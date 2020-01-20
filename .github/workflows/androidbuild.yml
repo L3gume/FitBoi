@@ -1,0 +1,20 @@
+name: AndroidBuild
+
+on: 
+  push:
+    branches:
+      - dev
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: build-android
+      uses: msfjarvis/setup-android@0.2
+      with:
+        entrypoint: ./gradlew
+        args: build
+    
