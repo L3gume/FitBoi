@@ -1,0 +1,23 @@
+name: AndroidTest
+
+on:
+  push:
+    branches: dev
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: unittest-android
+        uses: msfjarvis/setup-android@0.2
+        with:
+          entrypoint: ./gradlew
+          args: test
+      - name: connectedtest-android
+        uses: msfjarvis/setup-android@0.2
+        with:
+          entrypoint: ./gradlew
+          args: connectAndroidTest
