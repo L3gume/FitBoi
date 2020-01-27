@@ -1,0 +1,184 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2020-01-27T01:23:02.697Z",
+        "line": 11,
+        "name": "Today is or is not Friday",
+        "description": "",
+        "id": "is-it-friday-yet?;today-is-or-is-not-friday;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 1000000,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "today is \"Friday\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Friday\"",
+                  "offset": 9
+                }
+              ],
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.today_is(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I ask whether it\u0027s Friday yet",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.i_ask_whether_it_s_Friday_yet()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2000000,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I should be told \"TGIF\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"TGIF\"",
+                  "offset": 17
+                }
+              ],
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.i_should_be_told(java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:23:02.746Z",
+        "line": 12,
+        "name": "Today is or is not Friday",
+        "description": "",
+        "id": "is-it-friday-yet?;today-is-or-is-not-friday;;3",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 1000000,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "today is \"Sunday\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Sunday\"",
+                  "offset": 9
+                }
+              ],
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.today_is(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I ask whether it\u0027s Friday yet",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.i_ask_whether_it_s_Friday_yet()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I should be told \"Nope\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Nope\"",
+                  "offset": 17
+                }
+              ],
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.i_should_be_told(java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:23:02.749Z",
+        "line": 13,
+        "name": "Today is or is not Friday",
+        "description": "",
+        "id": "is-it-friday-yet?;today-is-or-is-not-friday;;4",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "today is \"anything else!\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"anything else!\"",
+                  "offset": 9
+                }
+              ],
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.today_is(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I ask whether it\u0027s Friday yet",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.i_ask_whether_it_s_Friday_yet()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I should be told \"Nope\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Nope\"",
+                  "offset": 17
+                }
+              ],
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.i_should_be_told(java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Is it Friday yet?",
+    "description": "  Everybody wants to know when it\u0027s Friday",
+    "id": "is-it-friday-yet?",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/com/example/fitboi/cucumber/assets/is_it_friday_yet.feature",
+    "tags": []
+  }
+]
