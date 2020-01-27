@@ -1,0 +1,2656 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2020-01-27T01:35:45.174Z",
+        "line": 7,
+        "name": "User profile is created (Normal flow)",
+        "description": "",
+        "id": "user-creates-new-account;user-profile-is-created-(normal-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "error_message": "io.cucumber.java.PendingException: TODO: implement me\r\n\tat com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application(ID001_User_Creates_New_Account.java:11)\r\n\tat ✽.the User is not currently a member of the the FitBoi application(file:///C:/Users/Brendan/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID001_User_Creates_New_Account.feature:9)\r\n",
+              "duration": 4000000,
+              "status": "pending"
+            },
+            "line": 9,
+            "name": "the User is not currently a member of the the FitBoi application",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 10,
+            "name": "the entered email is valid",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_entered_email_is_valid()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1000000,
+              "status": "skipped"
+            },
+            "line": 11,
+            "name": "the individual\u0027s form data entered are valid",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_individual_s_form_data_entered_are_valid()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 12,
+            "name": "clicking the create profile button",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.clicking_the_create_profile_button()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 13,
+            "name": "a new user profile is created using the entered email and associated form data \u003cDataType\u003e",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.a_new_user_profile_is_created_using_the_entered_email_and_associated_form_data_DataType()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 14,
+            "name": "the \"Successful profile creation\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.249Z",
+        "line": 17,
+        "name": "User enters invalid email (Error flow)",
+        "description": "",
+        "id": "user-creates-new-account;user-enters-invalid-email-(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "error_message": "io.cucumber.java.PendingException: TODO: implement me\r\n\tat com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application(ID001_User_Creates_New_Account.java:11)\r\n\tat ✽.the User is not currently a member of the the FitBoi application(file:///C:/Users/Brendan/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID001_User_Creates_New_Account.feature:19)\r\n",
+              "duration": 1000000,
+              "status": "pending"
+            },
+            "line": 19,
+            "name": "the User is not currently a member of the the FitBoi application",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 20,
+            "name": "the entered email is invalid",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 21,
+            "name": "the email field does not accept the user\u0027s entry",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 22,
+            "name": "the \"Invalid E-mail\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.254Z",
+        "line": 24,
+        "name": "User enters invalid data (Error flow)",
+        "description": "",
+        "id": "user-creates-new-account;user-enters-invalid-data-(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "error_message": "io.cucumber.java.PendingException: TODO: implement me\r\n\tat com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application(ID001_User_Creates_New_Account.java:11)\r\n\tat ✽.the User is not currently a member of the the FitBoi application(file:///C:/Users/Brendan/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID001_User_Creates_New_Account.feature:26)\r\n",
+              "status": "pending"
+            },
+            "line": 26,
+            "name": "the User is not currently a member of the the FitBoi application",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 27,
+            "name": "the entered form data is invalid",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 28,
+            "name": "the form fields do not accept the user\u0027s entry",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 29,
+            "name": "the \"Invalid Input\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      }
+    ],
+    "name": "User creates new account",
+    "description": "As a User of the FitBoi application\nI would like to create a new user profile\nSo that I can use the application as intended to log my personal goals and track my fitness progress.",
+    "id": "user-creates-new-account",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/com/example/fitboi/cucumber/assets/ID001_User_Creates_New_Account.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2020-01-27T01:35:45.260Z",
+        "line": 7,
+        "name": "User successfully logs in (Normal flow)",
+        "description": "",
+        "id": "user-logs-in;user-successfully-logs-in-(normal-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 9,
+            "name": "the User is not currently logged into the FitBoi application",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 10,
+            "name": "the entered e-mail is valid",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 11,
+            "name": "the password is valid",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 12,
+            "name": "the combination of email and password is correct",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 13,
+            "name": "clicking the sign in button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 14,
+            "name": "a user is logged in to their account",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 15,
+            "name": "the \"Successfully logged in\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.268Z",
+        "line": 17,
+        "name": "User enters invalid data (Error flow)",
+        "description": "",
+        "id": "user-logs-in;user-enters-invalid-data-(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 19,
+            "name": "the User is not currently logged into the FitBoi application",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 20,
+            "name": "the data entered into any field is invalid",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 21,
+            "name": "clicking the sign in button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 22,
+            "name": "the field does not accept the user\u0027s entry",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 23,
+            "name": "the \"Invalid input\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.274Z",
+        "line": 25,
+        "name": "User enters a correct e-mail but an incorrect password (Error flow)",
+        "description": "",
+        "id": "user-logs-in;user-enters-a-correct-e-mail-but-an-incorrect-password-(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 27,
+            "name": "the User is not currently logged into the FitBoi application",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 28,
+            "name": "the entered e-mail is valid",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 29,
+            "name": "the password entered is incorrect",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 30,
+            "name": "clicking the sign in button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 31,
+            "name": "the User is not logged in",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 32,
+            "name": "the \"Password is incorrect\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.279Z",
+        "line": 34,
+        "name": "User enters credentials for an account that does not exist (Error flow)",
+        "description": "",
+        "id": "user-logs-in;user-enters-credentials-for-an-account-that-does-not-exist-(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 36,
+            "name": "the User is not currently logged into the FitBoi application",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 37,
+            "name": "the entered e-mail is valid",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 38,
+            "name": "clicking the sign in button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 39,
+            "name": "the entered e-mail is not found",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 40,
+            "name": "the User is not logged in",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 41,
+            "name": "the \"Account cannot be found\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.283Z",
+        "line": 43,
+        "name": "The connection to the database cannot be established from a user connection point (Error flow)",
+        "description": "",
+        "id": "user-logs-in;the-connection-to-the-database-cannot-be-established-from-a-user-connection-point-(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 45,
+            "name": "the User is not currently logged into the FitBoi application",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 46,
+            "name": "there is data typed into both fields",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 47,
+            "name": "there is no valid internet connection on the device",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 48,
+            "name": "clicking the sign in button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 49,
+            "name": "the User is not logged in",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 50,
+            "name": "the \"No valid internet connection\" message is issued",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 51,
+            "name": "a pop-up window will prompt the user to check their internet connection",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.287Z",
+        "line": 53,
+        "name": "The connection to the database cannot be established from a server problem (Error flow)",
+        "description": "",
+        "id": "user-logs-in;the-connection-to-the-database-cannot-be-established-from-a-server-problem-(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 55,
+            "name": "the User is not currently logged into the FitBoi application",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 56,
+            "name": "there is data typed into both fields",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 57,
+            "name": "there is no valid connection from the server",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 58,
+            "name": "clicking the sign in button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 59,
+            "name": "the User is not logged in",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 60,
+            "name": "the \"Server error\" message is issued",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 61,
+            "name": "a pop-up window will inform the user that there is a server error",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      }
+    ],
+    "name": "User logs in",
+    "description": "As a user of the FitBoi application\nI would like to log in with my credentials\nSo that I can view my personal data and log values relevant to myself",
+    "id": "user-logs-in",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/com/example/fitboi/cucumber/assets/ID002_User_Logs_In.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2020-01-27T01:35:45.290Z",
+        "line": 7,
+        "name": "User sucessfully logs item using most recents (Normal flow)",
+        "description": "",
+        "id": "log-a-food-item;user-sucessfully-logs-item-using-most-recents-(normal-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 9,
+            "name": "the User is logged in",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 10,
+            "name": "the dersired food item is in the database",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 11,
+            "name": "the User selects the desired food item from the most recents",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 12,
+            "name": "requesting the addition of a new food item",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 13,
+            "name": "the calories of the food item will be added to the total calorie count",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 14,
+            "name": "the \"Item successfully added\" message will be displayed",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.294Z",
+        "line": 16,
+        "name": "User sucessfully logs item using search (Normal flow)",
+        "description": "",
+        "id": "log-a-food-item;user-sucessfully-logs-item-using-search-(normal-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 18,
+            "name": "the User is logged in",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 19,
+            "name": "the dersired food item is in the database",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 20,
+            "name": "the User selects the desired food item from the search results",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 21,
+            "name": "requesting the addition of a new food item",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 22,
+            "name": "the calories of the food item will be added to the total calorie count",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 23,
+            "name": "the \"Item successfully added\" message will be displayed",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.297Z",
+        "line": 25,
+        "name": "User sucessfully logs item using substitute (Alternate flow)",
+        "description": "",
+        "id": "log-a-food-item;user-sucessfully-logs-item-using-substitute-(alternate-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 27,
+            "name": "the User is logged in",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 28,
+            "name": "selects a substitute food item to replace the desired food item",
+            "match": {},
+            "keyword": "But "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 29,
+            "name": "requesting the addition of a new food item",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 30,
+            "name": "the calories of the substitute food item will be added to the total calorie count",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 31,
+            "name": "the \"Item successfully added\" message will be displayed",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.300Z",
+        "line": 33,
+        "name": "User fails to logs item (Error flow)",
+        "description": "",
+        "id": "log-a-food-item;user-fails-to-logs-item-(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 35,
+            "name": "the User is logged in",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 36,
+            "name": "the desired food item is not in the database",
+            "match": {},
+            "keyword": "But "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 37,
+            "name": "the User cancels the request for a food item",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 38,
+            "name": "requesting the addition of a new food item",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 39,
+            "name": "the User will see the dashboard",
+            "match": {},
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Log a food item",
+    "description": "As a user\nI would like to be able to log my consumed food items\nSo that my personal analytics will update with accurate data and provide me with information about reaching my goals",
+    "id": "log-a-food-item",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/com/example/fitboi/cucumber/assets/ID003_User_Logs_A_Food_Item.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2020-01-27T01:35:45.303Z",
+        "line": 7,
+        "name": "User goal is edited (Normal flow)",
+        "description": "",
+        "id": "user-edits-a-current-goal;user-goal-is-edited-(normal-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 9,
+            "name": "the User goal is created",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 10,
+            "name": "the goal is selected",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 11,
+            "name": "changes made to the goal targets are valid",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 12,
+            "name": "clicking the update goal button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 13,
+            "name": "the goal is updated and persisted to the database",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 14,
+            "name": "the \"Successful goal update\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.307Z",
+        "line": 16,
+        "name": "User cannot perform updates (Alternate flow)",
+        "description": "",
+        "id": "user-edits-a-current-goal;user-cannot-perform-updates-(alternate-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 18,
+            "name": "a User in on the goal page",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 19,
+            "name": "no goals are available",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 20,
+            "name": "no information is accessible",
+            "match": {},
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.310Z",
+        "line": 22,
+        "name": "User enters invalid goal targets (Error flow)",
+        "description": "",
+        "id": "user-edits-a-current-goal;user-enters-invalid-goal-targets-(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 24,
+            "name": "the User goal is created",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 25,
+            "name": "the goal is selected",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 26,
+            "name": "changes made to the goal targets are invalid",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 27,
+            "name": "clicking the update goal button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 28,
+            "name": "the goal is not updated",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 29,
+            "name": "the \"Invalid updates\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.312Z",
+        "line": 31,
+        "name": "User does not save updates (Error flow)",
+        "description": "",
+        "id": "user-edits-a-current-goal;user-does-not-save-updates-(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 33,
+            "name": "the User goal is created",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 34,
+            "name": "the goal is selected",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 35,
+            "name": "changes are made to the goal targets",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 36,
+            "name": "clicking the exit button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 37,
+            "name": "the goal is not updated",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 38,
+            "name": "the \"Updates cancelled\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      }
+    ],
+    "name": "User edits a current goal",
+    "description": "As a User of the FitBoi application\nI would like to edit an outstanding goal associated to my profile\nSo that I can better adapt my goals to my current progress",
+    "id": "user-edits-a-current-goal",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/com/example/fitboi/cucumber/assets/ID004_User_Edits_Current_Goal.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2020-01-27T01:35:45.315Z",
+        "line": 7,
+        "name": "User goal is ended (Normal flow)",
+        "description": "",
+        "id": "user-ends-a-current-goal;user-goal-is-ended-(normal-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 9,
+            "name": "the User goal is created",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 10,
+            "name": "the goal is selected",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 11,
+            "name": "clicking the end button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 12,
+            "name": "the goal is archived and persisted to the database",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 13,
+            "name": "the \"Finished goal\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.318Z",
+        "line": 15,
+        "name": "User cannot perform updates (Alternate flow)",
+        "description": "",
+        "id": "user-ends-a-current-goal;user-cannot-perform-updates-(alternate-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 17,
+            "name": "a User in on the goal page",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 18,
+            "name": "no goals are available",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 19,
+            "name": "no information is accessible",
+            "match": {},
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.320Z",
+        "line": 21,
+        "name": "User losses connection to goal (Error flow)",
+        "description": "",
+        "id": "user-ends-a-current-goal;user-losses-connection-to-goal-(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 23,
+            "name": "the User goal is created",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 24,
+            "name": "the goal is selected",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 25,
+            "name": "connection is between User and server is dropped",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 26,
+            "name": "clicking the end button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 27,
+            "name": "the goal is not updated",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 28,
+            "name": "the \"Cannot update goal\" message is issue",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      }
+    ],
+    "name": "User ends a current goal",
+    "description": "As a User of the FitBoi application\nI would like to end an outstanding goal associated to my profile\nSo that I can start a new goal to better track my future fitness trajectory ",
+    "id": "user-ends-a-current-goal",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/com/example/fitboi/cucumber/assets/ID005_User_Ends_Current_Goal.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2020-01-27T01:35:45.323Z",
+        "line": 7,
+        "name": "User successfully adds a preset goal with no current goal in progress (Normal flow)",
+        "description": "",
+        "id": "user-sets-a-new-goal;user-successfully-adds-a-preset-goal-with-no-current-goal-in-progress-(normal-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 9,
+            "name": "the User is on the goals dashboard",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 10,
+            "name": "there is no goal currently in progress",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 11,
+            "name": "the User has selected one of three preset goals",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 12,
+            "name": "clicking the set goal button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 13,
+            "name": "the User adds a goal to their profile",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 14,
+            "name": "the \"Successfully added new goal\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.337Z",
+        "line": 16,
+        "name": "User successfully adds a preset goal with a current goal in progress (Normal flow)",
+        "description": "",
+        "id": "user-sets-a-new-goal;user-successfully-adds-a-preset-goal-with-a-current-goal-in-progress-(normal-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 18,
+            "name": "the User is on the goals dashboard",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 19,
+            "name": "there is a goal currently in progress",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 20,
+            "name": "the User has selected one of three preset goals",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 21,
+            "name": "clicking the set goal button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 22,
+            "name": "the User is given a prompt informing that they will override their current goal",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 23,
+            "name": "the User clicks the confirm button",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 24,
+            "name": "the User adds a goal to their profile",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 25,
+            "name": "the \"Successfully added new goal\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.340Z",
+        "line": 27,
+        "name": "User successfully adds a custom goal with no current goal in progress (Alternate flow)",
+        "description": "",
+        "id": "user-sets-a-new-goal;user-successfully-adds-a-custom-goal-with-no-current-goal-in-progress-(alternate-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 29,
+            "name": "the User is on the goals dashboard",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 30,
+            "name": "there is no goal currently in progress",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 31,
+            "name": "the User has entered a custom goal",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 32,
+            "name": "clicking the set goal button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 33,
+            "name": "the User adds a goal to their profile",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 34,
+            "name": "the \"Successfully added new custom goal\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.343Z",
+        "line": 36,
+        "name": "User successfully adds a custom goal with a current goal in progress (Alternate flow)",
+        "description": "",
+        "id": "user-sets-a-new-goal;user-successfully-adds-a-custom-goal-with-a-current-goal-in-progress-(alternate-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 38,
+            "name": "the User is on the goals dashboard",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 39,
+            "name": "there is a goal currently in progress",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 40,
+            "name": "the User has entered a custom goal",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 41,
+            "name": "clicking the set goal button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 42,
+            "name": "the User is given a prompt informing that they will override their current goal",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 43,
+            "name": "the User clicks the confirm button",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 44,
+            "name": "the User adds a goal to their profile",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 45,
+            "name": "the \"Successfully added new custom goal\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.347Z",
+        "line": 47,
+        "name": "User enters invalid data (Error flow)",
+        "description": "",
+        "id": "user-sets-a-new-goal;user-enters-invalid-data-(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 49,
+            "name": "the User is on the goals dashboard",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 50,
+            "name": "the User has entered a custom goal",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 51,
+            "name": "the data is invalid",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 52,
+            "name": "clicking the set goal button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 53,
+            "name": "a User adds a goal to their profile",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 54,
+            "name": "the User is given a prompt informing that they will override their current goal",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 55,
+            "name": "the \"Input invalid\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      }
+    ],
+    "name": "User sets a new goal",
+    "description": "As a user of the FitBoi application\nI would like to specify my preferred fitness goal\nSo that FitBoi can tailor information to me and provide accurate analytics",
+    "id": "user-sets-a-new-goal",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/com/example/fitboi/cucumber/assets/ID006_User_Sets_A_New_Goal.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2020-01-27T01:35:45.350Z",
+        "line": 7,
+        "name": "User views current consumption (Normal flow)",
+        "description": "",
+        "id": "user-sees-daily-consumption-against-goal;user-views-current-consumption-(normal-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 9,
+            "name": "the User is on the main dashboard",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 10,
+            "name": "viewing the screen",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 11,
+            "name": "the daily caloric consumtion values are displayed",
+            "match": {},
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.352Z",
+        "line": 13,
+        "name": "User cannot perform updates (Alternate flow)",
+        "description": "",
+        "id": "user-sees-daily-consumption-against-goal;user-cannot-perform-updates-(alternate-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 15,
+            "name": "the User is on the main dashboard",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 16,
+            "name": "viewing the screen",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 17,
+            "name": "the daily caloric consumtion values are not displayed",
+            "match": {},
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.354Z",
+        "line": 19,
+        "name": "User cannot fetch information from server  (Error flow)",
+        "description": "",
+        "id": "user-sees-daily-consumption-against-goal;user-cannot-fetch-information-from-server--(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 21,
+            "name": "the User is on the main dashboard",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 22,
+            "name": "the connection between User and server is lost",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 23,
+            "name": "no information is displayed",
+            "match": {},
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "User sees daily consumption against goal",
+    "description": "As a User of the FitBoi application\nI would like to see my current caloric for the current date versus my current goal\nSo that I can gauge what I should consume for the remainder of the day",
+    "id": "user-sees-daily-consumption-against-goal",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/com/example/fitboi/cucumber/assets/ID007_User_Daily_Consumption_Against_Goal.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2020-01-27T01:35:45.356Z",
+        "line": 8,
+        "name": "User sees the analytics dashboard with data (Normal Scenario)",
+        "description": "",
+        "id": "user-sees-analytics;user-sees-the-analytics-dashboard-with-data-(normal-scenario)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 10,
+            "name": "the User is on the analytics dashboard",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 11,
+            "name": "there is data to display",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 12,
+            "name": "the User selects an analytic type from a dropdown menu",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 13,
+            "name": "the User selects their viewing scale for the graph",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 14,
+            "name": "viewing the analytics dashboard",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 15,
+            "name": "the graph will display the corresponding analytics type with the appropriate scale",
+            "match": {},
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.359Z",
+        "line": 17,
+        "name": "User sees the analytics dashboard void of data (Alternate Scenario)",
+        "description": "",
+        "id": "user-sees-analytics;user-sees-the-analytics-dashboard-void-of-data-(alternate-scenario)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 19,
+            "name": "the User is on the analytics dashboard",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 20,
+            "name": "there is no data to display",
+            "match": {},
+            "keyword": "But "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 21,
+            "name": "viewing the analytics dashboard",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 22,
+            "name": "the graph will be empty",
+            "match": {},
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "User sees analytics",
+    "description": "As a user\nI would like to see my data tracked over time\nSo that I may visualize improvement or failures according to the goals I set \nand make decisions for myself based on data",
+    "id": "user-sees-analytics",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/com/example/fitboi/cucumber/assets/ID008_User_Sees_Analytics.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2020-01-27T01:35:45.361Z",
+        "line": 7,
+        "name": "User views current consumption (Normal flow)",
+        "description": "",
+        "id": "user-adds-custom-food-item-to-database;user-views-current-consumption-(normal-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 9,
+            "name": "the User is on the main dashboard",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 10,
+            "name": "the add custom item button is pressed",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 11,
+            "name": "the food item descriptions are added for all fields",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 12,
+            "name": "the descriptions are valid",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 13,
+            "name": "the item is submitted",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 14,
+            "name": "the item placed in a database to be approved",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 15,
+            "name": "the message \"Item submitted\" is displayed",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.364Z",
+        "line": 17,
+        "name": "User submits an incomplete food item  (Error flow)",
+        "description": "",
+        "id": "user-adds-custom-food-item-to-database;user-submits-an-incomplete-food-item--(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 19,
+            "name": "the User is on the main dashboard",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 20,
+            "name": "the add custom item button is pressed",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 21,
+            "name": "the food item descriptions are added for not all fields",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 22,
+            "name": "the item is submitted",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 23,
+            "name": "an error message \"Incomplete form\" is displayed",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 24,
+            "name": "the item is not sent to the database",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.366Z",
+        "line": 26,
+        "name": "User submits an incomplete food item  (Error flow)",
+        "description": "",
+        "id": "user-adds-custom-food-item-to-database;user-submits-an-incomplete-food-item--(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 28,
+            "name": "the User is on the main dashboard",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 29,
+            "name": "the add custom item button is pressed",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 30,
+            "name": "the food item descriptions are added for all fields",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 31,
+            "name": "a description is invalid",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 32,
+            "name": "the item is submitted",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 33,
+            "name": "an error message \"Invalid form data\" is displayed",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 34,
+            "name": "the item is not sent to the database",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      }
+    ],
+    "name": "User adds custom food item to database",
+    "description": "As a User of the FitBoi application\nI would like to be able to add new foods to the database, \nSo I can personalize my items if what I am looking for does not appear in the search.",
+    "id": "user-adds-custom-food-item-to-database",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/com/example/fitboi/cucumber/assets/ID009_User_Adds_Custom_Food_Item_To_Database.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2020-01-27T01:35:45.368Z",
+        "line": 7,
+        "name": "User successfully changes one profile value (Normal flow)",
+        "description": "",
+        "id": "user-changes-personal-profile-details;user-successfully-changes-one-profile-value-(normal-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 9,
+            "name": "the User is logged into FitBoi",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 10,
+            "name": "they have clicked on the profile settings menu",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 11,
+            "name": "the User has modified one value in their profile",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 12,
+            "name": "clicking the save changes button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 13,
+            "name": "the profile changes are saved",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 14,
+            "name": "the \"Successfully modified one value\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.372Z",
+        "line": 16,
+        "name": "User successfully changes many or all values (Alternate flow)",
+        "description": "",
+        "id": "user-changes-personal-profile-details;user-successfully-changes-many-or-all-values-(alternate-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 18,
+            "name": "the User is logged into FitBoi",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 19,
+            "name": "they have clicked on the profile settings menu",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 20,
+            "name": "the User has modified multiple values at once in their profile",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 21,
+            "name": "clicking the save changes button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 22,
+            "name": "the profile changes are saved",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 23,
+            "name": "the \"Successfully modified multiple value\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.374Z",
+        "line": 25,
+        "name": "User enters invalid data (Error flow)",
+        "description": "",
+        "id": "user-changes-personal-profile-details;user-enters-invalid-data-(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 27,
+            "name": "the User is logged into FitBoi",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 28,
+            "name": "they have clicked on the profile settings menu",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 29,
+            "name": "the User has modified multiple values in their profile with invalid data",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 30,
+            "name": "clicking the save changes button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 31,
+            "name": "the profile changes are not saved",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 32,
+            "name": "the \"Input invalid\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.376Z",
+        "line": 34,
+        "name": "User exits the window without saving (Error flow)",
+        "description": "",
+        "id": "user-changes-personal-profile-details;user-exits-the-window-without-saving-(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 36,
+            "name": "the User is logged into FitBoi",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 37,
+            "name": "they have clicked on the profile settings menu",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 38,
+            "name": "the User has modified multiple values in their profile",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 39,
+            "name": "the User exits the current window",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 40,
+            "name": "the profile changes are not saved",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 41,
+            "name": "the \"Data was not saved\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.378Z",
+        "line": 43,
+        "name": "Connectivity issue prevents data from persisting (Error flow)",
+        "description": "",
+        "id": "user-changes-personal-profile-details;connectivity-issue-prevents-data-from-persisting-(error-flow)",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 45,
+            "name": "the User is logged into FitBoi",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 46,
+            "name": "they have clicked on the profile settings menu",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 47,
+            "name": "the User has modified multiple values in their profile",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 48,
+            "name": "there is a lack of connection between the server and client",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 49,
+            "name": "clicking the save changes button",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 50,
+            "name": "the profile changes are not saved",
+            "match": {},
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 51,
+            "name": "the \"Connectivity issues prevented saving\" message is issued",
+            "match": {},
+            "keyword": "And "
+          }
+        ]
+      }
+    ],
+    "name": "User changes personal profile details",
+    "description": "As a user of the FitBoi application\nI would like to modify my personal profile details\nSo that FitBoi can tailor information to me and provide accurate analytics and to rectify any mistakes made",
+    "id": "user-changes-personal-profile-details",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/com/example/fitboi/cucumber/assets/ID010_User_Changes_Personal_Profile_Details.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2020-01-27T01:35:45.381Z",
+        "line": 11,
+        "name": "Today is or is not Friday",
+        "description": "",
+        "id": "is-it-friday-yet?;today-is-or-is-not-friday;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "today is \"Friday\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Friday\"",
+                  "offset": 9
+                }
+              ],
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.today_is(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I ask whether it\u0027s Friday yet",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.i_ask_whether_it_s_Friday_yet()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1000000,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I should be told \"TGIF\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"TGIF\"",
+                  "offset": 17
+                }
+              ],
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.i_should_be_told(java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.385Z",
+        "line": 12,
+        "name": "Today is or is not Friday",
+        "description": "",
+        "id": "is-it-friday-yet?;today-is-or-is-not-friday;;3",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "today is \"Sunday\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Sunday\"",
+                  "offset": 9
+                }
+              ],
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.today_is(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I ask whether it\u0027s Friday yet",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.i_ask_whether_it_s_Friday_yet()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I should be told \"Nope\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Nope\"",
+                  "offset": 17
+                }
+              ],
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.i_should_be_told(java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-27T01:35:45.386Z",
+        "line": 13,
+        "name": "Today is or is not Friday",
+        "description": "",
+        "id": "is-it-friday-yet?;today-is-or-is-not-friday;;4",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "today is \"anything else!\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"anything else!\"",
+                  "offset": 9
+                }
+              ],
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.today_is(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I ask whether it\u0027s Friday yet",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.i_ask_whether_it_s_Friday_yet()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I should be told \"Nope\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Nope\"",
+                  "offset": 17
+                }
+              ],
+              "location": "com.example.fitboi.cucumber.steps.Stepdefs.i_should_be_told(java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Is it Friday yet?",
+    "description": "  Everybody wants to know when it\u0027s Friday",
+    "id": "is-it-friday-yet?",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/com/example/fitboi/cucumber/assets/is_it_friday_yet.feature",
+    "tags": []
+  }
+]
