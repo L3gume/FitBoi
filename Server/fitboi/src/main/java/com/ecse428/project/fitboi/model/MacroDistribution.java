@@ -16,9 +16,9 @@ public class MacroDistribution
   //------------------------
 
   //MacroDistribution Attributes
-  private int fats;
-  private int carbs;
-  private int protein;
+  private float fats;
+  private float carbs;
+  private float protein;
 
   //MacroDistribution Associations
   private Goal goal;
@@ -28,7 +28,7 @@ public class MacroDistribution
   // CONSTRUCTOR
   //------------------------
 
-  public MacroDistribution(int aFats, int aCarbs, int aProtein, Goal aGoal, FoodItem aFoodItem)
+  public MacroDistribution(float aFats, float aCarbs, float aProtein, Goal aGoal, FoodItem aFoodItem)
   {
     fats = aFats;
     carbs = aCarbs;
@@ -82,17 +82,17 @@ public class MacroDistribution
     return wasSet;
   }
 
-  public int getFats()
+  public float getFats()
   {
     return fats;
   }
 
-  public int getCarbs()
+  public float getCarbs()
   {
     return carbs;
   }
 
-  public int getProtein()
+  public float getProtein()
   {
     return protein;
   }
