@@ -10,10 +10,6 @@ public class UserDto {
     private int weight;
     private int height;
 
-    public UserDto() {
-
-    }
-
     public UserDto(String email, int age, boolean sex, int weight, int height) {
         this.email = email;
         this.age = age;
