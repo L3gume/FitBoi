@@ -104,7 +104,6 @@ public class Meals
 
   public boolean addFoodItem(FoodItem aFoodItem)
   {
-    boolean wasAdded = false;
     if (foodItems.contains(aFoodItem)) {
       return false;
     }
