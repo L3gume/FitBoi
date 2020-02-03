@@ -19,22 +19,14 @@ public class Weight
   private Date date;
   private float weight;
 
-  //Weight Associations
-  private UserProfile userProfile;
-
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Weight(Date aDate, float aWeight, UserProfile aUserProfile)
+  public Weight(Date aDate, float aWeight)
   {
     date = aDate;
     weight = aWeight;
-    boolean didAddUserProfile = setUserProfile(aUserProfile);
-    if (!didAddUserProfile)
-    {
-      throw new RuntimeException("Unable to create weight due to userProfile. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-    }
   }
 
   //------------------------
@@ -66,58 +58,13 @@ public class Weight
   {
     return weight;
   }
-  /* Code from template association_GetOne */
-  public UserProfile getUserProfile()
-  {
-    return userProfile;
-  }
-  /* Code from template association_SetOneToMandatoryMany */
-  public boolean setUserProfile(UserProfile aUserProfile)
-  {
-    boolean wasSet = false;
-    //Must provide userProfile to weight
-    if (aUserProfile == null)
-    {
-      return wasSet;
-    }
-
-    if (userProfile != null && userProfile.numberOfWeights() <= UserProfile.minimumNumberOfWeights())
-    {
-      return wasSet;
-    }
-
-    UserProfile existingUserProfile = userProfile;
-    userProfile = aUserProfile;
-    if (existingUserProfile != null && !existingUserProfile.equals(aUserProfile))
-    {
-      boolean didRemove = existingUserProfile.removeWeight(this);
-      if (!didRemove)
-      {
-        userProfile = existingUserProfile;
-        return wasSet;
-      }
-    }
-    userProfile.addWeight(this);
-    wasSet = true;
-    return wasSet;
-  }
-
-  public void delete()
-  {
-    UserProfile placeholderUserProfile = userProfile;
-    this.userProfile = null;
-    if(placeholderUserProfile != null)
-    {
-      placeholderUserProfile.removeWeight(this);
-    }
-  }
-
 
   public String toString()
   {
     return super.toString() + "["+
             "weight" + ":" + getWeight()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "userProfile = "+(getUserProfile()!=null?Integer.toHexString(System.identityHashCode(getUserProfile())):"null");
+            "  " + "date" + "=" +
+            (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") +
+            System.getProperties().getProperty("line.separator");
   }
 }

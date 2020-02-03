@@ -20,41 +20,30 @@ public class FoodItem
   private int portionSize;
 
   //FoodItem Associations
-  private Meals meals;
   private MacroDistribution macroDistribution;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public FoodItem(String aName, int aCalories, int aPortionSize, Meals aMeals, MacroDistribution aMacroDistribution)
+  public FoodItem(String aName, int aCalories, int aPortionSize, MacroDistribution aMacroDistribution)
   {
     name = aName;
     calories = aCalories;
     portionSize = aPortionSize;
-    boolean didAddMeals = setMeals(aMeals);
-    if (!didAddMeals)
-    {
-      throw new RuntimeException("Unable to create foodItem due to meals. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-    }
-    if (aMacroDistribution == null || aMacroDistribution.getFoodItem() != null)
+    if (aMacroDistribution == null)
     {
       throw new RuntimeException("Unable to create FoodItem due to aMacroDistribution. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
     macroDistribution = aMacroDistribution;
   }
 
-  public FoodItem(String aName, int aCalories, int aPortionSize, Meals aMeals, int aFatsForMacroDistribution, int aCarbsForMacroDistribution, int aProteinForMacroDistribution, Goal aGoalForMacroDistribution)
+  public FoodItem(String aName, int aCalories, int aPortionSize, int aFatsForMacroDistribution, int aCarbsForMacroDistribution, int aProteinForMacroDistribution, Goal aGoalForMacroDistribution)
   {
     name = aName;
     calories = aCalories;
     portionSize = aPortionSize;
-    boolean didAddMeals = setMeals(aMeals);
-    if (!didAddMeals)
-    {
-      throw new RuntimeException("Unable to create foodItem due to meals. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-    }
-    macroDistribution = new MacroDistribution(aFatsForMacroDistribution, aCarbsForMacroDistribution, aProteinForMacroDistribution, aGoalForMacroDistribution, this);
+    macroDistribution = new MacroDistribution(aFatsForMacroDistribution, aCarbsForMacroDistribution, aProteinForMacroDistribution);
   }
 
   //------------------------
@@ -100,62 +89,17 @@ public class FoodItem
     return portionSize;
   }
   /* Code from template association_GetOne */
-  public Meals getMeals()
-  {
-    return meals;
-  }
-  /* Code from template association_GetOne */
   public MacroDistribution getMacroDistribution()
   {
     return macroDistribution;
   }
   /* Code from template association_SetOneToMandatoryMany */
-  public boolean setMeals(Meals aMeals)
-  {
-    boolean wasSet = false;
-    //Must provide meals to foodItem
-    if (aMeals == null)
-    {
-      return wasSet;
-    }
-
-    if (meals != null && meals.numberOfFoodItems() <= Meals.minimumNumberOfFoodItems())
-    {
-      return wasSet;
-    }
-
-    Meals existingMeals = meals;
-    meals = aMeals;
-    if (existingMeals != null && !existingMeals.equals(aMeals))
-    {
-      boolean didRemove = existingMeals.removeFoodItem(this);
-      if (!didRemove)
-      {
-        meals = existingMeals;
-        return wasSet;
-      }
-    }
-    meals.addFoodItem(this);
-    wasSet = true;
-    return wasSet;
-  }
 
   public void delete()
   {
-    Meals placeholderMeals = meals;
-    this.meals = null;
-    if(placeholderMeals != null)
-    {
-      placeholderMeals.removeFoodItem(this);
-    }
     MacroDistribution existingMacroDistribution = macroDistribution;
     macroDistribution = null;
-    if (existingMacroDistribution != null)
-    {
-      existingMacroDistribution.delete();
-    }
   }
-
 
   public String toString()
   {
@@ -163,7 +107,6 @@ public class FoodItem
             "name" + ":" + getName()+ "," +
             "calories" + ":" + getCalories()+ "," +
             "portionSize" + ":" + getPortionSize()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "meals = "+(getMeals()!=null?Integer.toHexString(System.identityHashCode(getMeals())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "macroDistribution = "+(getMacroDistribution()!=null?Integer.toHexString(System.identityHashCode(getMacroDistribution())):"null");
   }
 }

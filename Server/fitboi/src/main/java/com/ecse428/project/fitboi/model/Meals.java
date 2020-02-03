@@ -25,21 +25,15 @@ public class Meals
   private MealType mealType;
 
   //Meals Associations
-  private Metrics metrics;
   private List<FoodItem> foodItems;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Meals(MealType aMealType, Metrics aMetrics)
+  public Meals(MealType aMealType)
   {
     mealType = aMealType;
-    boolean didAddMetrics = setMetrics(aMetrics);
-    if (!didAddMetrics)
-    {
-      throw new RuntimeException("Unable to create meal due to metrics. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-    }
     foodItems = new ArrayList<FoodItem>();
   }
 
@@ -58,11 +52,6 @@ public class Meals
   public MealType getMealType()
   {
     return mealType;
-  }
-  /* Code from template association_GetOne */
-  public Metrics getMetrics()
-  {
-    return metrics;
   }
   /* Code from template association_GetMany */
   public FoodItem getFoodItem(int index)
@@ -94,25 +83,7 @@ public class Meals
     int index = foodItems.indexOf(aFoodItem);
     return index;
   }
-  /* Code from template association_SetOneToMany */
-  public boolean setMetrics(Metrics aMetrics)
-  {
-    boolean wasSet = false;
-    if (aMetrics == null)
-    {
-      return wasSet;
-    }
 
-    Metrics existingMetrics = metrics;
-    metrics = aMetrics;
-    if (existingMetrics != null && !existingMetrics.equals(aMetrics))
-    {
-      existingMetrics.removeMeal(this);
-    }
-    metrics.addMeal(this);
-    wasSet = true;
-    return wasSet;
-  }
   /* Code from template association_IsNumberOfValidMethod */
   public boolean isNumberOfFoodItemsValid()
   {
@@ -127,51 +98,31 @@ public class Meals
   /* Code from template association_AddMandatoryManyToOne */
   public FoodItem addFoodItem(String aName, int aCalories, int aPortionSize, MacroDistribution aMacroDistribution)
   {
-    FoodItem aNewFoodItem = new FoodItem(aName, aCalories, aPortionSize, this, aMacroDistribution);
+    FoodItem aNewFoodItem = new FoodItem(aName, aCalories, aPortionSize, aMacroDistribution);
     return aNewFoodItem;
   }
 
   public boolean addFoodItem(FoodItem aFoodItem)
   {
     boolean wasAdded = false;
-    if (foodItems.contains(aFoodItem)) { return false; }
-    Meals existingMeals = aFoodItem.getMeals();
-    boolean isNewMeals = existingMeals != null && !this.equals(existingMeals);
-
-    if (isNewMeals && existingMeals.numberOfFoodItems() <= minimumNumberOfFoodItems())
-    {
-      return wasAdded;
+    if (foodItems.contains(aFoodItem)) {
+      return false;
     }
-    if (isNewMeals)
-    {
-      aFoodItem.setMeals(this);
-    }
-    else
-    {
+    else{
       foodItems.add(aFoodItem);
+      return true;
     }
-    wasAdded = true;
-    return wasAdded;
   }
 
   public boolean removeFoodItem(FoodItem aFoodItem)
   {
-    boolean wasRemoved = false;
-    //Unable to remove aFoodItem, as it must always have a meals
-    if (this.equals(aFoodItem.getMeals()))
-    {
-      return wasRemoved;
+    if(!foodItems.contains(aFoodItem)){
+      return false;
     }
-
-    //meals already at minimum (1)
-    if (numberOfFoodItems() <= minimumNumberOfFoodItems())
-    {
-      return wasRemoved;
+    else{
+      foodItems.remove(aFoodItem);
+      return true;
     }
-
-    foodItems.remove(aFoodItem);
-    wasRemoved = true;
-    return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
   public boolean addFoodItemAt(FoodItem aFoodItem, int index)
@@ -208,12 +159,6 @@ public class Meals
 
   public void delete()
   {
-    Metrics placeholderMetrics = metrics;
-    this.metrics = null;
-    if(placeholderMetrics != null)
-    {
-      placeholderMetrics.removeMeal(this);
-    }
     for(int i=foodItems.size(); i > 0; i--)
     {
       FoodItem aFoodItem = foodItems.get(i - 1);
@@ -225,7 +170,8 @@ public class Meals
   public String toString()
   {
     return super.toString() + "["+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "mealType" + "=" + (getMealType() != null ? !getMealType().equals(this)  ? getMealType().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "metrics = "+(getMetrics()!=null?Integer.toHexString(System.identityHashCode(getMetrics())):"null");
+            "  " + "mealType" + "=" +
+            (getMealType() != null ? !getMealType().equals(this)  ? getMealType().toString().replaceAll("  ","    ") : "this" : "null") +
+            System.getProperties().getProperty("line.separator");
   }
 }

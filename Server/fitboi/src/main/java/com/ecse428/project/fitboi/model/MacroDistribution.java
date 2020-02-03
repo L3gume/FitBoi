@@ -20,38 +20,15 @@ public class MacroDistribution
   private float carbs;
   private float protein;
 
-  //MacroDistribution Associations
-  private Goal goal;
-  private FoodItem foodItem;
-
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public MacroDistribution(float aFats, float aCarbs, float aProtein, Goal aGoal, FoodItem aFoodItem)
+  public MacroDistribution(float aFats, float aCarbs, float aProtein)
   {
     fats = aFats;
     carbs = aCarbs;
     protein = aProtein;
-    if (aGoal == null || aGoal.getMacroDistribution() != null)
-    {
-      throw new RuntimeException("Unable to create MacroDistribution due to aGoal. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-    }
-    goal = aGoal;
-    if (aFoodItem == null || aFoodItem.getMacroDistribution() != null)
-    {
-      throw new RuntimeException("Unable to create MacroDistribution due to aFoodItem. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-    }
-    foodItem = aFoodItem;
-  }
-
-  public MacroDistribution(int aFats, int aCarbs, int aProtein, int aBaseCaloriesForGoal, boolean aResultForGoal, Date aStartDateForGoal, float aWeightForGoal, ActivityLevel aActivityLevelForGoal, UserProfile aUserProfileForGoal, String aNameForFoodItem, int aCaloriesForFoodItem, int aPortionSizeForFoodItem, Meals aMealsForFoodItem)
-  {
-    fats = aFats;
-    carbs = aCarbs;
-    protein = aProtein;
-    goal = new Goal(aBaseCaloriesForGoal, aResultForGoal, aStartDateForGoal, aWeightForGoal, aActivityLevelForGoal, aUserProfileForGoal, this);
-    foodItem = new FoodItem(aNameForFoodItem, aCaloriesForFoodItem, aPortionSizeForFoodItem, aMealsForFoodItem, this);
   }
 
   //------------------------
@@ -96,32 +73,6 @@ public class MacroDistribution
   {
     return protein;
   }
-  /* Code from template association_GetOne */
-  public Goal getGoal()
-  {
-    return goal;
-  }
-  /* Code from template association_GetOne */
-  public FoodItem getFoodItem()
-  {
-    return foodItem;
-  }
-
-  public void delete()
-  {
-    Goal existingGoal = goal;
-    goal = null;
-    if (existingGoal != null)
-    {
-      existingGoal.delete();
-    }
-    FoodItem existingFoodItem = foodItem;
-    foodItem = null;
-    if (existingFoodItem != null)
-    {
-      existingFoodItem.delete();
-    }
-  }
 
 
   public String toString()
@@ -129,8 +80,6 @@ public class MacroDistribution
     return super.toString() + "["+
             "fats" + ":" + getFats()+ "," +
             "carbs" + ":" + getCarbs()+ "," +
-            "protein" + ":" + getProtein()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "goal = "+(getGoal()!=null?Integer.toHexString(System.identityHashCode(getGoal())):"null") + System.getProperties().getProperty("line.separator") +
-            "  " + "foodItem = "+(getFoodItem()!=null?Integer.toHexString(System.identityHashCode(getFoodItem())):"null");
+            "protein" + ":" + getProtein()+ "]" + System.getProperties().getProperty("line.separator");
   }
 }

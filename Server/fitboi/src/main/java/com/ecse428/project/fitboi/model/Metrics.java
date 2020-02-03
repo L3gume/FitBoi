@@ -20,22 +20,16 @@ public class Metrics
   private int exerciseSpending;
 
   //Metrics Associations
-  private UserProfile userProfile;
   private List<Meals> meals;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Metrics(Date aDate, int aExerciseSpending, UserProfile aUserProfile)
+  public Metrics(Date aDate, int aExerciseSpending)
   {
     date = aDate;
     exerciseSpending = aExerciseSpending;
-    boolean didAddUserProfile = setUserProfile(aUserProfile);
-    if (!didAddUserProfile)
-    {
-      throw new RuntimeException("Unable to create metric due to userProfile. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-    }
     meals = new ArrayList<Meals>();
   }
 
@@ -68,11 +62,6 @@ public class Metrics
   {
     return exerciseSpending;
   }
-  /* Code from template association_GetOne */
-  public UserProfile getUserProfile()
-  {
-    return userProfile;
-  }
   /* Code from template association_GetMany */
   public Meals getMeal(int index)
   {
@@ -103,75 +92,33 @@ public class Metrics
     int index = meals.indexOf(aMeal);
     return index;
   }
-  /* Code from template association_SetOneToMandatoryMany */
-  public boolean setUserProfile(UserProfile aUserProfile)
-  {
-    boolean wasSet = false;
-    //Must provide userProfile to metric
-    if (aUserProfile == null)
-    {
-      return wasSet;
-    }
 
-    if (userProfile != null && userProfile.numberOfMetrics() <= UserProfile.minimumNumberOfMetrics())
-    {
-      return wasSet;
-    }
-
-    UserProfile existingUserProfile = userProfile;
-    userProfile = aUserProfile;
-    if (existingUserProfile != null && !existingUserProfile.equals(aUserProfile))
-    {
-      boolean didRemove = existingUserProfile.removeMetric(this);
-      if (!didRemove)
-      {
-        userProfile = existingUserProfile;
-        return wasSet;
-      }
-    }
-    userProfile.addMetric(this);
-    wasSet = true;
-    return wasSet;
-  }
   /* Code from template association_MinimumNumberOfMethod */
   public static int minimumNumberOfMeals()
   {
     return 0;
   }
-  /* Code from template association_AddManyToOne */
-  public Meals addMeal(MealType aMealType)
-  {
-    return new Meals(aMealType, this);
-  }
 
   public boolean addMeal(Meals aMeal)
   {
     boolean wasAdded = false;
-    if (meals.contains(aMeal)) { return false; }
-    Metrics existingMetrics = aMeal.getMetrics();
-    boolean isNewMetrics = existingMetrics != null && !this.equals(existingMetrics);
-    if (isNewMetrics)
-    {
-      aMeal.setMetrics(this);
+    if (meals.contains(aMeal)) {
+      return false;
     }
-    else
-    {
-      meals.add(aMeal);
-    }
+    meals.add(aMeal);
     wasAdded = true;
     return wasAdded;
   }
 
   public boolean removeMeal(Meals aMeal)
   {
-    boolean wasRemoved = false;
-    //Unable to remove aMeal, as it must always have a metrics
-    if (!this.equals(aMeal.getMetrics()))
-    {
-      meals.remove(aMeal);
-      wasRemoved = true;
-    }
-    return wasRemoved;
+   if(!meals.contains(aMeal)){
+     return false;
+   }
+   else {
+     meals.remove(aMeal);
+     return true;
+   }
   }
   /* Code from template association_AddIndexControlFunctions */
   public boolean addMealAt(Meals aMeal, int index)
@@ -208,12 +155,6 @@ public class Metrics
 
   public void delete()
   {
-    UserProfile placeholderUserProfile = userProfile;
-    this.userProfile = null;
-    if(placeholderUserProfile != null)
-    {
-      placeholderUserProfile.removeMetric(this);
-    }
     for(int i=meals.size(); i > 0; i--)
     {
       Meals aMeal = meals.get(i - 1);
@@ -226,7 +167,8 @@ public class Metrics
   {
     return super.toString() + "["+
             "exerciseSpending" + ":" + getExerciseSpending()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "userProfile = "+(getUserProfile()!=null?Integer.toHexString(System.identityHashCode(getUserProfile())):"null");
+            "  " + "date" + "=" +
+            (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") +
+            System.getProperties().getProperty("line.separator");
   }
 }

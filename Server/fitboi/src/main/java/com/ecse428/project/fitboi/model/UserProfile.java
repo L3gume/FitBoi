@@ -251,51 +251,30 @@ public class UserProfile
   /* Code from template association_AddMandatoryManyToOne */
   public Weight addWeight(Date aDate, float aWeight)
   {
-    Weight aNewWeight = new Weight(aDate, aWeight, this);
+    Weight aNewWeight = new Weight(aDate, aWeight);
     return aNewWeight;
   }
 
   public boolean addWeight(Weight aWeight)
   {
-    boolean wasAdded = false;
-    if (weights.contains(aWeight)) { return false; }
-    UserProfile existingUserProfile = aWeight.getUserProfile();
-    boolean isNewUserProfile = existingUserProfile != null && !this.equals(existingUserProfile);
-
-    if (isNewUserProfile && existingUserProfile.numberOfWeights() <= minimumNumberOfWeights())
-    {
-      return wasAdded;
+    if (weights.contains(aWeight)) {
+      return false;
     }
-    if (isNewUserProfile)
-    {
-      aWeight.setUserProfile(this);
-    }
-    else
-    {
+    else{
       weights.add(aWeight);
+      return true;
     }
-    wasAdded = true;
-    return wasAdded;
   }
 
   public boolean removeWeight(Weight aWeight)
   {
-    boolean wasRemoved = false;
-    //Unable to remove aWeight, as it must always have a userProfile
-    if (this.equals(aWeight.getUserProfile()))
-    {
-      return wasRemoved;
+    if(!weights.contains(aWeight)){
+      return false;
     }
-
-    //userProfile already at minimum (1)
-    if (numberOfWeights() <= minimumNumberOfWeights())
-    {
-      return wasRemoved;
+    else{
+      weights.remove(aWeight);
+      return true;
     }
-
-    weights.remove(aWeight);
-    wasRemoved = true;
-    return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
   public boolean addWeightAt(Weight aWeight, int index)
@@ -343,51 +322,30 @@ public class UserProfile
   /* Code from template association_AddMandatoryManyToOne */
   public Metrics addMetric(Date aDate, int aExerciseSpending)
   {
-    Metrics aNewMetric = new Metrics(aDate, aExerciseSpending, this);
+    Metrics aNewMetric = new Metrics(aDate, aExerciseSpending);
     return aNewMetric;
   }
 
   public boolean addMetric(Metrics aMetric)
   {
-    boolean wasAdded = false;
-    if (metrics.contains(aMetric)) { return false; }
-    UserProfile existingUserProfile = aMetric.getUserProfile();
-    boolean isNewUserProfile = existingUserProfile != null && !this.equals(existingUserProfile);
-
-    if (isNewUserProfile && existingUserProfile.numberOfMetrics() <= minimumNumberOfMetrics())
-    {
-      return wasAdded;
+    if(metrics.contains(aMetric)){
+      return false;
     }
-    if (isNewUserProfile)
-    {
-      aMetric.setUserProfile(this);
-    }
-    else
-    {
+    else{
       metrics.add(aMetric);
+      return true;
     }
-    wasAdded = true;
-    return wasAdded;
   }
 
   public boolean removeMetric(Metrics aMetric)
   {
-    boolean wasRemoved = false;
-    //Unable to remove aMetric, as it must always have a userProfile
-    if (this.equals(aMetric.getUserProfile()))
-    {
-      return wasRemoved;
+    if(!metrics.contains(aMetric)){
+      return false;
     }
-
-    //userProfile already at minimum (1)
-    if (numberOfMetrics() <= minimumNumberOfMetrics())
-    {
-      return wasRemoved;
+    else{
+      metrics.remove(aMetric);
+      return true;
     }
-
-    metrics.remove(aMetric);
-    wasRemoved = true;
-    return wasRemoved;
   }
   /* Code from template association_AddIndexControlFunctions */
   public boolean addMetricAt(Metrics aMetric, int index)
@@ -429,37 +387,29 @@ public class UserProfile
   /* Code from template association_AddManyToOne */
   public Goal addGoal(int aBaseCalories, boolean aResult, Date aStartDate, float aWeight, ActivityLevel aActivityLevel, MacroDistribution aMacroDistribution)
   {
-    return new Goal(aBaseCalories, aResult, aStartDate, aWeight, aActivityLevel, this, aMacroDistribution);
+    return new Goal(aBaseCalories, aResult, aStartDate, aWeight, aActivityLevel, aMacroDistribution);
   }
 
   public boolean addGoal(Goal aGoal)
   {
-    boolean wasAdded = false;
-    if (goals.contains(aGoal)) { return false; }
-    UserProfile existingUserProfile = aGoal.getUserProfile();
-    boolean isNewUserProfile = existingUserProfile != null && !this.equals(existingUserProfile);
-    if (isNewUserProfile)
-    {
-      aGoal.setUserProfile(this);
+    if(goals.contains(aGoal)){
+      return false;
     }
-    else
-    {
+    else{
       goals.add(aGoal);
+      return true;
     }
-    wasAdded = true;
-    return wasAdded;
   }
 
   public boolean removeGoal(Goal aGoal)
   {
-    boolean wasRemoved = false;
-    //Unable to remove aGoal, as it must always have a userProfile
-    if (!this.equals(aGoal.getUserProfile()))
-    {
-      goals.remove(aGoal);
-      wasRemoved = true;
+    if(!goals.contains(aGoal)){
+      return false;
     }
-    return wasRemoved;
+    else{
+      goals.remove(aGoal);
+      return true;
+    }
   }
   /* Code from template association_AddIndexControlFunctions */
   public boolean addGoalAt(Goal aGoal, int index)
@@ -496,11 +446,6 @@ public class UserProfile
 
   public void delete()
   {
-    for(int i=weights.size(); i > 0; i--)
-    {
-      Weight aWeight = weights.get(i - 1);
-      aWeight.delete();
-    }
     for(int i=metrics.size(); i > 0; i--)
     {
       Metrics aMetric = metrics.get(i - 1);
@@ -512,8 +457,7 @@ public class UserProfile
       aGoal.delete();
     }
   }
-
-
+  
   public String toString()
   {
     return super.toString() + "["+
