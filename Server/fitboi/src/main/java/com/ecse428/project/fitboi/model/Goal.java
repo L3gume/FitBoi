@@ -48,7 +48,7 @@ public class Goal
     macroDistribution = aMacroDistribution;
   }
 
-  public Goal(int aBaseCalories, boolean aResult, Date aStartDate, float aWeight, ActivityLevel aActivityLevel, int aFatsForMacroDistribution, int aCarbsForMacroDistribution, int aProteinForMacroDistribution, FoodItem aFoodItemForMacroDistribution)
+  public Goal(int aBaseCalories, boolean aResult, Date aStartDate, float aWeight, ActivityLevel aActivityLevel, float aFatsForMacroDistribution, float aCarbsForMacroDistribution, float aProteinForMacroDistribution, FoodItem aFoodItemForMacroDistribution)
   {
     baseCalories = aBaseCalories;
     result = aResult;

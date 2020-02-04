@@ -20,7 +20,7 @@ public class Metrics
   private int exerciseSpending;
 
   //Metrics Associations
-  private List<Meals> meals;
+  private List<Meal> meals;
 
   //------------------------
   // CONSTRUCTOR
@@ -30,7 +30,7 @@ public class Metrics
   {
     date = aDate;
     exerciseSpending = aExerciseSpending;
-    meals = new ArrayList<Meals>();
+    meals = new ArrayList<Meal>();
   }
 
   //------------------------
@@ -63,15 +63,15 @@ public class Metrics
     return exerciseSpending;
   }
   /* Code from template association_GetMany */
-  public Meals getMeal(int index)
+  public Meal getMeal(int index)
   {
-    Meals aMeal = meals.get(index);
+    Meal aMeal = meals.get(index);
     return aMeal;
   }
 
-  public List<Meals> getMeals()
+  public List<Meal> getMeals()
   {
-    List<Meals> newMeals = Collections.unmodifiableList(meals);
+    List<Meal> newMeals = Collections.unmodifiableList(meals);
     return newMeals;
   }
 
@@ -87,7 +87,7 @@ public class Metrics
     return has;
   }
 
-  public int indexOfMeal(Meals aMeal)
+  public int indexOfMeal(Meal aMeal)
   {
     int index = meals.indexOf(aMeal);
     return index;
@@ -99,7 +99,7 @@ public class Metrics
     return 0;
   }
 
-  public boolean addMeal(Meals aMeal)
+  public boolean addMeal(Meal aMeal)
   {
     boolean wasAdded = false;
     if (meals.contains(aMeal)) {
@@ -110,7 +110,7 @@ public class Metrics
     return wasAdded;
   }
 
-  public boolean removeMeal(Meals aMeal)
+  public boolean removeMeal(Meal aMeal)
   {
    if(!meals.contains(aMeal)){
      return false;
@@ -121,7 +121,7 @@ public class Metrics
    }
   }
   /* Code from template association_AddIndexControlFunctions */
-  public boolean addMealAt(Meals aMeal, int index)
+  public boolean addMealAt(Meal aMeal, int index)
   {  
     boolean wasAdded = false;
     if(addMeal(aMeal))
@@ -135,7 +135,7 @@ public class Metrics
     return wasAdded;
   }
 
-  public boolean addOrMoveMealAt(Meals aMeal, int index)
+  public boolean addOrMoveMealAt(Meal aMeal, int index)
   {
     boolean wasAdded = false;
     if(meals.contains(aMeal))
@@ -157,7 +157,7 @@ public class Metrics
   {
     for(int i=meals.size(); i > 0; i--)
     {
-      Meals aMeal = meals.get(i - 1);
+      Meal aMeal = meals.get(i - 1);
       aMeal.delete();
     }
   }

@@ -14,24 +14,24 @@ enum MealType { BreakFast, Lunch, Dinner }
 
 // line 27 "model.ump"
 // line 86 "model.ump"
-public class Meals
+public class Meal
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //Meals Attributes
+  //Meal Attributes
   private MealType mealType;
 
-  //Meals Associations
+  //Meal Associations
   private List<FoodItem> foodItems;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Meals(MealType aMealType)
+  public Meal(MealType aMealType)
   {
     mealType = aMealType;
     foodItems = new ArrayList<FoodItem>();
@@ -96,7 +96,7 @@ public class Meals
     return 1;
   }
   /* Code from template association_AddMandatoryManyToOne */
-  public FoodItem addFoodItem(String aName, int aCalories, int aPortionSize, MacroDistribution aMacroDistribution)
+  public FoodItem addFoodItem(String aName, int aCalories, float aPortionSize, MacroDistribution aMacroDistribution)
   {
     FoodItem aNewFoodItem = new FoodItem(aName, aCalories, aPortionSize, aMacroDistribution);
     return aNewFoodItem;

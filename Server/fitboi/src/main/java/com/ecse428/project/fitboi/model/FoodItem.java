@@ -17,7 +17,7 @@ public class FoodItem
   //FoodItem Attributes
   private String name;
   private int calories;
-  private int portionSize;
+  private float portionSize;
 
   //FoodItem Associations
   private MacroDistribution macroDistribution;
@@ -26,7 +26,7 @@ public class FoodItem
   // CONSTRUCTOR
   //------------------------
 
-  public FoodItem(String aName, int aCalories, int aPortionSize, MacroDistribution aMacroDistribution)
+  public FoodItem(String aName, int aCalories, float aPortionSize, MacroDistribution aMacroDistribution)
   {
     name = aName;
     calories = aCalories;
@@ -38,7 +38,7 @@ public class FoodItem
     macroDistribution = aMacroDistribution;
   }
 
-  public FoodItem(String aName, int aCalories, int aPortionSize, int aFatsForMacroDistribution, int aCarbsForMacroDistribution, int aProteinForMacroDistribution, Goal aGoalForMacroDistribution)
+  public FoodItem(String aName, int aCalories, float aPortionSize, float aFatsForMacroDistribution, float aCarbsForMacroDistribution, float aProteinForMacroDistribution, Goal aGoalForMacroDistribution)
   {
     name = aName;
     calories = aCalories;
@@ -84,7 +84,7 @@ public class FoodItem
     return calories;
   }
 
-  public int getPortionSize()
+  public float getPortionSize()
   {
     return portionSize;
   }

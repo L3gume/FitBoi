@@ -35,7 +35,7 @@ public class MacroDistribution
   // INTERFACE
   //------------------------
 
-  public boolean setFats(int aFats)
+  public boolean setFats(float aFats)
   {
     boolean wasSet = false;
     fats = aFats;
@@ -43,7 +43,7 @@ public class MacroDistribution
     return wasSet;
   }
 
-  public boolean setCarbs(int aCarbs)
+  public boolean setCarbs(float aCarbs)
   {
     boolean wasSet = false;
     carbs = aCarbs;
@@ -51,7 +51,7 @@ public class MacroDistribution
     return wasSet;
   }
 
-  public boolean setProtein(int aProtein)
+  public boolean setProtein(float aProtein)
   {
     boolean wasSet = false;
     protein = aProtein;
