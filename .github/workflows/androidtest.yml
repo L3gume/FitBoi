@@ -14,10 +14,10 @@ jobs:
       - name: unittest-android
         uses: msfjarvis/setup-android@0.2
         with:
-          entrypoint: ./gradlew
+          entrypoint: ./App/gradlew
           args: test
       - name: connectedtest-android
         uses: msfjarvis/setup-android@0.2
         with:
-          entrypoint: ./gradlew
+          entrypoint: ./App/gradlew
           args: connectAndroidTest
