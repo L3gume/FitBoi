@@ -15,6 +15,6 @@ jobs:
     - name: build-android
       uses: msfjarvis/setup-android@0.2
       with:
-        entrypoint: ./gradlew
+        entrypoint: ./App/gradlew
         args: build
     
