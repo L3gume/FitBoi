@@ -15,17 +15,15 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.13
+      - name: install java 13
+        run: apt install openjdk-13-jdk
       - name: unittest-android
         uses: msfjarvis/setup-android@0.2
-        env: 
-          JAVA_HOME: /opt/hostedtoolcache/jdk/13.0.2/
         with:
           entrypoint: ./App/gradlew
           args: test
       - name: connectedtest-android
         uses: msfjarvis/setup-android@0.2
-        env: 
-          JAVA_HOME: /opt/hostedtoolcache/jdk/13.0.2/
         with:
           entrypoint: ./App/gradlew
           args: connectAndroidTest
