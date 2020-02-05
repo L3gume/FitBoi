@@ -11,12 +11,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - name: set up JDK 1.13
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.13
+      #- name: set up JDK 1.13
+      #  uses: actions/setup-java@v1
+      #  with:
+      #    java-version: 1.13
       - name: install java 13
-        run: apt install openjdk-13-jdk
+        run: sudo apt-get install openjdk-13-jdk
       - name: unittest-android
         uses: msfjarvis/setup-android@0.2
         with:
