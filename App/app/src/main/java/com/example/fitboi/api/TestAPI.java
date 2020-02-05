@@ -23,7 +23,7 @@ public class TestAPI {
         return new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                    fn.accept(response);
+                fn.accept(response);
             }
         };
     }
