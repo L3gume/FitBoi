@@ -17,8 +17,6 @@ jobs:
       #    java-version: 1.13
       - name: install java 13
         run: |
-          #sudo apt-get update
-          #sudo apt-get install openjdk-13-jdk
           sudo apt install -y curl
           curl -O https://download.java.net/java/GA/jdk13/5b8a42f3905b406298b72d750b6919f6/33/GPL/openjdk-13_linux-x64_bin.tar.gz
           tar xvf openjdk-13_linux-x64_bin.tar.gz
