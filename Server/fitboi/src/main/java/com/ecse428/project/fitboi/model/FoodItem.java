@@ -66,7 +66,7 @@ public class FoodItem
     return wasSet;
   }
 
-  public boolean setPortionSize(int aPortionSize)
+  public boolean setPortionSize(float aPortionSize)
   {
     boolean wasSet = false;
     portionSize = aPortionSize;
