@@ -1,5 +1,6 @@
 package com.example.fitboi.api;
 
+<<<<<<< HEAD
 import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
