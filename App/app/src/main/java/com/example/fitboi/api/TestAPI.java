@@ -23,7 +23,7 @@ public class TestAPI {
         return new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                    fn.apply(response);
+                    fn.accept(response);
             }
         };
     }
@@ -32,7 +32,7 @@ public class TestAPI {
         return new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                fn.apply(error.getMessage());
+                fn.accept(error.getMessage());
             }
         };
     }
