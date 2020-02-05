@@ -84,8 +84,15 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
+Server/.vscode/settings.json
+Server/.vscode/launch.json
+Server/.project
+Server/.settings/org.eclipse.buildship.core.prefs
+
+
 # Ignore eclipse metadata
 .metadata
 
 # Ignore macos DS_Store
 .DS_Store
+
