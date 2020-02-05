@@ -26,13 +26,15 @@ jobs:
           export PATH=\$PATH:\$JAVA_HOME/bin
           EOF
           source /etc/profile.d/jdk13.sh
-      - name: unittest-android
-        uses: msfjarvis/setup-android@0.2
-        with:
-          entrypoint: ./App/gradlew
-          args: test
-      - name: connectedtest-android
-        uses: msfjarvis/setup-android@0.2
-        with:
-          entrypoint: ./App/gradlew
-          args: connectAndroidTest
+      - name: build android
+        run: ./App/gradlew build
+      #- name: unittest-android
+      #  uses: msfjarvis/setup-android@0.2
+      #  with:
+      #    entrypoint: ./App/gradlew
+      #    args: test
+      #- name: connectedtest-android
+      #  uses: msfjarvis/setup-android@0.2
+      #  with:
+      #    entrypoint: ./App/gradlew
+      #    args: connectAndroidTest
