@@ -16,7 +16,7 @@ jobs:
       #  with:
       #    java-version: 1.13
       - name: install java 13
-        run: 
+        run: |
           #sudo apt-get update
           #sudo apt-get install openjdk-13-jdk
           sudo apt install -y curl
