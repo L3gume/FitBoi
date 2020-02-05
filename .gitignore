@@ -83,3 +83,9 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+
+# Ignore eclipse metadata
+.metadata
+
+# Ignore macos DS_Store
+.DS_Store
