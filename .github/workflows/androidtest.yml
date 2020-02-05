@@ -11,11 +11,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+        
+      - name: set-dir
+        run: cd App/
+        
       - name: unittest-android
         uses: msfjarvis/setup-android@0.2
         with:
           entrypoint: ./gradlew
           args: test
+        
       - name: connectedtest-android
         uses: msfjarvis/setup-android@0.2
         with:
