@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background_gradient"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="123dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp">
+
+            <ImageButton
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:adjustViewBounds="true"
+                android:background="null"
+                android:outlineProvider="none"
+                android:scaleType="fitCenter"
+                android:src="@drawable/fitboi_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:layout_gravity="top"
+                android:text="Daily Fact: an apple a ..."
+                android:textColor="#FFFFFF"
+                android:textSize="10pt"
+                tools:visibility="visible">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="91dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:gravity="center"
+                android:text="@string/daily_progress_msg"
+                android:textColor="#FFFFFF"
+                android:textSize="10pt"
+                tools:visibility="visible">
+
+            </TextView>
+
+        </RelativeLayout>
+
+        <GridLayout
+            android:layout_width="350dp"
+            android:layout_gravity="center"
+            android:layout_height="120dp"
+            android:layout_marginTop="0dp"
+            android:alignmentMode="alignMargins"
+            android:baselineAligned="false"
+            android:columnCount="1"
+            android:columnOrderPreserved="false"
+            android:rowCount="1">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:background="#FFFFFF"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_gravity="top"
+                    android:orientation="vertical"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="3dp"
+                        android:textStyle="bold|italic"
+                        android:gravity="center"
+                        android:text="Calories Consumed"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="6pt">
+
+                    </TextView>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                app:cardCornerRadius="4dp"
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_gravity="right"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:background="#FFFFFF"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="155dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="top"
+                    android:orientation="vertical"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="top|center"
+                        android:text="Calories Remaining"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="6pt"
+                        android:textStyle="bold|italic">
+                    </TextView>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="320dp"
+            android:layout_gravity="center"
+            android:layout_height="120dp"
+            android:layout_marginTop="8dp"
+            android:alignmentMode="alignMargins"
+            android:baselineAligned="false"
+            android:columnCount="1"
+            android:columnOrderPreserved="false"
+            android:outlineSpotShadowColor="@color/colorBlack"
+            android:rowCount="1">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:background="#FFFFFF"
+                app:cardBackgroundColor="@color/colorBlack"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_gravity="top"
+                    android:orientation="vertical"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="top|center"
+                        android:text="Macro-Based Calories Distribution"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold|italic"
+                        android:layout_marginLeft="35dp">
+
+                    </TextView>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center|left"
+                        android:layout_marginLeft="20dp"
+                        android:paddingTop="30dp"
+                        android:src="" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:orientation="vertical"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="top|center"
+                        android:text="Macro-Based Calories Distribution"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold|italic"
+                        android:layout_marginLeft="35dp">
+
+                    </TextView>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="320dp"
+            android:layout_gravity="center"
+            android:layout_height="120dp"
+            android:layout_marginTop="60dp"
+            android:alignmentMode="alignMargins"
+            android:baselineAligned="false"
+            android:columnCount="1"
+            android:columnOrderPreserved="false"
+            android:outlineSpotShadowColor="@color/colorBlack"
+            android:rowCount="1">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:background="#FFFFFF"
+                app:cardBackgroundColor="@color/colorBlack"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_gravity="center"
+                android:maxWidth="60dp"
+                android:maxHeight="60dp"
+                android:src="@drawable/meal_addition_logo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="320dp"
+            android:layout_gravity="center"
+            android:layout_height="120dp"
+            android:layout_marginTop="15dp"
+            android:alignmentMode="alignMargins"
+            android:baselineAligned="false"
+            android:columnCount="1"
+            android:columnOrderPreserved="false"
+            android:outlineSpotShadowColor="@color/colorBlack"
+            android:rowCount="1">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:background="#FFFFFF"
+                app:cardBackgroundColor="@color/colorBlack"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/stats_history"
+                        android:layout_gravity="center"
+                        android:maxWidth="60dp"
+                        android:maxHeight="60dp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </GridLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
