@@ -7,8 +7,8 @@ plugins {
 
 group = 'com.ecse428.project'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '13'
-targetCompatibility = '13'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
