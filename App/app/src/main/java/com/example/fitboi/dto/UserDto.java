@@ -4,11 +4,11 @@ import java.util.Objects;
 
 public class UserDto {
 
-    public String email;
-    public int age;
-    public boolean sex;
-    public int weight;
-    public int height;
+    private String email;
+    private int age;
+    private boolean sex;
+    private int weight;
+    private int height;
 
     public UserDto(String email, int age, boolean sex, int weight, int height) {
         this.email = email;
