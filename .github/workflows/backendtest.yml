@@ -1,4 +1,4 @@
-name: backend test
+name: BackendTest
 
 on:
   push:
@@ -22,6 +22,7 @@ jobs:
           export PATH=\$PATH:\$JAVA_HOME/bin
           EOF
           source /etc/profile.d/jdk13.sh
-      
     - name: build server
-      run: ./Server/fitboi/gradlew build
+      run: |
+        cd Server/fitboi/
+        ./gradlew build
