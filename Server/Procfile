@@ -1,0 +1,1 @@
+web: java -jar Server/build/libs/Server-0.0.1-SNAPSHOT.jar 
