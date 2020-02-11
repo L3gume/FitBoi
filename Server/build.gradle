@@ -4,24 +4,21 @@ plugins {
 	id 'java'
 	id 'idea'
 }
-
 group = 'com.ecse428.project'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
-
+sourceCompatibility = '13'
 repositories {
 	mavenCentral()
 }
-
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 }
-
 test {
 	useJUnitPlatform()
 }
