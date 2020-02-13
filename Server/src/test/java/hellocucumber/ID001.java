@@ -5,11 +5,11 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 //import static org.junit.Assert.*;
 
-class ID001 {
+class hello {
     
 }
 
-public class Stepdefs {
+public class ID001 {
 
     @Given("the User is not currently a memeber of the the FitBoi application a")
     public void the_User_is_not_currently_a_memeber_of_the_the_FitBoi_application_a() {
