@@ -6,8 +6,11 @@ package com.ecse428.project.fitboi.model;
 
 import java.sql.Date;
 
+import javax.persistence.Entity;
+
 // line 48 "model.ump"
 // line 99 "model.ump"
+@Entity
 public class MacroDistribution
 {
 

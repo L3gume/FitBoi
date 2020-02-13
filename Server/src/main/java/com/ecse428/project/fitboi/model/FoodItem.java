@@ -1,5 +1,9 @@
 package com.ecse428.project.fitboi.model;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.CascadeType;
+
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.29.1.4753.5a97eca04 modeling language!*/
 
@@ -7,6 +11,7 @@ package com.ecse428.project.fitboi.model;
 
 // line 55 "model.ump"
 // line 104 "model.ump"
+@Entity
 public class FoodItem
 {
 
@@ -89,6 +94,7 @@ public class FoodItem
     return portionSize;
   }
   /* Code from template association_GetOne */
+  @OneToOne(cascade={CascadeType.ALL})
   public MacroDistribution getMacroDistribution()
   {
     return macroDistribution;

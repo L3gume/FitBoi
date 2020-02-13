@@ -7,8 +7,14 @@ package com.ecse428.project.fitboi.model;
 import java.sql.Date;
 import java.util.*;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
+
+
 // line 20 "model.ump"
 // line 80 "model.ump"
+@Entity
 public class Metrics
 {
   //------------------------
@@ -69,6 +75,7 @@ public class Metrics
     return aMeal;
   }
 
+  @OneToMany(cascade={CascadeType.ALL})
   public List<Meal> getMeals()
   {
     List<Meal> newMeals = Collections.unmodifiableList(meals);

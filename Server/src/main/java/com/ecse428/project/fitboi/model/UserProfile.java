@@ -5,10 +5,17 @@ package com.ecse428.project.fitboi.model;
 
 
 import java.util.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
+
 import java.sql.Date;
 
 // line 2 "model.ump"
 // line 69 "model.ump"
+@Entity
 public class UserProfile
 {
 
@@ -108,6 +115,7 @@ public class UserProfile
     return wasSet;
   }
 
+  @Id
   public String getEmail()
   {
     return email;
@@ -154,6 +162,7 @@ public class UserProfile
     return aWeight;
   }
 
+  @OneToMany(cascade={CascadeType.ALL})
   public List<Weight> getWeights()
   {
     List<Weight> newWeights = Collections.unmodifiableList(weights);
@@ -184,6 +193,7 @@ public class UserProfile
     return aMetric;
   }
 
+  @OneToMany(cascade={CascadeType.ALL})
   public List<Metrics> getMetrics()
   {
     List<Metrics> newMetrics = Collections.unmodifiableList(metrics);
@@ -214,6 +224,7 @@ public class UserProfile
     return aGoal;
   }
 
+  @OneToMany(cascade={CascadeType.ALL})
   public List<Goal> getGoals()
   {
     List<Goal> newGoals = Collections.unmodifiableList(goals);

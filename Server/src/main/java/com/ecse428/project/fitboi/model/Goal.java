@@ -6,14 +6,14 @@ package com.ecse428.project.fitboi.model;
 
 import java.sql.Date;
 
-  //------------------------
-  // ENUMERATIONS
-  //------------------------
-
-enum ActivityLevel { ONE, TWO, THREE, FOUR, FIVE }
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.OneToOne;
+import javax.persistence.CascadeType;
 
 // line 37 "model.ump"
 // line 92 "model.ump"
+@Entity
 public class Goal
 {
   //------------------------
@@ -122,6 +122,7 @@ public class Goal
     return weight;
   }
 
+  @Enumerated
   public ActivityLevel getActivityLevel()
   {
     return activityLevel;
@@ -132,6 +133,7 @@ public class Goal
     return result;
   }
   /* Code from template association_GetOne */
+  @OneToOne(cascade={CascadeType.ALL})
   public MacroDistribution getMacroDistribution()
   {
     return macroDistribution;
