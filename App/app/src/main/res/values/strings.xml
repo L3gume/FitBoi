@@ -11,7 +11,8 @@
     <string name="login_failed">"Login failed"</string>
 
     <!--   Main Page -->
-    <string name="main_page_daily_fact_example">Daily Nutrition Fact: An apple a day keeps the doctor away</string>
+    <string name="test_main_page_daily_fact">Daily Nutrition Fact: An apple a day keeps the
+        doctor away</string>
     <string name="main_page_call_to_action">Check Out Your Progress Today!</string>
     <string name="main_page_calories_consumed">Calories Consumed</string>
     <string name="test_main_page_calories_consumed_data">1240</string>

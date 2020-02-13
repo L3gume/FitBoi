@@ -17,7 +17,7 @@
             android:id="@+id/main_page_text_daily_fact"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-                android:text="@string/main_page_daily_fact_example"
+                android:text="@string/test_main_page_daily_fact"
             tools:text="Daily Nutrition Fact: An apple a day keeps the doctor away"/>
 
         <ImageView
