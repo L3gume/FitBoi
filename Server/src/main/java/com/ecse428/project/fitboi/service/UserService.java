@@ -28,46 +28,46 @@ public class UserService {
 	// ));
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	/**
-	 * Gets all users from the database
-	 * @return List of all users
-	 */
-	public List<UserDto> getAllUsers() {
-		List<UserDto> users;
-		// TODO: Add call into JDBC to fetch all users //////
-        users = new ArrayList<UserDto>(mockUsers.values());
-        //////////////////////////////////////////////////////
-		return users;
-	}
+	// /**
+	//  * Gets all users from the database
+	//  * @return List of all users
+	//  */
+	// public List<UserDto> getAllUsers() {
+	// 	List<UserDto> users;
+	// 	// TODO: Add call into JDBC to fetch all users //////
+ //        users = new ArrayList<UserDto>(mockUsers.values());
+ //        //////////////////////////////////////////////////////
+	// 	return users;
+	// }
 	
-	/**
-	 * Gets a specific users from the database
-	 * @return If the userId exists in the database, the a user dto is returned. Else, null is returned.
-	 */
-	public UserDto getUser(String userId) {
-		UserDto user;
-    	// TODO: Add call into JDBC to fetch a user //////
-    	user = mockUsers.get(userId);
-        //////////////////////////////////////////////////////
-		return user;
-	}
+	// /**
+	//  * Gets a specific users from the database
+	//  * @return If the userId exists in the database, the a user dto is returned. Else, null is returned.
+	//  */
+	// public UserDto getUser(String userId) {
+	// 	UserDto user;
+ //    	// TODO: Add call into JDBC to fetch a user //////
+ //    	user = mockUsers.get(userId);
+ //        //////////////////////////////////////////////////////
+	// 	return user;
+	// }
 	
 	
-	/**
-	 * Adds a new user to the database
-	 * @param user
-	 * @return True if the user has been inserted, False otherwise
-	 */
-	public boolean addUser(UserDto user) {
-		// TODO: Add call into JDBC to create a user ////////
-    	if (mockUsers.containsKey(user.getEmail())) {
-    		return false;
-    	}
-    	 // Note: The actual operation may add extra data into the UserDto. To make this clear, I have the newUser object.
-    	mockUsers.put(user.getEmail(), user);
-        //////////////////////////////////////////////////////
-		return true;
-	}
+	// /**
+	//  * Adds a new user to the database
+	//  * @param user
+	//  * @return True if the user has been inserted, False otherwise
+	//  */
+	// public boolean addUser(UserDto user) {
+	// 	// TODO: Add call into JDBC to create a user ////////
+ //    	if (mockUsers.containsKey(user.getEmail())) {
+ //    		return false;
+ //    	}
+ //    	 // Note: The actual operation may add extra data into the UserDto. To make this clear, I have the newUser object.
+ //    	mockUsers.put(user.getEmail(), user);
+ //        //////////////////////////////////////////////////////
+	// 	return true;
+	// }
 	
 	// /**
 	//  * Deletes a user from the database 
