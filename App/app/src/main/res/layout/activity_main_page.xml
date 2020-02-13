@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/main_page_text_daily_fact"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+                android:text="@string/main_page_daily_fact_example"
+            tools:text="Daily Nutrition Fact: An apple a day keeps the doctor away"/>
+
+        <ImageView
+            android:id="@+id/main_page_logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@android:color/background_light" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/main_page_info_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/main_page_call_to_action"
+        tools:text="Check Out Your Progress Today!"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@android:color/background_light">
+
+            <TextView
+                android:id="@+id/main_page_text_cal_consumed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/main_page_calories_consumed"
+                android:drawableBottom="@android:color/background_light"
+                tools:text="Calories Consumed"
+                android:textColor="@color/textBlack"/>
+
+            <TextView
+                android:id="@+id/main_page_data_cal_consumed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="30sp"
+                android:text="@string/test_main_page_calories_consumed_data"
+                tools:text="1240"
+                android:textColor="@color/textBlack"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@android:color/background_light">
+
+            <TextView
+                android:id="@+id/main_page_text_cal_remaining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/main_page_calories_remaining"
+                tools:text="Calories Remaining"
+                android:textColor="@color/colorOrangeRed"/>
+
+            <TextView
+                android:id="@+id/main_page_data_cal_remaining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="30sp"
+                android:text="@string/test_main_page_calories_remaining_data"
+                tools:text="1320"
+                android:textColor="@color/colorOrangeRed"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="320dp"
+            android:layout_height="130dp"
+            android:padding="10dp"
+            android:background="@android:color/background_light">
+
+            <TextView
+                android:id="@+id/main_page_text_macro_distribution"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/main_page_macro_distribution"
+                tools:text="Macro-based Calories Distribution"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp">
+
+                    <ImageView
+                        android:id="@+id/main_page_image_corn"
+                        android:layout_width="75dp"
+                        android:layout_height="50dp"/>
+
+                    <TextView
+                        android:id="@+id/main_page_text_corn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp">
+
+                    <ImageView
+                        android:id="@+id/main_page_image_protein"
+                        android:layout_width="75dp"
+                        android:layout_height="50dp"/>
+
+                    <TextView
+                        android:id="@+id/main_page_text_protein"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp">
+
+                    <ImageView
+                        android:id="@+id/main_page_image_fat"
+                        android:layout_width="75dp"
+                        android:layout_height="50dp"/>
+
+                    <TextView
+                        android:id="@+id/main_page_text_fat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="320dp"
+            android:layout_height="120dp"
+            android:background="@android:color/background_light">
+
+            <ImageButton
+                android:id="@+id/main_page_button_create_meal"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"/>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="320dp"
+            android:layout_height="120dp"
+            android:background="@android:color/background_light">
+
+            <ImageButton
+                android:id="@+id/main_page_button_statistics"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"/>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
