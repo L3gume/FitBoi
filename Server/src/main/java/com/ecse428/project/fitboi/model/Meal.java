@@ -2,7 +2,11 @@ package com.ecse428.project.fitboi.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 
 /*PLEASE DO NOT EDIT THIS CODE*/
@@ -21,10 +25,15 @@ public class Meal
   // MEMBER VARIABLES
   //------------------------
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	
   //Meal Attributes
   private MealType mealType;
 
   //Meal Associations
+  @OneToMany(cascade={CascadeType.ALL})
   private List<FoodItem> foodItems;
 
   //------------------------

@@ -7,6 +7,9 @@ package com.ecse428.project.fitboi.model;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 // line 48 "model.ump"
 // line 99 "model.ump"
@@ -19,6 +22,9 @@ public class MacroDistribution
   //------------------------
 
   //MacroDistribution Attributes
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
   private float fats;
   private float carbs;
   private float protein;

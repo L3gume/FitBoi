@@ -8,6 +8,9 @@ import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 
@@ -21,6 +24,10 @@ public class Goal
   //------------------------
 
   //Goal Attributes
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	
   private int baseCalories;
   private boolean result;
   private Date startDate;
@@ -28,6 +35,7 @@ public class Goal
   private ActivityLevel activityLevel;
 
   //Goal Associations
+  @OneToOne(cascade={CascadeType.ALL})
   private MacroDistribution macroDistribution;
 
   //------------------------

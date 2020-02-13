@@ -1,6 +1,9 @@
 package com.ecse428.project.fitboi.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 
@@ -20,11 +23,16 @@ public class FoodItem
   //------------------------
 
   //FoodItem Attributes
+  @Id
+  @GeneratedValue(strategy=GenerationType.AUTO)
+  private int id;
+  
   private String name;
   private int calories;
   private float portionSize;
 
   //FoodItem Associations
+  @OneToOne(cascade={CascadeType.ALL})
   private MacroDistribution macroDistribution;
 
   //------------------------

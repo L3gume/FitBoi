@@ -7,6 +7,8 @@ package com.ecse428.project.fitboi.model;
 import java.util.*;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
@@ -24,13 +26,25 @@ public class UserProfile
   //------------------------
 
   //UserProfile Attributes
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	
   private String email;
   private String name;
-  private String userName;
+  public void setMetrics(List<Metrics> metrics) {
+	this.metrics = metrics;
+}
+
+private String userName;
   private String password;
   private int age;
   private int height;
-  private boolean biologicalSex;
+  public void setWeights(List<Weight> weights) {
+	this.weights = weights;
+}
+
+private boolean biologicalSex;
 
   //UserProfile Associations
   private List<Weight> weights;
@@ -114,6 +128,11 @@ public class UserProfile
     wasSet = true;
     return wasSet;
   }
+  
+  public void setGoals(List<Goal> goals)
+  {
+	  this.goals = goals;
+  }
 
   @Id
   public String getEmail()
@@ -150,11 +169,7 @@ public class UserProfile
   {
     return biologicalSex;
   }
-  /* Code from template attribute_IsBoolean */
-  public boolean isBiologicalSex()
-  {
-    return biologicalSex;
-  }
+
   /* Code from template association_GetMany */
   public Weight getWeight(int index)
   {
@@ -248,12 +263,6 @@ public class UserProfile
     int index = goals.indexOf(aGoal);
     return index;
   }
-  /* Code from template association_IsNumberOfValidMethod */
-  public boolean isNumberOfWeightsValid()
-  {
-    boolean isValid = numberOfWeights() >= minimumNumberOfWeights();
-    return isValid;
-  }
   /* Code from template association_MinimumNumberOfMethod */
   public static int minimumNumberOfWeights()
   {
@@ -319,12 +328,9 @@ public class UserProfile
     }
     return wasAdded;
   }
-  /* Code from template association_IsNumberOfValidMethod */
-  public boolean isNumberOfMetricsValid()
-  {
-    boolean isValid = numberOfMetrics() >= minimumNumberOfMetrics();
-    return isValid;
-  }
+
+  
+  
   /* Code from template association_MinimumNumberOfMethod */
   public static int minimumNumberOfMetrics()
   {
