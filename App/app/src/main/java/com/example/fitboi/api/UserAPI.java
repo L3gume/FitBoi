@@ -19,11 +19,6 @@ import static java.lang.Boolean.*;
 
 public class UserAPI {
 
-    static final String ip_localhost = "127.0.0.1";
-    static final String ip_dev_machine = "10.0.2.2";
-    static final boolean usingEmulator = TRUE;
-    static final String userUrl = "http://"+(usingEmulator ? ip_dev_machine : ip_localhost)+"/users/";
-
     /********** PUBLIC METHODS **********/
 
     /**
@@ -43,7 +38,7 @@ public class UserAPI {
     public static void addNewUser(UserDto userToAdd, Consumer<UserDto> fn) {
         RequestQueue queue = MyVolley.getRequestQueue();
         JsonObjectRequest request = new JsonObjectRequest(
-                userUrl,
+                MyVolley.userUrl,
                 userDtoToJson(userToAdd),
                 userCallSuccessListener(fn),
                 userCallErrorListener(fn)
@@ -65,7 +60,7 @@ public class UserAPI {
     public static void getAllUsers(Consumer<List<UserDto>> fn) {
         RequestQueue queue = MyVolley.getRequestQueue();
         JsonArrayRequest request = new JsonArrayRequest(
-                userUrl,
+                MyVolley.userUrl,
                 userListCallSuccessListener(fn),
                 userListCallErrorListener(fn)
         );
@@ -86,7 +81,7 @@ public class UserAPI {
     public static void getUserByLoginInfo(Consumer<UserDto> fn, String email) {
         RequestQueue queue = MyVolley.getRequestQueue();
         JsonObjectRequest request = new JsonObjectRequest(
-                userUrl+email+"/",
+                MyVolley.userUrl+email+"/",
                 null,
                 userCallSuccessListener(fn),
                 userCallErrorListener(fn)
