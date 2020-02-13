@@ -19,13 +19,13 @@ import com.ecse428.project.fitboi.dto.UserDto;
 public class UserService {
 	
 	
-	/* @TODO: Create a JDBC layer for this controller.
-	 * For now, I'm going to use this Map to mock the database.
-	 */
-	private static Map<String, UserDto> mockUsers = new HashMap<String, UserDto> (Map.ofEntries(
-			Map.entry("test1@gmail.com", new UserDto("test1@gmail.com", 25, true, 10, 10)),
-			Map.entry("test2@gmail.com", new UserDto("test2@gmail.com", 20, true, 39, 49))
-	));
+	// /* @TODO: Create a JDBC layer for this controller.
+	//  * For now, I'm going to use this Map to mock the database.
+	//  */
+	// private static Map<String, UserDto> mockUsers = new HashMap<String, UserDto> (Map.ofEntries(
+	// 		Map.entry("test1@gmail.com", new UserDto("test1@gmail.com", 25, true, 10, 10)),
+	// 		Map.entry("test2@gmail.com", new UserDto("test2@gmail.com", 20, true, 39, 49))
+	// ));
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/**
