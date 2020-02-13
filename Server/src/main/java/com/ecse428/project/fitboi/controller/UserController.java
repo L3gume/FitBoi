@@ -20,7 +20,7 @@ import com.ecse428.project.fitboi.service.UserService;
 @RequestMapping("/users/")
 public class UserController {
 	
-	@Autowired
+	//@Autowired
 	// private UserService userService;
 	
  //    /**
