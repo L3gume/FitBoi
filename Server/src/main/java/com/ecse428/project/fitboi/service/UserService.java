@@ -69,21 +69,21 @@ public class UserService {
 		return true;
 	}
 	
-	/**
-	 * Deletes a user from the database 
-	 * @param userId
-	 * @return The deleted user dto if the deletion was successful. null if the user could not be removed / did not exist in the db.
-	 */
-	public UserDto deleteUser(String userId) {
-		UserDto deletedUser;
-		// TODO: Add call into JDBC to delete a user ////////
-    	if (!mockUsers.containsKey(userId)) {
-    		return null;
-    	}
-    	deletedUser = mockUsers.remove(userId);
-        //////////////////////////////////////////////////////	
-		return deletedUser;
-	}
+	// /**
+	//  * Deletes a user from the database 
+	//  * @param userId
+	//  * @return The deleted user dto if the deletion was successful. null if the user could not be removed / did not exist in the db.
+	//  */
+	// public UserDto deleteUser(String userId) {
+	// 	UserDto deletedUser;
+	// 	// TODO: Add call into JDBC to delete a user ////////
+ //    	if (!mockUsers.containsKey(userId)) {
+ //    		return null;
+ //    	}
+ //    	deletedUser = mockUsers.remove(userId);
+ //        //////////////////////////////////////////////////////	
+	// 	return deletedUser;
+	// }
 	
 
 }
