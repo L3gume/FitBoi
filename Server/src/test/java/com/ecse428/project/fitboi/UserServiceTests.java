@@ -1,25 +1,37 @@
 package com.ecse428.project.fitboi;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.UserService;
-
+import com.ecse428.project.fitboi.repository.*;
 
 @SpringBootTest
 class UserServiceTests {
 
 	@Autowired
 	private UserService userService;
+	@Autowired 
+	private UserRepository userRepository;
 
+	@BeforeEach
+	public void setup(){
+		userRepository.deleteAll();
+	}
 
-
+	@AfterEach
+	public void teardown(){
+		userRepository.deleteAll();
+	}
 
 	@Test
 	public void addCheckGetDeleteUser(){
@@ -36,7 +48,7 @@ class UserServiceTests {
 		boolean addStatus = userService.addUser(testUser);
 		assertTrue(addStatus, "Add user failure");
 		
-		boolean existStatus = userService.checkUser(testUser);
+		boolean existStatus = userService.checkUser(aEmail);
 		assertTrue(addStatus, "Check user failure");
 
 		UserProfile dbUser =  userService.getUser(aEmail);
