@@ -13,7 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.UserService;
-import com.ecse428.project.fitboi.repository.*;
+import com.ecse428.project.repository.*;
 
 @SpringBootTest
 class UserServiceTests {
