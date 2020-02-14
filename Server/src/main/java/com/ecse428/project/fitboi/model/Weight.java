@@ -6,8 +6,14 @@ package com.ecse428.project.fitboi.model;
 
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 // line 14 "model.ump"
 // line 75 "model.ump"
+@Entity
 public class Weight
 {
 
@@ -15,6 +21,10 @@ public class Weight
   // MEMBER VARIABLES
   //------------------------
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	
   //Weight Attributes
   private Date date;
   private float weight;
@@ -27,6 +37,11 @@ public class Weight
   {
     date = aDate;
     weight = aWeight;
+  }
+  
+  public Weight()
+  {
+	  
   }
 
   //------------------------

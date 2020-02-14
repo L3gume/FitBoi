@@ -1,5 +1,6 @@
 package com.ecse428.project.fitboi.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecse428.project.fitboi.dto.*;
+import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.UserService;
 
 @RestController
@@ -29,7 +31,10 @@ public class UserController {
      */
     @GetMapping("")
     public ResponseEntity<List<UserDto>> getAllUsers() {
-        List<UserDto> users = userService.getAllUsers();
+        List<UserDto> users = new ArrayList<UserDto>();
+        for (UserProfile user : userService.getAllUsers()) {
+        	users.add(convertToDto(user));
+        }
         return new ResponseEntity<List<UserDto>>(users, HttpStatus.OK);
     }
     
@@ -41,12 +46,11 @@ public class UserController {
      */
     @GetMapping("{userId}")
     public ResponseEntity<?> getUser(@PathVariable String userId) {
-    	UserDto user;
-    	user = userService.getUser(userId);
+    	UserProfile user = userService.getUser(userId);
     	if (user == null) {
     		return new ResponseEntity<String>("User not found", HttpStatus.NOT_FOUND);
     	}
-    	return new ResponseEntity<UserDto>(user, HttpStatus.OK);
+    	return new ResponseEntity<UserDto>(convertToDto(user), HttpStatus.OK);
     }
     
     /**
@@ -61,7 +65,9 @@ public class UserController {
     		return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
     	}
     	
-    	if (!userService.addUser(user))
+    	System.out.println("USER: " + user.toString());
+    	
+    	if (!userService.addUser(convertToDomainObject(user)))
     	{
     		return new ResponseEntity<String>("User already exists", HttpStatus.UNPROCESSABLE_ENTITY);
     	}
@@ -78,14 +84,40 @@ public class UserController {
     @DeleteMapping("{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable String userId) {
     	
-    	UserDto deletedUser = userService.deleteUser(userId);
+    	UserProfile deletedUser = userService.deleteUser(userId);
 
     	if (deletedUser == null) {
     		return new ResponseEntity<String>("User does not exist", HttpStatus.NOT_FOUND);
     	}
-    	return new ResponseEntity<UserDto>(deletedUser, HttpStatus.OK);
+    	return new ResponseEntity<UserDto>(convertToDto(deletedUser), HttpStatus.OK);
     }
 
-    // TODO: Add PATCH call
+   // TODO: Add PATCH call
+    
+    private UserDto convertToDto(UserProfile user) {
+    	return new UserDto(
+    			user.getEmail(),
+    			user.getName(),
+    			user.getUserName(),
+    			user.getPassword(),
+    			user.getAge(),
+    			user.getHeight(),
+    			user.getBiologicalSex()
+    			);
+    }
+    
+	private UserProfile convertToDomainObject(UserDto userDto) {
+		
+		UserProfile profile = new UserProfile(
+				userDto.getEmail(),
+				userDto.getName(),
+				userDto.getUserName(),
+				userDto.getPassword(),
+				userDto.getAge(),
+				userDto.getHeight(),
+				userDto.getSex()
+				);
+		return profile;
+    }
 
 }
