@@ -22,7 +22,9 @@ jobs:
           export PATH=\$PATH:\$JAVA_HOME/bin
           EOF
           source /etc/profile.d/jdk13.sh
+    - name: change dir
+      run: cd Server/
     - name: build server
-      run: |
-        cd Server/
-        ./gradlew build
+      run: ./gradlew build
+    - name: run unit tests
+      run: ./gradlew test
