@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import com.ecse428.project.fitboi.model.Goal;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.repository.GoalRepository;
+import com.ecse428.project.repository.UserRepository;
 
 /**
  * Provides an API to manipulate user information in the database.
@@ -16,21 +17,16 @@ public class GoalService {
 	
 	
 	@Autowired
-	GoalRepository repository;
+    GoalRepository goalRepository;
+    
+    @Autowired
+	UserRepository userRepository;
 	
 	
 	
-	/**
-	 * Adds a new user to the database
-	 * @param goal
-	 * @return True if the user has been inserted, False otherwise
-	 */
 	public boolean addGoaltoUser(Goal goal, UserProfile user) {
-		if (repository.existsById(goal.getId())) {
-			return false;
-		}
+
 		
-		repository.save(user);
 		return true;
 	}
 	
