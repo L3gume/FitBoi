@@ -29,10 +29,10 @@ public class UserService {
 	
 	/**
 	 * Gets a specific users from the database
-	 * @return If the userId exists in the database, the a user dto is returned. Else, null is returned.
+	 * @return If the userEmail exists in the database, the a user dto is returned. Else, null is returned.
 	 */
-	public UserProfile getUser(String userId) {
-		return repository.findUserByEmail(userId);
+	public UserProfile getUser(String userEmail) {
+		return repository.findUserByEmail(userEmail);
 	}
 	
 	
@@ -52,15 +52,15 @@ public class UserService {
 	
 	/**
 	 * Deletes a user from the database 
-	 * @param userId
+	 * @param userEmail
 	 * @return The deleted user dto if the deletion was successful. null if the user could not be removed / did not exist in the db.
 	 */
-	public UserProfile deleteUser(String userId) {
-    	if (!repository.existsById(userId)) {
+	public UserProfile deleteUser(String userEmail) {
+    	if (!repository.existsById(userEmail)) {
     		return null;
     	}
-    	UserProfile deletedUser = repository.findUserByEmail(userId);
-    	repository.deleteById(userId);
+    	UserProfile deletedUser = repository.findUserByEmail(userEmail);
+    	repository.deleteById(userEmail);
 		return deletedUser;
 	}
 	

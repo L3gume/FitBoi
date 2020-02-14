@@ -40,13 +40,13 @@ public class UserController {
     
     /**
      * GET
-     * /users/{user_id}/ -> returns a specific user given their userId (email for now)
-     * @param userId
+     * /users/{user_id}/ -> returns a specific user given their userEmail (email for now)
+     * @param userEmail
      * @return
      */
-    @GetMapping("{userId}")
-    public ResponseEntity<?> getUser(@PathVariable String userId) {
-    	UserProfile user = userService.getUser(userId);
+    @GetMapping("{userEmail}")
+    public ResponseEntity<?> getUser(@PathVariable String userEmail) {
+    	UserProfile user = userService.getUser(userEmail);
     	if (user == null) {
     		return new ResponseEntity<String>("User not found", HttpStatus.NOT_FOUND);
     	}
@@ -56,7 +56,7 @@ public class UserController {
     /**
      * POST
      * /users/ -> adds a new user to the DB
-     * @param userId
+     * @param userEmail
      * @return
      */
     @PostMapping("")
@@ -78,13 +78,13 @@ public class UserController {
     /**
      * DELETE
      * /users/{user_id}/ -> deletes a user from the DB
-     * @param userId
+     * @param userEmail
      * @return
      */
-    @DeleteMapping("{userId}")
-    public ResponseEntity<?> deleteUser(@PathVariable String userId) {
+    @DeleteMapping("{userEmail}")
+    public ResponseEntity<?> deleteUser(@PathVariable String userEmail) {
     	
-    	UserProfile deletedUser = userService.deleteUser(userId);
+    	UserProfile deletedUser = userService.deleteUser(userEmail);
 
     	if (deletedUser == null) {
     		return new ResponseEntity<String>("User does not exist", HttpStatus.NOT_FOUND);
