@@ -2,15 +2,21 @@ package com.example.fitboi.ui.meal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.example.fitboi.R;
 
+import java.util.AbstractQueue;
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by Andi-Camille Bakti on 13/02/2020.
@@ -18,22 +24,27 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AddMealActivity extends AppCompatActivity {
     private static final String LOG_TAG = AddMealActivity.class.getSimpleName();
 
-    private MealListAdapter mealAdapter;
+    private RecyclerView.Adapter mealAdapter;
+    private ArrayList<FoodDtoTest> mealEntries;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meal);
 
-        //Populate list view
-        ArrayList<MealTest> mealEntries = new ArrayList<MealTest>();
-        mealEntries.add(new MealTest("Pizza", 100));
-        mealEntries.add(new MealTest("Mac+Cheese", 200));
-        mealEntries.add(new MealTest("Salad", 300));
-        mealEntries.add(new MealTest("MickeyDees", 400));
-        mealEntries.add(new MealTest("Timmies", 500));
 
-        this.mealAdapter = new MealListAdapter(this, mealEntries);
+        //ArrayList<MealTest> mealEntries = getRecentMeals();
+
+        //Populate list view (testing)
+        ArrayList<FoodDtoTest> mealEntries = new ArrayList<FoodDtoTest>();
+        mealEntries.add(new FoodDtoTest("Pizza", 100));
+        mealEntries.add(new FoodDtoTest("Mac+Cheese", 200));
+        mealEntries.add(new FoodDtoTest("Salad", 300));
+        mealEntries.add(new FoodDtoTest("MickeyDees", 400));
+        mealEntries.add(new FoodDtoTest("Timmies", 500));
+
+        this.mealAdapter = new MealListAdapter(mealEntries);
 
         uiSetup();
     }
@@ -49,8 +60,47 @@ public class AddMealActivity extends AppCompatActivity {
             }
         });
 
-        ListView mealListView = findViewById(R.id.add_meal_listview);
+        RecyclerView mealListView = findViewById(R.id.add_meal_recyclerView);
         mealListView.setAdapter(this.mealAdapter);
+        mealListView.setLayoutManager(new LinearLayoutManager(this));
+
+        androidx.appcompat.widget.SearchView searchView  =
+                findViewById(R.id.add_meal_searchview);
+        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+//                this.searchRequest = query;
+//                Log.d(LOG_TAG,query + "searched");
+//
+//                loaderManager = getLoaderManager();
+//                loaderManager.initLoader(BOOK_LOADER_ID, null,MainActivity.this);
+                  // Test without threads
+
+//                Consumer showFoodsFromQuery = new Consumer<List<FoodDto>>() {
+//                    @Override
+//                    public void accept(List<FoodDto> food) {
+//
+//                        mealEntries.add(f.name, f.calories);
+//                    }
+//                };
+//                FoodAPI.getFoodsFromQuery(showFoodsFromQuery, searchText);
+                return true;
+            }
+
+            /**
+             * This override is required but this functionality is not on the MVP
+             * @param newText
+             * @return
+             */
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+
+
+        });
+
+//        ???
     }
 
     private void launchCreateMealActivity() {

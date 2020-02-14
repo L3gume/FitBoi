@@ -26,8 +26,11 @@
             android:background="@drawable/ic_add_black_24dp"/>
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/add_meal_listview"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/add_meal_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        />
+
 </LinearLayout>

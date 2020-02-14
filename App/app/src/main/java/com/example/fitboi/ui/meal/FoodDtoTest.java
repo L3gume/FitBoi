@@ -6,7 +6,7 @@ import java.sql.Time;
 /**
  * Created by Andi-Camille Bakti on 13/02/2020.
  */
-class MealTest {
+class FoodDtoTest {
 
     private String name;
     private Integer calories;
@@ -24,7 +24,7 @@ class MealTest {
         return date;
     }
 
-    public MealTest(String name, Integer calories){
+    public FoodDtoTest(String name, Integer calories){
         this.name = name;
         this.calories = calories;
     }
