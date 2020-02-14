@@ -60,7 +60,7 @@ public class UserController {
      * @return
      */
     @PostMapping("")
-    public ResponseEntity<?> addNewUser(@RequestBody UserDto user) {
+    public ResponseEntity<?> addUser(@RequestBody UserDto user) {
     	if (user == null) {
     		return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
     	}

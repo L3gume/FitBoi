@@ -26,8 +26,7 @@ public class GoalService {
 	GoalRepository goalRepository;
 
 	@Autowired
-	UserService userService;
-	
+    UserService userService;
 	
 	
 	public boolean addGoaltoUser(Goal goal, UserProfile user) {
