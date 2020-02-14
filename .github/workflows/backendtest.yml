@@ -26,5 +26,3 @@ jobs:
       run: cd Server/
     - name: build server
       run: ./gradlew build
-    - name: run unit tests
-      run: ./gradlew test
