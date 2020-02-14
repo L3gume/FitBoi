@@ -1,9 +1,16 @@
 package com.ecse428.project.fitboi.service;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import com.ecse428.project.fitboi.model.Goal;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.repository.GoalRepository;
+import com.ecse428.project.repository.UserRepository;
 
 /**
  * Provides an API to manipulate user information in the database.
@@ -16,7 +23,10 @@ public class GoalService {
 	
 	
 	@Autowired
-	GoalRepository repository;
+	GoalRepository goalRepository;
+
+	@Autowired
+	UserService userService;
 	
 	
 	
@@ -26,14 +36,33 @@ public class GoalService {
 	 * @return True if the user has been inserted, False otherwise
 	 */
 	public boolean addGoaltoUser(Goal goal, UserProfile user) {
-		if (repository.existsById(goal.getId())) {
-			return false;
-		}
-		
-		repository.save(user);
+		user.addGoal(goal);
+		userService.updateUser(user);
 		return true;
 	}
 	
-	
+	public List<Goal> getUserGoals(String userEmail)
+	{
+		UserProfile user = userService.getUser(userEmail);
+		return user.getGoals();
+	}
+
+	public List<Goal> getUserGoalsInRange(String userEmail, Date start,
+		Date end)
+	{
+		List<Goal> goals = getUserGoals(userEmail);
+		List<Goal> valid_goals = new ArrayList<Goal>();
+
+		for(Goal goal : goals)
+		{
+			if((goal.getStartDate().after(start) && goal.getStartDate().before(end)) ||
+				goal.getStartDate().equals(start) || goal.getStartDate().equals(end))
+			{
+				valid_goals.add(goal);
+			}
+		}
+
+		return valid_goals;
+	}
 
 }

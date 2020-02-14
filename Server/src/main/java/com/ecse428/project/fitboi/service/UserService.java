@@ -48,8 +48,22 @@ public class UserService {
 	 * @param user
 	 * @return True if the user has been inserted, False otherwise
 	 */
-	public boolean addUser(UserProfile user) {
+	public boolean addNewUser(UserProfile user) {
 		if (repository.existsById(user.getEmail())) {
+			return false;
+		}
+		
+		repository.save(user);
+		return true;
+	}
+
+	/**
+	 * Updates an existing user
+	 * @param user
+	 * @return True if the user has been inserted, False otherwise
+	 */
+	public boolean updateUser(UserProfile user) {
+		if (!repository.existsById(user.getEmail())) {
 			return false;
 		}
 		

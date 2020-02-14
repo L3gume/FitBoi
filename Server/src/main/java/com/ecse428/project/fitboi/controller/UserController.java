@@ -60,14 +60,14 @@ public class UserController {
      * @return
      */
     @PostMapping("")
-    public ResponseEntity<?> addUser(@RequestBody UserDto user) {
+    public ResponseEntity<?> addNewUser(@RequestBody UserDto user) {
     	if (user == null) {
     		return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
     	}
     	
     	System.out.println("USER: " + user.toString());
     	
-    	if (!userService.addUser(convertToDomainObject(user)))
+    	if (!userService.addNewUser(convertToDomainObject(user)))
     	{
     		return new ResponseEntity<String>("User already exists", HttpStatus.UNPROCESSABLE_ENTITY);
     	}
