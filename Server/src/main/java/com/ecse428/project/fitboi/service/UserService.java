@@ -34,8 +34,16 @@ public class UserService {
 	public UserProfile getUser(String userId) {
 		return repository.findUserByEmail(userId);
 	}
-	
-	
+
+	/**
+	 * Checks whether or not a user exists
+	 * @param userId: the user's email address
+	 * @return true if the user exists in the database, false otherwise
+	 */
+	public boolean userExists(String userId) {
+		return getUser(userId) != null;
+	}
+
 	/**
 	 * Adds a new user to the database
 	 * @param user
@@ -63,6 +71,5 @@ public class UserService {
     	repository.deleteById(userId);
 		return deletedUser;
 	}
-	
 
 }
