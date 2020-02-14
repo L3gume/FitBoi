@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -69,12 +70,36 @@ public class UserController {
     	
     	if (!userService.addUser(convertToDomainObject(user)))
     	{
-    		return new ResponseEntity<String>("User already exists", HttpStatus.UNPROCESSABLE_ENTITY);
+    		return new ResponseEntity<String>("User already exists", HttpStatus.BAD_REQUEST);
     	}
     	
     	return new ResponseEntity<UserDto>(user, HttpStatus.CREATED);
     }
     
+
+    /**
+     * UPDATE
+     * /users/ -> update user in DB
+     * @param userEmail
+     * @return
+     */
+    @PutMapping("")
+    public ResponseEntity<?> updateUser(@RequestBody UserDto user) {
+        if (user == null) {
+            return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
+        }
+        
+        System.out.println("USER: " + user.toString());
+        
+        if (!userService.updateUser(convertToDomainObject(user)))
+        {
+            return new ResponseEntity<String>("User does not exist", HttpStatus.BAD_REQUEST);
+        }
+        
+        return new ResponseEntity<UserDto>(user, HttpStatus.OK);
+    }
+
+
     /**
      * DELETE
      * /users/{user_id}/ -> deletes a user from the DB

@@ -51,6 +51,20 @@ public class UserService {
 	}
 
 	/**
+	 * Update a user in the database
+	 * @param user
+	 * @return True if the user has update
+	 */
+	public boolean updateUser(UserProfile user){
+		if (repository.existsById(user.getEmail())) {
+			repository.save(user);
+			return true;
+		}
+		return false;
+	}
+
+
+	/**
 	 * Adds a new user to the database
 	 * @param user
 	 * @return True if the user exists, false if they dont
@@ -59,7 +73,7 @@ public class UserService {
 	public boolean checkUser(String userEmail){
 		return repository.existsById(userEmail);
 	}
-	
+
 	/**
 	 * Deletes a user from the database 
 	 * @param userEmail
