@@ -78,6 +78,10 @@ public class Goal
   // INTERFACE
   //------------------------
 
+  public int getId(){
+    return this.id;
+  }
+
   public boolean setBaseCalories(int aBaseCalories)
   {
     boolean wasSet = false;
