@@ -45,6 +45,11 @@ public class Meal
     mealType = aMealType;
     foodItems = new ArrayList<FoodItem>();
   }
+  
+  public Meal()
+  {
+    foodItems = new ArrayList<FoodItem>();
+  }
 
   //------------------------
   // INTERFACE
@@ -73,8 +78,7 @@ public class Meal
   @OneToMany(cascade={CascadeType.ALL})
   public List<FoodItem> getFoodItems()
   {
-    List<FoodItem> newFoodItems = Collections.unmodifiableList(foodItems);
-    return newFoodItems;
+    return foodItems;
   }
 
   public int numberOfFoodItems()

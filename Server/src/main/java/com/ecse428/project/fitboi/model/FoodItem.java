@@ -58,6 +58,11 @@ public class FoodItem
     portionSize = aPortionSize;
     macroDistribution = new MacroDistribution(aFatsForMacroDistribution, aCarbsForMacroDistribution, aProteinForMacroDistribution);
   }
+  
+  public FoodItem()
+  {
+	  
+  }
 
   //------------------------
   // INTERFACE

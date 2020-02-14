@@ -7,6 +7,7 @@ package com.ecse428.project.fitboi.model;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,6 +33,8 @@ public class Goal
   private boolean result;
   private Date startDate;
   private float weight;
+  
+  @Enumerated(EnumType.STRING)
   private ActivityLevel activityLevel;
 
   //Goal Associations
@@ -64,6 +67,11 @@ public class Goal
     weight = aWeight;
     activityLevel = aActivityLevel;
     macroDistribution = new MacroDistribution(aFatsForMacroDistribution, aCarbsForMacroDistribution, aProteinForMacroDistribution);
+  }
+  
+  public Goal()
+  {
+	  
   }
 
   //------------------------

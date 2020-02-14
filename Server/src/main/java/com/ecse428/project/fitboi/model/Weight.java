@@ -38,6 +38,11 @@ public class Weight
     date = aDate;
     weight = aWeight;
   }
+  
+  public Weight()
+  {
+	  
+  }
 
   //------------------------
   // INTERFACE

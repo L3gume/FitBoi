@@ -46,6 +46,11 @@ public class Metrics
     exerciseSpending = aExerciseSpending;
     meals = new ArrayList<Meal>();
   }
+  
+  public Metrics()
+  {
+    meals = new ArrayList<Meal>();
+  }
 
   //------------------------
   // INTERFACE
@@ -86,8 +91,7 @@ public class Metrics
   @OneToMany(cascade={CascadeType.ALL})
   public List<Meal> getMeals()
   {
-    List<Meal> newMeals = Collections.unmodifiableList(meals);
-    return newMeals;
+    return meals;
   }
 
   public int numberOfMeals()

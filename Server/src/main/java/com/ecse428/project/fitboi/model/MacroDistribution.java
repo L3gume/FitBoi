@@ -39,6 +39,11 @@ public class MacroDistribution
     carbs = aCarbs;
     protein = aProtein;
   }
+  
+  public MacroDistribution()
+  {
+	  
+  }
 
   //------------------------
   // INTERFACE
