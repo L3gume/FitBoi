@@ -3,7 +3,6 @@ package com.ecse428.project.fitboi;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,8 +18,11 @@ class UserServiceTests {
 	@Autowired
 	private UserService userService;
 
+
+
+
 	@Test
-	public void addGetDeleteUser(){
+	public void addCheckGetDeleteUser(){
 
 		String aEmail = "testUser1@mail.mcgill.ca";
 		String aName = "testboi";
@@ -34,6 +36,9 @@ class UserServiceTests {
 		boolean addStatus = userService.addUser(testUser);
 		assertTrue(addStatus, "Add user failure");
 		
+		boolean existStatus = userService.checkUser(testUser);
+		assertTrue(addStatus, "Check user failure");
+
 		UserProfile dbUser =  userService.getUser(aEmail);
 		assertTrue(dbUser.getEmail().equals(aEmail), "Get user failure");
 		assertTrue(dbUser.getName().equals(aName), "Get user failure");

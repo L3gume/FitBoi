@@ -49,6 +49,16 @@ public class UserService {
 		repository.save(user);
 		return true;
 	}
+
+	/**
+	 * Adds a new user to the database
+	 * @param user
+	 * @return True if the user exists, false if they dont
+	 */
+
+	public boolean checkUser(String userEmail){
+		return repository.existsById(user.getEmail());
+	}
 	
 	/**
 	 * Deletes a user from the database 
