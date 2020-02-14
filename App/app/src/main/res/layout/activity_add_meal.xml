@@ -3,25 +3,28 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/add_meal_search_button"
-            android:layout_margin="10dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/ic_search_black_24dp"/>
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/add_meal_searchview"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"/>
 
         <Button
             android:id="@+id/add_meal_create_new_button"
             android:layout_margin="10dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
             android:background="@drawable/ic_add_black_24dp"/>
-    </LinearLayout>
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/add_meal_listview"
