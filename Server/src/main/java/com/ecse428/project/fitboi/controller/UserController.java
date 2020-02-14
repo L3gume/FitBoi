@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecse428.project.fitboi.dto.*;
+import com.ecse428.project.fitboi.model.Goal;
 import com.ecse428.project.fitboi.model.UserProfile;
+import com.ecse428.project.fitboi.service.GoalService;
 import com.ecse428.project.fitboi.service.UserService;
 
 @RestController
@@ -23,7 +25,10 @@ import com.ecse428.project.fitboi.service.UserService;
 public class UserController {
 	
 	@Autowired
-	private UserService userService;
+    private UserService userService;
+    
+    @Autowired
+    private GoalService goalService;
 	
     /**
      * GET
@@ -90,6 +95,33 @@ public class UserController {
     		return new ResponseEntity<String>("User does not exist", HttpStatus.NOT_FOUND);
     	}
     	return new ResponseEntity<UserDto>(convertToDto(deletedUser), HttpStatus.OK);
+    }
+
+    /**
+     * GET
+     * /users/{user_id}/ -> returns a specific user given their userId (email for now)
+     * @param userId
+     * @return
+     */
+    @GetMapping("{userEmail}/goals")
+    public ResponseEntity<List<GoalDto>> getUserGoals(@PathVariable String userEmail)
+    {
+        List<GoalDto> goalDtos = new ArrayList<GoalDto>();
+        List<Goal> goals = goalService.getUserGoals(userEmail);
+
+        for(Goal goal : goals)
+        {
+            goalDtos.add(new GoalDto(
+                goal.getBaseCalories(),
+                goal.isResult(),
+                goal.getStartDate(),
+                goal.getWeight(),
+                goal.getActivityLevel(),
+                goal.getMacroDistribution()
+            ));
+        }
+
+    	return new ResponseEntity<List<GoalDto>>(goalDtos, HttpStatus.OK);
     }
 
    // TODO: Add PATCH call
