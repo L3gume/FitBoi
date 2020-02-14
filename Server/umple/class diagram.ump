@@ -1,0 +1,110 @@
+class UserProfile
+{
+  email;
+    name;
+  userName;
+  password;
+  Integer age;
+  Integer height;
+  Boolean biologicalSex;
+  0..1 -> 1..* Weight;
+}
+
+class Weight
+{
+  Date date;
+  float weight;
+}
+
+class Metrics
+{
+  Date date;
+  Integer exerciseSpending;
+  1..* <- 0..1 UserProfile;
+}
+
+class Meal
+{
+  MealType mealType;
+ * <- 0..1 Metrics;
+}
+
+enum MealType {BreakFast, Lunch, Dinner}
+
+enum ActivityLevel{1,2,3,4,5}
+
+class Goal
+{
+  Integer baseCalories;
+  Boolean result;
+  Date startDate;
+  float weight;
+  ActivityLevel activityLevel;
+  * <- 0..1 UserProfile;
+  0..1 -> 1 MacroDistribution;
+}
+
+class MacroDistribution
+{
+  float fats;
+  float carbs;
+  float protein;
+}
+
+class FoodItem
+{
+  name;
+  Integer calories;
+  float portionSize;
+  1..* <- 0..1 Meal;
+  0..1 -> 1 MacroDistribution;
+}
+
+
+
+//$?[End_of_model]$?
+
+namespace -;
+
+
+class Meal
+{
+  position 412 378 160 57;
+  position.association Meal__Metrics 0,2 202,7;
+}
+
+class UserProfile
+{
+  position 101 74 175 158;
+  position.association UserProfile__Weight 0,158 108,0;
+}
+
+class Weight
+{
+  position 9 288 109 74;
+}
+
+class Metrics
+{
+  position 135 370 201 74;
+  position.association Metrics__UserProfile 30,0 22,158;
+}
+
+class Goal
+{
+  position 312 75 202 125;
+  position.association Goal__UserProfile 0,26 175,16;
+  position.association Goal__MacroDistribution 202,73 0,45;
+}
+
+class MacroDistribution
+{
+  position 627 73 126 90;
+}
+
+class FoodItem
+{
+  position 610 280 139 90;
+  position.association FoodItem__MacroDistribution 137,0 0,90;
+  position.association FoodItem__Meal 0,35 160,35;
+}

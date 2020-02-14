@@ -1,18 +1,18 @@
-name: AndroidTest
+name: BackendTest
 
 on:
   push:
     branches: dev
-
+    
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
-      - name: install java 13
-        run: |
+    - uses: actions/checkout@v2
+    - name: install java 13
+      run: |
           sudo apt install -y curl
           curl -O https://download.java.net/java/GA/jdk13/5b8a42f3905b406298b72d750b6919f6/33/GPL/openjdk-13_linux-x64_bin.tar.gz
           tar xvf openjdk-13_linux-x64_bin.tar.gz
@@ -22,5 +22,7 @@ jobs:
           export PATH=\$PATH:\$JAVA_HOME/bin
           EOF
           source /etc/profile.d/jdk13.sh
-      - name: build android
-        run: ./App/gradlew build
+    - name: change dir
+      run: cd Server/
+    - name: build server
+      run: ./gradlew build
