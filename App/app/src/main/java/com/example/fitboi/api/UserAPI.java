@@ -7,6 +7,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.fitboi.data.model.LoggedInUser;
 import com.example.fitboi.dto.UserDto;
 
 import org.json.JSONArray;
@@ -93,6 +94,22 @@ public class UserAPI {
         );
         request.setRetryPolicy(new DefaultRetryPolicy(0, 0, 0));
         queue.add(request);
+    }
+    
+    /**
+     * @param fn to be called by the response
+     * @param username user's username
+     * @param password user's password
+     */
+    public static void loginUser(Consumer<UserDto> fn, String username, String password) {
+        JsonObjectRequest req = new JsonObjectRequest(
+                userUrl+username+"/"+password+"/",
+                null,
+                userCallSuccessListener(fn),
+                userCallErrorListener(fn)
+        );
+        req.setRetryPolicy(new DefaultRetryPolicy(0, 0, 0));
+        MyVolley.getRequestQueue().add(req);
     }
 
     /********** PRIVATE METHODS **********/
