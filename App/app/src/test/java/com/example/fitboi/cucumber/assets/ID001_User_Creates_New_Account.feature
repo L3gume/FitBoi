@@ -9,22 +9,20 @@ Scenario: User profile is created (Normal flow)
 Given the User is not currently a member of the the FitBoi application
 And the entered email is valid
 And the individual's form data entered are valid 
-When clicking the create profile button
-Then a new user profile is created using the entered email and associated form data <DataType>
-And the "Successful profile creation" message is issued
-
+When a request to create a profile is made
+Then a new User profile is created 
 
 Scenario: User enters invalid email (Error flow)
 
 Given the User is not currently a member of the the FitBoi application
-  And the entered email is invalid
-  Then the email field does not accept the user's entry
-And the "Invalid E-mail" message is issued
+And the entered email is invalid
+When the request to create a profile is made
+Then the new User profile is not created
 
 Scenario: User enters invalid data (Error flow)
 
 Given the User is not currently a member of the the FitBoi application
 And the entered form data is invalid
-Then the form fields do not accept the user's entry
-And the "Invalid Input" message is issued
+When the request to create a profile is made
+Then the new User profile is not created
 
