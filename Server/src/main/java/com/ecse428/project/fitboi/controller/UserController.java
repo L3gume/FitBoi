@@ -2,6 +2,8 @@ package com.ecse428.project.fitboi.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Date;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecse428.project.fitboi.dto.*;
+import com.ecse428.project.fitboi.model.ActivityLevel;
 import com.ecse428.project.fitboi.model.Goal;
+import com.ecse428.project.fitboi.model.MacroDistribution;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.GoalService;
 import com.ecse428.project.fitboi.service.UserService;
@@ -124,6 +128,21 @@ public class UserController {
     	return new ResponseEntity<List<GoalDto>>(goalDtos, HttpStatus.OK);
     }
 
+    @PostMapping("{userEmail}/goals/{baseCalories}/{startDate}/{weight}/{activityLevel}/{fats}/{carbs}/{protein}")
+    public GoalDto createGoalForUser(@PathVariable("userEmail") String userEmail, @PathVariable("baseCalories") int baseCalories, @PathVariable("startDate") Date startDate,
+    @PathVariable("weight") float weight, @PathVariable("activityLevel") ActivityLevel activityLevel, @PathVariable("fats") float fats, 
+    @PathVariable("carbs") float carbs, @PathVariable("protein") float protein){
+
+        UserProfile user = userService.getUser(userEmail);
+        MacroDistribution macroDistribution = new MacroDistribution(fats, carbs, protein);
+        Goal goal = goalService.createGoal(baseCalories, startDate, weight, activityLevel, macroDistribution);
+        goalService.addGoaltoUser(goal, user);
+        
+        return convertoDto(goal);
+    }
+
+
+
    // TODO: Add PATCH call
     
     private UserDto convertToDto(UserProfile user) {
@@ -136,6 +155,17 @@ public class UserController {
     			user.getHeight(),
     			user.getBiologicalSex()
     			);
+    }
+
+    private GoalDto convertoDto(Goal goal){
+        return new GoalDto(
+            goal.getBaseCalories(),
+            goal.getResult(),
+            goal.getStartDate(),
+            goal.getWeight(),
+            goal.getActivityLevel(),
+            goal.getMacroDistribution()
+        );
     }
     
 	private UserProfile convertToDomainObject(UserDto userDto) {

@@ -122,6 +122,14 @@ public class Goal
     return wasSet;
   }
 
+  public boolean setMacroDistribution(MacroDistribution aMacroDistribution){
+    boolean wasSet = false;
+    macroDistribution = aMacroDistribution;
+    wasSet = true;
+    return wasSet;
+
+  }
+
   public int getBaseCalories()
   {
     return baseCalories;
