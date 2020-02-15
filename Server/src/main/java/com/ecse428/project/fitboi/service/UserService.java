@@ -62,7 +62,7 @@ public class UserService {
 		return true;
 	}
 
-	
+	/**
 	 * Update a user in the database
 	 * @param user
 	 * @return True if the user has update

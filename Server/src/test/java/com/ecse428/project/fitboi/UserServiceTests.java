@@ -42,7 +42,7 @@ class UserServiceTests {
 		boolean aBiologicalSex = true;
 
 		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
-		boolean addStatus = userService.addUser(testUser);
+		boolean addStatus = userService.addNewUser(testUser);
 		assertTrue(addStatus, "Add user failure");
 		
 		boolean existStatus = userService.checkUser(aEmail);
@@ -85,8 +85,8 @@ class UserServiceTests {
 		assertFalse(existStatus, "Check user failure");
 
 		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
-		userService.addUser(testUser);
-		boolean addStatus = userService.addUser(testUser);
+		userService.addNewUser(testUser);
+		boolean addStatus = userService.addNewUser(testUser);
 
 		// duplicate
 		assertFalse(addStatus, "Add user failure");
