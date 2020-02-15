@@ -23,6 +23,7 @@ import com.ecse428.project.fitboi.model.MacroDistribution;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.GoalService;
 import com.ecse428.project.fitboi.service.UserService;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @RestController
 @RequestMapping("/users/")
@@ -128,17 +129,50 @@ public class UserController {
     	return new ResponseEntity<List<GoalDto>>(goalDtos, HttpStatus.OK);
     }
 
-    @PostMapping("{userEmail}/goals/{baseCalories}/{startDate}/{weight}/{activityLevel}/{fats}/{carbs}/{protein}")
-    public GoalDto createGoalForUser(@PathVariable("userEmail") String userEmail, @PathVariable("baseCalories") int baseCalories, @PathVariable("startDate") Date startDate,
-    @PathVariable("weight") float weight, @PathVariable("activityLevel") ActivityLevel activityLevel, @PathVariable("fats") float fats, 
-    @PathVariable("carbs") float carbs, @PathVariable("protein") float protein){
-
+        /**
+     * POST
+     * create a new Goal for a User
+     * @param userId
+     * @return
+     */
+    @PostMapping("{userId}/goals")
+    public ResponseEntity<?> createGoal(@PathVariable("userId") String userEmail, @RequestBody ObjectNode objectNode) {
+    	if (objectNode == null) {
+    		return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
+    	}
         UserProfile user = userService.getUser(userEmail);
-        MacroDistribution macroDistribution = new MacroDistribution(fats, carbs, protein);
-        Goal goal = goalService.createGoal(baseCalories, startDate, weight, activityLevel, macroDistribution);
-        goalService.addGoaltoUser(goal, user);
-        
-        return convertoDto(goal);
+
+        ActivityLevel activityLevel = ActivityLevel.valueOf(objectNode.get("activityLevel").asText());
+
+        MacroDistribution macroDistribution = new MacroDistribution((float) objectNode.get("fats").asLong(), (float) objectNode.get("carbs").asLong(), (float) objectNode.get("proteins").asLong());
+
+        GoalDto goal = new GoalDto(objectNode.get("baseCalories").asInt(), objectNode.get("result").asBoolean(), Date.valueOf(objectNode.get("startDate").asText()), (float) objectNode.get("weight").asLong(), 
+        activityLevel, macroDistribution);
+
+    	if (!goalService.addGoaltoUser(convertToDomainObject(goal), user))
+    	{
+    		return new ResponseEntity<String>("Goal already exists", HttpStatus.UNPROCESSABLE_ENTITY);
+    	}
+
+    	return new ResponseEntity<GoalDto>(goal, HttpStatus.CREATED);
+    }
+
+        /**
+     * DELETE
+     * /users/{user_id}/goals/{goalId} -> deletes a goal from the DB
+     * @param userId 
+     * @param goalId
+     * @return
+     */
+    @DeleteMapping("{userId}/goals/{goalId}")
+    public ResponseEntity<?> deleteGoal(@PathVariable String userId, @PathVariable int goalId) {
+    	
+    	Goal deletedGoal = goalService.deleteGoal(userId, goalId);
+
+    	if (deletedGoal == null) {
+    		return new ResponseEntity<String>("Goal does not exist", HttpStatus.NOT_FOUND);
+    	}
+    	return new ResponseEntity<GoalDto>(convertToDto(deletedGoal), HttpStatus.OK);
     }
 
 
@@ -157,15 +191,15 @@ public class UserController {
     			);
     }
 
-    private GoalDto convertoDto(Goal goal){
-        return new GoalDto(
+    private GoalDto convertToDto(Goal goal) {
+    	return new GoalDto(
             goal.getBaseCalories(),
             goal.getResult(),
             goal.getStartDate(),
             goal.getWeight(),
             goal.getActivityLevel(),
-            goal.getMacroDistribution()
-        );
+            goal.getMacroDistribution()   			
+    			);
     }
     
 	private UserProfile convertToDomainObject(UserDto userDto) {
@@ -180,6 +214,20 @@ public class UserController {
 				userDto.getSex()
 				);
 		return profile;
+    }
+
+    private Goal convertToDomainObject(GoalDto goalDto) {
+		
+		Goal goal = new Goal(
+            goalDto.getBaseCalories(),
+            goalDto.getResult(),
+            goalDto.getStartDate(),
+            goalDto.getWeight(),
+            goalDto.getActivityLevel(),
+            goalDto.getMacroDistribution()
+                );
+                
+		return goal;
     }
 
 }

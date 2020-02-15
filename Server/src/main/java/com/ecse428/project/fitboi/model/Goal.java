@@ -59,7 +59,7 @@ public class Goal
     macroDistribution = aMacroDistribution;
   }
 
-  public Goal(int aBaseCalories, boolean aResult, Date aStartDate, float aWeight, ActivityLevel aActivityLevel, float aFatsForMacroDistribution, float aCarbsForMacroDistribution, float aProteinForMacroDistribution, FoodItem aFoodItemForMacroDistribution)
+  public Goal(int aBaseCalories, boolean aResult, Date aStartDate, float aWeight, ActivityLevel aActivityLevel, float aFatsForMacroDistribution, float aCarbsForMacroDistribution, float aProteinForMacroDistribution)
   {
     baseCalories = aBaseCalories;
     result = aResult;
@@ -68,6 +68,7 @@ public class Goal
     activityLevel = aActivityLevel;
     macroDistribution = new MacroDistribution(aFatsForMacroDistribution, aCarbsForMacroDistribution, aProteinForMacroDistribution);
   }
+
   
   public Goal()
   {

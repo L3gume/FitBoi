@@ -1,6 +1,5 @@
 package com.ecse428.project.fitboi.dto;
 
-import java.util.Objects;
 import java.sql.Date;
 import com.ecse428.project.fitboi.model.ActivityLevel;
 import com.ecse428.project.fitboi.model.MacroDistribution;;
@@ -15,6 +14,10 @@ public class GoalDto {
     
     private ActivityLevel activityLevel;
     private MacroDistribution macroDistribution;
+
+    public GoalDto(){
+
+    }
 
     public GoalDto(int baseCalories, boolean result, Date startDate, float weight, ActivityLevel activityLevel, MacroDistribution macroDistribution){
         this.baseCalories = baseCalories;

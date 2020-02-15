@@ -26,30 +26,20 @@ public class GoalService {
 	
 	@Autowired
 	GoalRepository goalRepository;
+	@Autowired
+	UserRepository userRepository;
 
 	@Autowired
 	UserService userService;
 	
-	/**
-	 * Adds a new goal to the database
-	 * @param aResult aBaseCalories
-	 * @return True if the user has been inserted, False otherwise
-	 */
-	public Goal createGoal(int aBaseCalories, Date aStartDate, float aWeight, ActivityLevel aActivityLevel, MacroDistribution aMacroDistribution){
-		Goal newGoal = new Goal();
-		newGoal.setActivityLevel(aActivityLevel);
-		newGoal.setBaseCalories(aBaseCalories);
-		newGoal.setResult(false);
-		newGoal.setStartDate(aStartDate);
-		newGoal.setWeight(aWeight);
-		newGoal.setMacroDistribution(aMacroDistribution);
-		goalRepository.save(newGoal);
-		return newGoal;
-	}
 	
-	
+
 	public boolean addGoaltoUser(Goal goal, UserProfile user) {
+		if (goalRepository.existsById(goal.getId())) {
+			return false;
+		}
 		user.addGoal(goal);
+		goalRepository.save(goal);
 		userService.updateUser(user);
 		return true;
 	}
@@ -58,6 +48,24 @@ public class GoalService {
 	{
 		UserProfile user = userService.getUser(userEmail);
 		return user.getGoals();
+	}
+
+		/**
+	 * Deletes a goal from the database 
+	 * @param userId
+	 * @return The deleted user dto if the deletion was successful. null if the user could not be removed / did not exist in the db.
+	 */
+	public Goal deleteGoal(String userId, int goalId) {
+    	if (!goalRepository.existsById(goalId)) {
+    		return null;
+		}
+		UserProfile user = userRepository.findUserByEmail(userId);
+
+		Goal deletedGoal = goalRepository.findGoalById(goalId);
+		user.removeGoal(deletedGoal);
+		userRepository.save(user);
+		goalRepository.deleteById(goalId);
+		return deletedGoal;
 	}
 
 	public List<Goal> getUserGoalsInRange(String userEmail, Date start,
