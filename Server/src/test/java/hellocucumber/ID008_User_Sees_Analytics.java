@@ -1,3 +1,4 @@
+//package com.example.fitboi.cucumber.steps;
 package hellocucumber;
 
 import io.cucumber.java.en.Given;
@@ -5,7 +6,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
 
-public class ID008 { 
+public class ID008_User_Sees_Analytics { 
     @Given("the User is on the analytics dashboard")
     public void the_User_is_on_the_analytics_dashboard() {
         // Write code here that turns the phrase above into concrete actions

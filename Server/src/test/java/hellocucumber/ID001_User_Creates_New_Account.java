@@ -4,9 +4,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
-import hellocucumber.Common;
+//import com.example.fitboi.cucumber.steps.ID000_Common_Steps;
+import hellocucumber.ID000_Common_Steps;
 
-public class ID001 {
+public class ID001_User_Creates_New_Account {
 
     private String validEmail;
     private String validForm;
@@ -56,7 +57,7 @@ public class ID001 {
         // Check that the user exists in the database
         // Assert true
 
-        Common.returnString = "Successful profile creation";
+        ID000_Common_Steps.returnString = "Successful profile creation";
 
         //throw new io.cucumber.java.PendingException();
     }

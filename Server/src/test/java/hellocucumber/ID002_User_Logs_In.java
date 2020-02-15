@@ -1,3 +1,4 @@
+//package com.example.fitboi.cucumber.steps;
 package hellocucumber;
 
 import io.cucumber.java.en.Given;
@@ -5,7 +6,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
 
-public class ID002 {
+public class ID002_User_Logs_In {
 
     @Given("the User is not currently logged into the FitBoi application")
     public void the_User_is_not_currently_logged_into_the_FitBoi_application() {

@@ -56,7 +56,7 @@ public class ID001_User_Creates_New_Account {
         // Check that the user exists in the database
         // Assert true
 
-        Common.returnString = "Successful profile creation";
+        ID000_Common_Steps.returnString = "Successful profile creation";
 
         //throw new io.cucumber.java.PendingException();
     }

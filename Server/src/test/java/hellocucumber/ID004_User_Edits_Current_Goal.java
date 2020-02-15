@@ -1,3 +1,4 @@
+//package com.example.fitboi.cucumber.steps;
 package hellocucumber;
 
 import io.cucumber.java.en.Given;
@@ -5,7 +6,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
 
-public class ID004 {
+public class ID004_User_Edits_Current_Goal {
 
     @Given("changes made to the goal targets are valid")
     public void changes_made_to_the_goal_targets_are_valid() {

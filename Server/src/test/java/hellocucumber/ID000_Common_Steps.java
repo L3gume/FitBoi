@@ -1,3 +1,4 @@
+//package com.example.fitboi.cucumber.steps;
 package hellocucumber;
 
 import io.cucumber.java.en.Given;
@@ -5,7 +6,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
 
-public class Common {
+public class ID000_Common_Steps {
 
     public static String returnString;
 

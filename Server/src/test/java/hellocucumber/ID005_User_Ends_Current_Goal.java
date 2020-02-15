@@ -1,3 +1,4 @@
+//package com.example.fitboi.cucumber.steps;
 package hellocucumber;
 
 import io.cucumber.java.en.Given;
@@ -5,7 +6,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
 
-public class ID005 { 
+public class ID005_User_Ends_Current_Goal { 
 
     @When("clicking the end button")
     public void clicking_the_end_button() {

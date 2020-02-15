@@ -1,3 +1,4 @@
+//package com.example.fitboi.cucumber.steps;
 package hellocucumber;
 
 import io.cucumber.java.en.Given;
@@ -5,7 +6,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
 
-public class ID003 {
+public class ID003_User_Logs_A_Food_Item {
 
     @Given("the User is logged in")
     public void the_User_is_logged_in() {

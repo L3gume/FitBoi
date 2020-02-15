@@ -1,3 +1,4 @@
+//package com.example.fitboi.cucumber.steps;
 package hellocucumber;
 
 import io.cucumber.java.en.Given;
@@ -5,7 +6,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
 
-public class ID007 { 
+public class ID007_User_Daily_Consumption_Against_Goal { 
 
     @When("viewing the screen")
     public void viewing_the_screen() {
