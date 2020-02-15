@@ -20,7 +20,6 @@ class UserServiceTests {
 
 	@Autowired
 	private UserService userService;
-
 	@MockBean
     private UserRepository mockRepository;
 
@@ -29,7 +28,7 @@ class UserServiceTests {
 		UserProfile testUser = createUser();
 		when(mockRepository.existsById(testUser.getEmail())).thenReturn(false);
 		when(mockRepository.save(testUser)).thenReturn(testUser);
-		boolean addStatus = userService.addUser(testUser);
+		boolean addStatus = userService.addNewUser(testUser);
 		assertTrue(addStatus);
 	}
 
@@ -37,7 +36,7 @@ class UserServiceTests {
 	public void testAddUserFailure(){
 		UserProfile testUser = createUser();
 		when(mockRepository.existsById(testUser.getEmail())).thenReturn(true);
-		boolean addStatus = userService.addUser(testUser);
+		boolean addStatus = userService.addNewUser(testUser);
 		assertTrue(!addStatus);
 	}
 
@@ -131,4 +130,5 @@ class UserServiceTests {
 		boolean aBiologicalSex = true;
 		return new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
 	}
+
 }
