@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,13 +51,13 @@ public class UserController {
     
     /**
      * GET
-     * /users/{user_id}/ -> returns a specific user given their userId (email for now)
-     * @param userId
+     * /users/{user_id}/ -> returns a specific user given their userEmail (email for now)
+     * @param userEmail
      * @return
      */
-    @GetMapping("{userId}")
-    public ResponseEntity<?> getUser(@PathVariable String userId) {
-    	UserProfile user = userService.getUser(userId);
+    @GetMapping("{userEmail}")
+    public ResponseEntity<?> getUser(@PathVariable String userEmail) {
+    	UserProfile user = userService.getUser(userEmail);
     	if (user == null) {
     		return new ResponseEntity<String>("User not found", HttpStatus.NOT_FOUND);
     	}
@@ -66,7 +67,7 @@ public class UserController {
     /**
      * POST
      * /users/ -> adds a new user to the DB
-     * @param userId
+     * @param userEmail
      * @return
      */
     @PostMapping("")
@@ -79,22 +80,46 @@ public class UserController {
     	
     	if (!userService.addNewUser(convertToDomainObject(user)))
     	{
-    		return new ResponseEntity<String>("User already exists", HttpStatus.UNPROCESSABLE_ENTITY);
+    		return new ResponseEntity<String>("User already exists", HttpStatus.BAD_REQUEST);
     	}
     	
     	return new ResponseEntity<UserDto>(user, HttpStatus.CREATED);
     }
     
+
+    /**
+     * UPDATE
+     * /users/ -> update user in DB
+     * @param userEmail
+     * @return
+     */
+    @PutMapping("")
+    public ResponseEntity<?> updateUser(@RequestBody UserDto user) {
+        if (user == null) {
+            return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
+        }
+        
+        System.out.println("USER: " + user.toString());
+        
+        if (!userService.updateUser(convertToDomainObject(user)))
+        {
+            return new ResponseEntity<String>("User does not exist", HttpStatus.BAD_REQUEST);
+        }
+        
+        return new ResponseEntity<UserDto>(user, HttpStatus.OK);
+    }
+
+
     /**
      * DELETE
      * /users/{user_id}/ -> deletes a user from the DB
-     * @param userId
+     * @param userEmail
      * @return
      */
-    @DeleteMapping("{userId}")
-    public ResponseEntity<?> deleteUser(@PathVariable String userId) {
+    @DeleteMapping("{userEmail}")
+    public ResponseEntity<?> deleteUser(@PathVariable String userEmail) {
     	
-    	UserProfile deletedUser = userService.deleteUser(userId);
+    	UserProfile deletedUser = userService.deleteUser(userEmail);
 
     	if (deletedUser == null) {
     		return new ResponseEntity<String>("User does not exist", HttpStatus.NOT_FOUND);
