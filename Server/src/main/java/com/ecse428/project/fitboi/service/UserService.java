@@ -1,6 +1,14 @@
 package com.ecse428.project.fitboi.service;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.ecse428.project.fitboi.model.Goal;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.repository.UserRepository;
 
@@ -22,6 +30,7 @@ public class UserService {
 	 * Gets all users from the database
 	 * @return List of all users
 	 */
+	@Transactional
 	public Iterable<UserProfile> getAllUsers() {
 		repository.findAll();
 		return repository.findAll();
@@ -29,10 +38,11 @@ public class UserService {
 	
 	/**
 	 * Gets a specific users from the database
-	 * @return If the userId exists in the database, the a user dto is returned. Else, null is returned.
+	 * @return If the userEmail exists in the database, the a user dto is returned. Else, null is returned.
 	 */
-	public UserProfile getUser(String userId) {
-		return repository.findUserByEmail(userId);
+	@Transactional
+	public UserProfile getUser(String userEmail) {
+		return repository.findUserByEmail(userEmail);
 	}
 	
 	
@@ -41,7 +51,9 @@ public class UserService {
 	 * @param user
 	 * @return True if the user has been inserted, False otherwise
 	 */
-	public boolean addUser(UserProfile user) {
+
+	@Transactional
+	public boolean addNewUser(UserProfile user) {
 		if (repository.existsById(user.getEmail())) {
 			return false;
 		}
@@ -49,20 +61,68 @@ public class UserService {
 		repository.save(user);
 		return true;
 	}
+
 	
+	 * Update a user in the database
+	 * @param user
+	 * @return True if the user has update
+	 */
+	@Transactional
+	public boolean updateUser(UserProfile user){
+		if (repository.existsById(user.getEmail())) {
+			repository.save(user);
+			return true;
+		}
+		return false;
+	}
+
+
+	/**
+	 * Adds a new user to the database
+	 * @param user
+	 * @return True if the user exists, false if they dont
+	 */
+	@Transactional
+	public boolean checkUser(String userEmail){
+		return repository.existsById(userEmail);
+	}
+
 	/**
 	 * Deletes a user from the database 
-	 * @param userId
+	 * @param userEmail
 	 * @return The deleted user dto if the deletion was successful. null if the user could not be removed / did not exist in the db.
 	 */
-	public UserProfile deleteUser(String userId) {
-    	if (!repository.existsById(userId)) {
+	@Transactional
+	public UserProfile deleteUser(String userEmail) {
+    	if (!repository.existsById(userEmail)) {
     		return null;
     	}
-    	UserProfile deletedUser = repository.findUserByEmail(userId);
-    	repository.deleteById(userId);
+    	UserProfile deletedUser = repository.findUserByEmail(userEmail);
+    	repository.deleteById(userEmail);
 		return deletedUser;
 	}
 	
+	public List<Goal> getUserGoals(String userEmail)
+	{
+		UserProfile user = getUser(userEmail);
+		return user.getGoals();
+	}
 
+	public List<Goal> getUserGoalsInRange(String userEmail, Date start,
+		Date end)
+	{
+		List<Goal> goals = getUserGoals(userEmail);
+		List<Goal> valid_goals = new ArrayList<Goal>();
+
+		for(Goal goal : goals)
+		{
+			if((goal.getStartDate().after(start) && goal.getStartDate().before(end)) ||
+				goal.getStartDate().equals(start) || goal.getStartDate().equals(end))
+			{
+				valid_goals.add(goal);
+			}
+		}
+
+		return valid_goals;
+	}
 }
