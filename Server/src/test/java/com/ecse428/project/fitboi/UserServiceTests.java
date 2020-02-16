@@ -21,7 +21,7 @@ class UserServiceTests {
 	@Autowired
 	private UserService userService;
 	@MockBean
-    private UserRepository mockRepository;
+	private UserRepository mockRepository;
 
 	@Test
 	public void testAddUserSuccess(){
