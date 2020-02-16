@@ -18,14 +18,13 @@ public class LoginDataSource {
     public Result<LoggedInUser> login(final String username, final String password) {
 
         try {
-            // TODO: handle loggedInUser authentication
-            final ArrayList<LoggedInUser> res = new ArrayList<>();
-            Consumer<UserDto> loginUser = new Consumer<UserDto>() {
-                @Override
-                public void accept(UserDto userDto) {
-                    res.add(userDto != null ? new LoggedInUser(userDto.getEmail(), username) : null);
-                }
-            };
+            //final ArrayList<LoggedInUser> res = new ArrayList<>();
+            //Consumer<UserDto> loginUser = new Consumer<UserDto>() {
+            //    @Override
+            //    public void accept(UserDto userDto) {
+            //        res.add(userDto != null ? new LoggedInUser(userDto.getEmail(), username) : null);
+            //    }
+            //};
             // Authentication happens on the server side
             UserDto ret = UserAPI.loginUser(username, password);
             //while (res.size() < 1);

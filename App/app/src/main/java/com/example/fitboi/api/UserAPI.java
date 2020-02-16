@@ -100,22 +100,11 @@ public class UserAPI {
     }
     
     /**
-     * @param fn to be called by the response
+     * Synchronous call to authenticate user
      * @param username user's username
      * @param password user's password
+     * @return UserDto is successful, null if not
      */
-    public static void loginUser(Consumer<UserDto> fn, String username, String password) {
-        JsonObjectRequest req = new JsonObjectRequest(
-                Request.Method.GET,
-                userUrl+username+"/"+password+"/",
-                null,
-                userCallSuccessListener(fn),
-                userCallErrorListener(fn)
-        );
-        req.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
-        MyVolley.getRequestQueue().add(req);
-    }
-
     public static UserDto loginUser(String username, String password) {
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         JsonObjectRequest req = new JsonObjectRequest(
