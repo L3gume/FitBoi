@@ -22,8 +22,20 @@ public class FoodItemAPI {
 
     /**
      * Get a list of all food items
-     * /foodItems
-     * @param fn will store the response
+     * path :    /foodItems
+     *
+     * Example of how to use:
+     * List listOfFoodItems;
+     * Consumer addAllUsersToList = new Consumer<List<FoodItemDTO>> fn) {
+     *   @Override
+     *   public void accept(List<FoodItemDTO> foodItems) {
+     *     listOfFoodItems.addAll(foodItems);
+     *   }
+     * };
+     * FoodAPI.getAllUsers(addAllFoodItemsToList);
+     *
+     *
+     * @param fn will map the response to the food item list
     **/
     public static void getAllFoodItems(Consumer<List<FoodItemDTO>> fn) {
         RequestQueue queue = MyVolley.getRequestQueue();
@@ -38,8 +50,21 @@ public class FoodItemAPI {
 
     /**
      * Get a specific food items
-     * /foodItems/{foodItem}
-     * @param fn will store the response
+     * path:     /foodItems/{foodItem}
+     *
+     * Example of how to use:
+     * FoodItemDTO foodItem;
+     * Consumer addAllUsersToList = new Consumer<FoodItemDTO> fn) {
+     *   @Override
+     *   public void accept(FoodItemDTO foodItemDTO) {
+     *      foodItem = foodItemDTO;
+     *   }
+     * };
+     *
+     * FoodAPI.getFoodItem(foodItem, "Chicken");
+     *
+     *
+     * @param fn will map the response to food item
      **/
     public static void getFoodItem(Consumer<FoodItemDTO> fn, String foodItem) {
         RequestQueue queue = MyVolley.getRequestQueue();
