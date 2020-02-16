@@ -7,19 +7,33 @@ package com.ecse428.project.fitboi.model;
 import java.sql.Date;
 import java.util.*;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.CascadeType;
+
+
 // line 20 "model.ump"
 // line 80 "model.ump"
+@Entity
 public class Metrics
 {
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
   //Metrics Attributes
   private Date date;
   private int exerciseSpending;
 
   //Metrics Associations
+  @OneToMany(cascade={CascadeType.ALL})
   private List<Meal> meals;
 
   //------------------------
@@ -30,6 +44,11 @@ public class Metrics
   {
     date = aDate;
     exerciseSpending = aExerciseSpending;
+    meals = new ArrayList<Meal>();
+  }
+  
+  public Metrics()
+  {
     meals = new ArrayList<Meal>();
   }
 
@@ -69,10 +88,10 @@ public class Metrics
     return aMeal;
   }
 
+  @OneToMany(cascade={CascadeType.ALL})
   public List<Meal> getMeals()
   {
-    List<Meal> newMeals = Collections.unmodifiableList(meals);
-    return newMeals;
+    return meals;
   }
 
   public int numberOfMeals()

@@ -6,14 +6,18 @@ package com.ecse428.project.fitboi.model;
 
 import java.sql.Date;
 
-  //------------------------
-  // ENUMERATIONS
-  //------------------------
-
-enum ActivityLevel { ONE, TWO, THREE, FOUR, FIVE }
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.CascadeType;
 
 // line 37 "model.ump"
 // line 92 "model.ump"
+@Entity
 public class Goal
 {
   //------------------------
@@ -21,13 +25,20 @@ public class Goal
   //------------------------
 
   //Goal Attributes
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	
   private int baseCalories;
   private boolean result;
   private Date startDate;
   private float weight;
+  
+  @Enumerated(EnumType.STRING)
   private ActivityLevel activityLevel;
 
   //Goal Associations
+  @OneToOne(cascade={CascadeType.ALL})
   private MacroDistribution macroDistribution;
 
   //------------------------
@@ -48,7 +59,7 @@ public class Goal
     macroDistribution = aMacroDistribution;
   }
 
-  public Goal(int aBaseCalories, boolean aResult, Date aStartDate, float aWeight, ActivityLevel aActivityLevel, float aFatsForMacroDistribution, float aCarbsForMacroDistribution, float aProteinForMacroDistribution, FoodItem aFoodItemForMacroDistribution)
+  public Goal(int aBaseCalories, boolean aResult, Date aStartDate, float aWeight, ActivityLevel aActivityLevel, float aFatsForMacroDistribution, float aCarbsForMacroDistribution, float aProteinForMacroDistribution)
   {
     baseCalories = aBaseCalories;
     result = aResult;
@@ -58,9 +69,19 @@ public class Goal
     macroDistribution = new MacroDistribution(aFatsForMacroDistribution, aCarbsForMacroDistribution, aProteinForMacroDistribution);
   }
 
+  
+  public Goal()
+  {
+	  
+  }
+
   //------------------------
   // INTERFACE
   //------------------------
+
+  public int getId(){
+    return this.id;
+  }
 
   public boolean setBaseCalories(int aBaseCalories)
   {
@@ -102,6 +123,14 @@ public class Goal
     return wasSet;
   }
 
+  public boolean setMacroDistribution(MacroDistribution aMacroDistribution){
+    boolean wasSet = false;
+    macroDistribution = aMacroDistribution;
+    wasSet = true;
+    return wasSet;
+
+  }
+
   public int getBaseCalories()
   {
     return baseCalories;
@@ -122,6 +151,7 @@ public class Goal
     return weight;
   }
 
+  @Enumerated
   public ActivityLevel getActivityLevel()
   {
     return activityLevel;
@@ -132,6 +162,7 @@ public class Goal
     return result;
   }
   /* Code from template association_GetOne */
+  @OneToOne(cascade={CascadeType.ALL})
   public MacroDistribution getMacroDistribution()
   {
     return macroDistribution;

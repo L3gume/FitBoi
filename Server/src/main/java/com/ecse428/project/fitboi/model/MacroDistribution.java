@@ -3,11 +3,14 @@ package com.ecse428.project.fitboi.model;
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.29.1.4753.5a97eca04 modeling language!*/
 
-
-import java.sql.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 // line 48 "model.ump"
 // line 99 "model.ump"
+@Entity
 public class MacroDistribution
 {
 
@@ -16,6 +19,9 @@ public class MacroDistribution
   //------------------------
 
   //MacroDistribution Attributes
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
   private float fats;
   private float carbs;
   private float protein;
@@ -29,6 +35,11 @@ public class MacroDistribution
     fats = aFats;
     carbs = aCarbs;
     protein = aProtein;
+  }
+  
+  public MacroDistribution()
+  {
+	  
   }
 
   //------------------------
