@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fitboi.R;
+import com.example.fitboi.dto.FoodItemDto;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.MyViewHolder>{
     private static final String LOG_TAG = MealListAdapter.class.getSimpleName();
-    private final ArrayList<FoodDtoTest> mfoods;
+    private final ArrayList<FoodItemDto> mfoods;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -54,7 +55,7 @@ public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.MyView
 
     }
 
-    public MealListAdapter(ArrayList<FoodDtoTest> foods) {
+    public MealListAdapter(ArrayList<FoodItemDto> foods) {
         this.mfoods = foods;
         Log.d(LOG_TAG, String.valueOf(foods.size()));
     }
@@ -72,7 +73,7 @@ public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        FoodDtoTest food = mfoods.get(position);
+        FoodItemDto food = mfoods.get(position);
 
         TextView foodName = (TextView) holder.foodNameView;
         TextView foodCalCount= (TextView) holder.foodCalCountView;

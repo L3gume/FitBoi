@@ -10,9 +10,12 @@ import android.widget.ProgressBar;
 import android.widget.SearchView;
 
 import com.example.fitboi.R;
+import com.example.fitboi.api.FoodItemAPI;
+import com.example.fitboi.dto.FoodItemDto;
 
 import java.util.AbstractQueue;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +29,7 @@ public class AddMealActivity extends AppCompatActivity {
     private static final String LOG_TAG = AddMealActivity.class.getSimpleName();
 
     private RecyclerView.Adapter mealAdapter;
-    private ArrayList<FoodDtoTest> mealEntries;
+    private ArrayList<FoodItemDto> mealEntries;
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
@@ -38,13 +41,7 @@ public class AddMealActivity extends AppCompatActivity {
         //ArrayList<MealTest> mealEntries = getRecentMeals();
 
         //Populate list view (testing)
-        ArrayList<FoodDtoTest> mealEntries = new ArrayList<FoodDtoTest>();
-        mealEntries.add(new FoodDtoTest("Pizza", 100));
-        mealEntries.add(new FoodDtoTest("Mac+Cheese", 200));
-        mealEntries.add(new FoodDtoTest("Salad", 300));
-        mealEntries.add(new FoodDtoTest("MickeyDees", 400));
-        mealEntries.add(new FoodDtoTest("Timmies", 500));
-
+        ArrayList<FoodItemDto> mealEntries = new ArrayList<>();
         this.mealAdapter = new MealListAdapter(mealEntries);
 
         uiSetup();
@@ -63,7 +60,8 @@ public class AddMealActivity extends AppCompatActivity {
 
         RecyclerView mealListView = findViewById(R.id.add_meal_recyclerView);
         mealListView.setAdapter(this.mealAdapter);
-        mealListView.setLayoutManager(new LinearLayoutManager(this));
+        this.layoutManager = new LinearLayoutManager(this);
+        mealListView.setLayoutManager(layoutManager);
 
         androidx.appcompat.widget.SearchView searchView  =
                 findViewById(R.id.add_meal_searchview);
@@ -72,6 +70,9 @@ public class AddMealActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 ProgressBar progressBar = findViewById(R.id.add_meal_loading_bar);
                 progressBar.setVisibility(View.VISIBLE);
+
+                Log.d(LOG_TAG,query + " searched");
+
 //                this.searchRequest = query;
 //                Log.d(LOG_TAG,query + "searched");
 //
@@ -79,14 +80,13 @@ public class AddMealActivity extends AppCompatActivity {
 //                loaderManager.initLoader(BOOK_LOADER_ID, null,MainActivity.this);
                   // Test without threads
 
-//                Consumer foodConsumer = new Consumer<List<FoodItemDTO>>() {
-//                    @Override
-//                    public void accept(List<FoodItemDTO> food) {
-//
-//                        mealEntries.add(f.name, f.calories);
-//                    }
-//                };
-//                FoodItemAPI.getFoodItem(foodConsumer, searchText);
+                Consumer foodConsumer = new Consumer<FoodItemDto>() {
+                    @Override
+                    public void accept(FoodItemDto food) {
+                        mealEntries.add(food);
+                    }
+                };
+                FoodItemAPI.getFoodItem(foodConsumer, query);
 
                 progressBar.setVisibility(View.INVISIBLE);
                 return true;
