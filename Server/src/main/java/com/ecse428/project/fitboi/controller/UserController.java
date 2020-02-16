@@ -37,7 +37,20 @@ public class UserController {
     
     @Autowired
     private GoalService goalService;
-	
+
+    @GetMapping("{userEmail}/{password}")
+    public ResponseEntity<?> loginUser(@PathVariable String userEmail, @PathVariable String password) {
+        UserProfile user = userService.getUser(userEmail);
+        if (user == null) {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+        if (!user.getPassword().equals(password)) {
+            return new ResponseEntity<>("Wrong password", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(convertToDto(user), HttpStatus.OK);
+    }
+
     /**
      * GET
      * /users/ -> returns a list of all users

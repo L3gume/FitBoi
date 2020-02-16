@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ecse428.project.fitboi.dto.*;
 
 @RestController
-@RequestMapping("/users/")
 public class LoginController {
     
     @Autowired
@@ -27,20 +26,7 @@ public class LoginController {
     }
     */
     
-    @GetMapping("{userId}/{password}")
-    //@GetMapping("{password}")
-    public ResponseEntity<?> loginUser(@PathVariable String userId, @PathVariable String password) {
-        UserProfile user = userService.getUser(userId);
-        if (user == null) {
-    		return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
-        }
-        if (!user.getPassword().equals(password)) {
-            return new ResponseEntity<>("Wrong password", HttpStatus.UNAUTHORIZED);
-        }
-        
-        return new ResponseEntity<>(convertToDto(user), HttpStatus.OK);
-    }
-    
+
     private UserDto convertToDto(UserProfile user) {
     	return new UserDto(
     			user.getEmail(),
