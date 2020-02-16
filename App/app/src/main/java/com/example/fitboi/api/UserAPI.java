@@ -166,7 +166,6 @@ public class UserAPI {
             @Override
             public void onErrorResponse(VolleyError error) {
                 // TODO: do something with error
-                System.out.println("ERROR");
                 fn.accept(null);
             }
         };
