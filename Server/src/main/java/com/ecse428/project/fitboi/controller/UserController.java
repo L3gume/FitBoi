@@ -122,7 +122,6 @@ public class UserController {
     public ResponseEntity<?> deleteUser(@PathVariable String userEmail) {
     	
     	UserProfile deletedUser = userService.deleteUser(userEmail);
-
     	if (deletedUser == null || !userEmail.contains("@")) {
     		return new ResponseEntity<String>("User does not exist", HttpStatus.NOT_FOUND);
     	}
