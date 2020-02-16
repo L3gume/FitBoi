@@ -84,6 +84,7 @@ public class AddMealActivity extends AppCompatActivity {
                     @Override
                     public void accept(FoodItemDto food) {
                         mealEntries.add(food);
+                        Log.d(LOG_TAG, food.getName() + "added");
                     }
                 };
                 FoodItemAPI.getFoodItem(foodConsumer, query);
