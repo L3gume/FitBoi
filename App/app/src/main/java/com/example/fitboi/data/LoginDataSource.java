@@ -25,6 +25,7 @@ public class LoginDataSource {
                     res.add(new LoggedInUser(userDto.getEmail(), username));
                 }
             };
+            // Authentication happens on the server side
             UserAPI.loginUser(loginUser, username, password);
             return new Result.Success<>(res.get(0));
         } catch (Exception e) {
