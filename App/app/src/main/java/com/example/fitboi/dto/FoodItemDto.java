@@ -2,13 +2,13 @@ package com.example.fitboi.dto;
 
 import androidx.annotation.NonNull;
 
-public class FoodItemDTO {
+public class FoodItemDto {
 
     private String name;
     private int calories;
     private float portionSize;
 
-    public FoodItemDTO (String name, int calories, float portionSize) {
+    public FoodItemDto(String name, int calories, float portionSize) {
         this.name = name;
         this.calories = calories;
         this.portionSize = portionSize;

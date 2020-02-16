@@ -8,7 +8,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.fitboi.dto.FoodItemDTO;
+import com.example.fitboi.dto.FoodItemDto;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,9 +16,14 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static java.lang.Boolean.TRUE;
+
 public class FoodItemAPI {
 
-    private static final String foodItemUrl = "https://fitboi-dev.herokuapp.com/foodItems/";
+    static final String ip_localhost = "127.0.0.1";
+    static final String ip_dev_machine = "10.0.2.2";
+    static final boolean usingEmulator = TRUE;
+    static final String foodItemUrl = "http://"+(usingEmulator ? ip_dev_machine : ip_localhost)+"/users/";
 
     /**
      * Get a list of all food items
@@ -26,9 +31,9 @@ public class FoodItemAPI {
      *
      * Example of how to use:
      * List listOfFoodItems;
-     * Consumer addAllUsersToList = new Consumer<List<FoodItemDTO>> fn) {
+     * Consumer addAllUsersToList = new Consumer<List<FoodItemDto>> fn) {
      *   @Override
-     *   public void accept(List<FoodItemDTO> foodItems) {
+     *   public void accept(List<FoodItemDto> foodItems) {
      *     listOfFoodItems.addAll(foodItems);
      *   }
      * };
@@ -37,7 +42,7 @@ public class FoodItemAPI {
      *
      * @param fn will map the response to the food item list
     **/
-    public static void getAllFoodItems(Consumer<List<FoodItemDTO>> fn) {
+    public static void getAllFoodItems(Consumer<List<FoodItemDto>> fn) {
         RequestQueue queue = MyVolley.getRequestQueue();
         JsonArrayRequest request = new JsonArrayRequest(
                 foodItemUrl,
@@ -53,10 +58,10 @@ public class FoodItemAPI {
      * path:     /foodItems/{foodItem}
      *
      * Example of how to use:
-     * FoodItemDTO foodItem;
-     * Consumer addAllUsersToList = new Consumer<FoodItemDTO> fn) {
+     * FoodItemDto foodItem;
+     * Consumer addAllUsersToList = new Consumer(<FoodItemDto> fn) {
      *   @Override
-     *   public void accept(FoodItemDTO foodItemDTO) {
+     *   public void accept(FoodItemDto foodItemDTO) {
      *      foodItem = foodItemDTO;
      *   }
      * };
@@ -66,7 +71,7 @@ public class FoodItemAPI {
      *
      * @param fn will map the response to food item
      **/
-    public static void getFoodItem(Consumer<FoodItemDTO> fn, String foodItem) {
+    public static void getFoodItem(Consumer<FoodItemDto> fn, String foodItem) {
         RequestQueue queue = MyVolley.getRequestQueue();
         JsonObjectRequest request = new JsonObjectRequest(
                 foodItemUrl + foodItem + "/",
@@ -81,11 +86,11 @@ public class FoodItemAPI {
 
     // Success Listeners
 
-    private static Response.Listener<JSONArray> foodItemListCallSuccessListener(final Consumer<List<FoodItemDTO>> fn) {
+    private static Response.Listener<JSONArray> foodItemListCallSuccessListener(final Consumer<List<FoodItemDto>> fn) {
         return new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                List<FoodItemDTO> foodItemDtoList = null;
+                List<FoodItemDto> foodItemDtoList = null;
                 for (int i=0; i<response.length(); i++) {
                     foodItemDtoList.add( jsonToFoodItemDto(response.optJSONObject(i)));
                 }
@@ -94,7 +99,7 @@ public class FoodItemAPI {
         };
     }
 
-    private static Response.Listener<JSONObject> foodItemCallSuccessListener(final Consumer<FoodItemDTO> fn) {
+    private static Response.Listener<JSONObject> foodItemCallSuccessListener(final Consumer<FoodItemDto> fn) {
         return new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -106,7 +111,7 @@ public class FoodItemAPI {
 
     // Error Listeners
 
-    private static Response.ErrorListener foodItemListCallErrorListener(final Consumer<List<FoodItemDTO>> fn) {
+    private static Response.ErrorListener foodItemListCallErrorListener(final Consumer<List<FoodItemDto>> fn) {
         return new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -115,7 +120,7 @@ public class FoodItemAPI {
         };
     }
 
-    private static Response.ErrorListener foodItemCallErrorListener(final Consumer<FoodItemDTO> fn) {
+    private static Response.ErrorListener foodItemCallErrorListener(final Consumer<FoodItemDto> fn) {
         return new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -125,15 +130,15 @@ public class FoodItemAPI {
     }
 
     @NonNull
-    private static FoodItemDTO jsonToFoodItemDto(JSONObject json) {
+    private static FoodItemDto jsonToFoodItemDto(JSONObject json) {
         String name = json.optString("name");
         int calories = json.optInt("calories");
         float portionSize = (float) json.optDouble("portionSize");
 
-        return new FoodItemDTO(name, calories, portionSize);
+        return new FoodItemDto(name, calories, portionSize);
     }
 
-    private static JSONObject foodItemToJson(FoodItemDTO foodItem) {
+    private static JSONObject foodItemToJson(FoodItemDto foodItem) {
         JSONObject json = new JSONObject();
 
         try {
