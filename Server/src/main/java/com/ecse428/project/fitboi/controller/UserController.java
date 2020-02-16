@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -166,14 +168,17 @@ public class UserController {
     		return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
     	}
         UserProfile user = userService.getUser(userEmail);
-
         ActivityLevel activityLevel = ActivityLevel.valueOf(objectNode.get("activityLevel").asText());
+        MacroDistribution macroDistribution  = new MacroDistribution((float) objectNode.get("fats").asLong(), (float) objectNode.get("carbs").asLong(), (float) objectNode.get("proteins").asLong());
 
-        MacroDistribution macroDistribution = new MacroDistribution((float) objectNode.get("fats").asLong(), (float) objectNode.get("carbs").asLong(), (float) objectNode.get("proteins").asLong());
+        int cal = objectNode.get("baseCalories").asInt();
+        boolean result =  objectNode.get("result").asBoolean();
+      
+        float weight = objectNode.get("weight").asLong();
 
-        GoalDto goal = new GoalDto(objectNode.get("baseCalories").asInt(), objectNode.get("result").asBoolean(), Date.valueOf(objectNode.get("startDate").asText()), (float) objectNode.get("weight").asLong(), 
-        activityLevel, macroDistribution);
-
+        GoalDto goal = new GoalDto(cal, result, Date.valueOf(objectNode.get("startDate").asText()), weight, activityLevel, macroDistribution);
+       
+        
     	if (!goalService.addGoaltoUser(convertToDomainObject(goal), user))
     	{
     		return new ResponseEntity<String>("Goal already exists", HttpStatus.UNPROCESSABLE_ENTITY);
