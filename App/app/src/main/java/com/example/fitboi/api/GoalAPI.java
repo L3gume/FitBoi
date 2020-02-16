@@ -138,18 +138,33 @@ public class GoalAPI {
 
     // JSON - DTO converters
     private static GoalDto jsonToGoalDto(JSONObject json) {
-        String tmp = json.optString("tmp");
+        int baseCalories = json.optInt("baseCalories");
+        boolean result = json.optBoolean("result");
+        String startDate = json.optString("startDate");
+        double weight = json.optDouble("weight");
+        String activityLevel = json.optString("activityLevel");
+        int fats = json.optInt("fats");
+        int carbs = json.optInt("carbs");
+        int proteins = json.optInt("proteins");
 
-        return new GoalDto(tmp);
+        return new GoalDto(baseCalories,result,startDate,weight,activityLevel,fats,carbs,proteins);
     }
 
     private static JSONObject goalDtoToJson(GoalDto goal) {
         JSONObject json = new JSONObject();
 
         try {
-            json.put("tmp", goal.getTmp());
+            json.put("baseCalories", goal.getBaseCalories());
+            json.put("result", goal.getResult());
+            json.put("startDate", goal.getStartDate());
+            json.put("weight", goal.getWeight());
+            json.put("activityLevel", goal.getActivityLevel());
+            json.put("fats", goal.getFats());
+            json.put("carbs", goal.getCarbs());
+            json.put("proteins", goal.getProteins());
         } catch (Exception e) {
             // TODO: something with exception
         }
+        return json;
     }
 }

@@ -72,7 +72,7 @@ public class UserAPI {
      * Consumer addUserEmailToList = new Consumer<UserDto>() {
      *   @Override
      *   public void accept(UserDto user) {
-     *       ListObject.add(user.age);
+     *       TextBox.add(user.age);
      *   }
      * };
      * UserAPI.getUserByLoginInfo(addUserEmailToList, emailText);
@@ -140,12 +140,14 @@ public class UserAPI {
 
     private static UserDto jsonToUserDto(JSONObject json) {
         String email = json.optString("email");
+        String name = json.optString("name");
+        String username = json.optString("username");
+        String password = json.optString("password");
         int age = json.optInt("age");
         boolean sex = json.optBoolean("sex");
-        int weight = json.optInt("weight");
         int height = json.optInt("height");
 
-        return new UserDto(email, age, sex, weight, height);
+        return new UserDto(email, name, username, password, age, height, sex);
     }
 
     private static JSONObject userDtoToJson(UserDto user) {
@@ -153,9 +155,11 @@ public class UserAPI {
 
         try {
             json.put("email", user.getEmail());
+            json.put("name", user.getName());
+            json.put("username", user.getUserName());
+            json.put("password", user.getPassword());
             json.put("age", user.getAge());
             json.put("sex", user.getSex());
-            json.put("weight", user.getWeight());
             json.put("height", user.getHeight());
         } catch (Exception e) {
             // TODO: something with exception

@@ -12,14 +12,14 @@ import static java.lang.Boolean.TRUE;
 
 public class MyVolley {
     private static RequestQueue mRequestQueue;
-    private static ImageLoader mImageLoader;
+//    private static ImageLoader mImageLoader;
 
     private MyVolley() {
         // no instances
     }
 
-    public static final String ip_localhost = "127.0.0.1";
-    public static final String ip_dev_machine = "10.0.2.2";
+    public static final String ip_localhost = "127.0.0.1:8080";
+    public static final String ip_dev_machine = "10.0.2.2:8080";
     public static final boolean usingEmulator = TRUE;
     public static final String userUrl = "http://"+(usingEmulator ? ip_dev_machine : ip_localhost)+"/users/";
     public static final String goalUrl = "/goals/";
@@ -43,18 +43,18 @@ public class MyVolley {
     }
 
 
-    /**
-     * Returns instance of ImageLoader initialized with {@see FakeImageCache} which effectively means
-     * that no memory caching is used. This is useful for images that you know that will be show
-     * only once.
-     *
-     * @return
-     */
-    public static ImageLoader getImageLoader() {
-        if (mImageLoader != null) {
-            return mImageLoader;
-        } else {
-            throw new IllegalStateException("ImageLoader not initialized");
-        }
-    }
+//    /**
+//     * Returns instance of ImageLoader initialized with {@see FakeImageCache} which effectively means
+//     * that no memory caching is used. This is useful for images that you know that will be show
+//     * only once.
+//     *
+//     * @return
+//     */
+//    public static ImageLoader getImageLoader() {
+//        if (mImageLoader != null) {
+//            return mImageLoader;
+//        } else {
+//            throw new IllegalStateException("ImageLoader not initialized");
+//        }
+//    }
 }
