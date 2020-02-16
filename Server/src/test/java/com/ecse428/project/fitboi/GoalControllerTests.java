@@ -1,0 +1,92 @@
+package com.ecse428.project.fitboi;
+
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.springframework.http.MediaType;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.logging.*;
+
+import com.ecse428.project.repository.*;
+import com.ecse428.project.fitboi.model.*;
+
+
+@SpringBootTest
+@AutoConfigureMockMvc
+class GoalControllerTests {
+    private static final Logger LOGGER = Logger.getLogger(GoalControllerTests.class.getName());
+
+    @Autowired
+    private GoalRepository goalRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    private	ObjectMapper mapper = new ObjectMapper();
+
+    @BeforeEach
+    public void setup() {
+        userRepository.deleteAll();
+        goalRepository.deleteAll();
+    }
+
+    @AfterEach
+    public void teardown() {
+        userRepository.deleteAll();
+        goalRepository.deleteAll();
+    }
+
+    @Test
+    public void testPostGoalControllerSuccess() throws Exception{
+		String aEmail = "testUser1@mail.mcgill.ca";
+		String aName = "testboi";
+		String aUserName = "testBoi";
+		String aPassword = "password";
+		int aAge = 15;
+		int aHeight = 193;
+		boolean aBiologicalSex = true;
+		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+
+
+        int baseCalories = 100;
+        boolean result = false;
+        DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+        Date startDate = new java.sql.Date(df.parse("02-04-2020").getTime());
+        float weight = 68;
+        ActivityLevel activityLevel = ActivityLevel.Medium;
+        float fatsForMacroDistribution = 0.3f;
+        float carbsForMacroDistribution = 0.4f; 
+        float proteinForMacroDistribution = 0.3f;
+
+        Goal goal = new Goal(baseCalories, result, startDate, weight, activityLevel, fatsForMacroDistribution, carbsForMacroDistribution, proteinForMacroDistribution);
+
+
+		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
+		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
+            .andExpect(status().isCreated());
+            
+        LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(goal));
+		mockMvc.perform(post("/users/"+ aEmail + "/goals").contentType(MediaType.APPLICATION_JSON)
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(goal)))
+        	.andExpect(status().isCreated());
+	}
+}
