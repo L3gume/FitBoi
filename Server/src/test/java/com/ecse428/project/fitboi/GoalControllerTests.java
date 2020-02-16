@@ -1,9 +1,5 @@
 package com.ecse428.project.fitboi;
 
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.test.web.servlet.MockMvc;
@@ -14,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import org.springframework.http.MediaType;
@@ -171,7 +166,34 @@ class GoalControllerTests {
         testUser = userRepository.findUserByEmail(aEmail);
         int goalId = testUser.getGoal(0).getId();
 
-       mockMvc.perform(delete("/users/"+aEmail+"/goals/" + Integer.toString(goalId))).andExpect(status().isOk());
+        mockMvc.perform(delete("/users/"+aEmail+"/goals/" + Integer.toString(goalId))).andExpect(status().isOk());
+        return;
+    }
+
+    @Test
+    public void testPostGoalControllerNull() throws Exception {
+        String aEmail = "testUser1@mail.mcgill.ca";
+		String aName = "testboi";
+		String aUserName = "testBoi";
+		String aPassword = "password";
+		int aAge = 15;
+		int aHeight = 193;
+		boolean aBiologicalSex = true;
+		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+
+        SerializableGoal serializableGoal = null;
+
+        LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
+		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
+            .andExpect(status().isCreated());
+            
+        LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(serializableGoal));
+		mockMvc.perform(post("/users/"+ aEmail + "/goals").contentType(MediaType.APPLICATION_JSON)
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(serializableGoal)))
+            .andExpect(status().isBadRequest());
+            
+        return;
     }
 
 }

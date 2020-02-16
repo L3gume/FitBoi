@@ -60,7 +60,7 @@ public class UserController {
     @GetMapping("{userEmail}")
     public ResponseEntity<?> getUser(@PathVariable String userEmail) {
     	UserProfile user = userService.getUser(userEmail);
-    	if (user == null && !userEmail.contains("@")) {
+    	if (user == null || !userEmail.contains("@")) {
     		return new ResponseEntity<String>("User not found", HttpStatus.NOT_FOUND);
     	}
     	return new ResponseEntity<UserDto>(convertToDto(user), HttpStatus.OK);
@@ -97,7 +97,7 @@ public class UserController {
      */
     @PutMapping("")
     public ResponseEntity<?> updateUser(@RequestBody UserDto user) {
-        if (user == null && !isValidUser(user)) {
+        if (user == null || !isValidUser(user)) {
             return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
         }
         
@@ -122,8 +122,7 @@ public class UserController {
     public ResponseEntity<?> deleteUser(@PathVariable String userEmail) {
     	
     	UserProfile deletedUser = userService.deleteUser(userEmail);
-
-    	if (deletedUser == null && !userEmail.contains("@")) {
+    	if (deletedUser == null || !userEmail.contains("@")) {
     		return new ResponseEntity<String>("User does not exist", HttpStatus.NOT_FOUND);
     	}
     	return new ResponseEntity<UserDto>(convertToDto(deletedUser), HttpStatus.OK);

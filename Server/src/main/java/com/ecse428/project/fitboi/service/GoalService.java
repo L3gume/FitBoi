@@ -2,8 +2,6 @@ package com.ecse428.project.fitboi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ecse428.project.fitboi.model.ActivityLevel;
-import com.ecse428.project.fitboi.model.MacroDistribution;
 
 import java.util.ArrayList;
 import java.sql.Date;
@@ -23,16 +21,14 @@ import com.ecse428.project.repository.UserRepository;
 @Service
 public class GoalService {
 	
-	
 	@Autowired
 	GoalRepository goalRepository;
+
 	@Autowired
 	UserRepository userRepository;
 
 	@Autowired
 	UserService userService;
-	
-	
 
 	public boolean addGoaltoUser(Goal goal, UserProfile user) {
 		if (goalRepository.existsById(goal.getId())) {
@@ -50,7 +46,7 @@ public class GoalService {
 		return user.getGoals();
 	}
 
-		/**
+	/**
 	 * Deletes a goal from the database 
 	 * @param userId
 	 * @return The deleted user dto if the deletion was successful. null if the user could not be removed / did not exist in the db.

@@ -3,9 +3,6 @@ package com.ecse428.project.fitboi.model;
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.29.1.4753.5a97eca04 modeling language!*/
 
-
-import java.sql.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
