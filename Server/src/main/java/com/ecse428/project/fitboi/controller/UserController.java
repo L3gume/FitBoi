@@ -56,7 +56,7 @@ public class UserController {
     /**
      * POST
      * /users/ -> adds a new user to the DB
-     * @param userId
+     * @param user
      * @return
      */
     @PostMapping("")
@@ -101,8 +101,8 @@ public class UserController {
     			user.getUserName(),
     			user.getPassword(),
     			user.getAge(),
-    			user.getHeight(),
-    			user.getBiologicalSex()
+				user.getBiologicalSex(),
+				user.getHeight()
     			);
     }
     

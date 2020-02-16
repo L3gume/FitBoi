@@ -1,15 +1,17 @@
 package com.ecse428.project.fitboi.controller;
 
-import javax.servlet.http.HttpUtils;
-
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.ecse428.project.fitboi.dto.*;
 
 @RestController
 @RequestMapping("/users/")
@@ -25,18 +27,18 @@ public class LoginController {
     }
     */
     
-    @GetMapping("{userId}")
-    @GetMapping("{password}")
+    @GetMapping("{userId}/{password}")
+    //@GetMapping("{password}")
     public ResponseEntity<?> loginUser(@PathVariable String userId, @PathVariable String password) {
         UserProfile user = userService.getUser(userId);
         if (user == null) {
-    		return new ResponseEntity<String>("User not found", HttpStatus.NOT_FOUND);
+    		return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
         }
-        if (user.getPassword() != password) {
-            return new ResponseEntity<String>("Wrong password", HttpStatus.NOT_ACCEPTABLE);
+        if (!user.getPassword().equals(password)) {
+            return new ResponseEntity<>("Wrong password", HttpStatus.UNAUTHORIZED);
         }
         
-        return new ResponseEntity<UserDto>(convertToDto(user), HttpUtils.OK);
+        return new ResponseEntity<>(convertToDto(user), HttpStatus.OK);
     }
     
     private UserDto convertToDto(UserProfile user) {
@@ -46,9 +48,9 @@ public class LoginController {
     			user.getUserName(),
     			user.getPassword(),
     			user.getAge(),
-    			user.getHeight(),
-    			user.getBiologicalSex()
-    			);
+    			user.getBiologicalSex(),
+				user.getHeight()
+				);
     }
     
 	private UserProfile convertToDomainObject(UserDto userDto) {
