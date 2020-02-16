@@ -103,6 +103,7 @@ public class UserAPI {
      */
     public static void loginUser(Consumer<UserDto> fn, String username, String password) {
         JsonObjectRequest req = new JsonObjectRequest(
+                Request.Method.GET,
                 userUrl+username+"/"+password+"/",
                 null,
                 userCallSuccessListener(fn),
@@ -166,8 +167,9 @@ public class UserAPI {
         boolean sex = json.optBoolean("sex");
         int weight = json.optInt("weight");
         int height = json.optInt("height");
+        String password = json.optString("password");
 
-        return new UserDto(email, age, sex, weight, height);
+        return new UserDto(email, password, age, sex, weight, height);
     }
 
     private static JSONObject userDtoToJson(UserDto user) {
@@ -179,6 +181,7 @@ public class UserAPI {
             json.put("sex", user.getSex());
             json.put("weight", user.getWeight());
             json.put("height", user.getHeight());
+            json.put("password", user.getPassword());
         } catch (Exception e) {
             // TODO: something with exception
         }

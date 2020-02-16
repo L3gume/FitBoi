@@ -5,13 +5,17 @@ import java.util.Objects;
 public class UserDto {
 
     private String email;
+    private String name;
+    private String userName;
+    private String password;
     private int age;
     private boolean sex;
     private int weight;
     private int height;
 
-    public UserDto(String email, int age, boolean sex, int weight, int height) {
+    public UserDto(String email, String password, int age, boolean sex, int weight, int height) {
         this.email = email;
+        this.password = password;
         this.age = age;
         this.sex = sex;
         this.weight = weight;
@@ -61,6 +65,10 @@ public class UserDto {
     public void setHeight(int height) {
         this.height = height;
     }
+
+    public String getPassword() {return password;}
+
+    public  void setPassword(String password) {this.password = password;}
 
     public UserDto email(String email) {
         this.email = email;
