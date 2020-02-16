@@ -38,7 +38,7 @@ public class UserAPI {
     public static void addNewUser(UserDto userToAdd, Consumer<UserDto> fn) {
         RequestQueue queue = MyVolley.getRequestQueue();
         JsonObjectRequest request = new JsonObjectRequest(
-                MyVolley.userUrl,
+                MyVolley.serverUrl+MyVolley.userPostfix,
                 userDtoToJson(userToAdd),
                 userCallSuccessListener(fn),
                 userCallErrorListener(fn)
@@ -60,7 +60,7 @@ public class UserAPI {
     public static void getAllUsers(Consumer<List<UserDto>> fn) {
         RequestQueue queue = MyVolley.getRequestQueue();
         JsonArrayRequest request = new JsonArrayRequest(
-                MyVolley.userUrl,
+                MyVolley.serverUrl+MyVolley.userPostfix,
                 userListCallSuccessListener(fn),
                 userListCallErrorListener(fn)
         );
@@ -81,7 +81,7 @@ public class UserAPI {
     public static void getUserByLoginInfo(Consumer<UserDto> fn, String email) {
         RequestQueue queue = MyVolley.getRequestQueue();
         JsonObjectRequest request = new JsonObjectRequest(
-                MyVolley.userUrl+email+"/",
+                MyVolley.serverUrl+MyVolley.userPostfix+email+"/",
                 null,
                 userCallSuccessListener(fn),
                 userCallErrorListener(fn)

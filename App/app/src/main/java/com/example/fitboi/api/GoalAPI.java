@@ -7,7 +7,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.fitboi.dto.GoalDto;
-import com.example.fitboi.dto.UserDto;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,7 +35,7 @@ public class GoalAPI {
     public static void addNewGoal(String userEmail, GoalDto goalToAdd, Consumer<GoalDto> fn) {
         RequestQueue queue = MyVolley.getRequestQueue();
         JsonObjectRequest request = new JsonObjectRequest(
-                (MyVolley.userUrl+userEmail+MyVolley.goalUrl),
+                MyVolley.serverUrl+MyVolley.userPostfix+userEmail+MyVolley.goalPostfix,
                 goalDtoToJson(goalToAdd),
                 goalCallSuccessListener(fn),
                 goalCallErrorListener(fn)
@@ -62,7 +61,7 @@ public class GoalAPI {
         RequestQueue queue = MyVolley.getRequestQueue();
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.DELETE,
-                (MyVolley.userUrl+MyVolley.goalUrl),
+                (MyVolley.serverUrl+MyVolley.userPostfix+MyVolley.goalPostfix),
                 null,
                 goalCallSuccessListener(fn),
                 null);
@@ -83,7 +82,7 @@ public class GoalAPI {
     public static void getUserGoals(String userEmail, Consumer<List<GoalDto>> fn) {
         RequestQueue queue = MyVolley.getRequestQueue();
         JsonArrayRequest request = new JsonArrayRequest(
-                (MyVolley.userUrl+userEmail+MyVolley.goalUrl),
+                (MyVolley.serverUrl+MyVolley.userPostfix+userEmail+MyVolley.goalPostfix),
                 goalListCallSuccessListener(fn),
                 goalListCallErrorListener(fn)
         );

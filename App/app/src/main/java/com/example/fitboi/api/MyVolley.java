@@ -1,12 +1,9 @@
 package com.example.fitboi.api;
 
-import android.app.ActivityManager;
 import android.content.Context;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-import com.example.fitboi.tools.BitmapLruCache;
 
 import static java.lang.Boolean.TRUE;
 
@@ -18,11 +15,14 @@ public class MyVolley {
         // no instances
     }
 
-    public static final String ip_localhost = "127.0.0.1:8080";
-    public static final String ip_dev_machine = "10.0.2.2:8080";
-    public static final boolean usingEmulator = TRUE;
-    public static final String userUrl = "http://"+(usingEmulator ? ip_dev_machine : ip_localhost)+"/users/";
-    public static final String goalUrl = "/goals/";
+    public static final String ip_localhost = "http://127.0.0.1:8080";
+    public static final String ip_dev_machine_for_emulator = "http://10.0.2.2:8080";
+    public static final String ip_heroku = "http://fitboi-dev.herokuapp.com";
+
+    public static final String serverUrl = ip_heroku;
+    public static final String userPostfix = "/users/";
+    public static final String goalPostfix = "/goals/";
+    public static final String foodItemPostfix = "/foods/";
 
     public static void init(Context context) {
         mRequestQueue = Volley.newRequestQueue(context);
