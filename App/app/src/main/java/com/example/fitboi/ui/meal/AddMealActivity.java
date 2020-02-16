@@ -86,7 +86,7 @@ public class AddMealActivity extends AppCompatActivity {
 //                        mealEntries.add(f.name, f.calories);
 //                    }
 //                };
-//                FoodAPI.getFoodItem(foodConsumer, searchText);
+//                FoodItemAPI.getFoodItem(foodConsumer, searchText);
 
                 progressBar.setVisibility(View.INVISIBLE);
                 return true;
