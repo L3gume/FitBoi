@@ -99,3 +99,4 @@ Server/.settings/org.eclipse.buildship.core.prefs
 
 # eclipse stuff???
 .settings/
+*.args
