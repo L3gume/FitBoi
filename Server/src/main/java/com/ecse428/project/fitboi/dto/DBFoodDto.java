@@ -1,17 +1,7 @@
-package com.ecse428.project.fitboi.model;
+package com.ecse428.project.fitboi.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
-public class DBFood
+public class DBFoodDto
 {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
-
     private String name;
     private long cal;
     private double protein;
@@ -19,7 +9,7 @@ public class DBFood
     private double carbs;
 
 
-    public DBFood(String aName, long aCal, double aProtein, double aFat,
+    public DBFoodDto(String aName, long aCal, double aProtein, double aFat,
         double aCarbs)
     {
         name = aName;
@@ -29,7 +19,7 @@ public class DBFood
         carbs = aCarbs;
     }
 
-    public DBFood()
+    public DBFoodDto()
     {
 
     }
