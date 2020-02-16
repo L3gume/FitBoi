@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 
 import com.example.fitboi.R;
@@ -69,6 +70,8 @@ public class AddMealActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                ProgressBar progressBar = findViewById(R.id.add_meal_loading_bar);
+                progressBar.setVisibility(View.VISIBLE);
 //                this.searchRequest = query;
 //                Log.d(LOG_TAG,query + "searched");
 //
@@ -76,14 +79,16 @@ public class AddMealActivity extends AppCompatActivity {
 //                loaderManager.initLoader(BOOK_LOADER_ID, null,MainActivity.this);
                   // Test without threads
 
-//                Consumer showFoodsFromQuery = new Consumer<List<FoodDto>>() {
+//                Consumer foodConsumer = new Consumer<List<FoodItemDTO>>() {
 //                    @Override
-//                    public void accept(List<FoodDto> food) {
+//                    public void accept(List<FoodItemDTO> food) {
 //
 //                        mealEntries.add(f.name, f.calories);
 //                    }
 //                };
-//                FoodAPI.getFoodsFromQuery(showFoodsFromQuery, searchText);
+//                FoodAPI.getFoodItem(foodConsumer, searchText);
+
+                progressBar.setVisibility(View.INVISIBLE);
                 return true;
             }
 

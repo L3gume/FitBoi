@@ -12,6 +12,9 @@ class FoodDtoTest {
     private Integer calories;
     private Time date = new Time(69420);
 
+
+    private Float portion;
+
     public String getName() {
         return name;
     }
@@ -20,6 +23,9 @@ class FoodDtoTest {
         return calories;
     }
 
+    public Float getPortionSize() {
+        return portion;
+    }
     public Time getDate() {
         return date;
     }
