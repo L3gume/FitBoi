@@ -8,6 +8,8 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.example.fitboi.tools.BitmapLruCache;
 
+import static java.lang.Boolean.TRUE;
+
 public class MyVolley {
     private static RequestQueue mRequestQueue;
     private static ImageLoader mImageLoader;
@@ -15,6 +17,12 @@ public class MyVolley {
     private MyVolley() {
         // no instances
     }
+
+    public static final String ip_localhost = "127.0.0.1";
+    public static final String ip_dev_machine = "10.0.2.2";
+    public static final boolean usingEmulator = TRUE;
+    public static final String userUrl = "http://"+(usingEmulator ? ip_dev_machine : ip_localhost)+"/users/";
+    public static final String goalUrl = "/goals/";
 
     public static void init(Context context) {
         mRequestQueue = Volley.newRequestQueue(context);
