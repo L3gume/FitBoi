@@ -3,36 +3,124 @@ package com.ecse428.project.fitboi;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.UserService;
 import com.ecse428.project.repository.*;
 
+import static org.mockito.Mockito.*;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
+import java.util.List;
+import java.util.ArrayList;
+
 @SpringBootTest
 class UserServiceTests {
 
 	@Autowired
 	private UserService userService;
-	@Autowired 
-	private UserRepository userRepository;
+	@MockBean
+	private UserRepository mockRepository;
 
-	@BeforeEach
-	public void setup(){
-		userRepository.deleteAll();
-	}
-
-	@AfterEach
-	public void teardown(){
-		userRepository.deleteAll();
+	@Test
+	public void testAddUserSuccess(){
+		UserProfile testUser = createUser();
+		when(mockRepository.existsById(testUser.getEmail())).thenReturn(false);
+		when(mockRepository.save(testUser)).thenReturn(testUser);
+		boolean addStatus = userService.addNewUser(testUser);
+		assertTrue(addStatus);
 	}
 
 	@Test
-	public void testAddExistGetDeleteUpdateUserSuccess(){
+	public void testAddUserFailure(){
+		UserProfile testUser = createUser();
+		when(mockRepository.existsById(testUser.getEmail())).thenReturn(true);
+		boolean addStatus = userService.addNewUser(testUser);
+		assertTrue(!addStatus);
+	}
+
+	@Test
+	public void testGetUserSuccess(){
+		UserProfile testUser = createUser();
+		when(mockRepository.findUserByEmail(testUser.getEmail())).thenReturn(testUser);
+		UserProfile found = userService.getUser(testUser.getEmail());
+		assertTrue(found.getEmail().equals(testUser.getEmail()));
+	}
+	
+	@Test
+	public void testGetUserFailure(){
+		UserProfile testUser = createUser();
+		when(mockRepository.findUserByEmail(testUser.getEmail())).thenReturn(null);
+		UserProfile found = userService.getUser(testUser.getEmail());
+		assertTrue(found == null);
+	}
+
+	@Test
+	public void testGetAllUserSuccess(){
+		List<UserProfile> users = new ArrayList<>();
+		UserProfile testUser = createUser();
+		users.add(testUser);
+		when(mockRepository.findAll()).thenReturn(users);
+		List<UserProfile> results = new ArrayList<>();
+		for(UserProfile user : userService.getAllUsers()){
+			results.add(user);
+		}
+		assertTrue(!results.isEmpty());
+	}
+
+	@Test
+	public void tesUpdateUserSuccess(){
+		UserProfile testUser = createUser();
+		when(mockRepository.existsById(testUser.getEmail())).thenReturn(true);
+		when(mockRepository.save(testUser)).thenReturn(testUser);
+		boolean addStatus = userService.updateUser(testUser);
+		assertTrue(addStatus);
+	}
+
+	@Test
+	public void testUpdateUserFailure(){
+		UserProfile testUser = createUser();
+		when(mockRepository.existsById(testUser.getEmail())).thenReturn(false);
+		boolean addStatus = userService.updateUser(testUser);
+		assertTrue(!addStatus);
+	}
+
+	@Test
+	public void testCheckUserSuccess(){
+		UserProfile testUser = createUser();
+		when(mockRepository.existsById(testUser.getEmail())).thenReturn(true);
+		boolean found = userService.checkUser(testUser.getEmail());
+		assertTrue(found == true);
+	}
+	
+	@Test
+	public void testCheckUserFailure(){
+		UserProfile testUser = createUser();
+		when(mockRepository.existsById(testUser.getEmail())).thenReturn(false);
+		boolean found = userService.checkUser(testUser.getEmail());
+		assertTrue(found == false);
+	}
+
+	@Test
+	public void testDeleteUserFailure(){
+		UserProfile testUser = createUser();
+		when(mockRepository.existsById(testUser.getEmail())).thenReturn(false);
+		UserProfile deleted = userService.deleteUser(testUser.getEmail());
+		assertTrue(deleted == null);
+	}
+	
+	@Test
+	public void testDeleteUserSuccess(){
+		UserProfile testUser = createUser();
+		when(mockRepository.existsById(testUser.getEmail())).thenReturn(true);
+		when(mockRepository.findUserByEmail(testUser.getEmail())).thenReturn(testUser);
+
+		UserProfile deleted = userService.deleteUser(testUser.getEmail());
+		assertTrue(deleted.getEmail().equals(testUser.getEmail()));
+	}
+
+	private UserProfile createUser(){
 		String aEmail = "testUser1@mail.mcgill.ca";
 		String aName = "testboi";
 		String aUserName = "testBoi";
@@ -40,61 +128,7 @@ class UserServiceTests {
 		int aAge = 15;
 		int aHeight = 193;
 		boolean aBiologicalSex = true;
-
-		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
-		boolean addStatus = userService.addNewUser(testUser);
-		assertTrue(addStatus, "Add user failure");
-		
-		boolean existStatus = userService.checkUser(aEmail);
-		assertTrue(existStatus, "Check user failure");
-
-		aAge = 20;
-		testUser.setAge(aAge);
-		boolean updateStatus = userService.updateUser(testUser);
-		assertTrue(updateStatus, "Update user failure");
-
-		UserProfile dbUser =  userService.getUser(aEmail);
-		assertTrue(dbUser.getEmail().equals(aEmail), "Get user failure");
-		assertTrue(dbUser.getName().equals(aName), "Get user failure");
-		assertTrue(dbUser.getUserName().equals(aUserName), "Get user failure");
-		assertTrue(dbUser.getPassword().equals(aPassword), "Get user failure");
-		assertTrue(dbUser.getAge() == aAge, "Get user failure");
-		assertTrue(dbUser.getHeight() == aHeight, "Get user failure");
-		assertTrue(dbUser.getBiologicalSex() == aBiologicalSex, "Get user failure");
-
-		userService.deleteUser(aEmail);
-		if(userService.getUser(aEmail) != null){
-			fail("Delete user failure");
-		}
-	}
-
-	@Test
-	public void testAddExistGetDeleteUpdateUserFailure(){
-		String aEmail = "testUser2@mail.mcgill.ca";
-		String aName = "testboi";
-		String aUserName = "testBoi";
-		String aPassword = "password";
-		int aAge = 15;
-		int aHeight = 193;
-		boolean aBiologicalSex = true;
-
-		String wrongEmail = "testUser3@mail.mcgill.ca";
-
-		// non existing
-		boolean existStatus = userService.checkUser(wrongEmail);
-		assertFalse(existStatus, "Check user failure");
-
-		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
-		userService.addNewUser(testUser);
-		boolean addStatus = userService.addNewUser(testUser);
-
-		// duplicate
-		assertFalse(addStatus, "Add user failure");
-
-		userService.deleteUser(aEmail);
-		if(userService.getUser(aEmail) != null){
-			fail("Delete user failure");
-		}
+		return new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
 	}
 
 }
