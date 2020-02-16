@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 include ':app'
 rootProject.name='Main Dashboard'
+||||||| merged common ancestors
+=======
+include ':Server'
+>>>>>>> dev
