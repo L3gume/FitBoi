@@ -7,6 +7,7 @@ package com.ecse428.project.fitboi.model;
 import java.util.*;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -211,12 +212,13 @@ public class UserProfile {
 	}
 
 	/* Code from template association_GetMany */
+	//@OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	public Goal getGoal(int index) {
 		Goal aGoal = goals.get(index);
 		return aGoal;
 	}
 
-	@OneToMany(cascade = { CascadeType.ALL })
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	public List<Goal> getGoals() {
 		return goals;
 	}

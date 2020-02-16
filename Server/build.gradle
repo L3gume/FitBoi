@@ -18,6 +18,7 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	compile group: 'com.fasterxml', name: 'jackson-module-json-org', version: '0.9.1'
 }
 test {
 	useJUnitPlatform()

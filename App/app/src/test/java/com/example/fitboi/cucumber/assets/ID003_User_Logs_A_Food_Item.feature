@@ -1,41 +1,22 @@
 Feature: Log a food item
 
-As a user
+As a User
 I would like to be able to log my consumed food items
 So that my personal analytics will update with accurate data and provide me with information about reaching my goals
 
-Scenario: User sucessfully logs item using most recents (Normal flow)
+Scenario: User successfully logs food item using search (Normal flow)
 
 Given the User is logged in
-And the dersired food item is in the database
-And the User selects the desired food item from the most recents
-When requesting the addition of a new food item
-Then the calories of the food item will be added to the total calorie count
-And the "Item successfully added" message will be displayed
-
-Scenario: User sucessfully logs item using search (Normal flow)
-
-Given the User is logged in
-And the dersired food item is in the database
+And the database contains the desired food item
 And the User selects the desired food item from the search results
-When requesting the addition of a new food item
-Then the calories of the food item will be added to the total calorie count
-And the "Item successfully added" message will be displayed
-
-Scenario: User sucessfully logs item using substitute (Alternate flow)
-
-Given the User is logged in
-But selects a substitute food item to replace the desired food item
-When requesting the addition of a new food item
-Then the calories of the substitute food item will be added to the total calorie count
-And the "Item successfully added" message will be displayed
+When a request to log the food item is made
+Then the User's calorie count is updated using the desired food item
 
 Scenario: User fails to logs item (Error flow)
 
 Given the User is logged in
-But the desired food item is not in the database
-And the User cancels the request for a food item
-When requesting the addition of a new food item
-Then the User will see the dashboard
+And the database does not contain the desired food item
+When a request to log the food item is made
+Then the User will be unable to log the food item
 
 
