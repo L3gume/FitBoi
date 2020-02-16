@@ -62,6 +62,44 @@ class UserControllerTests {
 	}
 
 	@Test
+	public void testPostUserControllerInvalidUserInfo() throws Exception{
+		String aEmail = "testUser1@mail.mcgill.ca";
+		String aName = "testboi";
+		String aUserName = "testBoi";
+		String aPassword = "password";
+		int aAge = 15;
+		int aHeight = 193;
+		boolean aBiologicalSex = true;
+		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+
+		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
+		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
+			.andExpect(status().isCreated());
+		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
+        	.andExpect(status().isBadRequest());	
+	}
+
+	@Test
+	public void testPostUserControllerDuplicate() throws Exception{
+		String aEmail = "";
+		String aName = "testboi";
+		String aUserName = "testBoi";
+		String aPassword = "password";
+		int aAge = -1;
+		int aHeight = -1;
+		boolean aBiologicalSex = true;
+		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+
+		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
+		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
+        	.andExpect(status().isNotAcceptable());
+	}
+
+
+	@Test
 	public void testPostUserControllerNull() throws Exception{
 		UserProfile testUser = null;
 
@@ -109,7 +147,26 @@ class UserControllerTests {
         	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
         	.andExpect(status().isCreated());
 
-        mockMvc.perform(get("/users/"+aEmail)).andExpect(status().isOk());
+        mockMvc.perform(get("/users/" + aEmail)).andExpect(status().isOk());
+	}
+
+	@Test
+	public void testGetUserControllerFail() throws Exception{
+		String aEmail = "testUser1@mail.mcgill.ca";
+		String aName = "testboi";
+		String aUserName = "testBoi";
+		String aPassword = "password";
+		int aAge = 15;
+		int aHeight = 193;
+		boolean aBiologicalSex = true;
+		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+
+		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
+		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
+        	.andExpect(status().isCreated());
+
+        mockMvc.perform(get("/users/" + "test")).andExpect(status().isNotFound());
 	}
 
 	@Test
@@ -128,7 +185,8 @@ class UserControllerTests {
         	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
         	.andExpect(status().isCreated());
 
-        mockMvc.perform(delete("/users/"+aEmail)).andExpect(status().isOk());
+        mockMvc.perform(delete("/users/" + aEmail)).andExpect(status().isOk());
 	}
 
+	
 }
