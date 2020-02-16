@@ -89,7 +89,6 @@ public class GoalDto {
 
     public void setProteins(int proteins) {
         this.proteins = proteins;
-
     }
 }
 

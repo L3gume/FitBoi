@@ -1,19 +1,23 @@
 package com.ecse428.project.fitboi.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.CascadeType;
+
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.29.1.4753.5a97eca04 modeling language!*/
 
 
 import java.util.*;
 
-//------------------------
-// ENUMERATIONS
-//------------------------
-
-enum MealType { BreakFast, Lunch, Dinner }
-
 // line 27 "model.ump"
 // line 86 "model.ump"
+@Entity
 public class Meal
 {
 
@@ -21,10 +25,15 @@ public class Meal
   // MEMBER VARIABLES
   //------------------------
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	
   //Meal Attributes
   private MealType mealType;
 
   //Meal Associations
+  @OneToMany(cascade={CascadeType.ALL})
   private List<FoodItem> foodItems;
 
   //------------------------
@@ -34,6 +43,11 @@ public class Meal
   public Meal(MealType aMealType)
   {
     mealType = aMealType;
+    foodItems = new ArrayList<FoodItem>();
+  }
+  
+  public Meal()
+  {
     foodItems = new ArrayList<FoodItem>();
   }
 
@@ -49,6 +63,7 @@ public class Meal
     return wasSet;
   }
 
+  @Enumerated
   public MealType getMealType()
   {
     return mealType;
@@ -60,10 +75,10 @@ public class Meal
     return aFoodItem;
   }
 
+  @OneToMany(cascade={CascadeType.ALL})
   public List<FoodItem> getFoodItems()
   {
-    List<FoodItem> newFoodItems = Collections.unmodifiableList(foodItems);
-    return newFoodItems;
+    return foodItems;
   }
 
   public int numberOfFoodItems()
