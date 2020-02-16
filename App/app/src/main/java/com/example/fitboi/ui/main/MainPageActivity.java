@@ -28,18 +28,14 @@ public class MainPageActivity extends AppCompatActivity {
 
     private void uiSetup() {
         getSupportActionBar().setTitle("Home");
+        final CardView createMeal = findViewById(R.id.main_meals_card);
 
-        final CardView createMeal = findViewById(R.id.main_meal_card);
-
-
-
-
-        createMeal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchCreateMealActivity();
-            }
-        });
+//        createMeal.setOnClickListener(new View.OnClickListener() {
+//            @Overrides
+//            public void onClick(View v) {
+//                launchCreateMealActivity();
+//            }
+//        });
 
     }
 
