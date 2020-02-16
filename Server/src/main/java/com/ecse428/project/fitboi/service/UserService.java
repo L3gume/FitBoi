@@ -20,12 +20,8 @@ import com.ecse428.project.repository.UserRepository;
  */
 @Service
 public class UserService {
-	
-	
 	@Autowired
 	UserRepository repository;
-	
-	
 	/**
 	 * Gets all users from the database
 	 * @return List of all users
