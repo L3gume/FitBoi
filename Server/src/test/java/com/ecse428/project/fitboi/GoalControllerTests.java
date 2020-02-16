@@ -24,6 +24,7 @@ import java.util.logging.*;
 
 import com.ecse428.project.repository.*;
 import com.ecse428.project.fitboi.model.*;
+import com.ecse428.project.fitboi.TestHelpMethods.*;
 
 
 @SpringBootTest
@@ -69,14 +70,14 @@ class GoalControllerTests {
         int baseCalories = 100;
         boolean result = false;
         DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
-        Date startDate = new java.sql.Date(df.parse("02-04-2020").getTime());
+        String startDate =  "2020-05-09";
         float weight = 68;
         ActivityLevel activityLevel = ActivityLevel.Medium;
         float fatsForMacroDistribution = 0.3f;
         float carbsForMacroDistribution = 0.4f; 
         float proteinForMacroDistribution = 0.3f;
 
-        Goal goal = new Goal(baseCalories, result, startDate, weight, activityLevel, fatsForMacroDistribution, carbsForMacroDistribution, proteinForMacroDistribution);
+        SerializableGoal serializableGoal = new SerializableGoal(baseCalories, result, startDate, weight, activityLevel, fatsForMacroDistribution, carbsForMacroDistribution, proteinForMacroDistribution);
 
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
@@ -84,9 +85,9 @@ class GoalControllerTests {
         	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
             .andExpect(status().isCreated());
             
-        LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(goal));
+        LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(serializableGoal));
 		mockMvc.perform(post("/users/"+ aEmail + "/goals").contentType(MediaType.APPLICATION_JSON)
-        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(goal)))
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(serializableGoal)))
         	.andExpect(status().isCreated());
 	}
 }
