@@ -28,23 +28,19 @@ public class MainPageActivity extends AppCompatActivity {
 
     private void uiSetup() {
         getSupportActionBar().setTitle("Home");
-
         final CardView createMeal = findViewById(R.id.main_meals_card);
 
-//        createMeal.setOnClickListener(new View.OnClickListener() {
-//            @Overrides
-//            public void onClick(View v) {
-//                launchCreateMealActivity();
-//            }
-//        });
+        createMeal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchCreateMealActivity();
+            }
+        });
 
     }
 
     private void launchCreateMealActivity() {
         Intent intent = new Intent(this, AddMealActivity.class);
-//        EditText editText = (EditText) findViewById(R.id.editText);
-//        String message = editText.getText().toString();
-//        intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
 }
