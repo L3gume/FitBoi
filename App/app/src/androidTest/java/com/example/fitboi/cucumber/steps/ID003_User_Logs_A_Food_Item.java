@@ -49,12 +49,27 @@ public class ID003_User_Logs_A_Food_Item {
         assert !isFoodInDatabase(foodLoggedName);
     }
 
-    /*
+    @And("the User selects the desired food item from the search results")
+    public void and_user_slects_desired_food_item_from_search_results() {
+        this.foodLoggedName = "Bread";
+        assert this.foodLoggedName != "";
+    }
+
+    @When("a request to log the food item is made")
+    public void when_log_food_item_request_made() {
+        this.foodLoggedName = "Bread"
+    }
+
+    
     @Then("the User's calorie count is updated using the desired food item")
     public void then_user_calorie_count_updated_using_desired_food_item() {
         assert true;
     }
-*/
 
+
+    @Then("the User will be unable to log the food item")
+    public void then_user_not_able_log_food_item() {
+        assert true;
+    }
 
 }
