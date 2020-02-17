@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background_gradient">
 
     <RelativeLayout
         android:id="@+id/add_meal_group_searchAdd"
@@ -34,6 +33,16 @@
         android:scrollbars="vertical"
         android:layout_below="@id/add_meal_group_searchAdd"
         />
+
+    <TextView
+        android:id="@+id/add_meal_emptyview"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        android:text="@string/addmeal_press_on_the_search_icon"
+        android:textSize="18sp"
+        android:gravity="center" />
 
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/add_meal_loading_bar"

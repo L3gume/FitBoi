@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.example.fitboi.R;
 import com.example.fitboi.api.FoodItemAPI;
@@ -41,7 +42,7 @@ public class AddMealActivity extends AppCompatActivity {
         //ArrayList<MealTest> mealEntries = getRecentMeals();
 
         //Populate list view (testing)
-        ArrayList<FoodItemDto> mealEntries = new ArrayList<>();
+        this.mealEntries = new ArrayList<>();
         this.mealAdapter = new MealListAdapter(mealEntries);
 
         uiSetup();
@@ -63,6 +64,13 @@ public class AddMealActivity extends AppCompatActivity {
         this.layoutManager = new LinearLayoutManager(this);
         mealListView.setLayoutManager(layoutManager);
 
+        TextView emptyView = findViewById(R.id.add_meal_emptyview);
+        if(mealEntries.isEmpty()){
+            emptyView.setVisibility(View.VISIBLE);
+        }else{
+            emptyView.setVisibility(View.INVISIBLE);
+        }
+
         androidx.appcompat.widget.SearchView searchView  =
                 findViewById(R.id.add_meal_searchview);
         searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
@@ -72,23 +80,19 @@ public class AddMealActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
 
                 Log.d(LOG_TAG,query + " searched");
-
-//                this.searchRequest = query;
-//                Log.d(LOG_TAG,query + "searched");
-//
-//                loaderManager = getLoaderManager();
-//                loaderManager.initLoader(BOOK_LOADER_ID, null,MainActivity.this);
-                  // Test without threads
-
                 Consumer foodConsumer = new Consumer<FoodItemDto>() {
                     @Override
                     public void accept(FoodItemDto food) {
                         mealEntries.add(food);
+                        Log.d(LOG_TAG, food.getName() + "added");
                     }
                 };
                 FoodItemAPI.getFoodItem(foodConsumer, query);
 
+                mealEntries.add(new FoodItemDto("Cucumber", 69420, (float) 1.0));
                 progressBar.setVisibility(View.INVISIBLE);
+
+                uiSetup();
                 return true;
             }
 
@@ -105,14 +109,10 @@ public class AddMealActivity extends AppCompatActivity {
 
         });
 
-//        ???
     }
 
     private void launchCreateMealActivity() {
             Intent intent = new Intent(this, CreateMealActivity.class);
-//        EditText editText = (EditText) findViewById(R.id.editText);
-//        String message = editText.getText().toString();
-//        intent.putExtra(EXTRA_MESSAGE, message);
             startActivity(intent);
     }
 }

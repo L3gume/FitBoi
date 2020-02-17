@@ -7,17 +7,27 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.RequestFuture;
+import com.example.fitboi.data.Result;
+import com.example.fitboi.data.model.LoggedInUser;
 import com.example.fitboi.dto.UserDto;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 import static java.lang.Boolean.*;
 
 public class UserAPI {
+
+    // debug stuff
+    static final String ip_localhost = "127.0.0.1:8080";
+    static final String ip_dev_machine = "10.0.2.2:8080";
+    static final boolean usingEmulator = true;
+    static final String userUrl = "http://"+(usingEmulator ? ip_dev_machine : ip_localhost) + "/users/";
 
     /********** PUBLIC METHODS **********/
 
@@ -89,6 +99,30 @@ public class UserAPI {
         request.setRetryPolicy(new DefaultRetryPolicy(0, 0, 0));
         queue.add(request);
     }
+    
+    /**
+     * Synchronous call to authenticate user
+     * @param username user's username
+     * @param password user's password
+     * @return UserDto is successful, null if not
+     */
+    public static UserDto loginUser(String username, String password) {
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        JsonObjectRequest req = new JsonObjectRequest(
+                Request.Method.GET,
+                userUrl+username+"/"+password+"/",
+                null,
+                future,
+                future
+        );
+        req.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(req);
+        try {
+            return jsonToUserDto(future.get(10, TimeUnit.SECONDS));
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     /********** PRIVATE METHODS **********/
 
@@ -132,6 +166,7 @@ public class UserAPI {
             @Override
             public void onErrorResponse(VolleyError error) {
                 // TODO: do something with error
+                fn.accept(null);
             }
         };
     }
@@ -161,6 +196,7 @@ public class UserAPI {
             json.put("age", user.getAge());
             json.put("sex", user.getSex());
             json.put("height", user.getHeight());
+            json.put("password", user.getPassword());
         } catch (Exception e) {
             // TODO: something with exception
         }

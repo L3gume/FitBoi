@@ -188,5 +188,62 @@ class UserControllerTests {
         mockMvc.perform(delete("/users/" + aEmail)).andExpect(status().isOk());
 	}
 
-	
+	@Test
+	public void testGetLoginUserSuccess() throws Exception {
+		String aEmail = "testUser1@mail.mcgill.ca";
+		String aName = "testboi";
+		String aUserName = "testBoi";
+		String aPassword = "password";
+		int aAge = 15;
+		int aHeight = 193;
+		boolean aBiologicalSex = true;
+		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+
+		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
+		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
+				.andExpect(status().isCreated());
+
+		mockMvc.perform(get("/users/" + aEmail + "/" + aPassword)).andExpect(status().isOk());
+	}
+
+	@Test
+	public void testGetLoginUserFailureNotFound() throws Exception {
+		String aEmail = "testUser1@mail.mcgill.ca";
+		String aBadEmail = "testUser2@mail.mcgill.ca";
+		String aName = "testboi";
+		String aUserName = "testBoi";
+		String aPassword = "password";
+		int aAge = 15;
+		int aHeight = 193;
+		boolean aBiologicalSex = true;
+		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+
+		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
+		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
+				.andExpect(status().isCreated());
+
+		mockMvc.perform(get("/users/" + aBadEmail + "/" + aPassword)).andExpect(status().isNotFound());
+	}
+
+	@Test
+	public void testGetLoginUserFailureBadPassword() throws Exception {
+		String aEmail = "testUser1@mail.mcgill.ca";
+		String aName = "testboi";
+		String aUserName = "testBoi";
+		String aPassword = "password";
+		String aBadPassword = "password1";
+		int aAge = 15;
+		int aHeight = 193;
+		boolean aBiologicalSex = true;
+		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+
+		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
+		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
+				.andExpect(status().isCreated());
+
+		mockMvc.perform(get("/users/" + aEmail + "/" + aBadPassword)).andExpect(status().isNotFound());
+	}
 }
