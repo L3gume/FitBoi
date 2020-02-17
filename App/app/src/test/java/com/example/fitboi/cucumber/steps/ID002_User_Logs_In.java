@@ -2,6 +2,8 @@ package com.example.fitboi.cucumber.steps;
 
 import android.util.Patterns;
 
+import com.example.fitboi.Fitboi;
+import com.example.fitboi.api.MyVolley;
 import com.example.fitboi.api.UserAPI;
 import com.example.fitboi.data.model.LoggedInUser;
 import com.example.fitboi.dto.UserDto;
@@ -63,11 +65,13 @@ public class ID002_User_Logs_In {
     @And("the password entered is invalid")
     public void and_password_is_invalid() {
         password = "four";
-        assert password.length() > 4;
+        assert password.length() < 5;
     }
 
     @And("valid data is entered in the email and password fields")
     public void and_valid_data_in_email_and_password_fields() {
+        email = "boaty@mcboatface.ca";
+        password = "morethanfivechars";
         assert isValidEmail(email) && password.length() > 4;
     }
 
@@ -90,6 +94,7 @@ public class ID002_User_Logs_In {
 
     @When("a login request is made")
     public void when_login_request_made() {
+        MyVolley.init(new Fitboi());
         this.userDto = UserAPI.loginUser(email, password);
     }
 

@@ -3,7 +3,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.174Z",
+        "start_timestamp": "2020-02-17T15:27:06.458Z",
         "line": 7,
         "name": "User profile is created (Normal flow)",
         "description": "",
@@ -13,8 +13,8 @@
         "steps": [
           {
             "result": {
-              "error_message": "io.cucumber.java.PendingException: TODO: implement me\r\n\tat com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application(ID001_User_Creates_New_Account.java:11)\r\n\tat ✽.the User is not currently a member of the the FitBoi application(file:///C:/Users/Brendan/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID001_User_Creates_New_Account.feature:9)\r\n",
-              "duration": 4000000,
+              "error_message": "io.cucumber.java.PendingException: TODO: implement me\r\n\tat com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application(ID001_User_Creates_New_Account.java:11)\r\n\tat ✽.the User is not currently a member of the the FitBoi application(file:///D:/Projects/ECSE428/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID001_User_Creates_New_Account.feature:9)\r\n",
+              "duration": 3000000,
               "status": "pending"
             },
             "line": 9,
@@ -37,7 +37,6 @@
           },
           {
             "result": {
-              "duration": 1000000,
               "status": "skipped"
             },
             "line": 11,
@@ -49,40 +48,27 @@
           },
           {
             "result": {
-              "status": "skipped"
+              "status": "undefined"
             },
             "line": 12,
-            "name": "clicking the create profile button",
-            "match": {
-              "location": "com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.clicking_the_create_profile_button()"
-            },
+            "name": "a request to create a profile is made",
+            "match": {},
             "keyword": "When "
-          },
-          {
-            "result": {
-              "status": "skipped"
-            },
-            "line": 13,
-            "name": "a new user profile is created using the entered email and associated form data \u003cDataType\u003e",
-            "match": {
-              "location": "com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.a_new_user_profile_is_created_using_the_entered_email_and_associated_form_data_DataType()"
-            },
-            "keyword": "Then "
           },
           {
             "result": {
               "status": "undefined"
             },
-            "line": 14,
-            "name": "the \"Successful profile creation\" message is issued",
+            "line": 13,
+            "name": "a new User profile is created",
             "match": {},
-            "keyword": "And "
+            "keyword": "Then "
           }
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.249Z",
-        "line": 17,
+        "start_timestamp": "2020-02-17T15:27:06.517Z",
+        "line": 15,
         "name": "User enters invalid email (Error flow)",
         "description": "",
         "id": "user-creates-new-account;user-enters-invalid-email-(error-flow)",
@@ -91,11 +77,10 @@
         "steps": [
           {
             "result": {
-              "error_message": "io.cucumber.java.PendingException: TODO: implement me\r\n\tat com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application(ID001_User_Creates_New_Account.java:11)\r\n\tat ✽.the User is not currently a member of the the FitBoi application(file:///C:/Users/Brendan/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID001_User_Creates_New_Account.feature:19)\r\n",
-              "duration": 1000000,
+              "error_message": "io.cucumber.java.PendingException: TODO: implement me\r\n\tat com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application(ID001_User_Creates_New_Account.java:11)\r\n\tat ✽.the User is not currently a member of the the FitBoi application(file:///D:/Projects/ECSE428/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID001_User_Creates_New_Account.feature:17)\r\n",
               "status": "pending"
             },
-            "line": 19,
+            "line": 17,
             "name": "the User is not currently a member of the the FitBoi application",
             "match": {
               "location": "com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application()"
@@ -106,7 +91,7 @@
             "result": {
               "status": "undefined"
             },
-            "line": 20,
+            "line": 18,
             "name": "the entered email is invalid",
             "match": {},
             "keyword": "And "
@@ -115,25 +100,25 @@
             "result": {
               "status": "undefined"
             },
-            "line": 21,
-            "name": "the email field does not accept the user\u0027s entry",
+            "line": 19,
+            "name": "the request to create a profile is made",
             "match": {},
-            "keyword": "Then "
+            "keyword": "When "
           },
           {
             "result": {
               "status": "undefined"
             },
-            "line": 22,
-            "name": "the \"Invalid E-mail\" message is issued",
+            "line": 20,
+            "name": "the new User profile is not created",
             "match": {},
-            "keyword": "And "
+            "keyword": "Then "
           }
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.254Z",
-        "line": 24,
+        "start_timestamp": "2020-02-17T15:27:06.521Z",
+        "line": 22,
         "name": "User enters invalid data (Error flow)",
         "description": "",
         "id": "user-creates-new-account;user-enters-invalid-data-(error-flow)",
@@ -142,10 +127,10 @@
         "steps": [
           {
             "result": {
-              "error_message": "io.cucumber.java.PendingException: TODO: implement me\r\n\tat com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application(ID001_User_Creates_New_Account.java:11)\r\n\tat ✽.the User is not currently a member of the the FitBoi application(file:///C:/Users/Brendan/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID001_User_Creates_New_Account.feature:26)\r\n",
+              "error_message": "io.cucumber.java.PendingException: TODO: implement me\r\n\tat com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application(ID001_User_Creates_New_Account.java:11)\r\n\tat ✽.the User is not currently a member of the the FitBoi application(file:///D:/Projects/ECSE428/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID001_User_Creates_New_Account.feature:24)\r\n",
               "status": "pending"
             },
-            "line": 26,
+            "line": 24,
             "name": "the User is not currently a member of the the FitBoi application",
             "match": {
               "location": "com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application()"
@@ -156,7 +141,7 @@
             "result": {
               "status": "undefined"
             },
-            "line": 27,
+            "line": 25,
             "name": "the entered form data is invalid",
             "match": {},
             "keyword": "And "
@@ -165,19 +150,19 @@
             "result": {
               "status": "undefined"
             },
-            "line": 28,
-            "name": "the form fields do not accept the user\u0027s entry",
+            "line": 26,
+            "name": "the request to create a profile is made",
             "match": {},
-            "keyword": "Then "
+            "keyword": "When "
           },
           {
             "result": {
               "status": "undefined"
             },
-            "line": 29,
-            "name": "the \"Invalid Input\" message is issued",
+            "line": 27,
+            "name": "the new User profile is not created",
             "match": {},
-            "keyword": "And "
+            "keyword": "Then "
           }
         ]
       }
@@ -193,7 +178,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.260Z",
+        "start_timestamp": "2020-02-17T15:27:06.525Z",
         "line": 7,
         "name": "User successfully logs in (Normal flow)",
         "description": "",
@@ -203,72 +188,66 @@
         "steps": [
           {
             "result": {
-              "status": "undefined"
+              "status": "passed"
             },
             "line": 9,
             "name": "the User is not currently logged into the FitBoi application",
-            "match": {},
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.given_user_not_currently_logged_into_fitboi_app()"
+            },
             "keyword": "Given "
           },
           {
             "result": {
-              "status": "undefined"
+              "status": "passed"
             },
             "line": 10,
             "name": "the entered e-mail is valid",
-            "match": {},
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.and_entered_email_is_valid()"
+            },
             "keyword": "And "
           },
           {
             "result": {
-              "status": "undefined"
+              "status": "passed"
             },
             "line": 11,
             "name": "the password is valid",
-            "match": {},
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.and_password_is_valid()"
+            },
             "keyword": "And "
           },
           {
             "result": {
-              "status": "undefined"
+              "error_message": "java.lang.NoClassDefFoundError: org/apache/http/client/HttpClient\r\n\tat com.example.fitboi.api.MyVolley.init(MyVolley.java:28)\r\n\tat com.example.fitboi.cucumber.steps.ID002_User_Logs_In.when_login_request_made(ID002_User_Logs_In.java:97)\r\n\tat ✽.a login request is made(file:///D:/Projects/ECSE428/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID002_User_Logs_In.feature:12)\r\nCaused by: java.lang.ClassNotFoundException: org.apache.http.client.HttpClient\r\n\tat java.net.URLClassLoader.findClass(URLClassLoader.java:382)\r\n\tat java.lang.ClassLoader.loadClass(ClassLoader.java:424)\r\n\tat sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349)\r\n\tat java.lang.ClassLoader.loadClass(ClassLoader.java:357)\r\n\tat com.example.fitboi.api.MyVolley.init(MyVolley.java:28)\r\n\tat com.example.fitboi.cucumber.steps.ID002_User_Logs_In.when_login_request_made(ID002_User_Logs_In.java:97)\r\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n\tat java.lang.reflect.Method.invoke(Method.java:498)\r\n\tat io.cucumber.java.Invoker.invoke(Invoker.java:27)\r\n\tat io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:27)\r\n\tat io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)\r\n\tat io.cucumber.core.runner.TestStep.executeStep(TestStep.java:64)\r\n\tat io.cucumber.core.runner.TestStep.run(TestStep.java:49)\r\n\tat io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:46)\r\n\tat io.cucumber.core.runner.TestCase.run(TestCase.java:51)\r\n\tat io.cucumber.core.runner.Runner.runPickle(Runner.java:66)\r\n\tat io.cucumber.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:149)\r\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:83)\r\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:24)\r\n\tat org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)\r\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)\r\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)\r\n\tat org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)\r\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)\r\n\tat org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)\r\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:413)\r\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:185)\r\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:83)\r\n\tat org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)\r\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)\r\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)\r\n\tat org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)\r\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)\r\n\tat io.cucumber.junit.Cucumber$RunCucumber.evaluate(Cucumber.java:219)\r\n\tat org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)\r\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:413)\r\n\tat org.junit.runner.JUnitCore.run(JUnitCore.java:137)\r\n\tat com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)\r\n\tat com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)\r\n\tat com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)\r\n\tat com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)\r\n",
+              "duration": 8000000,
+              "status": "failed"
             },
             "line": 12,
-            "name": "the combination of email and password is correct",
-            "match": {},
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "status": "undefined"
+            "name": "a login request is made",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.when_login_request_made()"
             },
-            "line": 13,
-            "name": "clicking the sign in button",
-            "match": {},
             "keyword": "When "
           },
           {
             "result": {
-              "status": "undefined"
+              "status": "skipped"
             },
-            "line": 14,
-            "name": "a user is logged in to their account",
-            "match": {},
+            "line": 13,
+            "name": "a User is logged in to their account",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.then_user_logged_in_account()"
+            },
             "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 15,
-            "name": "the \"Successfully logged in\" message is issued",
-            "match": {},
-            "keyword": "And "
           }
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.268Z",
-        "line": 17,
+        "start_timestamp": "2020-02-17T15:27:06.539Z",
+        "line": 15,
         "name": "User enters invalid data (Error flow)",
         "description": "",
         "id": "user-logs-in;user-enters-invalid-data-(error-flow)",
@@ -277,54 +256,55 @@
         "steps": [
           {
             "result": {
-              "status": "undefined"
+              "status": "passed"
             },
-            "line": 19,
+            "line": 17,
             "name": "the User is not currently logged into the FitBoi application",
-            "match": {},
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.given_user_not_currently_logged_into_fitboi_app()"
+            },
             "keyword": "Given "
           },
           {
             "result": {
-              "status": "undefined"
+              "status": "passed"
             },
-            "line": 20,
+            "line": 18,
             "name": "the data entered into any field is invalid",
-            "match": {},
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.and_data_entered_any_field_invalid()"
+            },
             "keyword": "And "
           },
           {
             "result": {
-              "status": "undefined"
+              "error_message": "java.lang.NoClassDefFoundError: org/apache/http/client/HttpClient\r\n\tat com.example.fitboi.api.MyVolley.init(MyVolley.java:28)\r\n\tat com.example.fitboi.cucumber.steps.ID002_User_Logs_In.when_login_request_made(ID002_User_Logs_In.java:97)\r\n\tat ✽.a login request is made(file:///D:/Projects/ECSE428/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID002_User_Logs_In.feature:19)\r\nCaused by: java.lang.ClassNotFoundException: org.apache.http.client.HttpClient\r\n\tat java.net.URLClassLoader.findClass(URLClassLoader.java:382)\r\n\tat java.lang.ClassLoader.loadClass(ClassLoader.java:424)\r\n\tat sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349)\r\n\tat java.lang.ClassLoader.loadClass(ClassLoader.java:357)\r\n\tat com.example.fitboi.api.MyVolley.init(MyVolley.java:28)\r\n\tat com.example.fitboi.cucumber.steps.ID002_User_Logs_In.when_login_request_made(ID002_User_Logs_In.java:97)\r\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n\tat java.lang.reflect.Method.invoke(Method.java:498)\r\n\tat io.cucumber.java.Invoker.invoke(Invoker.java:27)\r\n\tat io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:27)\r\n\tat io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)\r\n\tat io.cucumber.core.runner.TestStep.executeStep(TestStep.java:64)\r\n\tat io.cucumber.core.runner.TestStep.run(TestStep.java:49)\r\n\tat io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:46)\r\n\tat io.cucumber.core.runner.TestCase.run(TestCase.java:51)\r\n\tat io.cucumber.core.runner.Runner.runPickle(Runner.java:66)\r\n\tat io.cucumber.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:149)\r\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:83)\r\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:24)\r\n\tat org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)\r\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)\r\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)\r\n\tat org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)\r\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)\r\n\tat org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)\r\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:413)\r\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:185)\r\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:83)\r\n\tat org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)\r\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)\r\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)\r\n\tat org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)\r\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)\r\n\tat io.cucumber.junit.Cucumber$RunCucumber.evaluate(Cucumber.java:219)\r\n\tat org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)\r\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:413)\r\n\tat org.junit.runner.JUnitCore.run(JUnitCore.java:137)\r\n\tat com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)\r\n\tat com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)\r\n\tat com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)\r\n\tat com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)\r\n",
+              "duration": 1000000,
+              "status": "failed"
             },
-            "line": 21,
-            "name": "clicking the sign in button",
-            "match": {},
+            "line": 19,
+            "name": "a login request is made",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.when_login_request_made()"
+            },
             "keyword": "When "
           },
           {
             "result": {
-              "status": "undefined"
+              "status": "skipped"
             },
-            "line": 22,
-            "name": "the field does not accept the user\u0027s entry",
-            "match": {},
+            "line": 20,
+            "name": "a User is not logged into their account",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.then_user_not_logged_in_account()"
+            },
             "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 23,
-            "name": "the \"Invalid input\" message is issued",
-            "match": {},
-            "keyword": "And "
           }
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.274Z",
-        "line": 25,
+        "start_timestamp": "2020-02-17T15:27:06.543Z",
+        "line": 22,
         "name": "User enters a correct e-mail but an incorrect password (Error flow)",
         "description": "",
         "id": "user-logs-in;user-enters-a-correct-e-mail-but-an-incorrect-password-(error-flow)",
@@ -333,63 +313,66 @@
         "steps": [
           {
             "result": {
-              "status": "undefined"
+              "status": "passed"
             },
-            "line": 27,
+            "line": 24,
             "name": "the User is not currently logged into the FitBoi application",
-            "match": {},
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.given_user_not_currently_logged_into_fitboi_app()"
+            },
             "keyword": "Given "
           },
           {
             "result": {
-              "status": "undefined"
+              "status": "passed"
             },
-            "line": 28,
+            "line": 25,
             "name": "the entered e-mail is valid",
-            "match": {},
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.and_entered_email_is_valid()"
+            },
             "keyword": "And "
           },
           {
             "result": {
-              "status": "undefined"
+              "status": "passed"
             },
-            "line": 29,
-            "name": "the password entered is incorrect",
-            "match": {},
+            "line": 26,
+            "name": "the password entered is invalid",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.and_password_is_invalid()"
+            },
             "keyword": "And "
           },
           {
             "result": {
-              "status": "undefined"
+              "error_message": "java.lang.NoClassDefFoundError: org/apache/http/client/HttpClient\r\n\tat com.example.fitboi.api.MyVolley.init(MyVolley.java:28)\r\n\tat com.example.fitboi.cucumber.steps.ID002_User_Logs_In.when_login_request_made(ID002_User_Logs_In.java:97)\r\n\tat ✽.a login request is made(file:///D:/Projects/ECSE428/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID002_User_Logs_In.feature:27)\r\nCaused by: java.lang.ClassNotFoundException: org.apache.http.client.HttpClient\r\n\tat java.net.URLClassLoader.findClass(URLClassLoader.java:382)\r\n\tat java.lang.ClassLoader.loadClass(ClassLoader.java:424)\r\n\tat sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349)\r\n\tat java.lang.ClassLoader.loadClass(ClassLoader.java:357)\r\n\tat com.example.fitboi.api.MyVolley.init(MyVolley.java:28)\r\n\tat com.example.fitboi.cucumber.steps.ID002_User_Logs_In.when_login_request_made(ID002_User_Logs_In.java:97)\r\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n\tat java.lang.reflect.Method.invoke(Method.java:498)\r\n\tat io.cucumber.java.Invoker.invoke(Invoker.java:27)\r\n\tat io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:27)\r\n\tat io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)\r\n\tat io.cucumber.core.runner.TestStep.executeStep(TestStep.java:64)\r\n\tat io.cucumber.core.runner.TestStep.run(TestStep.java:49)\r\n\tat io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:46)\r\n\tat io.cucumber.core.runner.TestCase.run(TestCase.java:51)\r\n\tat io.cucumber.core.runner.Runner.runPickle(Runner.java:66)\r\n\tat io.cucumber.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:149)\r\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:83)\r\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:24)\r\n\tat org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)\r\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)\r\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)\r\n\tat org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)\r\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)\r\n\tat org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)\r\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:413)\r\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:185)\r\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:83)\r\n\tat org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)\r\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)\r\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)\r\n\tat org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)\r\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)\r\n\tat io.cucumber.junit.Cucumber$RunCucumber.evaluate(Cucumber.java:219)\r\n\tat org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)\r\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:413)\r\n\tat org.junit.runner.JUnitCore.run(JUnitCore.java:137)\r\n\tat com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)\r\n\tat com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)\r\n\tat com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)\r\n\tat com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)\r\n",
+              "duration": 1000000,
+              "status": "failed"
             },
-            "line": 30,
-            "name": "clicking the sign in button",
-            "match": {},
+            "line": 27,
+            "name": "a login request is made",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.when_login_request_made()"
+            },
             "keyword": "When "
           },
           {
             "result": {
-              "status": "undefined"
+              "status": "skipped"
             },
-            "line": 31,
-            "name": "the User is not logged in",
-            "match": {},
+            "line": 28,
+            "name": "a User is not logged into their account",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.then_user_not_logged_in_account()"
+            },
             "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 32,
-            "name": "the \"Password is incorrect\" message is issued",
-            "match": {},
-            "keyword": "And "
           }
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.279Z",
-        "line": 34,
+        "start_timestamp": "2020-02-17T15:27:06.547Z",
+        "line": 30,
         "name": "User enters credentials for an account that does not exist (Error flow)",
         "description": "",
         "id": "user-logs-in;user-enters-credentials-for-an-account-that-does-not-exist-(error-flow)",
@@ -398,63 +381,66 @@
         "steps": [
           {
             "result": {
-              "status": "undefined"
+              "status": "passed"
             },
-            "line": 36,
+            "line": 32,
             "name": "the User is not currently logged into the FitBoi application",
-            "match": {},
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.given_user_not_currently_logged_into_fitboi_app()"
+            },
             "keyword": "Given "
           },
           {
             "result": {
-              "status": "undefined"
+              "status": "passed"
             },
-            "line": 37,
-            "name": "the entered e-mail is valid",
-            "match": {},
+            "line": 33,
+            "name": "valid data is entered in the email and password fields",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.and_valid_data_in_email_and_password_fields()"
+            },
             "keyword": "And "
           },
           {
             "result": {
-              "status": "undefined"
+              "status": "passed"
             },
-            "line": 38,
-            "name": "clicking the sign in button",
-            "match": {},
+            "line": 34,
+            "name": "the User does not exist on the platform",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.and_user_does_not_exist_on_platform()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.NoClassDefFoundError: org/apache/http/client/HttpClient\r\n\tat com.example.fitboi.api.MyVolley.init(MyVolley.java:28)\r\n\tat com.example.fitboi.cucumber.steps.ID002_User_Logs_In.when_login_request_made(ID002_User_Logs_In.java:97)\r\n\tat ✽.a login request is made(file:///D:/Projects/ECSE428/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID002_User_Logs_In.feature:35)\r\nCaused by: java.lang.ClassNotFoundException: org.apache.http.client.HttpClient\r\n\tat java.net.URLClassLoader.findClass(URLClassLoader.java:382)\r\n\tat java.lang.ClassLoader.loadClass(ClassLoader.java:424)\r\n\tat sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349)\r\n\tat java.lang.ClassLoader.loadClass(ClassLoader.java:357)\r\n\tat com.example.fitboi.api.MyVolley.init(MyVolley.java:28)\r\n\tat com.example.fitboi.cucumber.steps.ID002_User_Logs_In.when_login_request_made(ID002_User_Logs_In.java:97)\r\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n\tat java.lang.reflect.Method.invoke(Method.java:498)\r\n\tat io.cucumber.java.Invoker.invoke(Invoker.java:27)\r\n\tat io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:27)\r\n\tat io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)\r\n\tat io.cucumber.core.runner.TestStep.executeStep(TestStep.java:64)\r\n\tat io.cucumber.core.runner.TestStep.run(TestStep.java:49)\r\n\tat io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:46)\r\n\tat io.cucumber.core.runner.TestCase.run(TestCase.java:51)\r\n\tat io.cucumber.core.runner.Runner.runPickle(Runner.java:66)\r\n\tat io.cucumber.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:149)\r\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:83)\r\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:24)\r\n\tat org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)\r\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)\r\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)\r\n\tat org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)\r\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)\r\n\tat org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)\r\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:413)\r\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:185)\r\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:83)\r\n\tat org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)\r\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)\r\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)\r\n\tat org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)\r\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)\r\n\tat io.cucumber.junit.Cucumber$RunCucumber.evaluate(Cucumber.java:219)\r\n\tat org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)\r\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:413)\r\n\tat org.junit.runner.JUnitCore.run(JUnitCore.java:137)\r\n\tat com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)\r\n\tat com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)\r\n\tat com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)\r\n\tat com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)\r\n",
+              "duration": 1000000,
+              "status": "failed"
+            },
+            "line": 35,
+            "name": "a login request is made",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.when_login_request_made()"
+            },
             "keyword": "When "
           },
           {
             "result": {
-              "status": "undefined"
+              "status": "skipped"
             },
-            "line": 39,
-            "name": "the entered e-mail is not found",
-            "match": {},
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "status": "undefined"
+            "line": 36,
+            "name": "a User is not logged into their account",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.then_user_not_logged_in_account()"
             },
-            "line": 40,
-            "name": "the User is not logged in",
-            "match": {},
             "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 41,
-            "name": "the \"Account cannot be found\" message is issued",
-            "match": {},
-            "keyword": "And "
           }
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.283Z",
-        "line": 43,
+        "start_timestamp": "2020-02-17T15:27:06.551Z",
+        "line": 38,
         "name": "The connection to the database cannot be established from a user connection point (Error flow)",
         "description": "",
         "id": "user-logs-in;the-connection-to-the-database-cannot-be-established-from-a-user-connection-point-(error-flow)",
@@ -463,72 +449,65 @@
         "steps": [
           {
             "result": {
-              "status": "undefined"
+              "status": "passed"
             },
-            "line": 45,
+            "line": 40,
             "name": "the User is not currently logged into the FitBoi application",
-            "match": {},
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.given_user_not_currently_logged_into_fitboi_app()"
+            },
             "keyword": "Given "
           },
           {
             "result": {
-              "status": "undefined"
+              "status": "passed"
             },
-            "line": 46,
-            "name": "there is data typed into both fields",
-            "match": {},
+            "line": 41,
+            "name": "valid data is entered in the email and password fields",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.and_valid_data_in_email_and_password_fields()"
+            },
             "keyword": "And "
           },
           {
             "result": {
-              "status": "undefined"
+              "error_message": "io.cucumber.java.PendingException: TODO: implement me\r\n\tat com.example.fitboi.cucumber.steps.ID002_User_Logs_In.and_no_valid_internet_connection_on_device(ID002_User_Logs_In.java:86)\r\n\tat ✽.there is no valid internet connection on the device(file:///D:/Projects/ECSE428/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID002_User_Logs_In.feature:42)\r\n",
+              "status": "pending"
             },
-            "line": 47,
+            "line": 42,
             "name": "there is no valid internet connection on the device",
-            "match": {},
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.and_no_valid_internet_connection_on_device()"
+            },
             "keyword": "And "
           },
           {
             "result": {
-              "status": "undefined"
+              "status": "skipped"
             },
-            "line": 48,
-            "name": "clicking the sign in button",
-            "match": {},
+            "line": 43,
+            "name": "a login request is made",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.when_login_request_made()"
+            },
             "keyword": "When "
           },
           {
             "result": {
-              "status": "undefined"
+              "status": "skipped"
             },
-            "line": 49,
-            "name": "the User is not logged in",
-            "match": {},
+            "line": 44,
+            "name": "a User is not logged into their account",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.then_user_not_logged_in_account()"
+            },
             "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 50,
-            "name": "the \"No valid internet connection\" message is issued",
-            "match": {},
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 51,
-            "name": "a pop-up window will prompt the user to check their internet connection",
-            "match": {},
-            "keyword": "And "
           }
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.287Z",
-        "line": 53,
+        "start_timestamp": "2020-02-17T15:27:06.554Z",
+        "line": 46,
         "name": "The connection to the database cannot be established from a server problem (Error flow)",
         "description": "",
         "id": "user-logs-in;the-connection-to-the-database-cannot-be-established-from-a-server-problem-(error-flow)",
@@ -537,72 +516,65 @@
         "steps": [
           {
             "result": {
-              "status": "undefined"
+              "status": "passed"
             },
-            "line": 55,
+            "line": 48,
             "name": "the User is not currently logged into the FitBoi application",
-            "match": {},
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.given_user_not_currently_logged_into_fitboi_app()"
+            },
             "keyword": "Given "
           },
           {
             "result": {
-              "status": "undefined"
+              "status": "passed"
             },
-            "line": 56,
-            "name": "there is data typed into both fields",
-            "match": {},
+            "line": 49,
+            "name": "valid data is entered in the email and password fields",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.and_valid_data_in_email_and_password_fields()"
+            },
             "keyword": "And "
           },
           {
             "result": {
-              "status": "undefined"
+              "error_message": "io.cucumber.java.PendingException: TODO: implement me\r\n\tat com.example.fitboi.cucumber.steps.ID002_User_Logs_In.and_no_valid_connection_from_server(ID002_User_Logs_In.java:92)\r\n\tat ✽.there is no valid connection from the server(file:///D:/Projects/ECSE428/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID002_User_Logs_In.feature:50)\r\n",
+              "status": "pending"
             },
-            "line": 57,
+            "line": 50,
             "name": "there is no valid connection from the server",
-            "match": {},
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.and_no_valid_connection_from_server()"
+            },
             "keyword": "And "
           },
           {
             "result": {
-              "status": "undefined"
+              "status": "skipped"
             },
-            "line": 58,
-            "name": "clicking the sign in button",
-            "match": {},
+            "line": 51,
+            "name": "a login request is made",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.when_login_request_made()"
+            },
             "keyword": "When "
           },
           {
             "result": {
-              "status": "undefined"
+              "status": "skipped"
             },
-            "line": 59,
-            "name": "the User is not logged in",
-            "match": {},
+            "line": 52,
+            "name": "a User is not logged into their account",
+            "match": {
+              "location": "com.example.fitboi.cucumber.steps.ID002_User_Logs_In.then_user_not_logged_in_account()"
+            },
             "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 60,
-            "name": "the \"Server error\" message is issued",
-            "match": {},
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 61,
-            "name": "a pop-up window will inform the user that there is a server error",
-            "match": {},
-            "keyword": "And "
           }
         ]
       }
     ],
     "name": "User logs in",
-    "description": "As a user of the FitBoi application\nI would like to log in with my credentials\nSo that I can view my personal data and log values relevant to myself",
+    "description": "As a User of the FitBoi application\nI would like to log in with my credentials\nSo that I can view my personal data and log values relevant to myself",
     "id": "user-logs-in",
     "keyword": "Feature",
     "uri": "file:src/test/java/com/example/fitboi/cucumber/assets/ID002_User_Logs_In.feature",
@@ -612,11 +584,11 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.290Z",
+        "start_timestamp": "2020-02-17T15:27:06.559Z",
         "line": 7,
-        "name": "User sucessfully logs item using most recents (Normal flow)",
+        "name": "User successfully logs food item using search (Normal flow)",
         "description": "",
-        "id": "log-a-food-item;user-sucessfully-logs-item-using-most-recents-(normal-flow)",
+        "id": "log-a-food-item;user-successfully-logs-food-item-using-search-(normal-flow)",
         "type": "scenario",
         "keyword": "Scenario",
         "steps": [
@@ -634,7 +606,7 @@
               "status": "undefined"
             },
             "line": 10,
-            "name": "the dersired food item is in the database",
+            "name": "the database contains the desired food item",
             "match": {},
             "keyword": "And "
           },
@@ -643,71 +615,6 @@
               "status": "undefined"
             },
             "line": 11,
-            "name": "the User selects the desired food item from the most recents",
-            "match": {},
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 12,
-            "name": "requesting the addition of a new food item",
-            "match": {},
-            "keyword": "When "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 13,
-            "name": "the calories of the food item will be added to the total calorie count",
-            "match": {},
-            "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 14,
-            "name": "the \"Item successfully added\" message will be displayed",
-            "match": {},
-            "keyword": "And "
-          }
-        ]
-      },
-      {
-        "start_timestamp": "2020-01-27T01:35:45.294Z",
-        "line": 16,
-        "name": "User sucessfully logs item using search (Normal flow)",
-        "description": "",
-        "id": "log-a-food-item;user-sucessfully-logs-item-using-search-(normal-flow)",
-        "type": "scenario",
-        "keyword": "Scenario",
-        "steps": [
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 18,
-            "name": "the User is logged in",
-            "match": {},
-            "keyword": "Given "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 19,
-            "name": "the dersired food item is in the database",
-            "match": {},
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 20,
             "name": "the User selects the desired food item from the search results",
             "match": {},
             "keyword": "And "
@@ -716,8 +623,8 @@
             "result": {
               "status": "undefined"
             },
-            "line": 21,
-            "name": "requesting the addition of a new food item",
+            "line": 12,
+            "name": "a request to log the food item is made",
             "match": {},
             "keyword": "When "
           },
@@ -725,81 +632,16 @@
             "result": {
               "status": "undefined"
             },
-            "line": 22,
-            "name": "the calories of the food item will be added to the total calorie count",
+            "line": 13,
+            "name": "the User\u0027s calorie count is updated using the desired food item",
             "match": {},
             "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 23,
-            "name": "the \"Item successfully added\" message will be displayed",
-            "match": {},
-            "keyword": "And "
           }
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.297Z",
-        "line": 25,
-        "name": "User sucessfully logs item using substitute (Alternate flow)",
-        "description": "",
-        "id": "log-a-food-item;user-sucessfully-logs-item-using-substitute-(alternate-flow)",
-        "type": "scenario",
-        "keyword": "Scenario",
-        "steps": [
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 27,
-            "name": "the User is logged in",
-            "match": {},
-            "keyword": "Given "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 28,
-            "name": "selects a substitute food item to replace the desired food item",
-            "match": {},
-            "keyword": "But "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 29,
-            "name": "requesting the addition of a new food item",
-            "match": {},
-            "keyword": "When "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 30,
-            "name": "the calories of the substitute food item will be added to the total calorie count",
-            "match": {},
-            "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 31,
-            "name": "the \"Item successfully added\" message will be displayed",
-            "match": {},
-            "keyword": "And "
-          }
-        ]
-      },
-      {
-        "start_timestamp": "2020-01-27T01:35:45.300Z",
-        "line": 33,
+        "start_timestamp": "2020-02-17T15:27:06.562Z",
+        "line": 15,
         "name": "User fails to logs item (Error flow)",
         "description": "",
         "id": "log-a-food-item;user-fails-to-logs-item-(error-flow)",
@@ -810,7 +652,7 @@
             "result": {
               "status": "undefined"
             },
-            "line": 35,
+            "line": 17,
             "name": "the User is logged in",
             "match": {},
             "keyword": "Given "
@@ -819,17 +661,8 @@
             "result": {
               "status": "undefined"
             },
-            "line": 36,
-            "name": "the desired food item is not in the database",
-            "match": {},
-            "keyword": "But "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 37,
-            "name": "the User cancels the request for a food item",
+            "line": 18,
+            "name": "the database does not contain the desired food item",
             "match": {},
             "keyword": "And "
           },
@@ -837,8 +670,8 @@
             "result": {
               "status": "undefined"
             },
-            "line": 38,
-            "name": "requesting the addition of a new food item",
+            "line": 19,
+            "name": "a request to log the food item is made",
             "match": {},
             "keyword": "When "
           },
@@ -846,8 +679,8 @@
             "result": {
               "status": "undefined"
             },
-            "line": 39,
-            "name": "the User will see the dashboard",
+            "line": 20,
+            "name": "the User will be unable to log the food item",
             "match": {},
             "keyword": "Then "
           }
@@ -855,7 +688,7 @@
       }
     ],
     "name": "Log a food item",
-    "description": "As a user\nI would like to be able to log my consumed food items\nSo that my personal analytics will update with accurate data and provide me with information about reaching my goals",
+    "description": "As a User\nI would like to be able to log my consumed food items\nSo that my personal analytics will update with accurate data and provide me with information about reaching my goals",
     "id": "log-a-food-item",
     "keyword": "Feature",
     "uri": "file:src/test/java/com/example/fitboi/cucumber/assets/ID003_User_Logs_A_Food_Item.feature",
@@ -865,7 +698,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.303Z",
+        "start_timestamp": "2020-02-17T15:27:06.570Z",
         "line": 7,
         "name": "User goal is edited (Normal flow)",
         "description": "",
@@ -930,7 +763,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.307Z",
+        "start_timestamp": "2020-02-17T15:27:06.575Z",
         "line": 16,
         "name": "User cannot perform updates (Alternate flow)",
         "description": "",
@@ -968,7 +801,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.310Z",
+        "start_timestamp": "2020-02-17T15:27:06.578Z",
         "line": 22,
         "name": "User enters invalid goal targets (Error flow)",
         "description": "",
@@ -1033,7 +866,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.312Z",
+        "start_timestamp": "2020-02-17T15:27:06.582Z",
         "line": 31,
         "name": "User does not save updates (Error flow)",
         "description": "",
@@ -1109,7 +942,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.315Z",
+        "start_timestamp": "2020-02-17T15:27:06.587Z",
         "line": 7,
         "name": "User goal is ended (Normal flow)",
         "description": "",
@@ -1165,7 +998,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.318Z",
+        "start_timestamp": "2020-02-17T15:27:06.590Z",
         "line": 15,
         "name": "User cannot perform updates (Alternate flow)",
         "description": "",
@@ -1203,7 +1036,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.320Z",
+        "start_timestamp": "2020-02-17T15:27:06.594Z",
         "line": 21,
         "name": "User losses connection to goal (Error flow)",
         "description": "",
@@ -1279,7 +1112,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.323Z",
+        "start_timestamp": "2020-02-17T15:27:06.598Z",
         "line": 7,
         "name": "User successfully adds a preset goal with no current goal in progress (Normal flow)",
         "description": "",
@@ -1344,7 +1177,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.337Z",
+        "start_timestamp": "2020-02-17T15:27:06.603Z",
         "line": 16,
         "name": "User successfully adds a preset goal with a current goal in progress (Normal flow)",
         "description": "",
@@ -1427,7 +1260,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.340Z",
+        "start_timestamp": "2020-02-17T15:27:06.607Z",
         "line": 27,
         "name": "User successfully adds a custom goal with no current goal in progress (Alternate flow)",
         "description": "",
@@ -1492,7 +1325,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.343Z",
+        "start_timestamp": "2020-02-17T15:27:06.611Z",
         "line": 36,
         "name": "User successfully adds a custom goal with a current goal in progress (Alternate flow)",
         "description": "",
@@ -1575,7 +1408,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.347Z",
+        "start_timestamp": "2020-02-17T15:27:06.614Z",
         "line": 47,
         "name": "User enters invalid data (Error flow)",
         "description": "",
@@ -1660,7 +1493,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.350Z",
+        "start_timestamp": "2020-02-17T15:27:06.617Z",
         "line": 7,
         "name": "User views current consumption (Normal flow)",
         "description": "",
@@ -1698,7 +1531,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.352Z",
+        "start_timestamp": "2020-02-17T15:27:06.620Z",
         "line": 13,
         "name": "User cannot perform updates (Alternate flow)",
         "description": "",
@@ -1736,7 +1569,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.354Z",
+        "start_timestamp": "2020-02-17T15:27:06.622Z",
         "line": 19,
         "name": "User cannot fetch information from server  (Error flow)",
         "description": "",
@@ -1785,7 +1618,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.356Z",
+        "start_timestamp": "2020-02-17T15:27:06.625Z",
         "line": 8,
         "name": "User sees the analytics dashboard with data (Normal Scenario)",
         "description": "",
@@ -1850,7 +1683,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.359Z",
+        "start_timestamp": "2020-02-17T15:27:06.629Z",
         "line": 17,
         "name": "User sees the analytics dashboard void of data (Alternate Scenario)",
         "description": "",
@@ -1908,7 +1741,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.361Z",
+        "start_timestamp": "2020-02-17T15:27:06.632Z",
         "line": 7,
         "name": "User views current consumption (Normal flow)",
         "description": "",
@@ -1982,7 +1815,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.364Z",
+        "start_timestamp": "2020-02-17T15:27:06.635Z",
         "line": 17,
         "name": "User submits an incomplete food item  (Error flow)",
         "description": "",
@@ -2047,7 +1880,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.366Z",
+        "start_timestamp": "2020-02-17T15:27:06.638Z",
         "line": 26,
         "name": "User submits an incomplete food item  (Error flow)",
         "description": "",
@@ -2132,7 +1965,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.368Z",
+        "start_timestamp": "2020-02-17T15:27:06.641Z",
         "line": 7,
         "name": "User successfully changes one profile value (Normal flow)",
         "description": "",
@@ -2197,7 +2030,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.372Z",
+        "start_timestamp": "2020-02-17T15:27:06.645Z",
         "line": 16,
         "name": "User successfully changes many or all values (Alternate flow)",
         "description": "",
@@ -2262,7 +2095,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.374Z",
+        "start_timestamp": "2020-02-17T15:27:06.648Z",
         "line": 25,
         "name": "User enters invalid data (Error flow)",
         "description": "",
@@ -2327,7 +2160,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.376Z",
+        "start_timestamp": "2020-02-17T15:27:06.651Z",
         "line": 34,
         "name": "User exits the window without saving (Error flow)",
         "description": "",
@@ -2392,7 +2225,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.378Z",
+        "start_timestamp": "2020-02-17T15:27:06.654Z",
         "line": 43,
         "name": "Connectivity issue prevents data from persisting (Error flow)",
         "description": "",
@@ -2477,7 +2310,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.381Z",
+        "start_timestamp": "2020-02-17T15:27:06.658Z",
         "line": 11,
         "name": "Today is or is not Friday",
         "description": "",
@@ -2534,7 +2367,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.385Z",
+        "start_timestamp": "2020-02-17T15:27:06.662Z",
         "line": 12,
         "name": "Today is or is not Friday",
         "description": "",
@@ -2590,7 +2423,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.386Z",
+        "start_timestamp": "2020-02-17T15:27:06.664Z",
         "line": 13,
         "name": "Today is or is not Friday",
         "description": "",
