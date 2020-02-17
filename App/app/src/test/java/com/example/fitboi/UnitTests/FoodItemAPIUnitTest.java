@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(FoodItemAPI.class)
-public class FoodItemUnitTest {
+public class FoodItemAPIUnitTest {
 
     private static FoodItemDto foodItem;
     private static List<FoodItemDto> foodItemList = new ArrayList<>();
