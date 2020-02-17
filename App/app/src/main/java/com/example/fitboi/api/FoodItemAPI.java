@@ -20,11 +20,6 @@ import static java.lang.Boolean.TRUE;
 
 public class FoodItemAPI {
 
-    static final String ip_localhost = "127.0.0.1";
-    static final String ip_dev_machine = "10.0.2.2";
-    static final boolean usingEmulator = TRUE;
-    static final String foodItemUrl = "http://"+(usingEmulator ? ip_dev_machine : ip_localhost)+"/users/";
-
     /**
      * Get a list of all food items
      * path :    /foodItems
@@ -45,7 +40,7 @@ public class FoodItemAPI {
     public static void getAllFoodItems(Consumer<List<FoodItemDto>> fn) {
         RequestQueue queue = MyVolley.getRequestQueue();
         JsonArrayRequest request = new JsonArrayRequest(
-                foodItemUrl,
+                MyVolley.serverUrl+MyVolley.foodItemPostfix,
                 foodItemListCallSuccessListener(fn),
                 foodItemListCallErrorListener(fn)
         );
@@ -74,7 +69,7 @@ public class FoodItemAPI {
     public static void getFoodItem(Consumer<FoodItemDto> fn, String foodItem) {
         RequestQueue queue = MyVolley.getRequestQueue();
         JsonObjectRequest request = new JsonObjectRequest(
-                foodItemUrl + foodItem + "/",
+                MyVolley.serverUrl+MyVolley.foodItemPostfix+foodItem+"/",
                 null,
                 foodItemCallSuccessListener(fn),
                 foodItemCallErrorListener(fn)

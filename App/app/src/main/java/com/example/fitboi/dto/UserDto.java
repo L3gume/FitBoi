@@ -10,15 +10,19 @@ public class UserDto {
     private String password;
     private int age;
     private boolean sex;
-    private int weight;
     private int height;
 
-    public UserDto(String email, String password, int age, boolean sex, int weight, int height) {
+    public UserDto() {
+
+    }
+
+    public UserDto(String email, String name, String userName, String password, int age, int height, boolean sex) {
         this.email = email;
-        this.password = password;
+        this.setName(name);
+        this.setUserName(userName);
+        this.setPassword(password);
         this.age = age;
         this.sex = sex;
-        this.weight = weight;
         this.height = height;
     }
 
@@ -50,14 +54,6 @@ public class UserDto {
         this.sex = sex;
     }
 
-    public int getWeight() {
-        return this.weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
     public int getHeight() {
         return this.height;
     }
@@ -85,10 +81,6 @@ public class UserDto {
         return this;
     }
 
-    public UserDto weight(int weight) {
-        this.weight = weight;
-        return this;
-    }
 
     public UserDto height(int height) {
         this.height = height;
@@ -103,12 +95,12 @@ public class UserDto {
             return false;
         }
         UserDto userDto = (UserDto) o;
-        return Objects.equals(email, userDto.email) && age == userDto.age && sex == userDto.sex && weight == userDto.weight && height == userDto.height;
+        return Objects.equals(email, userDto.email) && age == userDto.age && sex == userDto.sex && height == userDto.height;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, age, sex, weight, height);
+        return Objects.hash(email, age, sex, height);
     }
 
     @Override
@@ -117,9 +109,23 @@ public class UserDto {
                 " email='" + getEmail() + "'" +
                 ", age='" + getAge() + "'" +
                 ", sex='" + isSex() + "'" +
-                ", weight='" + getWeight() + "'" +
                 ", height='" + getHeight() + "'" +
                 "}";
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 }

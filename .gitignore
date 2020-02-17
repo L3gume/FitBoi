@@ -96,7 +96,6 @@ Server/.settings/org.eclipse.buildship.core.prefs
 
 # Ignore macos DS_Store
 .DS_Store
-
 # eclipse stuff???
 .settings/
 *.args
