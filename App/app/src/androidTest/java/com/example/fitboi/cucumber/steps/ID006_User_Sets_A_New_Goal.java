@@ -27,7 +27,7 @@ public class ID006_User_Sets_A_New_Goal {
             public void accept(GoalDto goal) {
             }
         };
-        GoalAPI.addNewGoal("test@gmail.com", goalDto, addGoalConfirmation);
+        GoalAPI.addNewGoal("boaty@mcboatface.ca", goalDto, addGoalConfirmation);
         assert true;
     }
 
@@ -53,7 +53,7 @@ public class ID006_User_Sets_A_New_Goal {
             public void accept(GoalDto goal) {
             }
         };
-        GoalAPI.getUserGoals("test@gmail.com",getGoal);
+        GoalAPI.getUserGoals("boaty@mcboatface.ca",getGoal);
         assert true;
     }
 
