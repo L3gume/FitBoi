@@ -15,3 +15,5 @@
 /captures
 .externalNativeBuild
 .cxx
+
+/app/target/cucumber-report.json
