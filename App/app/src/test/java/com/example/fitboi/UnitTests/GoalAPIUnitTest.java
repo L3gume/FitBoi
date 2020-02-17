@@ -47,7 +47,7 @@ public class GoalAPIUnitTest {
             @Override
             public void accept(GoalDto goalDto) {
                 if(goalDto.getStartDate().equals(goal.getStartDate())) {
-                    isAdded = false;
+                    isDeleted = true;
                 }
             }
         };
