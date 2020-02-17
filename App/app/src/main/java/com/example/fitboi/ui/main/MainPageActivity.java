@@ -11,12 +11,7 @@ import com.example.fitboi.ui.meal.AddMealActivity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-/**
- * Created by Andi-Camille Bakti on 13/02/2020.
- */
 public class MainPageActivity extends AppCompatActivity {
-    private static final String LOG_TAG = MainPageActivity.class.getSimpleName();
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,13 +25,21 @@ public class MainPageActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Home");
 
         final CardView createMeal = findViewById(R.id.main_meals_card);
+        final ImageButton profileButton = findViewById((R.id.profile_button));
 
-//        createMeal.setOnClickListener(new View.OnClickListener() {
-//            @Overrides
-//            public void onClick(View v) {
-//                launchCreateMealActivity();
-//            }
-//        });
+        createMeal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchCreateMealActivity();
+            }
+        });
+
+        profileButton.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchUserProfileActivity();
+            }
+        }));
 
     }
 
@@ -45,6 +48,12 @@ public class MainPageActivity extends AppCompatActivity {
 //        EditText editText = (EditText) findViewById(R.id.editText);
 //        String message = editText.getText().toString();
 //        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
+    private void launchUserProfileActivity() {
+        Intent intent = new Intent(this, UserProfileActivity.class);
+
         startActivity(intent);
     }
 }
