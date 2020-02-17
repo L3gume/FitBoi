@@ -19,11 +19,6 @@ import static java.lang.Boolean.*;
 
 public class UserAPI {
 
-    static final String ip_localhost = "127.0.0.1";
-    static final String ip_dev_machine = "10.0.2.2";
-    static final boolean usingEmulator = TRUE;
-    static final String userUrl = "http://"+(usingEmulator ? ip_dev_machine : ip_localhost)+"/users/";
-
     /********** PUBLIC METHODS **********/
 
     /**
@@ -43,7 +38,7 @@ public class UserAPI {
     public static void addNewUser(UserDto userToAdd, Consumer<UserDto> fn) {
         RequestQueue queue = MyVolley.getRequestQueue();
         JsonObjectRequest request = new JsonObjectRequest(
-                userUrl,
+                MyVolley.serverUrl+MyVolley.userPostfix,
                 userDtoToJson(userToAdd),
                 userCallSuccessListener(fn),
                 userCallErrorListener(fn)
@@ -65,7 +60,7 @@ public class UserAPI {
     public static void getAllUsers(Consumer<List<UserDto>> fn) {
         RequestQueue queue = MyVolley.getRequestQueue();
         JsonArrayRequest request = new JsonArrayRequest(
-                userUrl,
+                MyVolley.serverUrl+MyVolley.userPostfix,
                 userListCallSuccessListener(fn),
                 userListCallErrorListener(fn)
         );
@@ -77,7 +72,7 @@ public class UserAPI {
      * Consumer addUserEmailToList = new Consumer<UserDto>() {
      *   @Override
      *   public void accept(UserDto user) {
-     *       ListObject.add(user.age);
+     *       TextBox.add(user.age);
      *   }
      * };
      * UserAPI.getUserByLoginInfo(addUserEmailToList, emailText);
@@ -86,7 +81,7 @@ public class UserAPI {
     public static void getUserByLoginInfo(Consumer<UserDto> fn, String email) {
         RequestQueue queue = MyVolley.getRequestQueue();
         JsonObjectRequest request = new JsonObjectRequest(
-                userUrl+email+"/",
+                MyVolley.serverUrl+MyVolley.userPostfix+email+"/",
                 null,
                 userCallSuccessListener(fn),
                 userCallErrorListener(fn)
@@ -145,12 +140,14 @@ public class UserAPI {
 
     private static UserDto jsonToUserDto(JSONObject json) {
         String email = json.optString("email");
+        String name = json.optString("name");
+        String username = json.optString("username");
+        String password = json.optString("password");
         int age = json.optInt("age");
         boolean sex = json.optBoolean("sex");
-        int weight = json.optInt("weight");
         int height = json.optInt("height");
 
-        return new UserDto(email, age, sex, weight, height);
+        return new UserDto(email, name, username, password, age, height, sex);
     }
 
     private static JSONObject userDtoToJson(UserDto user) {
@@ -158,9 +155,11 @@ public class UserAPI {
 
         try {
             json.put("email", user.getEmail());
+            json.put("name", user.getName());
+            json.put("username", user.getUserName());
+            json.put("password", user.getPassword());
             json.put("age", user.getAge());
             json.put("sex", user.getSex());
-            json.put("weight", user.getWeight());
             json.put("height", user.getHeight());
         } catch (Exception e) {
             // TODO: something with exception

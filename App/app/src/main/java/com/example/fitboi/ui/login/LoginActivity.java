@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 import com.example.fitboi.R;
 import com.example.fitboi.ui.login.LoginViewModel;
 import com.example.fitboi.ui.login.LoginViewModelFactory;
+import com.example.fitboi.ui.main.MainPageActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -74,7 +76,9 @@ public class LoginActivity extends AppCompatActivity {
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
-                finish();
+//                finish();
+                // placeholder for when login page is done
+                launchMainPageActivity();
             }
         });
 
@@ -117,6 +121,14 @@ public class LoginActivity extends AppCompatActivity {
                         passwordEditText.getText().toString());
             }
         });
+    }
+
+    private void launchMainPageActivity() {
+        Intent intent = new Intent(this, MainPageActivity.class);
+//        EditText editText = (EditText) findViewById(R.id.editText);
+//        String message = editText.getText().toString();
+//        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
