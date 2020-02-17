@@ -239,121 +239,113 @@
                 </LinearLayout>
 
                 <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_gravity="top"
-                android:orientation="vertical"
-                android:paddingRight="16dp">
-
-                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="top|center"
-                    android:text="Macro-Based Calories Distribution"
-                    android:textColor="@color/textBlack"
-                    android:textStyle="bold|italic"
-                    android:layout_marginLeft="35dp">
+                    android:layout_height="30dp"
+                    android:layout_gravity="top"
+                    android:orientation="vertical"
+                    android:paddingRight="16dp">
 
-                </TextView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="top|center"
+                        android:text="Macro-Based Calories Distribution"
+                        android:textColor="@color/textBlack"
+                        android:textStyle="bold|italic"
+                        android:layout_marginLeft="35dp">
 
-                <ImageView
+                    </TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="1dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center|left"
-                    android:layout_marginLeft="20dp"
-                    android:paddingTop="30dp"
-                    android:src=""/>
+                    android:orientation="vertical"
+                    android:paddingRight="16dp">
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center|left"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="25dp"
+                        android:src="@drawable/carbs_logo"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|left"
-                android:orientation="vertical"
-                android:paddingRight="16dp">
+                    <EditText
+                        android:id="@+id/carbs_consumed_current"
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:inputType="number"
+                        android:textColor="@color/textBlack"
+                        android:textStyle="bold|italic">
 
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center|left"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="25dp"
-                    android:src="@drawable/carbs_logo"/>
+                    </EditText>
 
-                <EditText
-                    android:id="@+id/carbs_consumed_current"
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="10dp"
-                    android:inputType="number"
-                    android:textColor="@color/textBlack"
-                    android:textStyle="bold|italic">
+                    android:orientation="vertical">
 
-                </EditText>
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="25dp"
+                        android:src="@drawable/proteins_logo"/>
 
-            </LinearLayout>
+                    <EditText
+                        android:id="@+id/proteins_consumed_current"
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:inputType="number"
+                        android:textColor="@color/textBlack"
+                        android:textStyle="bold|italic">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
+                    </EditText>
 
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="25dp"
-                    android:src="@drawable/proteins_logo"/>
+                </LinearLayout>
 
-                <EditText
-                    android:id="@+id/proteins_consumed_current"
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:inputType="number"
-                    android:textColor="@color/textBlack"
-                    android:textStyle="bold|italic">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|right"
+                    android:paddingRight="20dp"
+                    android:orientation="vertical">
 
-                </EditText>
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center|left"
+                        android:layout_marginTop="25dp"
+                        android:src="@drawable/lipids_logo"/>
 
-            </LinearLayout>
+                    <EditText
+                        android:id="@+id/lipids_consumed_current"
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:inputType="number"
+                        android:textColor="@color/textBlack"
+                        android:textStyle="bold|italic">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|right"
-                android:paddingRight="20dp"
-                android:orientation="vertical">
+                    </EditText>
 
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center|left"
-                    android:layout_marginTop="25dp"
-                    android:src="@drawable/lipids_logo"/>
-
-                <EditText
-                    android:id="@+id/lipids_consumed_current"
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:inputType="number"
-                    android:textColor="@color/textBlack"
-                    android:textStyle="bold|italic">
-
-                </EditText>
-
-            </LinearLayout>
+                </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
-    </GridLayout>
+        </GridLayout>
 
         <GridLayout
             android:layout_width="320dp"
