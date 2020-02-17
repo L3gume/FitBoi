@@ -26,7 +26,7 @@ jobs:
       run: cd Server/
     - name: build server
       run: ./gradlew build
-    - name: Heroky Deploy
+    - name: Heroku Deploy
       uses: AkhileshNS/heroku-deploy@v3.0.0
       with:
         # This will be used for authentication. You can find it in your heroku homepage account settings
