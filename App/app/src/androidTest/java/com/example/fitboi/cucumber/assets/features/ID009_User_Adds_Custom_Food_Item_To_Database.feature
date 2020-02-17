@@ -23,7 +23,7 @@ When the item is submitted
 Then an error message "Incomplete form" is displayed
 And the item is not sent to the database
 
-Scenario: User submits an incomplete food item  (Error flow)
+Scenario: User submits an invalid description (Error flow)
 
 Given the User is on the main dashboard
 And the add custom item button is pressed 

@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.example.fitboi.R;
 import com.example.fitboi.api.FoodItemAPI;
@@ -63,6 +64,13 @@ public class AddMealActivity extends AppCompatActivity {
         this.layoutManager = new LinearLayoutManager(this);
         mealListView.setLayoutManager(layoutManager);
 
+        TextView emptyView = findViewById(R.id.add_meal_emptyview);
+        if(mealEntries.isEmpty()){
+            emptyView.setVisibility(View.VISIBLE);
+        }else{
+            emptyView.setVisibility(View.INVISIBLE);
+        }
+
         androidx.appcompat.widget.SearchView searchView  =
                 findViewById(R.id.add_meal_searchview);
         searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
@@ -81,10 +89,10 @@ public class AddMealActivity extends AppCompatActivity {
                 };
                 FoodItemAPI.getFoodItem(foodConsumer, query);
 
-
-//                mealEntries.add(new FoodItemDto(query, 500, (float) 2.4));
-
+                mealEntries.add(new FoodItemDto("Cucumber", 69420, (float) 1.0));
                 progressBar.setVisibility(View.INVISIBLE);
+
+                uiSetup();
                 return true;
             }
 

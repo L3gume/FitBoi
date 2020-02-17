@@ -53,6 +53,7 @@ captures/
 .idea/codeStyles/
 .idea/misc.xml
 .idea/runConfigurations.xml
+.idea/
 
 # Keystore files
 # Uncomment the following lines if you do not want to check your keystore files in.
@@ -99,3 +100,6 @@ Server/.settings/org.eclipse.buildship.core.prefs
 
 # Ignore macos DS_Store
 .DS_Store
+# eclipse stuff???
+.settings/
+*.args

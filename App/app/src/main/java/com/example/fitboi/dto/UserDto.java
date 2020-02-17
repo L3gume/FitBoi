@@ -62,6 +62,10 @@ public class UserDto {
         this.height = height;
     }
 
+    public String getPassword() {return password;}
+
+    public  void setPassword(String password) {this.password = password;}
+
     public UserDto email(String email) {
         this.email = email;
         return this;
@@ -123,13 +127,5 @@ public class UserDto {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
