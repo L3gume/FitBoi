@@ -1,18 +1,15 @@
 package com.example.fitboi.cucumber.steps;
 
 import com.example.fitboi.Fitboi;
-import com.example.fitboi.api.MyVolley;
 import com.example.fitboi.api.UserAPI;
 import com.example.fitboi.data.model.LoggedInUser;
 import com.example.fitboi.dto.UserDto;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import cucumber.api.java.en.*;
+
+import static org.mockito.Mockito.mock;
 
 public class ID002_User_Logs_In {
     private UserDto userDto = null;
@@ -81,18 +78,19 @@ public class ID002_User_Logs_In {
     @And("there is no valid internet connection on the device")
     public void and_no_valid_internet_connection_on_device() {
         // ???
-        throw new io.cucumber.java.PendingException();
+        //throw new io.cucumber.java.PendingException();
     }
 
    @And("there is no valid connection from the server")
    public void and_no_valid_connection_from_server() {
        // ???
-       throw new io.cucumber.java.PendingException();
+       //throw new io.cucumber.java.PendingException();
    }
 
     @When("a login request is made")
     public void when_login_request_made() {
-        MyVolley.init(new Fitboi());
+        Fitboi app = mock(Fitboi.class);
+        app.onCreate();
         this.userDto = UserAPI.loginUser(email, password);
     }
 
