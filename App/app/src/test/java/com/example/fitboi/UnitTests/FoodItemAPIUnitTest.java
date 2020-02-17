@@ -1,4 +1,4 @@
-package com.example.fitboi;
+package com.example.fitboi.UnitTests;
 
 import com.example.fitboi.api.FoodItemAPI;
 import com.example.fitboi.dto.FoodItemDto;
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+<<<<<<< HEAD:App/app/src/test/java/com/example/fitboi/UnitTests/FoodItemUnitTest.java
 /*@RunWith(PowerMockRunner.class)
 @PrepareForTest(FoodItemAPI.class)*/
 public class FoodItemUnitTest {
@@ -24,20 +25,30 @@ public class FoodItemUnitTest {
     private static List<FoodItemDto> foodItemList = new ArrayList<>();
     private static Consumer<List<FoodItemDTO>> foodItemListFunction;
     private static Consumer<FoodItemDTO> foodItemFunction;
+=======
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(FoodItemAPI.class)
+public class FoodItemAPIUnitTest {
+
+    private static FoodItemDto foodItem;
+    private static List<FoodItemDto> foodItemList = new ArrayList<>();
+    private static Consumer<List<FoodItemDto>> foodItemListFunction;
+    private static Consumer<FoodItemDto> foodItemFunction;
+>>>>>>> dev:App/app/src/test/java/com/example/fitboi/UnitTests/FoodItemAPIUnitTest.java
     private static String desiredFood;
 
     @BeforeClass
     public static void Setup() {
-        foodItemListFunction = new Consumer<List<FoodItemDTO>>() {
+        foodItemListFunction = new Consumer<List<FoodItemDto>>() {
             @Override
-            public void accept(List<FoodItemDTO> foodItemDTOS) {
+            public void accept(List<FoodItemDto> foodItemDTOS) {
                 foodItemList.addAll(foodItemDTOS);
             }
         };
 
-        foodItemFunction = new Consumer<FoodItemDTO>() {
+        foodItemFunction = new Consumer<FoodItemDto>() {
             @Override
-            public void accept(FoodItemDTO foodItemDTO) {
+            public void accept(FoodItemDto foodItemDTO) {
                 foodItem = foodItemDTO;
             }
         };

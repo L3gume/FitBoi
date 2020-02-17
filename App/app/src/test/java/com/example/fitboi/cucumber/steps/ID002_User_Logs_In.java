@@ -1,7 +1,5 @@
 package com.example.fitboi.cucumber.steps;
 
-import android.util.Patterns;
-
 import com.example.fitboi.Fitboi;
 import com.example.fitboi.api.MyVolley;
 import com.example.fitboi.api.UserAPI;
