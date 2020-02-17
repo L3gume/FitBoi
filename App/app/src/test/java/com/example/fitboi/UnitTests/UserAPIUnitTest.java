@@ -1,0 +1,4 @@
+package com.example.fitboi.UnitTests;
+
+public class UserAPIUnitTest {
+}
