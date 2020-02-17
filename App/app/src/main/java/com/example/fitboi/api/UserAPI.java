@@ -34,6 +34,7 @@ public class UserAPI {
      *     if (user.email == userDto.email) {
      *         Message.setText("User Added!");
      *     }
+     *
      *   }
      * };
      * UserAPI.addNewUser(userDto, addUserConfirmation);
