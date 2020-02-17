@@ -11,12 +11,7 @@ import com.example.fitboi.ui.meal.AddMealActivity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-/**
- * Created by Andi-Camille Bakti on 13/02/2020.
- */
 public class MainPageActivity extends AppCompatActivity {
-    private static final String LOG_TAG = MainPageActivity.class.getSimpleName();
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,6 +23,7 @@ public class MainPageActivity extends AppCompatActivity {
 
     private void uiSetup() {
         getSupportActionBar().setTitle("Home");
+
         final CardView createMeal = findViewById(R.id.main_meals_card);
 
         createMeal.setOnClickListener(new View.OnClickListener() {
@@ -36,11 +32,31 @@ public class MainPageActivity extends AppCompatActivity {
                 launchCreateMealActivity();
             }
         });
+        final ImageButton profileButton = findViewById((R.id.profile_button));
+
+        createMeal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchCreateMealActivity();
+            }
+        });
+
+        profileButton.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchUserProfileActivity();
+            }
+        }));
 
     }
 
     private void launchCreateMealActivity() {
         Intent intent = new Intent(this, AddMealActivity.class);
+        startActivity(intent);
+    }
+
+    private void launchUserProfileActivity() {
+        Intent intent = new Intent(this, UserProfileActivity.class);
         startActivity(intent);
     }
 }

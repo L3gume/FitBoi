@@ -19,4 +19,5 @@
     <string name="test_main_page_calories_remaining_data">1320</string>
     <string name="main_page_calories_remaining">Calories Remaining</string>
     <string name="main_page_macro_distribution">Macro-based Calories Distribution</string>
+    <string name="addmeal_press_on_the_search_icon">Press on the search icon to look for a food</string>
 </resources>
