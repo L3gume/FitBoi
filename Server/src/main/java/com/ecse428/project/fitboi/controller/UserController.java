@@ -37,7 +37,20 @@ public class UserController {
     
     @Autowired
     private GoalService goalService;
-	
+
+    @GetMapping("{userEmail}/{password}")
+    public ResponseEntity<?> loginUser(@PathVariable String userEmail, @PathVariable String password) {
+        UserProfile user = userService.getUser(userEmail);
+        if (user == null) {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+        if (!user.getPassword().equals(password)) {
+            return new ResponseEntity<>("Wrong password", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(convertToDto(user), HttpStatus.OK);
+    }
+
     /**
      * GET
      * /users/ -> returns a list of all users
@@ -73,19 +86,19 @@ public class UserController {
      * @return
      */
     @PostMapping("")
-    public ResponseEntity<?> addUser(@RequestBody UserDto user) {
-    	if (user == null || !isValidUser(user)) {
+    public ResponseEntity<?> addUser(@RequestBody UserDto userEmail) {
+    	if (userEmail == null || !isValidUser(userEmail)) {
     		return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
     	}
     	
-    	System.out.println("USER: " + user.toString());
+    	System.out.println("USER: " + userEmail.toString());
     	
-    	if (!userService.addNewUser(convertToDomainObject(user)))
+    	if (!userService.addNewUser(convertToDomainObject(userEmail)))
     	{
     		return new ResponseEntity<String>("User already exists", HttpStatus.BAD_REQUEST);
     	}
     	
-    	return new ResponseEntity<UserDto>(user, HttpStatus.CREATED);
+    	return new ResponseEntity<UserDto>(userEmail, HttpStatus.CREATED);
     }
     
 
@@ -96,19 +109,19 @@ public class UserController {
      * @return
      */
     @PutMapping("")
-    public ResponseEntity<?> updateUser(@RequestBody UserDto user) {
-        if (user == null || !isValidUser(user)) {
+    public ResponseEntity<?> updateUser(@RequestBody UserDto userEmail) {
+        if (userEmail == null || !isValidUser(userEmail)) {
             return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
         }
         
-        System.out.println("USER: " + user.toString());
+        System.out.println("USER: " + userEmail.toString());
         
-        if (!userService.updateUser(convertToDomainObject(user)))
+        if (!userService.updateUser(convertToDomainObject(userEmail)))
         {
             return new ResponseEntity<String>("User does not exist", HttpStatus.BAD_REQUEST);
         }
         
-        return new ResponseEntity<UserDto>(user, HttpStatus.OK);
+        return new ResponseEntity<UserDto>(userEmail, HttpStatus.OK);
     }
 
 
@@ -131,7 +144,7 @@ public class UserController {
     /**
      * GET
      * /users/{user_id}/ -> returns a specific user given their userId (email for now)
-     * @param userId
+     * @param userEmail
      * @return
      */
     @GetMapping("{userEmail}/goals")
@@ -158,7 +171,7 @@ public class UserController {
         /**
      * POST
      * create a new Goal for a User
-     * @param userId
+     * @param userEmail
      * @return
      */
     @PostMapping("{userId}/goals")
@@ -215,8 +228,8 @@ public class UserController {
     			user.getUserName(),
     			user.getPassword(),
     			user.getAge(),
-    			user.getHeight(),
-    			user.getBiologicalSex()
+				user.getBiologicalSex(),
+				user.getHeight()
     			);
     }
 

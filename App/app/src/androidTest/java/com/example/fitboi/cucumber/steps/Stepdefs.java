@@ -1,7 +1,7 @@
 package com.example.fitboi.cucumber.steps;
 
 
-import io.cucumber.java.en.*;
+import cucumber.api.java.en.*;
 import static org.junit.Assert.*;
 
 class IsItFriday {

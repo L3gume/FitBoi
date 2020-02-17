@@ -9,7 +9,6 @@ Scenario: User successfully logs in (Normal flow)
 Given the User is not currently logged into the FitBoi application
 And the entered e-mail is valid
 And the password is valid
-And the combination of email and password is valid
 When a login request is made
 Then a User is logged in to their account
 
@@ -34,7 +33,7 @@ Given the User is not currently logged into the FitBoi application
 And valid data is entered in the email and password fields
 And the User does not exist on the platform
 When a login request is made
-Then the User is not logged in
+Then a User is not logged into their account
 
 Scenario: The connection to the database cannot be established from a user connection point (Error flow)
 
@@ -42,7 +41,7 @@ Given the User is not currently logged into the FitBoi application
 And valid data is entered in the email and password fields
 And there is no valid internet connection on the device
 When a login request is made
-Then the User is not logged in
+Then a User is not logged into their account
 
 Scenario: The connection to the database cannot be established from a server problem (Error flow)
 
@@ -50,4 +49,4 @@ Given the User is not currently logged into the FitBoi application
 And valid data is entered in the email and password fields
 And there is no valid connection from the server
 When a login request is made
-Then the User is not logged in
+Then a User is not logged into their account

@@ -11,12 +11,8 @@ public class UserDto {
     private int age;
     private boolean sex;
     private int height;
-    
-    public UserDto() {
-    	
-    }
 
-    public UserDto(String email, String name, String userName, String password, int age, int height, boolean sex) {
+    public UserDto(String email, String name, String userName, String password, int age, boolean sex, int height) {
         this.email = email;
         this.setName(name);
         this.setUserName(userName);
@@ -82,6 +78,7 @@ public class UserDto {
         this.height = height;
         return this;
     }
+
 
     @Override
     public boolean equals(Object o) {
