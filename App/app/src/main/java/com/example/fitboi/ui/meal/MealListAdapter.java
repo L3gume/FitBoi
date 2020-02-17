@@ -75,15 +75,16 @@ public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.MyView
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         FoodItemDto food = mfoods.get(position);
 
-        TextView foodName = (TextView) holder.foodNameView;
-        TextView foodCalCount= (TextView) holder.foodCalCountView;
-        TextView foodPortionSize = (TextView) holder.foodPortionSizeView;
+        TextView foodNameView = (TextView) holder.foodNameView;
+        TextView foodCalCountView = (TextView) holder.foodCalCountView;
+        TextView foodPortionSizeView = (TextView) holder.foodPortionSizeView;
 
+        String foodCalCountText = String.valueOf(food.getCalories()) +  " Calories";
+        String foodPortionSizeText = String.valueOf(food.getCalories()) +  " portions";
 
-        foodName.setText(food.getName());
-        foodCalCount.setText(String.valueOf(food.getCalories()));
-        foodPortionSize.setText(String.valueOf(food.getPortionSize()));
-
+        foodNameView.setText(food.getName());
+        foodCalCountView.setText(foodCalCountText);
+        foodPortionSizeView.setText(foodPortionSizeText);
     }
 
     @Override

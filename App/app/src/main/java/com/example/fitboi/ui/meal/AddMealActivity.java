@@ -41,7 +41,7 @@ public class AddMealActivity extends AppCompatActivity {
         //ArrayList<MealTest> mealEntries = getRecentMeals();
 
         //Populate list view (testing)
-        ArrayList<FoodItemDto> mealEntries = new ArrayList<>();
+        this.mealEntries = new ArrayList<>();
         this.mealAdapter = new MealListAdapter(mealEntries);
 
         uiSetup();
@@ -72,21 +72,17 @@ public class AddMealActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
 
                 Log.d(LOG_TAG,query + " searched");
-
-//                this.searchRequest = query;
-//                Log.d(LOG_TAG,query + "searched");
-//
-//                loaderManager = getLoaderManager();
-//                loaderManager.initLoader(BOOK_LOADER_ID, null,MainActivity.this);
-                  // Test without threads
-
                 Consumer foodConsumer = new Consumer<FoodItemDto>() {
                     @Override
                     public void accept(FoodItemDto food) {
                         mealEntries.add(food);
+                        Log.d(LOG_TAG, food.getName() + "added");
                     }
                 };
                 FoodItemAPI.getFoodItem(foodConsumer, query);
+
+
+//                mealEntries.add(new FoodItemDto(query, 500, (float) 2.4));
 
                 progressBar.setVisibility(View.INVISIBLE);
                 return true;
@@ -105,14 +101,10 @@ public class AddMealActivity extends AppCompatActivity {
 
         });
 
-//        ???
     }
 
     private void launchCreateMealActivity() {
             Intent intent = new Intent(this, CreateMealActivity.class);
-//        EditText editText = (EditText) findViewById(R.id.editText);
-//        String message = editText.getText().toString();
-//        intent.putExtra(EXTRA_MESSAGE, message);
             startActivity(intent);
     }
 }
