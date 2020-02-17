@@ -45,7 +45,7 @@ public class ID001_User_Creates_New_Account {
     public void init() {
         isCreated = false;
         user = null;
-        email = "boaty@mcboatface.com";
+        email = "boatyyy@mcboatface.com";
         app = mock(Fitboi.class);
         app.onCreate();
         UserAPI.getUserByLoginInfo(new Consumer<UserDto>() {
