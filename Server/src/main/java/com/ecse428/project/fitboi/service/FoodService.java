@@ -1,23 +1,19 @@
 package com.ecse428.project.fitboi.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.ecse428.project.fitboi.model.DBFood;
-import com.ecse428.project.repository.FoodRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FoodService {
-    @Autowired
-    FoodRepository foodRepository;
-
     public List<DBFood> getDBFoodFromName(String name)
     {
-        List<DBFood> all_food = foodRepository.findAll();
-
+        List<DBFood> all_food = FoodQueryManager.getDBFoodsWithName(name);
         List<DBFood> target_food = new ArrayList<DBFood>();
 
         // TODO Sprint 2: auto complete feature for name
