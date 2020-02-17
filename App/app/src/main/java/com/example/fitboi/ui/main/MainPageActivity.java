@@ -31,37 +31,14 @@ public class MainPageActivity extends AppCompatActivity {
                 launchCreateMealActivity();
             }
         });
+
         final ImageButton profileButton = findViewById((R.id.profile_button));
-
-        createMeal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchCreateMealActivity();
-            }
-        });
-        final ImageButton profileButton = findViewById((R.id.profile_button));
-
-        createMeal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchCreateMealActivity();
-            }
-        });
-
         profileButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 launchUserProfileActivity();
             }
         }));
-
-        profileButton.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launchUserProfileActivity();
-            }
-        }));
-
     }
 
     private void launchCreateMealActivity() {

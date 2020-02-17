@@ -89,9 +89,7 @@ public class AddMealActivity extends AppCompatActivity {
                 };
                 FoodItemAPI.getFoodItem(foodConsumer, query);
 
-                mealEntries.add(new FoodItemDto("Cucumber", 69420, (float) 1.0));
                 progressBar.setVisibility(View.INVISIBLE);
-
                 uiSetup();
                 return true;
             }
