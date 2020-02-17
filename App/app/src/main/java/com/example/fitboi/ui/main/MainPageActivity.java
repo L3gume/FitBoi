@@ -25,29 +25,20 @@ public class MainPageActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Home");
 
         final CardView createMeal = findViewById(R.id.main_meals_card);
-
         createMeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 launchCreateMealActivity();
             }
         });
+
         final ImageButton profileButton = findViewById((R.id.profile_button));
-
-        createMeal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchCreateMealActivity();
-            }
-        });
-
         profileButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 launchUserProfileActivity();
             }
         }));
-
     }
 
     private void launchCreateMealActivity() {
