@@ -6,23 +6,12 @@ So that I can use the application as intended to log my personal goals and track
 
 Scenario: User profile is created (Normal flow)
 
-Given the User is not currently a member of the the FitBoi application
-And the entered email is valid
-And the individual's form data entered are valid 
-When a request to create a profile is made
-Then a new User profile is created 
-
-Scenario: User enters invalid email (Error flow)
-
-Given the User is not currently a member of the the FitBoi application
-And the entered email is invalid
-When the request to create a profile is made
-Then the new User profile is not created
+When a new User requests to create an account with valid input data
+Then a new User account is created with the valid input data 
 
 Scenario: User enters invalid data (Error flow)
 
-Given the User is not currently a member of the the FitBoi application
-And the entered form data is invalid
-When the request to create a profile is made
-Then the new User profile is not created
+When a new User requests to create an account with invalid input data
+Then the new User account is not created
+
 
