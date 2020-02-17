@@ -1,4 +1,4 @@
-package com.example.fitboi;
+package com.example.fitboi.UnitTests;
 
 import org.junit.Test;
 

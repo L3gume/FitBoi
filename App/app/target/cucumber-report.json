@@ -3,7 +3,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.174Z",
+        "start_timestamp": "2020-02-17T16:55:32.019Z",
         "line": 7,
         "name": "User profile is created (Normal flow)",
         "description": "",
@@ -13,8 +13,8 @@
         "steps": [
           {
             "result": {
-              "error_message": "io.cucumber.java.PendingException: TODO: implement me\r\n\tat com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application(ID001_User_Creates_New_Account.java:11)\r\n\tat ✽.the User is not currently a member of the the FitBoi application(file:///C:/Users/Brendan/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID001_User_Creates_New_Account.feature:9)\r\n",
-              "duration": 4000000,
+              "error_message": "io.cucumber.java.PendingException: TODO: implement me\r\n\tat com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application(ID001_User_Creates_New_Account.java:11)\r\n\tat ✽.the User is not currently a member of the the FitBoi application(file:///C:/Users/camille/workspace/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID001_User_Creates_New_Account.feature:9)\r\n",
+              "duration": 4997400,
               "status": "pending"
             },
             "line": 9,
@@ -37,7 +37,6 @@
           },
           {
             "result": {
-              "duration": 1000000,
               "status": "skipped"
             },
             "line": 11,
@@ -49,40 +48,27 @@
           },
           {
             "result": {
-              "status": "skipped"
+              "status": "undefined"
             },
             "line": 12,
-            "name": "clicking the create profile button",
-            "match": {
-              "location": "com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.clicking_the_create_profile_button()"
-            },
+            "name": "a request to create a profile is made",
+            "match": {},
             "keyword": "When "
-          },
-          {
-            "result": {
-              "status": "skipped"
-            },
-            "line": 13,
-            "name": "a new user profile is created using the entered email and associated form data \u003cDataType\u003e",
-            "match": {
-              "location": "com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.a_new_user_profile_is_created_using_the_entered_email_and_associated_form_data_DataType()"
-            },
-            "keyword": "Then "
           },
           {
             "result": {
               "status": "undefined"
             },
-            "line": 14,
-            "name": "the \"Successful profile creation\" message is issued",
+            "line": 13,
+            "name": "a new User profile is created",
             "match": {},
-            "keyword": "And "
+            "keyword": "Then "
           }
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.249Z",
-        "line": 17,
+        "start_timestamp": "2020-02-17T16:55:32.125Z",
+        "line": 15,
         "name": "User enters invalid email (Error flow)",
         "description": "",
         "id": "user-creates-new-account;user-enters-invalid-email-(error-flow)",
@@ -91,11 +77,11 @@
         "steps": [
           {
             "result": {
-              "error_message": "io.cucumber.java.PendingException: TODO: implement me\r\n\tat com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application(ID001_User_Creates_New_Account.java:11)\r\n\tat ✽.the User is not currently a member of the the FitBoi application(file:///C:/Users/Brendan/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID001_User_Creates_New_Account.feature:19)\r\n",
-              "duration": 1000000,
+              "error_message": "io.cucumber.java.PendingException: TODO: implement me\r\n\tat com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application(ID001_User_Creates_New_Account.java:11)\r\n\tat ✽.the User is not currently a member of the the FitBoi application(file:///C:/Users/camille/workspace/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID001_User_Creates_New_Account.feature:17)\r\n",
+              "duration": 997700,
               "status": "pending"
             },
-            "line": 19,
+            "line": 17,
             "name": "the User is not currently a member of the the FitBoi application",
             "match": {
               "location": "com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application()"
@@ -106,7 +92,7 @@
             "result": {
               "status": "undefined"
             },
-            "line": 20,
+            "line": 18,
             "name": "the entered email is invalid",
             "match": {},
             "keyword": "And "
@@ -115,25 +101,25 @@
             "result": {
               "status": "undefined"
             },
-            "line": 21,
-            "name": "the email field does not accept the user\u0027s entry",
+            "line": 19,
+            "name": "the request to create a profile is made",
             "match": {},
-            "keyword": "Then "
+            "keyword": "When "
           },
           {
             "result": {
               "status": "undefined"
             },
-            "line": 22,
-            "name": "the \"Invalid E-mail\" message is issued",
+            "line": 20,
+            "name": "the new User profile is not created",
             "match": {},
-            "keyword": "And "
+            "keyword": "Then "
           }
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.254Z",
-        "line": 24,
+        "start_timestamp": "2020-02-17T16:55:32.140Z",
+        "line": 22,
         "name": "User enters invalid data (Error flow)",
         "description": "",
         "id": "user-creates-new-account;user-enters-invalid-data-(error-flow)",
@@ -142,10 +128,10 @@
         "steps": [
           {
             "result": {
-              "error_message": "io.cucumber.java.PendingException: TODO: implement me\r\n\tat com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application(ID001_User_Creates_New_Account.java:11)\r\n\tat ✽.the User is not currently a member of the the FitBoi application(file:///C:/Users/Brendan/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID001_User_Creates_New_Account.feature:26)\r\n",
+              "error_message": "io.cucumber.java.PendingException: TODO: implement me\r\n\tat com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application(ID001_User_Creates_New_Account.java:11)\r\n\tat ✽.the User is not currently a member of the the FitBoi application(file:///C:/Users/camille/workspace/FitBoi/App/app/src/test/java/com/example/fitboi/cucumber/assets/ID001_User_Creates_New_Account.feature:24)\r\n",
               "status": "pending"
             },
-            "line": 26,
+            "line": 24,
             "name": "the User is not currently a member of the the FitBoi application",
             "match": {
               "location": "com.example.fitboi.cucumber.steps.ID001_User_Creates_New_Account.the_User_is_not_currently_a_member_of_the_the_FitBoi_application()"
@@ -156,7 +142,7 @@
             "result": {
               "status": "undefined"
             },
-            "line": 27,
+            "line": 25,
             "name": "the entered form data is invalid",
             "match": {},
             "keyword": "And "
@@ -165,19 +151,19 @@
             "result": {
               "status": "undefined"
             },
-            "line": 28,
-            "name": "the form fields do not accept the user\u0027s entry",
+            "line": 26,
+            "name": "the request to create a profile is made",
             "match": {},
-            "keyword": "Then "
+            "keyword": "When "
           },
           {
             "result": {
               "status": "undefined"
             },
-            "line": 29,
-            "name": "the \"Invalid Input\" message is issued",
+            "line": 27,
+            "name": "the new User profile is not created",
             "match": {},
-            "keyword": "And "
+            "keyword": "Then "
           }
         ]
       }
@@ -193,7 +179,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.260Z",
+        "start_timestamp": "2020-02-17T16:55:32.156Z",
         "line": 7,
         "name": "User successfully logs in (Normal flow)",
         "description": "",
@@ -233,7 +219,7 @@
               "status": "undefined"
             },
             "line": 12,
-            "name": "the combination of email and password is correct",
+            "name": "the combination of email and password is valid",
             "match": {},
             "keyword": "And "
           },
@@ -242,7 +228,7 @@
               "status": "undefined"
             },
             "line": 13,
-            "name": "clicking the sign in button",
+            "name": "a login request is made",
             "match": {},
             "keyword": "When "
           },
@@ -251,24 +237,15 @@
               "status": "undefined"
             },
             "line": 14,
-            "name": "a user is logged in to their account",
+            "name": "a User is logged in to their account",
             "match": {},
             "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 15,
-            "name": "the \"Successfully logged in\" message is issued",
-            "match": {},
-            "keyword": "And "
           }
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.268Z",
-        "line": 17,
+        "start_timestamp": "2020-02-17T16:55:32.172Z",
+        "line": 16,
         "name": "User enters invalid data (Error flow)",
         "description": "",
         "id": "user-logs-in;user-enters-invalid-data-(error-flow)",
@@ -279,7 +256,7 @@
             "result": {
               "status": "undefined"
             },
-            "line": 19,
+            "line": 18,
             "name": "the User is not currently logged into the FitBoi application",
             "match": {},
             "keyword": "Given "
@@ -288,7 +265,7 @@
             "result": {
               "status": "undefined"
             },
-            "line": 20,
+            "line": 19,
             "name": "the data entered into any field is invalid",
             "match": {},
             "keyword": "And "
@@ -297,8 +274,8 @@
             "result": {
               "status": "undefined"
             },
-            "line": 21,
-            "name": "clicking the sign in button",
+            "line": 20,
+            "name": "a login request is made",
             "match": {},
             "keyword": "When "
           },
@@ -306,25 +283,16 @@
             "result": {
               "status": "undefined"
             },
-            "line": 22,
-            "name": "the field does not accept the user\u0027s entry",
+            "line": 21,
+            "name": "a User is not logged into their account",
             "match": {},
             "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 23,
-            "name": "the \"Invalid input\" message is issued",
-            "match": {},
-            "keyword": "And "
           }
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.274Z",
-        "line": 25,
+        "start_timestamp": "2020-02-17T16:55:32.183Z",
+        "line": 23,
         "name": "User enters a correct e-mail but an incorrect password (Error flow)",
         "description": "",
         "id": "user-logs-in;user-enters-a-correct-e-mail-but-an-incorrect-password-(error-flow)",
@@ -335,7 +303,7 @@
             "result": {
               "status": "undefined"
             },
-            "line": 27,
+            "line": 25,
             "name": "the User is not currently logged into the FitBoi application",
             "match": {},
             "keyword": "Given "
@@ -344,7 +312,7 @@
             "result": {
               "status": "undefined"
             },
-            "line": 28,
+            "line": 26,
             "name": "the entered e-mail is valid",
             "match": {},
             "keyword": "And "
@@ -353,8 +321,8 @@
             "result": {
               "status": "undefined"
             },
-            "line": 29,
-            "name": "the password entered is incorrect",
+            "line": 27,
+            "name": "the password entered is invalid",
             "match": {},
             "keyword": "And "
           },
@@ -362,8 +330,8 @@
             "result": {
               "status": "undefined"
             },
-            "line": 30,
-            "name": "clicking the sign in button",
+            "line": 28,
+            "name": "a login request is made",
             "match": {},
             "keyword": "When "
           },
@@ -371,25 +339,16 @@
             "result": {
               "status": "undefined"
             },
-            "line": 31,
-            "name": "the User is not logged in",
+            "line": 29,
+            "name": "a User is not logged into their account",
             "match": {},
             "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 32,
-            "name": "the \"Password is incorrect\" message is issued",
-            "match": {},
-            "keyword": "And "
           }
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.279Z",
-        "line": 34,
+        "start_timestamp": "2020-02-17T16:55:32.192Z",
+        "line": 31,
         "name": "User enters credentials for an account that does not exist (Error flow)",
         "description": "",
         "id": "user-logs-in;user-enters-credentials-for-an-account-that-does-not-exist-(error-flow)",
@@ -400,7 +359,7 @@
             "result": {
               "status": "undefined"
             },
-            "line": 36,
+            "line": 33,
             "name": "the User is not currently logged into the FitBoi application",
             "match": {},
             "keyword": "Given "
@@ -409,8 +368,8 @@
             "result": {
               "status": "undefined"
             },
-            "line": 37,
-            "name": "the entered e-mail is valid",
+            "line": 34,
+            "name": "valid data is entered in the email and password fields",
             "match": {},
             "keyword": "And "
           },
@@ -418,8 +377,17 @@
             "result": {
               "status": "undefined"
             },
-            "line": 38,
-            "name": "clicking the sign in button",
+            "line": 35,
+            "name": "the User does not exist on the platform",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 36,
+            "name": "a login request is made",
             "match": {},
             "keyword": "When "
           },
@@ -427,34 +395,16 @@
             "result": {
               "status": "undefined"
             },
-            "line": 39,
-            "name": "the entered e-mail is not found",
-            "match": {},
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 40,
+            "line": 37,
             "name": "the User is not logged in",
             "match": {},
             "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 41,
-            "name": "the \"Account cannot be found\" message is issued",
-            "match": {},
-            "keyword": "And "
           }
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.283Z",
-        "line": 43,
+        "start_timestamp": "2020-02-17T16:55:32.202Z",
+        "line": 39,
         "name": "The connection to the database cannot be established from a user connection point (Error flow)",
         "description": "",
         "id": "user-logs-in;the-connection-to-the-database-cannot-be-established-from-a-user-connection-point-(error-flow)",
@@ -465,7 +415,7 @@
             "result": {
               "status": "undefined"
             },
-            "line": 45,
+            "line": 41,
             "name": "the User is not currently logged into the FitBoi application",
             "match": {},
             "keyword": "Given "
@@ -474,8 +424,8 @@
             "result": {
               "status": "undefined"
             },
-            "line": 46,
-            "name": "there is data typed into both fields",
+            "line": 42,
+            "name": "valid data is entered in the email and password fields",
             "match": {},
             "keyword": "And "
           },
@@ -483,7 +433,7 @@
             "result": {
               "status": "undefined"
             },
-            "line": 47,
+            "line": 43,
             "name": "there is no valid internet connection on the device",
             "match": {},
             "keyword": "And "
@@ -492,8 +442,8 @@
             "result": {
               "status": "undefined"
             },
-            "line": 48,
-            "name": "clicking the sign in button",
+            "line": 44,
+            "name": "a login request is made",
             "match": {},
             "keyword": "When "
           },
@@ -501,34 +451,16 @@
             "result": {
               "status": "undefined"
             },
-            "line": 49,
+            "line": 45,
             "name": "the User is not logged in",
             "match": {},
             "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 50,
-            "name": "the \"No valid internet connection\" message is issued",
-            "match": {},
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 51,
-            "name": "a pop-up window will prompt the user to check their internet connection",
-            "match": {},
-            "keyword": "And "
           }
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.287Z",
-        "line": 53,
+        "start_timestamp": "2020-02-17T16:55:32.214Z",
+        "line": 47,
         "name": "The connection to the database cannot be established from a server problem (Error flow)",
         "description": "",
         "id": "user-logs-in;the-connection-to-the-database-cannot-be-established-from-a-server-problem-(error-flow)",
@@ -539,7 +471,7 @@
             "result": {
               "status": "undefined"
             },
-            "line": 55,
+            "line": 49,
             "name": "the User is not currently logged into the FitBoi application",
             "match": {},
             "keyword": "Given "
@@ -548,8 +480,8 @@
             "result": {
               "status": "undefined"
             },
-            "line": 56,
-            "name": "there is data typed into both fields",
+            "line": 50,
+            "name": "valid data is entered in the email and password fields",
             "match": {},
             "keyword": "And "
           },
@@ -557,7 +489,7 @@
             "result": {
               "status": "undefined"
             },
-            "line": 57,
+            "line": 51,
             "name": "there is no valid connection from the server",
             "match": {},
             "keyword": "And "
@@ -566,8 +498,8 @@
             "result": {
               "status": "undefined"
             },
-            "line": 58,
-            "name": "clicking the sign in button",
+            "line": 52,
+            "name": "a login request is made",
             "match": {},
             "keyword": "When "
           },
@@ -575,34 +507,16 @@
             "result": {
               "status": "undefined"
             },
-            "line": 59,
+            "line": 53,
             "name": "the User is not logged in",
             "match": {},
             "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 60,
-            "name": "the \"Server error\" message is issued",
-            "match": {},
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 61,
-            "name": "a pop-up window will inform the user that there is a server error",
-            "match": {},
-            "keyword": "And "
           }
         ]
       }
     ],
     "name": "User logs in",
-    "description": "As a user of the FitBoi application\nI would like to log in with my credentials\nSo that I can view my personal data and log values relevant to myself",
+    "description": "As a User of the FitBoi application\nI would like to log in with my credentials\nSo that I can view my personal data and log values relevant to myself",
     "id": "user-logs-in",
     "keyword": "Feature",
     "uri": "file:src/test/java/com/example/fitboi/cucumber/assets/ID002_User_Logs_In.feature",
@@ -612,11 +526,11 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.290Z",
+        "start_timestamp": "2020-02-17T16:55:32.223Z",
         "line": 7,
-        "name": "User sucessfully logs item using most recents (Normal flow)",
+        "name": "User successfully logs food item using search (Normal flow)",
         "description": "",
-        "id": "log-a-food-item;user-sucessfully-logs-item-using-most-recents-(normal-flow)",
+        "id": "log-a-food-item;user-successfully-logs-food-item-using-search-(normal-flow)",
         "type": "scenario",
         "keyword": "Scenario",
         "steps": [
@@ -634,7 +548,7 @@
               "status": "undefined"
             },
             "line": 10,
-            "name": "the dersired food item is in the database",
+            "name": "the database contains the desired food item",
             "match": {},
             "keyword": "And "
           },
@@ -643,71 +557,6 @@
               "status": "undefined"
             },
             "line": 11,
-            "name": "the User selects the desired food item from the most recents",
-            "match": {},
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 12,
-            "name": "requesting the addition of a new food item",
-            "match": {},
-            "keyword": "When "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 13,
-            "name": "the calories of the food item will be added to the total calorie count",
-            "match": {},
-            "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 14,
-            "name": "the \"Item successfully added\" message will be displayed",
-            "match": {},
-            "keyword": "And "
-          }
-        ]
-      },
-      {
-        "start_timestamp": "2020-01-27T01:35:45.294Z",
-        "line": 16,
-        "name": "User sucessfully logs item using search (Normal flow)",
-        "description": "",
-        "id": "log-a-food-item;user-sucessfully-logs-item-using-search-(normal-flow)",
-        "type": "scenario",
-        "keyword": "Scenario",
-        "steps": [
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 18,
-            "name": "the User is logged in",
-            "match": {},
-            "keyword": "Given "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 19,
-            "name": "the dersired food item is in the database",
-            "match": {},
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 20,
             "name": "the User selects the desired food item from the search results",
             "match": {},
             "keyword": "And "
@@ -716,8 +565,8 @@
             "result": {
               "status": "undefined"
             },
-            "line": 21,
-            "name": "requesting the addition of a new food item",
+            "line": 12,
+            "name": "a request to log the food item is made",
             "match": {},
             "keyword": "When "
           },
@@ -725,81 +574,16 @@
             "result": {
               "status": "undefined"
             },
-            "line": 22,
-            "name": "the calories of the food item will be added to the total calorie count",
+            "line": 13,
+            "name": "the User\u0027s calorie count is updated using the desired food item",
             "match": {},
             "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 23,
-            "name": "the \"Item successfully added\" message will be displayed",
-            "match": {},
-            "keyword": "And "
           }
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.297Z",
-        "line": 25,
-        "name": "User sucessfully logs item using substitute (Alternate flow)",
-        "description": "",
-        "id": "log-a-food-item;user-sucessfully-logs-item-using-substitute-(alternate-flow)",
-        "type": "scenario",
-        "keyword": "Scenario",
-        "steps": [
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 27,
-            "name": "the User is logged in",
-            "match": {},
-            "keyword": "Given "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 28,
-            "name": "selects a substitute food item to replace the desired food item",
-            "match": {},
-            "keyword": "But "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 29,
-            "name": "requesting the addition of a new food item",
-            "match": {},
-            "keyword": "When "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 30,
-            "name": "the calories of the substitute food item will be added to the total calorie count",
-            "match": {},
-            "keyword": "Then "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 31,
-            "name": "the \"Item successfully added\" message will be displayed",
-            "match": {},
-            "keyword": "And "
-          }
-        ]
-      },
-      {
-        "start_timestamp": "2020-01-27T01:35:45.300Z",
-        "line": 33,
+        "start_timestamp": "2020-02-17T16:55:32.234Z",
+        "line": 15,
         "name": "User fails to logs item (Error flow)",
         "description": "",
         "id": "log-a-food-item;user-fails-to-logs-item-(error-flow)",
@@ -810,7 +594,7 @@
             "result": {
               "status": "undefined"
             },
-            "line": 35,
+            "line": 17,
             "name": "the User is logged in",
             "match": {},
             "keyword": "Given "
@@ -819,17 +603,8 @@
             "result": {
               "status": "undefined"
             },
-            "line": 36,
-            "name": "the desired food item is not in the database",
-            "match": {},
-            "keyword": "But "
-          },
-          {
-            "result": {
-              "status": "undefined"
-            },
-            "line": 37,
-            "name": "the User cancels the request for a food item",
+            "line": 18,
+            "name": "the database does not contain the desired food item",
             "match": {},
             "keyword": "And "
           },
@@ -837,8 +612,8 @@
             "result": {
               "status": "undefined"
             },
-            "line": 38,
-            "name": "requesting the addition of a new food item",
+            "line": 19,
+            "name": "a request to log the food item is made",
             "match": {},
             "keyword": "When "
           },
@@ -846,8 +621,8 @@
             "result": {
               "status": "undefined"
             },
-            "line": 39,
-            "name": "the User will see the dashboard",
+            "line": 20,
+            "name": "the User will be unable to log the food item",
             "match": {},
             "keyword": "Then "
           }
@@ -855,7 +630,7 @@
       }
     ],
     "name": "Log a food item",
-    "description": "As a user\nI would like to be able to log my consumed food items\nSo that my personal analytics will update with accurate data and provide me with information about reaching my goals",
+    "description": "As a User\nI would like to be able to log my consumed food items\nSo that my personal analytics will update with accurate data and provide me with information about reaching my goals",
     "id": "log-a-food-item",
     "keyword": "Feature",
     "uri": "file:src/test/java/com/example/fitboi/cucumber/assets/ID003_User_Logs_A_Food_Item.feature",
@@ -865,7 +640,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.303Z",
+        "start_timestamp": "2020-02-17T16:55:32.247Z",
         "line": 7,
         "name": "User goal is edited (Normal flow)",
         "description": "",
@@ -930,7 +705,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.307Z",
+        "start_timestamp": "2020-02-17T16:55:32.254Z",
         "line": 16,
         "name": "User cannot perform updates (Alternate flow)",
         "description": "",
@@ -968,7 +743,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.310Z",
+        "start_timestamp": "2020-02-17T16:55:32.265Z",
         "line": 22,
         "name": "User enters invalid goal targets (Error flow)",
         "description": "",
@@ -1033,7 +808,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.312Z",
+        "start_timestamp": "2020-02-17T16:55:32.273Z",
         "line": 31,
         "name": "User does not save updates (Error flow)",
         "description": "",
@@ -1109,7 +884,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.315Z",
+        "start_timestamp": "2020-02-17T16:55:32.299Z",
         "line": 7,
         "name": "User goal is ended (Normal flow)",
         "description": "",
@@ -1165,7 +940,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.318Z",
+        "start_timestamp": "2020-02-17T16:55:32.316Z",
         "line": 15,
         "name": "User cannot perform updates (Alternate flow)",
         "description": "",
@@ -1203,7 +978,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.320Z",
+        "start_timestamp": "2020-02-17T16:55:32.337Z",
         "line": 21,
         "name": "User losses connection to goal (Error flow)",
         "description": "",
@@ -1279,7 +1054,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.323Z",
+        "start_timestamp": "2020-02-17T16:55:32.365Z",
         "line": 7,
         "name": "User successfully adds a preset goal with no current goal in progress (Normal flow)",
         "description": "",
@@ -1344,7 +1119,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.337Z",
+        "start_timestamp": "2020-02-17T16:55:32.402Z",
         "line": 16,
         "name": "User successfully adds a preset goal with a current goal in progress (Normal flow)",
         "description": "",
@@ -1427,7 +1202,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.340Z",
+        "start_timestamp": "2020-02-17T16:55:32.413Z",
         "line": 27,
         "name": "User successfully adds a custom goal with no current goal in progress (Alternate flow)",
         "description": "",
@@ -1492,7 +1267,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.343Z",
+        "start_timestamp": "2020-02-17T16:55:32.423Z",
         "line": 36,
         "name": "User successfully adds a custom goal with a current goal in progress (Alternate flow)",
         "description": "",
@@ -1575,7 +1350,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.347Z",
+        "start_timestamp": "2020-02-17T16:55:32.433Z",
         "line": 47,
         "name": "User enters invalid data (Error flow)",
         "description": "",
@@ -1660,7 +1435,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.350Z",
+        "start_timestamp": "2020-02-17T16:55:32.446Z",
         "line": 7,
         "name": "User views current consumption (Normal flow)",
         "description": "",
@@ -1698,7 +1473,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.352Z",
+        "start_timestamp": "2020-02-17T16:55:32.455Z",
         "line": 13,
         "name": "User cannot perform updates (Alternate flow)",
         "description": "",
@@ -1736,7 +1511,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.354Z",
+        "start_timestamp": "2020-02-17T16:55:32.464Z",
         "line": 19,
         "name": "User cannot fetch information from server  (Error flow)",
         "description": "",
@@ -1785,7 +1560,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.356Z",
+        "start_timestamp": "2020-02-17T16:55:32.485Z",
         "line": 8,
         "name": "User sees the analytics dashboard with data (Normal Scenario)",
         "description": "",
@@ -1850,7 +1625,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.359Z",
+        "start_timestamp": "2020-02-17T16:55:32.490Z",
         "line": 17,
         "name": "User sees the analytics dashboard void of data (Alternate Scenario)",
         "description": "",
@@ -1908,7 +1683,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.361Z",
+        "start_timestamp": "2020-02-17T16:55:32.500Z",
         "line": 7,
         "name": "User views current consumption (Normal flow)",
         "description": "",
@@ -1982,7 +1757,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.364Z",
+        "start_timestamp": "2020-02-17T16:55:32.514Z",
         "line": 17,
         "name": "User submits an incomplete food item  (Error flow)",
         "description": "",
@@ -2047,7 +1822,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.366Z",
+        "start_timestamp": "2020-02-17T16:55:32.522Z",
         "line": 26,
         "name": "User submits an incomplete food item  (Error flow)",
         "description": "",
@@ -2132,7 +1907,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.368Z",
+        "start_timestamp": "2020-02-17T16:55:32.534Z",
         "line": 7,
         "name": "User successfully changes one profile value (Normal flow)",
         "description": "",
@@ -2197,7 +1972,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.372Z",
+        "start_timestamp": "2020-02-17T16:55:32.545Z",
         "line": 16,
         "name": "User successfully changes many or all values (Alternate flow)",
         "description": "",
@@ -2262,7 +2037,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.374Z",
+        "start_timestamp": "2020-02-17T16:55:32.549Z",
         "line": 25,
         "name": "User enters invalid data (Error flow)",
         "description": "",
@@ -2327,7 +2102,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.376Z",
+        "start_timestamp": "2020-02-17T16:55:32.553Z",
         "line": 34,
         "name": "User exits the window without saving (Error flow)",
         "description": "",
@@ -2392,7 +2167,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.378Z",
+        "start_timestamp": "2020-02-17T16:55:32.557Z",
         "line": 43,
         "name": "Connectivity issue prevents data from persisting (Error flow)",
         "description": "",
@@ -2477,7 +2252,7 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2020-01-27T01:35:45.381Z",
+        "start_timestamp": "2020-02-17T16:55:32.562Z",
         "line": 11,
         "name": "Today is or is not Friday",
         "description": "",
@@ -2515,7 +2290,7 @@
           },
           {
             "result": {
-              "duration": 1000000,
+              "duration": 2998500,
               "status": "passed"
             },
             "line": 7,
@@ -2534,7 +2309,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.385Z",
+        "start_timestamp": "2020-02-17T16:55:32.569Z",
         "line": 12,
         "name": "Today is or is not Friday",
         "description": "",
@@ -2590,7 +2365,7 @@
         ]
       },
       {
-        "start_timestamp": "2020-01-27T01:35:45.386Z",
+        "start_timestamp": "2020-02-17T16:55:32.573Z",
         "line": 13,
         "name": "Today is or is not Friday",
         "description": "",

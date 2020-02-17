@@ -19,8 +19,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp">
 
-            <ImageButton
-                android:id="@+id/profile_button"
+            <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_alignParentRight="true"
@@ -29,7 +28,7 @@
                 android:background="@android:color/transparent"
                 android:outlineProvider="none"
                 android:scaleType="fitCenter"
-                android:src="@drawable/fitboi_logo"/>
+                android:src="@drawable/fitboi_logo" />
 
             <TextView
                 android:layout_width="275dp"
@@ -37,8 +36,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_centerInParent="true"
-
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:layout_gravity="top"
@@ -87,7 +85,6 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
                 android:background="@color/textWhite"
-                app:cardCornerRadius="5dp"
                 app:cardElevation="6dp">
 
                 <LinearLayout
@@ -102,26 +99,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="3dp"
+                        android:textStyle="bold|italic"
                         android:gravity="center"
                         android:text="@string/main_page_calories_consumed"
                         android:textColor="@color/textBlack"
-                        android:textSize="6pt"
-                        android:textStyle="bold|italic">
+                        android:textSize="6pt">
 
                     </TextView>
-
-                    <EditText
-                        android:id="@+id/calories_consumed_current"
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_row="0"
-                        android:layout_column="0"
-                        android:layout_gravity="bottom|center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:inputType="number">
-
-                    </EditText>
 
                 </LinearLayout>
 
@@ -129,6 +113,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
+                app:cardCornerRadius="4dp"
                 android:layout_height="match_parent"
                 android:layout_row="0"
                 android:layout_column="0"
@@ -136,7 +121,6 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="5dp"
                 android:background="@color/textWhite"
-                app:cardCornerRadius="5dp"
                 app:cardElevation="6dp">
 
                 <LinearLayout
@@ -157,20 +141,6 @@
                         android:textStyle="bold|italic">
                     </TextView>
 
-                    <EditText
-                        android:id="@+id/calories_remaining_current"
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_row="0"
-                        android:layout_column="0"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_gravity="bottom|center"
-                        android:layout_marginTop="10dp"
-                        android:inputType="number">
-
-                    </EditText>
-
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -181,7 +151,7 @@
             android:layout_width="320dp"
             android:layout_gravity="center"
             android:layout_height="120dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="8dp"
             android:alignmentMode="alignMargins"
             android:baselineAligned="false"
             android:columnCount="1"
@@ -216,6 +186,14 @@
 
                     </TextView>
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center|left"
+                        android:layout_marginLeft="20dp"
+                        android:paddingTop="30dp"/>
+<!--                        android:src="" />-->
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -238,129 +216,16 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_gravity="top"
-                android:orientation="vertical"
-                android:paddingRight="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="top|center"
-                    android:text="Macro-Based Calories Distribution"
-                    android:textColor="@color/textBlack"
-                    android:textStyle="bold|italic"
-                    android:layout_marginLeft="35dp">
-
-                </TextView>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center|left"
-                    android:layout_marginLeft="20dp"
-                    android:paddingTop="30dp"
-                    android:src=""/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|left"
-                android:orientation="vertical"
-                android:paddingRight="16dp">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center|left"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="25dp"
-                    android:src="@drawable/carbs_logo"/>
-
-                <EditText
-                    android:id="@+id/carbs_consumed_current"
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="10dp"
-                    android:inputType="number"
-                    android:textColor="@color/textBlack"
-                    android:textStyle="bold|italic">
-
-                </EditText>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="25dp"
-                    android:src="@drawable/proteins_logo"/>
-
-                <EditText
-                    android:id="@+id/proteins_consumed_current"
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:inputType="number"
-                    android:textColor="@color/textBlack"
-                    android:textStyle="bold|italic">
-
-                </EditText>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|right"
-                android:paddingRight="20dp"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center|left"
-                    android:layout_marginTop="25dp"
-                    android:src="@drawable/lipids_logo"/>
-
-                <EditText
-                    android:id="@+id/lipids_consumed_current"
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:inputType="number"
-                    android:textColor="@color/textBlack"
-                    android:textStyle="bold|italic">
-
-                </EditText>
-
-            </LinearLayout>
-
             </androidx.cardview.widget.CardView>
 
-    </GridLayout>
+        </GridLayout>
 
         <GridLayout
             android:layout_width="320dp"
+            android:layout_gravity="center"
             android:layout_height="120dp"
-            android:layout_gravity="top|center"
+            android:layout_marginTop="8dp"
             android:alignmentMode="alignMargins"
-            android:layout_marginTop="60dp"
             android:baselineAligned="false"
             android:columnCount="1"
             android:columnOrderPreserved="false"
@@ -370,15 +235,12 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/main_meals_card"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_row="0"
                 android:layout_column="0"
-                android:layout_gravity="top"
                 android:background="#FFFFFF"
-                android:outlineAmbientShadowColor="@color/textBlack"
-                android:outlineSpotShadowColor="@color/textBlack"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="29dp">
+                app:cardElevation="10dp">
 
 
                 <LinearLayout
@@ -392,14 +254,15 @@
                     <ImageView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
+                        android:src="@drawable/meal_addition_logo"
                         android:layout_row="0"
                         android:layout_column="0"
                         android:layout_gravity="center"
                         android:maxWidth="60dp"
-                        android:maxHeight="60dp"
-                        android:src="@drawable/meal_addition_logo" />
+                        android:maxHeight="60dp" />
 
                 </LinearLayout>
+
 
             </androidx.cardview.widget.CardView>
 
@@ -407,10 +270,10 @@
 
         <GridLayout
             android:layout_width="320dp"
+            android:layout_gravity="center"
             android:layout_height="120dp"
-            android:layout_gravity="bottom|center"
+            android:layout_marginTop="8dp"
             android:alignmentMode="alignMargins"
-            android:layout_marginTop="15dp"
             android:baselineAligned="false"
             android:columnCount="1"
             android:columnOrderPreserved="false"
@@ -420,39 +283,32 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/main_stats_card"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_row="0"
                 android:layout_column="0"
-                android:background="#FFFFFF"
-                android:outlineAmbientShadowColor="@color/textBlack"
-                android:outlineSpotShadowColor="@color/textBlack"
+                android:background="@color/textWhite"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="29dp">
+                app:cardElevation="10dp">
 
                 <LinearLayout
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
-                    android:layout_row="0"
-                    android:layout_column="0"
                     android:layout_gravity="center"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:layout_row="0"
-                        android:layout_column="0"
+                        android:src="@drawable/stats_history"
                         android:layout_gravity="center"
                         android:maxWidth="60dp"
-                        android:maxHeight="60dp"
-                        android:src="@drawable/stats_history" />
+                        android:maxHeight="60dp" />
 
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
         </GridLayout>
-
     </LinearLayout>
 
 </LinearLayout>
