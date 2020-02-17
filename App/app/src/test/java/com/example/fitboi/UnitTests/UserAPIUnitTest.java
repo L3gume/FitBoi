@@ -53,7 +53,7 @@ public class UserAPIUnitTest {
     }
 
     @Test
-    public void addNewGoal() {
+    public void addNewUser() {
         user = new UserDto("test@gmail.com", "Test", "test123", "123", 21, 21, true);
         PowerMockito.mockStatic(UserAPI.class);
         PowerMockito.doNothing().when(UserAPI.class);
