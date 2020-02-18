@@ -80,7 +80,8 @@ public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.MyView
         TextView foodPortionSizeView = (TextView) holder.foodPortionSizeView;
 
         String foodCalCountText = String.valueOf(food.getCalories()) +  " Calories";
-        String foodPortionSizeText = String.valueOf(food.getCalories()) +  " portions";
+        String foodPortionSizeText =
+                (int) (Math.round(food.getPortionSize())) +  " " + "portions";
 
         foodNameView.setText(food.getName());
         foodCalCountView.setText(foodCalCountText);
