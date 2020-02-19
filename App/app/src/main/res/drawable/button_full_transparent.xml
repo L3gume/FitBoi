@@ -3,12 +3,13 @@
     <item>
         <shape android:shape="rectangle">
             <!--apply button background transparent, full opacity-->
-            <solid android:color="#00ffffff"/>
+            <solid android:color="#00ffffff" />
             <!--make button border white solid color, nontransparent-->
             <stroke
-                android:color="#ffffffff"
-                android:width="2dp"/>
-            <corners android:radius="4dp"/>
+                android:color="#00ffffff"
+                android:width="2dp"
+                android:dashWidth="2dp"/>
+            <corners android:radius="0dp"/>
         </shape>
     </item>
 </selector>
