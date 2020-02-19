@@ -2,6 +2,7 @@ package com.ecse428.project.fitboi.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.ecse428.project.fitboi.dto.DBFoodDto;
 import com.ecse428.project.fitboi.model.DBFood;
@@ -28,11 +29,12 @@ public class FoodController {
      * @param foodName
      * @return
      */
-    @GetMapping("{foodName}")
-    public ResponseEntity<?> getUser(@PathVariable String foodName) {
+    @GetMapping("{foodName}/{numElements}")
+    public ResponseEntity<?> getUser(@PathVariable String foodName, @PathVariable int numElements) {
         List<DBFood> foodList = foodService.getDBFoodFromName(foodName);
+        List<DBFood> smallList = foodList.stream().limit(numElements).collect(Collectors.toList());
         List<DBFoodDto> foodDtoList = new ArrayList<DBFoodDto>();
-        for(DBFood food : foodList)
+        for(DBFood food : smallList)
         {
             foodDtoList.add(converToDto(food));
         }

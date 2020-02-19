@@ -26,7 +26,7 @@ public class FoodQueryManager
         try {
             conn = connect();
             
-            String sql = "SELECT * FROM food";
+            String sql = "SELECT * FROM food WHERE name like '%".concat(name).concat("%'");
             
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
