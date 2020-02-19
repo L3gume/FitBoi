@@ -91,7 +91,7 @@ public class ID002_User_Logs_In {
     public void when_login_request_made() {
         Fitboi app = mock(Fitboi.class);
         app.onCreate();
-        this.userDto = UserAPI.loginUser(email, password);
+        this.userDto = UserAPI.getUserByLogin(email, password, null);
     }
 
     @Then("a User is logged in to their account")

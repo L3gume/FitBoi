@@ -1,17 +1,19 @@
 package com.example.fitboi.api;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.RequestFuture;
 import com.example.fitboi.dto.GoalDto;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 public class GoalAPI {
@@ -19,74 +21,171 @@ public class GoalAPI {
     /********** PUBLIC METHODS **********/
 
     /**
-     * Example of how to use:
-     * Consumer addGoalConfirmation = new Consumer<GoalDto> fn) {
+     * Add new goal to given user
+     * path:    /users/{userEmail}/goals/
+     * type:    POST
+     *
+     * Example of how to use asynchronously:
+     * Consumer addGoalConfirmation = new Consumer<GoalDto>() {
      *   @Override
-     *   public void accept(GoalDto user) {
+     *   public void accept(GoalDto goal) {
      *     if (goal.goalId == goalDto.goalId) {
      *         Message.setText("Goal Added!");
      *     }
      *   }
      * };
      * GoalAPI.addNewGoal(goalDto, addGoalConfirmation);
-     * @param goalToAdd
-     * @param fn
+     *
+     * Example of how to use synchronously:
+     * GoalDto newGoal = GoalDto();
+     * GoalDto addedGoal = GoalAPI.addNewGoal("test@gmail.com", newGoal, null);
+     * if (addedGoal == newGoal) {
+     *     String message = "Adding new goal worked!";
+     * }
+     * @param userEmail of user to which to add the goal
+     * @param goalToAdd GoalDto of goal to add
+     * @param fn to be called by response, if null wait for response and return it directly
      */
-    public static void addNewGoal(String userEmail, GoalDto goalToAdd, Consumer<GoalDto> fn) {
-        RequestQueue queue = MyVolley.getRequestQueue();
+    public static GoalDto addUserGoal(String userEmail, GoalDto goalToAdd, Consumer<GoalDto> fn) {
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        Response.Listener<JSONObject> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = goalCallSuccessListener(fn);
+            errorListener = goalCallErrorListener(fn);
+        }
+
         JsonObjectRequest request = new JsonObjectRequest(
                 MyVolley.serverUrl+MyVolley.userPostfix+userEmail+MyVolley.goalPostfix,
                 goalDtoToJson(goalToAdd),
-                goalCallSuccessListener(fn),
-                goalCallErrorListener(fn)
+                successListener,
+                errorListener
         );
-        queue.add(request);
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+        if (fn == null) {
+            try {
+                return jsonToGoalDto(future.get(10, TimeUnit.SECONDS));
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
     }
 
     /**
-     * Example of how to use:
-     * Consumer deleteGoalConfirmation = new Consumer<GoalDto> fn) {
+     * Delete a goal from a given user
+     * path:    /users/{userEmail}/goals
+     * type:    DELETE
+     *
+     * Example of how to use asynchronously:
+     * Consumer deleteGoalConfirmation = new Consumer<GoalDto>() {
      *   @Override
      *   public void accept(GoalDto user) {
      *     if (goal.goalId == goalDto.goalId) {
-     *         Message.setText("Goal Deleted!");
+     *         String message = "Goal Deleted!";
      *     }
      *   }
      * };
      * GoalAPI.addNewGoal(goal.goalId, deleteGoalConfirmation);
-     * @param goalId
-     * @param fn
+     *
+     * Example of how to use synchronously:
+     * GoalDto deletedGoal = GoalAPI.deleteGoal(goal.goalId, null);
+     * if (goal.goalId = deletedGoal.goalId) {
+     *     String message = "Goal Deleted";
+     * }
+     * @param goalId of goal to be deleted
+     * @param fn to be called by response, if null wait for response and return it directly
      */
-    public static void deleteGoal(String goalId, Consumer<GoalDto> fn) {
-        RequestQueue queue = MyVolley.getRequestQueue();
+    public static GoalDto deleteUserGoal(String goalId, Consumer<GoalDto> fn) {
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        Response.Listener<JSONObject> successListener;
+
+        if (fn == null) {
+            successListener = future;
+        } else {
+            successListener = goalCallSuccessListener(fn);
+        }
+
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.DELETE,
-                (MyVolley.serverUrl+MyVolley.userPostfix+MyVolley.goalPostfix),
+                (MyVolley.serverUrl+MyVolley.userPostfix+MyVolley.goalPostfix+goalId+'/'),
                 null,
-                goalCallSuccessListener(fn),
+                successListener,
                 null);
-        queue.add(request);
+
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+
+        if (fn == null) {
+            try {
+                return jsonToGoalDto(future.get(10, TimeUnit.SECONDS));
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
     }
 
     /**
-     * Example of how to use:
-     * Consumer addAllGoalsToList = new Consumer<List<GoalDto>> fn) {
+     * Get a list of all goal of a given user
+     * path:    /users/{userEmail}/goals
+     * type:    GET
+     * Example of how to use asynchronously:
+     * Consumer addAllGoalsToList = new Consumer<List<GoalDto>>() {
      *   @Override
      *   public void accept(List<GoalDto> goals) {
      *     ListObject.add(goals);
      *   }
      * };
      * GoalAPI.getUserGoals(userEmail, addAllGoalsToList);
-     * @param fn to be called by response
+     *
+     * Example of how to use synchronously:
+     * GoalDto goal = GoalAPI.getUserGoals(userEmail, null);
+     *
+     * @param fn to be called by response, if null wait for response and return it directly
      */
-    public static void getUserGoals(String userEmail, Consumer<List<GoalDto>> fn) {
-        RequestQueue queue = MyVolley.getRequestQueue();
+    public static List<GoalDto> getUserGoals(String userEmail, Consumer<List<GoalDto>> fn) {
+        RequestFuture<JSONArray> future = RequestFuture.newFuture();
+        Response.Listener<JSONArray> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = goalListCallSuccessListener(fn);
+            errorListener = goalListCallErrorListener(fn);
+        }
+
         JsonArrayRequest request = new JsonArrayRequest(
                 (MyVolley.serverUrl+MyVolley.userPostfix+userEmail+MyVolley.goalPostfix),
-                goalListCallSuccessListener(fn),
-                goalListCallErrorListener(fn)
+                successListener,
+                errorListener
         );
-        queue.add(request);
+
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+
+        if (fn == null) {
+            try {
+                List<GoalDto> goals = null;
+                JSONArray result = future.get(10, TimeUnit.SECONDS);
+                for (int i=0; i<result.length(); i++) {
+                    goals.add(jsonToGoalDto(result.optJSONObject(i)));
+                }
+
+                return goals;
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+
     }
 
     /********** PRIVATE METHODS **********/

@@ -80,14 +80,16 @@ public class AddMealActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
 
                 Log.d(LOG_TAG,query + " searched");
-                Consumer foodConsumer = new Consumer<FoodItemDto>() {
+                Consumer foodConsumer = new Consumer<List<FoodItemDto>>() {
                     @Override
-                    public void accept(FoodItemDto food) {
-                        mealEntries.add(food);
-                        Log.d(LOG_TAG, food.getName() + "added");
+                    public void accept(List<FoodItemDto> foods) {
+                        for (FoodItemDto food: foods) {
+                            mealEntries.add(food);
+                            Log.d(LOG_TAG, food.getName() + "added");
+                        }
                     }
                 };
-                FoodItemAPI.getFoodItem(foodConsumer, query);
+                FoodItemAPI.getFoodItemsByPrefix(query,foodConsumer);
 
                 progressBar.setVisibility(View.INVISIBLE);
                 uiSetup();
