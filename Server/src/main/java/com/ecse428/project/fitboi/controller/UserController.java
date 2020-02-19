@@ -70,46 +70,46 @@ public class UserController {
     /**
      * POST
      * /users/ -> adds a new user to the DB
-     * @param userEmail
+     * @param userDto
      * @return
      */
     @PostMapping("")
-    public ResponseEntity<?> addUser(@RequestBody UserDto userEmail) {
-    	if (userEmail == null || !isValidUser(userEmail)) {
+    public ResponseEntity<?> addUser(@RequestBody UserDto userDto) {
+    	if (userDto == null || !isValidUser(userDto)) {
     		return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
     	}
     	
-    	System.out.println("USER: " + userEmail.toString());
+    	System.out.println("USER: " + userDto.toString());
     	
-    	if (!userService.addNewUser(convertToDomainObject(userEmail)))
+    	if (!userService.addNewUser(convertToDomainObject(userDto)))
     	{
     		return new ResponseEntity<String>("User already exists", HttpStatus.BAD_REQUEST);
     	}
     	
-    	return new ResponseEntity<UserDto>(userEmail, HttpStatus.CREATED);
+    	return new ResponseEntity<UserDto>(userDto, HttpStatus.CREATED);
     }
     
 
     /**
      * UPDATE
      * /users/ -> update user in DB
-     * @param userEmail
+     * @param userDto
      * @return
      */
     @PutMapping("")
-    public ResponseEntity<?> updateUser(@RequestBody UserDto userEmail) {
-        if (userEmail == null || !isValidUser(userEmail)) {
+    public ResponseEntity<?> updateUser(@RequestBody UserDto userDto) {
+        if (userDto == null || !isValidUser(userDto)) {
             return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
         }
         
-        System.out.println("USER: " + userEmail.toString());
+        System.out.println("USER: " + userDto.toString());
         
-        if (!userService.updateUser(convertToDomainObject(userEmail)))
+        if (!userService.updateUser(convertToDomainObject(userDto)))
         {
             return new ResponseEntity<String>("User does not exist", HttpStatus.BAD_REQUEST);
         }
         
-        return new ResponseEntity<UserDto>(userEmail, HttpStatus.OK);
+        return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
     }
 
 

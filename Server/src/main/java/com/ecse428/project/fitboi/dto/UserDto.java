@@ -12,6 +12,10 @@ public class UserDto {
     private boolean sex;
     private int height;
 
+    public UserDto() {
+
+    }
+
     public UserDto(String email, String name, String userName, String password, int age, boolean sex, int height) {
         this.email = email;
         this.setName(name);

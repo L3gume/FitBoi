@@ -36,7 +36,7 @@ public class GoalController {
 
     /**
      * GET
-     * /users/{user_id}/ -> returns a specific user given their userId (email for now)
+     * /users/{userEmail}/goals -> returns all the goals for a user
      * @param userEmail
      * @return
      */
@@ -48,14 +48,7 @@ public class GoalController {
 
         for(Goal goal : goals)
         {
-            goalDtos.add(new GoalDto(
-                goal.getBaseCalories(),
-                goal.isResult(),
-                goal.getStartDate(),
-                goal.getWeight(),
-                goal.getActivityLevel(),
-                goal.getMacroDistribution()
-            ));
+            goalDtos.add(convertToDto(goal));
         }
 
     	return new ResponseEntity<List<GoalDto>>(goalDtos, HttpStatus.OK);
@@ -67,14 +60,32 @@ public class GoalController {
      * @param userEmail
      * @return
      */
-    @PostMapping("{userId}/goals")
-    public ResponseEntity<?> createGoal(@PathVariable("userId") String userEmail, @RequestBody ObjectNode objectNode) {
+    @PostMapping("{userEmail}/goals")
+    public ResponseEntity<?> createGoal(@PathVariable("userEmail") String userEmail, @RequestBody ObjectNode objectNode) {
     	if (objectNode == null) {
     		return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
-    	}
+        }
+        
         UserProfile user = userService.getUser(userEmail);
-        ActivityLevel activityLevel = ActivityLevel.valueOf(objectNode.get("activityLevel").asText());
-        MacroDistribution macroDistribution  = new MacroDistribution((float) objectNode.get("fats").asLong(), (float) objectNode.get("carbs").asLong(), (float) objectNode.get("proteins").asLong());
+        if (user == null) {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+
+        ActivityLevel activityLevel;
+        
+        float fats, carbs, proteins;
+        try {
+            activityLevel = ActivityLevel.valueOf(objectNode.get("activityLevel").asText());
+
+            fats = (float) objectNode.get("fats").asLong();
+            carbs = (float) objectNode.get("carbs").asLong();
+            proteins = (float) objectNode.get("proteins").asLong();
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("Activity Level invalid ('Low', 'Medium', 'High')", HttpStatus.NOT_FOUND);
+        } catch(NullPointerException e) {
+            return new ResponseEntity<>("The macro distribution is missing a field: ('fats', 'carbs', 'proteins')", HttpStatus.NOT_FOUND);
+        }
+        MacroDistribution macroDistribution  = new MacroDistribution(fats, carbs, proteins);
 
         int cal = objectNode.get("baseCalories").asInt();
         boolean result =  objectNode.get("result").asBoolean();
@@ -83,7 +94,7 @@ public class GoalController {
 
         GoalDto goal = new GoalDto(cal, result, Date.valueOf(objectNode.get("startDate").asText()), weight, activityLevel, macroDistribution);
        
-        
+        //TODO This method is not working
     	if (!goalService.addGoaltoUser(convertToDomainObject(goal), user))
     	{
     		return new ResponseEntity<String>("Goal already exists", HttpStatus.UNPROCESSABLE_ENTITY);
@@ -95,14 +106,14 @@ public class GoalController {
         /**
      * DELETE
      * /users/{user_id}/goals/{goalId} -> deletes a goal from the DB
-     * @param userId 
+     * @param userEmail 
      * @param goalId
      * @return
      */
-    @DeleteMapping("{userId}/goals/{goalId}")
-    public ResponseEntity<?> deleteGoal(@PathVariable String userId, @PathVariable int goalId) {
+    @DeleteMapping("{userEmail}/goals/{goalId}")
+    public ResponseEntity<?> deleteGoal(@PathVariable String userEmail, @PathVariable int goalId) {
     	
-    	Goal deletedGoal = goalService.deleteGoal(userId, goalId);
+    	Goal deletedGoal = goalService.deleteGoal(userEmail, goalId);
 
     	if (deletedGoal == null) {
     		return new ResponseEntity<String>("Goal does not exist", HttpStatus.NOT_FOUND);
