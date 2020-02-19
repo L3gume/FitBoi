@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-FitboiApplication<Server>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.ecse428.project.fitboi.FitboiApplication",
+            "projectName": "Server",
+            "args": ""
+        }
+    ]
+}
