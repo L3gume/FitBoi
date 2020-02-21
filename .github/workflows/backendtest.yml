@@ -23,7 +23,10 @@ jobs:
           EOF
           source /etc/profile.d/jdk13.sh
     - name: change dir
-      run: cd Server/
+      # Also make gradlew an executable in case someone did something dumb
+      run: |
+        cd Server/
+        chmod +x ./gradlew
     - name: build server
       run: ./gradlew build
     - name: Heroku Deploy
