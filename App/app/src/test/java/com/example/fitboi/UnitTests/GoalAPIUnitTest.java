@@ -58,7 +58,7 @@ public class GoalAPIUnitTest {
         goal = new GoalDto(2000, false, "02-02-2020", 76.8, "high", 10, 20, 30);
         PowerMockito.mockStatic(GoalAPI.class);
         PowerMockito.doNothing().when(GoalAPI.class);
-        GoalAPI.addNewGoal("test@gmail.com", goal, goalAddFunction);
+        GoalAPI.addUserGoal("test@gmail.com", goal, goalAddFunction);
     }
 
     @Test
@@ -66,7 +66,7 @@ public class GoalAPIUnitTest {
         String goalID = "12345";
         PowerMockito.mockStatic(GoalAPI.class);
         PowerMockito.doNothing().when(GoalAPI.class);
-        GoalAPI.deleteGoal(goalID, goalDeleteFunction);
+        GoalAPI.deleteUserGoal(goalID, goalDeleteFunction);
     }
 
     @Test

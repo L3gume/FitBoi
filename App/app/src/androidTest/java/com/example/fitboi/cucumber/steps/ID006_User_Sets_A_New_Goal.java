@@ -9,6 +9,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 @RunWith(Cucumber.class)
@@ -22,12 +23,7 @@ public class ID006_User_Sets_A_New_Goal {
     @Then("the User adds a goal to their profile")
     public void the_user_adds_a_goal_to_their_profile() {
         GoalDto goalDto = new GoalDto(10, true, "12-12-2019", 12, "High", 20, 30, 40);
-        Consumer addGoalConfirmation = new Consumer<GoalDto>() {
-            @Override
-            public void accept(GoalDto goal) {
-            }
-        };
-        GoalAPI.addNewGoal("boaty@mcboatface.ca", goalDto, addGoalConfirmation);
+        GoalAPI.addUserGoal("boaty@mcboatface.ca", goalDto, null);
         assert true;
     }
 
@@ -48,13 +44,8 @@ public class ID006_User_Sets_A_New_Goal {
 
     @And("there is a goal currently in progress")
     public void there_is_a_goal_currently_in_progress() {
-        Consumer getGoal = new Consumer<GoalDto>() {
-            @Override
-            public void accept(GoalDto goal) {
-            }
-        };
-        GoalAPI.getUserGoals("boaty@mcboatface.ca",getGoal);
-        assert true;
+        List<GoalDto> goals = GoalAPI.getUserGoals("boaty@mcboatface.ca",null);
+        assert (!goals.isEmpty());
     }
 
     @And("the User has entered a custom goal")

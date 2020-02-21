@@ -3,81 +3,142 @@ package com.example.fitboi.api;
 import androidx.annotation.NonNull;
 
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.RequestFuture;
 import com.example.fitboi.dto.FoodItemDto;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
-
-import static java.lang.Boolean.TRUE;
 
 public class FoodItemAPI {
 
     /**
      * Get a list of all food items
-     * path :    /foodItems
+     * path:    /foodItems
+     * type:    GET
      *
-     * Example of how to use:
+     * Example of how to use asynchronously:
      * List listOfFoodItems;
-     * Consumer addAllUsersToList = new Consumer<List<FoodItemDto>> fn) {
+     * Consumer addAllFoodItemsToList = new Consumer<List<FoodItemDto>>() {
      *   @Override
      *   public void accept(List<FoodItemDto> foodItems) {
      *     listOfFoodItems.addAll(foodItems);
      *   }
      * };
-     * FoodAPI.getAllUsers(addAllFoodItemsToList);
+     * FoodAPI.getFoodItems(addAllFoodItemsToList);
      *
+     * Example of how to use synchronously:
+     * List<FoodItemDto> foods = FoodItemAPI.getFoodItems(null);
      *
-     * @param fn will map the response to the food item list
+     * @param fn to be called by response, if null wait for response and return it directly
     **/
-    public static void getAllFoodItems(Consumer<List<FoodItemDto>> fn) {
-        RequestQueue queue = MyVolley.getRequestQueue();
+    public static List<FoodItemDto> getFoodItems(Consumer<List<FoodItemDto>> fn) {
+        RequestFuture<JSONArray> future = RequestFuture.newFuture();
+        Response.Listener<JSONArray> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = foodItemListCallSuccessListener(fn);
+            errorListener = foodItemListCallErrorListener(fn);
+        }
+
         JsonArrayRequest request = new JsonArrayRequest(
                 MyVolley.serverUrl+MyVolley.foodItemPostfix,
-                foodItemListCallSuccessListener(fn),
-                foodItemListCallErrorListener(fn)
+                successListener,
+                errorListener
         );
-        queue.add(request);
+
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+
+        if (fn == null) {
+            try {
+                List<FoodItemDto> foods = null;
+                JSONArray result = future.get(10, TimeUnit.SECONDS);
+                for (int i=0; i<result.length(); i++) {
+                    foods.add(jsonToFoodItemDto(result.optJSONObject(i)));
+                }
+
+                return foods;
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
     }
 
-
     /**
-     * Get a specific food items
-     * path:     /foodItems/{foodItem}
+     * Get food items that start with given foodPrefix
+     * path:    /foodItems/{foodItem}
+     * type:    GET
      *
-     * Example of how to use:
+     * Example of how to use asynchronously:
      * FoodItemDto foodItem;
-     * Consumer addAllUsersToList = new Consumer(<FoodItemDto> fn) {
+     * Consumer addFoundFoodItemsToList = new Consumer(<FoodItemDto> fn) {
      *   @Override
      *   public void accept(FoodItemDto foodItemDTO) {
      *      foodItem = foodItemDTO;
      *   }
      * };
      *
-     * FoodAPI.getFoodItem(foodItem, "Chicken");
+     * FoodAPI.getFoodItemsByPrefix("Chicken",addFoundFoodItemsToList);
      *
+     * Example of how to use synchronously:
+     * List<FoodDto> food = FoodItemAPI.getFoodItemsByPrefix("banana", null);
      *
-     * @param fn will map the response to food item
+     * @param foodPrefix String: prefix of foods to be returned (i.e. "ban" will return Banana food item as part of list)
+     * @param fn to be called by response, if null wait for response and return it directly
      **/
-    public static void getFoodItem(Consumer<FoodItemDto> fn, String foodItem) {
-        RequestQueue queue = MyVolley.getRequestQueue();
-        JsonObjectRequest request = new JsonObjectRequest(
-                MyVolley.serverUrl+MyVolley.foodItemPostfix+foodItem+"/",
-                null,
-                foodItemCallSuccessListener(fn),
-                foodItemCallErrorListener(fn)
+    public static List<FoodItemDto> getFoodItemsByPrefix(String foodPrefix, Consumer<List<FoodItemDto>> fn) {
+        RequestFuture<JSONArray> future = RequestFuture.newFuture();
+        Response.Listener<JSONArray> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = foodItemListCallSuccessListener(fn);
+            errorListener = foodItemListCallErrorListener(fn);
+        }
+
+        JsonArrayRequest request = new JsonArrayRequest(
+                MyVolley.serverUrl+MyVolley.foodItemPostfix+foodPrefix+"/",
+                successListener,
+                errorListener
         );
-        request.setRetryPolicy(new DefaultRetryPolicy(0, 0, 0));
-        queue.add(request);
+
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+        if (fn == null) {
+            try {
+                List<FoodItemDto> foods = null;
+                JSONArray result = future.get(10, TimeUnit.SECONDS);
+                for (int i=0; i<result.length(); i++) {
+                    foods.add(jsonToFoodItemDto(result.optJSONObject(i)));
+                }
+
+                return foods;
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
     }
 
+    // TODO: write
+    public static FoodItemDto addFoodItemToUser(String foodName, String userId, Consumer<FoodItemDto> fn) {
+        return null;
+    }
 
     // Success Listeners
 

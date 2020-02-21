@@ -52,13 +52,13 @@ public class FoodItemAPIUnitTest {
     public void getAllOfTheItems() {
         PowerMockito.mockStatic(FoodItemAPI.class);
         PowerMockito.doNothing().when(FoodItemAPI.class);
-        FoodItemAPI.getAllFoodItems(foodItemListFunction);
+        FoodItemAPI.getFoodItems(foodItemListFunction);
     }
 
     @Test
     public void getSpecificItem() {
         PowerMockito.mockStatic(FoodItemAPI.class);
         PowerMockito.doNothing().when(FoodItemAPI.class);
-        FoodItemAPI.getFoodItem(foodItemFunction, desiredFood);
+        FoodItemAPI.getFoodItemsByPrefix(desiredFood, foodItemListFunction);
     }
 }
