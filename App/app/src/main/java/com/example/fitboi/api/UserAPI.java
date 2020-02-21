@@ -1,15 +1,11 @@
 package com.example.fitboi.api;
 
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
-import com.example.fitboi.data.Result;
-import com.example.fitboi.data.model.LoggedInUser;
 import com.example.fitboi.dto.UserDto;
 
 import org.json.JSONArray;
@@ -19,109 +15,175 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-import static java.lang.Boolean.*;
-
 public class UserAPI {
-
-    // debug stuff
-    static final String ip_localhost = "127.0.0.1:8080";
-    static final String ip_dev_machine = "10.0.2.2:8080";
-    static final boolean usingEmulator = true;
-    static final String userUrl = "http://"+(usingEmulator ? ip_dev_machine : ip_localhost) + "/users/";
 
     /********** PUBLIC METHODS **********/
 
     /**
-     * Example of how to use:
-     * Consumer addUserConfirmation = new Consumer<UserDto> fn) {
+     * Add new user to backend
+     * path:    /users/
+     * type:    POST
+     *
+     * Example of how to use asynchronously:
+     * Consumer addUserConfirmation = new Consumer<UserDto>() {
      *   @Override
      *   public void accept(UserDto user) {
      *     if (user.email == userDto.email) {
-     *         Message.setText("User Added!");
+     *         String message = "User Added!";
      *     }
      *   }
      * };
      * UserAPI.addNewUser(userDto, addUserConfirmation);
-     * @param userToAdd
-     * @param fn
+     *
+     * Example of how to use synchronously:
+     * UserDto userToAdd = new UserDto()
+     * UserDto userAdded = UserAPI.addNewUser(userToAdd, null);
+     *
+     * @param userToAdd UserDto of user to be added
+     * @param fn to be called by response, if null wait for response and return it directly
      */
-    public static void addNewUser(UserDto userToAdd, Consumer<UserDto> fn) {
-        RequestQueue queue = MyVolley.getRequestQueue();
+    public static UserDto addUser(UserDto userToAdd, Consumer<UserDto> fn) {
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        Response.Listener<JSONObject> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = userCallSuccessListener(fn);
+            errorListener = userCallErrorListener(fn);
+        }
+
         JsonObjectRequest request = new JsonObjectRequest(
                 MyVolley.serverUrl+MyVolley.userPostfix,
                 userDtoToJson(userToAdd),
-                userCallSuccessListener(fn),
-                userCallErrorListener(fn)
+                successListener,
+                errorListener
         );
-        queue.add(request);
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+
+        if (fn == null) {
+            try {
+                return jsonToUserDto(future.get(10, TimeUnit.SECONDS));
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
     }
 
     /**
-     * Example of how to use:
-     * Consumer addAllUsersToList = new Consumer<List<UserDto>> fn) {
+     * Get list of all users in system
+     * path:    /users/
+     * type:    GET
+     *
+     * Example of how to use asynchronously:
+     * Consumer addAllUsersToList = new Consumer<List<UserDto>>() {
      *   @Override
      *   public void accept(List<UserDto> users) {
      *     ListObject.add(users);
      *   }
      * };
      * UserAPI.getAllUsers(addAllUsersToList);
-     * @param fn to be called by response
+     *
+     * Example of how to use synchronously:
+     * List<UserDto> users = UserAPI.getAllUsers(null);
+     *
+     * @param fn to be called by response, if null wait for response and return it directly
      */
-    public static void getAllUsers(Consumer<List<UserDto>> fn) {
-        RequestQueue queue = MyVolley.getRequestQueue();
+    public static List<UserDto> getUsers(Consumer<List<UserDto>> fn) {
+        RequestFuture<JSONArray> future = RequestFuture.newFuture();
+        Response.Listener<JSONArray> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = userListCallSuccessListener(fn);
+            errorListener = userListCallErrorListener(fn);
+        }
+
         JsonArrayRequest request = new JsonArrayRequest(
                 MyVolley.serverUrl+MyVolley.userPostfix,
-                userListCallSuccessListener(fn),
-                userListCallErrorListener(fn)
+                successListener,
+                errorListener
         );
-        queue.add(request);
+
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+
+        if (fn == null) {
+            try {
+                List<UserDto> users = null;
+                JSONArray result = future.get(10, TimeUnit.SECONDS);
+                for (int i=0; i<result.length(); i++) {
+                    users.add(jsonToUserDto(result.optJSONObject(i)));
+                }
+
+                return users;
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
     }
 
     /**
-     * Example of how to use:
-     * Consumer addUserEmailToList = new Consumer<UserDto>() {
+     * Get user object from email and password
+     * path:    /users/{userEmail}/{userPassword}/
+     * type:    GET
+     *
+     * Example of how to use asynchronously:
+     * Consumer loginUser = new Consumer<UserDto>() {
      *   @Override
      *   public void accept(UserDto user) {
-     *       TextBox.add(user.age);
+     *       String message = "user logged in";
      *   }
      * };
-     * UserAPI.getUserByLoginInfo(addUserEmailToList, emailText);
-     * @param fn to be called by response
+     * UserAPI.getUserByLoginInfo("test@gmail.com", "123", loginUser);
+     *
+     * Example of how to use synchronously:
+     * UserDto user = UserAPI.getUserByLoginInfo("test@gmail.com", "123", null);
+     *
+     * @param email String: email of user to be logged in
+     * @param password: String: password of user to be logged in
+     * @param fn to be called by response, if null wait for response and return it directly
      */
-    public static void getUserByLoginInfo(Consumer<UserDto> fn, String email) {
-        RequestQueue queue = MyVolley.getRequestQueue();
-        JsonObjectRequest request = new JsonObjectRequest(
-                MyVolley.serverUrl+MyVolley.userPostfix+email+"/",
-                null,
-                userCallSuccessListener(fn),
-                userCallErrorListener(fn)
-        );
-        request.setRetryPolicy(new DefaultRetryPolicy(0, 0, 0));
-        queue.add(request);
-    }
-    
-    /**
-     * Synchronous call to authenticate user
-     * @param username user's username
-     * @param password user's password
-     * @return UserDto is successful, null if not
-     */
-    public static UserDto loginUser(String username, String password) {
+    public static UserDto getUserByLogin(String email, String password, Consumer<UserDto> fn) {
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
-        JsonObjectRequest req = new JsonObjectRequest(
-                Request.Method.GET,
-                userUrl+username+"/"+password+"/",
-                null,
-                future,
-                future
-        );
-        req.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
-        MyVolley.getRequestQueue().add(req);
-        try {
-            return jsonToUserDto(future.get(10, TimeUnit.SECONDS));
-        } catch (Exception e) {
-            return null;
+        Response.Listener<JSONObject> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = userCallSuccessListener(fn);
+            errorListener = userCallErrorListener(fn);
         }
+
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                MyVolley.serverUrl + MyVolley.userPostfix + email + "/" + password + "/",
+                null,
+                successListener,
+                errorListener
+        );
+
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+
+        if (fn == null) {
+            try {
+                return jsonToUserDto(future.get(10, TimeUnit.SECONDS));
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
     }
 
     /********** PRIVATE METHODS **********/

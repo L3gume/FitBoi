@@ -57,22 +57,23 @@ public class UserAPIUnitTest {
         user = new UserDto("test@gmail.com", "Test", "test123", "123", 21, 21, true);
         PowerMockito.mockStatic(UserAPI.class);
         PowerMockito.doNothing().when(UserAPI.class);
-        UserAPI.addNewUser(user, userAddFunction);
+        UserAPI.addUser(user, userAddFunction);
     }
 
     @Test
     public void getUserByLoginInfo() {
         String username = "hello";
+        String password = "password";
         PowerMockito.mockStatic(UserAPI.class);
         PowerMockito.doNothing().when(UserAPI.class);
-        UserAPI.getUserByLoginInfo(userGetFunction, username);
+        UserAPI.getUserByLogin(username, password, userGetFunction);
     }
 
     @Test
     public void getAllUsers() {
         PowerMockito.mockStatic(UserAPI.class);
         PowerMockito.doNothing().when(UserAPI.class);
-        UserAPI.getAllUsers(userGetListFunction);
+        UserAPI.getUsers(userGetListFunction);
     }
 }
 

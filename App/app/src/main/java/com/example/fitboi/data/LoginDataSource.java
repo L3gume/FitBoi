@@ -18,16 +18,7 @@ public class LoginDataSource {
     public Result<LoggedInUser> login(final String username, final String password) {
 
         try {
-            //final ArrayList<LoggedInUser> res = new ArrayList<>();
-            //Consumer<UserDto> loginUser = new Consumer<UserDto>() {
-            //    @Override
-            //    public void accept(UserDto userDto) {
-            //        res.add(userDto != null ? new LoggedInUser(userDto.getEmail(), username) : null);
-            //    }
-            //};
-            // Authentication happens on the server side
-            UserDto ret = UserAPI.loginUser(username, password);
-            //while (res.size() < 1);
+            UserDto ret = UserAPI.getUserByLogin(username, password, null);
             if (ret != null)
                 return new Result.Success<>(ret);
             else
