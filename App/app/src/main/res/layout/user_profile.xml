@@ -107,10 +107,11 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/profile_info_btn"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:paddingHorizontal="20dp"
-            android:background="@drawable/button_full_transparent"
+            android:background="@drawable/btn_select"
             android:drawableRight="@drawable/arrow_right_white"
             android:drawableLeft="@drawable/profile_info_icon"
             android:shadowColor="@color/textBlack"
@@ -121,15 +122,14 @@
             android:shadowDx="true"
             android:textSize="9pt"
             android:textStyle="bold"
-            android:textColor="@color/textWhite">
-
-        </Button>
+            android:textColor="@color/textWhite"/>
 
         <Button
+            android:id="@+id/goals_btn"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:paddingHorizontal="20dp"
-            android:background="@drawable/button_full_transparent"
+            android:background="@drawable/btn_select"
             android:drawableRight="@drawable/arrow_right_white"
             android:drawableLeft="@drawable/goal_icon"
             android:shadowColor="@color/textBlack"
@@ -144,16 +144,17 @@
             android:textColor="@color/textWhite"/>
 
         <Button
+            android:id="@+id/user_settings_btn"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:paddingHorizontal="20dp"
-            android:background="@drawable/button_full_transparent"
+            android:background="@drawable/btn_select"
             android:drawableRight="@drawable/arrow_right_white"
             android:drawableLeft="@drawable/goal_icon"
             android:shadowColor="@color/textBlack"
             android:elevation="5dp"
             android:textAlignment="center"
-            android:text="View Goals"
+            android:text="User Settings"
             android:textAllCaps="false"
             android:shadowRadius="2dp"
             android:outlineSpotShadowColor="@color/textBlack"

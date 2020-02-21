@@ -12,13 +12,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 public class UserProfileActivity extends AppCompatActivity {
-    private static final String LOG_TAG = MainPageActivity.class.getSimpleName();
+    private static final String LOG_TAG = UserProfileActivity.class.getSimpleName();
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_profile);
+
+
 
         uiSetup();
     }
@@ -29,12 +31,14 @@ public class UserProfileActivity extends AppCompatActivity {
 
     }
 
-    private void launchMainPageActivity() {
-        Intent intent = new Intent(this, MainPageActivity.class);
-//        EditText editText = (EditText) findViewById(R.id.editText);
-//        String message = editText.getText().toString();
-//        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
-    }
+//    private void launchUserGoalsActivity() {
+//        Intent intent = new Intent(this, UserProfileActivity.class);
+//        startActivity(intent);
+//    }
+
+//    private void launchUserGoalsActivity() {
+//        Intent intent = new Intent(this, UserProfileActivity.class);
+//        startActivity(intent);
+//    }
 
 }
