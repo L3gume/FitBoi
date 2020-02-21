@@ -119,7 +119,6 @@
             android:elevation="30dp"
             android:textAllCaps="false"
             android:text="Profile Information"
-            android:shadowDx="true"
             android:textSize="9pt"
             android:textStyle="bold"
             android:textColor="@color/textWhite"/>
@@ -137,7 +136,6 @@
             android:textAlignment="center"
             android:text="View Goals"
             android:textAllCaps="false"
-            android:shadowRadius="2dp"
             android:outlineSpotShadowColor="@color/textBlack"
             android:textSize="9pt"
             android:textStyle="bold"
@@ -156,7 +154,6 @@
             android:textAlignment="center"
             android:text="User Settings"
             android:textAllCaps="false"
-            android:shadowRadius="2dp"
             android:outlineSpotShadowColor="@color/textBlack"
             android:textSize="9pt"
             android:textStyle="bold"
