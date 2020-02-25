@@ -137,7 +137,7 @@ public class UserController {
     			user.getName(),
     			user.getUserName(),
     			user.getPassword(),
-    			user.getAge(),
+    			user.getDOB(),
 				user.getBiologicalSex(),
 				user.getHeight()
     			);
@@ -150,7 +150,7 @@ public class UserController {
 				userDto.getName(),
 				userDto.getUserName(),
 				userDto.getPassword(),
-				userDto.getAge(),
+				userDto.getDOB(),
 				userDto.getHeight(),
 				userDto.getSex()
 				);
@@ -158,7 +158,7 @@ public class UserController {
     }
 
     private boolean isValidUser(UserDto user){
-        return user.getEmail().contains(("@")) && user.getAge() > 0 && user.getHeight() > 0;
+        return user.getEmail().contains(("@")) && user.getHeight() > 0;
     }
 
 }

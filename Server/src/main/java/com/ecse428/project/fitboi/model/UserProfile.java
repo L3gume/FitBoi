@@ -290,6 +290,16 @@ public class UserProfile {
 		}
 	}
 
+	public boolean removeGoal(){
+		if (this.goal == null){
+			return false;
+		} 
+		else {
+			this.goal = null;
+			return true;
+		}
+	}
+
 	/* Code from template association_AddIndexControlFunctions */
 	public boolean addWeightAt(Weight aWeight, int index) {
 		boolean wasAdded = false;
