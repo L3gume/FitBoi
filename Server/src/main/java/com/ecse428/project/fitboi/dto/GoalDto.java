@@ -2,6 +2,7 @@ package com.ecse428.project.fitboi.dto;
 
 import java.sql.Date;
 import com.ecse428.project.fitboi.model.ActivityLevel;
+import com.ecse428.project.fitboi.model.GoalType;
 import com.ecse428.project.fitboi.model.MacroDistribution;;
 
 
@@ -10,21 +11,25 @@ public class GoalDto {
     private int baseCalories;
     private boolean result;
     private Date startDate;
-    private float weight;
+    private Date endDate;
+    private float weightGoal;
     
     private ActivityLevel activityLevel;
+    private GoalType goalType;
     private MacroDistribution macroDistribution;
 
     public GoalDto(){
 
     }
 
-    public GoalDto(int baseCalories, boolean result, Date startDate, float weight, ActivityLevel activityLevel, MacroDistribution macroDistribution){
+    public GoalDto(int baseCalories, boolean result, Date startDate, Date endDate, float weightGoal, ActivityLevel activityLevel, GoalType goalType, MacroDistribution macroDistribution){
         this.baseCalories = baseCalories;
         this.result = result;
         this.startDate = startDate;
-        this.weight = weight;
+        this.endDate = endDate;
+        this.weightGoal = weightGoal;
         this.activityLevel = activityLevel;
+        this.goalType = goalType;
         this.macroDistribution = macroDistribution;
     }
 
@@ -51,13 +56,21 @@ public class GoalDto {
     public void setStartDate(Date startDate){
         this.startDate = startDate;
     }
+
+    public Date getEndDate(){
+        return this.endDate;
+    }
+  
+    public void setEndDate(Date endDate){
+        this.endDate = endDate;
+    }
     
-    public float getWeight(){
-        return this.weight;
+    public float getWeightGoal(){
+        return this.weightGoal;
     }
 
-    public void setWeight(float weight){
-        this.weight = weight;
+    public void setWeightGoal(float weightGoal){
+        this.weightGoal = weightGoal;
     }
 
     public ActivityLevel getActivityLevel() {
@@ -66,6 +79,14 @@ public class GoalDto {
 
     public void setActivityLevel(ActivityLevel activityLevel){
         this.activityLevel = activityLevel;
+    }
+
+    public GoalType getGoalType() {
+        return this.goalType;
+    }
+
+    public void setGoalType(GoalType goalType){
+        this.goalType = goalType;
     }
 
     public MacroDistribution getMacroDistribution(){
