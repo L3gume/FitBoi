@@ -7,9 +7,6 @@ package com.ecse428.project.fitboi.model;
 import java.util.*;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -398,9 +395,9 @@ public class UserProfile {
 	}
 
 	/* Code from template association_AddManyToOne */
-	public Goal addGoal(int aBaseCalories, boolean aResult, Date aStartDate, float aWeight,
-			ActivityLevel aActivityLevel, MacroDistribution aMacroDistribution) {
-		return new Goal(aBaseCalories, aResult, aStartDate, aWeight, aActivityLevel, aMacroDistribution);
+	public Goal setGoal(int aBaseCalories, boolean aResult, Date aStartDate, Date aEndDate, float aWeightGoal,
+			ActivityLevel aActivityLevel, GoalType aGoalType, MacroDistribution aMacroDistribution) {
+		return new Goal(aBaseCalories, aResult, aStartDate, aEndDate, aWeightGoal, aActivityLevel, aGoalType, aMacroDistribution);
 	}
 
 
