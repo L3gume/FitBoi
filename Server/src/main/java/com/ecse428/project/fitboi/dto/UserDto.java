@@ -1,9 +1,7 @@
 package com.ecse428.project.fitboi.dto;
 
-import java.sql.Date;
 import java.util.Objects;
 
-import com.ecse428.project.fitboi.model.Sex;
 
 public class UserDto {
 
