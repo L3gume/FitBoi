@@ -110,7 +110,7 @@ public class GoalController {
      * @return
      */
     @DeleteMapping("{userEmail}/goal")
-    public ResponseEntity<?> deleteGoal(@PathVariable String userEmail, @PathVariable int goalId) {
+    public ResponseEntity<?> deleteGoal(@PathVariable String userEmail) {
     	
     	Goal deletedGoal = goalService.deleteGoal(userEmail);
 
