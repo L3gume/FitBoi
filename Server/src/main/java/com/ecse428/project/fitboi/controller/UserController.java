@@ -1,5 +1,8 @@
 package com.ecse428.project.fitboi.controller;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecse428.project.fitboi.dto.*;
+import com.ecse428.project.fitboi.model.Sex;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.UserService;
 
@@ -79,7 +83,8 @@ public class UserController {
     		return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
     	}
     	
-    	System.out.println("USER: " + userDto.toString());
+        System.out.println("USER: " + userDto.toString());
+       
     	
     	if (!userService.addNewUser(convertToDomainObject(userDto)))
     	{
@@ -132,13 +137,15 @@ public class UserController {
    // TODO: Add PATCH call
     
     private UserDto convertToDto(UserProfile user) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+ 
     	return new UserDto(
     			user.getEmail(),
     			user.getName(),
     			user.getUserName(),
     			user.getPassword(),
-    			user.getDOB(),
-				user.getBiologicalSex(),
+    			df.format(user.getDOB()),
+				user.getBiologicalSex().name(),
 				user.getHeight()
     			);
     }
@@ -150,9 +157,9 @@ public class UserController {
 				userDto.getName(),
 				userDto.getUserName(),
 				userDto.getPassword(),
-				userDto.getDOB(),
-				userDto.getHeight(),
-				userDto.getSex()
+				Date.valueOf(userDto.getDOB()),
+                userDto.getHeight(),
+                Sex.valueOf(userDto.getSex())
 				);
 		return profile;
     }

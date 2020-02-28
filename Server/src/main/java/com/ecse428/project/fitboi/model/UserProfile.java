@@ -118,7 +118,7 @@ public class UserProfile {
 		return wasSet;
 	}
 
-	public boolean setAge(Date adOB) {
+	public boolean setDOB(Date adOB) {
 		boolean wasSet = false;
 		dOB = adOB;
 		wasSet = true;

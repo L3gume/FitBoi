@@ -11,15 +11,15 @@ public class UserDto {
     private String name;
     private String userName;
 	private String password;
-    private Date dOB;
+    private String dOB;
     private int height;
-    private Sex sex;
+    private String sex;
 
     public UserDto() {
 
     }
 
-    public UserDto(String email, String name, String userName, String password, Date dOB, Sex sex, int height) {
+    public UserDto(String email, String name, String userName, String password, String dOB, String sex, int height) {
         this.email = email;
         this.setName(name);
         this.setUserName(userName);
@@ -37,19 +37,19 @@ public class UserDto {
         this.email = email;
     }
 
-    public Date getDOB() {
+    public String getDOB() {
         return this.dOB;
     }
 
-    public void setDOB(Date dOB) {
+    public void setDOB(String dOB) {
         this.dOB = dOB;
     }
 
-    public Sex getSex() {
+    public String getSex() {
         return this.sex;
     }
 
-    public void setSex(Sex sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -66,12 +66,12 @@ public class UserDto {
         return this;
     }
 
-    public UserDto dOB(Date dOB) {
+    public UserDto dOB(String dOB) {
         this.dOB = dOB;
         return this;
     }
 
-    public UserDto sex(Sex sex) {
+    public UserDto sex(String sex) {
         this.sex = sex;
         return this;
     }
@@ -103,7 +103,9 @@ public class UserDto {
     public String toString() {
         return "{" +
             " email='" + getEmail() + "'" +
-            ", age='" + getDOB() + "'" +
+            " name='" + getName() + "'" +
+            " userName='" + getUserName() + "'" +
+            ", dOB='" + getDOB() + "'" +
             ", sex='" + getSex() + "'" +
             ", height='" + getHeight() + "'" +
             "}";
