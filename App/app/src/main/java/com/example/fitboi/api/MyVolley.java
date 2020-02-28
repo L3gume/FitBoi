@@ -23,6 +23,7 @@ public class MyVolley {
     public static final String userPostfix = "/users/";
     public static final String goalPostfix = "/goals/";
     public static final String foodItemPostfix = "/foods/";
+    public static final String metricPostfix = "/metrics/";
 
     public static void init(Context context) {
         mRequestQueue = Volley.newRequestQueue(context);

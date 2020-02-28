@@ -21,6 +21,7 @@ public class ID001_User_Creates_New_Account {
     private Fitboi app;
     private UserDto user;
     private String email;
+    private String password;
 
     private static boolean isCreated;
 
@@ -44,16 +45,11 @@ public class ID001_User_Creates_New_Account {
     @Before
     public void init() {
         isCreated = false;
-        user = null;
-        email = "boatyyy@mcboatface.com";
+        email = "test@gmail.com";
+        password = "12345";
         app = mock(Fitboi.class);
         app.onCreate();
-        UserAPI.getUserByLoginInfo(new Consumer<UserDto>() {
-            @Override
-            public void accept(UserDto userDto) {
-                user = userDto;
-            }
-        }, email);
+        user = UserAPI.getUserByLogin(email, password, null);
     }
 
     @Given("the User is not currently a member of the the FitBoi application")
@@ -115,15 +111,8 @@ public class ID001_User_Creates_New_Account {
     public void request_create_profile_made() {
         // Write code here that turns the phrase above into concrete actions
   //      throw new io.cucumber.java.PendingException();
-        UserAPI.addNewUser(user, new Consumer<UserDto>() {
-            @Override
-            public void accept(UserDto userDto) {
-                if (userDto != null)
-                    isCreated = user.getEmail().equals(userDto.getEmail());
-                else
-                    isCreated = false;
-            }
-        });
+        UserDto userDto = UserAPI.addUser(user, null);
+        isCreated = (user != null && user.getEmail().equals(userDto.getEmail()));
     }
 
     @Then("a new User profile is created")

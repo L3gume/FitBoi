@@ -1,6 +1,7 @@
 package com.example.fitboi.api;
 
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -169,6 +170,64 @@ public class UserAPI {
         JsonObjectRequest request = new JsonObjectRequest(
                 MyVolley.serverUrl + MyVolley.userPostfix + email + "/" + password + "/",
                 null,
+                successListener,
+                errorListener
+        );
+
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+
+        if (fn == null) {
+            try {
+                return jsonToUserDto(future.get(10, TimeUnit.SECONDS));
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Update user object
+     * path:    /users/{userEmail}/{userPassword}/
+     * type:    GET
+     *
+     * Example of how to use asynchronously:
+     * UserDto userWithChange;
+     * Consumer modifyUserSettings = new Consumer<UserDto>() {
+     *   @Override
+     *   public void accept(UserDto user) {
+     *       String message = "user settings modified";
+     *   }
+     * };
+     * UserAPI.updateUser("test@gmail.com", userWithChange, modifyUserSettings);
+     *
+     * Example of how to use synchronously:
+     * UserDto userWithChange;
+     * UserDto user = UserAPI.updateUser("test@gmail.com", userWithChange, null);
+     *
+     * @param email String: email of user to be logged in
+     * @param newUserDto new information with which to update user
+     * @param fn to be called by response, if null wait for response and return it directly
+     */
+    public static UserDto updateUser(String email, UserDto newUserDto, Consumer<UserDto> fn) {
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        Response.Listener<JSONObject> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = userCallSuccessListener(fn);
+            errorListener = userCallErrorListener(fn);
+        }
+
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.PUT,
+                MyVolley.serverUrl+MyVolley.userPostfix,
+                userDtoToJson(newUserDto),
                 successListener,
                 errorListener
         );
