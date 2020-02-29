@@ -4,10 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import com.ecse428.project.fitboi.model.Goal;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.repository.UserRepository;
@@ -106,27 +102,10 @@ public class UserService {
 		return deletedUser;
 	}
 
-	public List<Goal> getUserGoals(String userEmail)
+	public Goal getUserGoal(String userEmail)
 	{
 		UserProfile user = getUser(userEmail);
-		return user.getGoals();
+		return user.getGoal();
 	}
 
-	public List<Goal> getUserGoalsInRange(String userEmail, Date start,
-		Date end)
-	{
-		List<Goal> goals = getUserGoals(userEmail);
-		List<Goal> valid_goals = new ArrayList<Goal>();
-
-		for(Goal goal : goals)
-		{
-			if((goal.getStartDate().after(start) && goal.getStartDate().before(end)) ||
-				goal.getStartDate().equals(start) || goal.getStartDate().equals(end))
-			{
-				valid_goals.add(goal);
-			}
-		}
-
-		return valid_goals;
-	}
 }

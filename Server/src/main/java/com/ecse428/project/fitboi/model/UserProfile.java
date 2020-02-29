@@ -7,12 +7,12 @@ package com.ecse428.project.fitboi.model;
 import java.util.*;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 import java.sql.Date;
 
@@ -29,48 +29,61 @@ public class UserProfile {
 	private String email;
 	private String name;
 
+	
+	private String userName;
+	private String password;
+	private Date dOB;
+	private int height;
+
+	
+	@Enumerated(EnumType.STRING)
+	private Sex biologicalSex;
+
+	// UserProfile Associations
+	private List<Weight> weights;
+	private List<Metrics> metrics;
+	private List<Footnote> footnotes;
+
+	@OneToOne(cascade={CascadeType.ALL})
+	private Goal goal;
+
 	public void setMetrics(List<Metrics> metrics) {
 		this.metrics = metrics;
 	}
-
-	private String userName;
-	private String password;
-	private int age;
-	private int height;
 
 	public void setWeights(List<Weight> weights) {
 		this.weights = weights;
 	}
 
-	private boolean biologicalSex;
+	public void setFootnotes(List<Footnote> footnotes){
+		this.footnotes = footnotes;
+	}
 
-	// UserProfile Associations
-	private List<Weight> weights;
-	private List<Metrics> metrics;
-	private List<Goal> goals;
 
 	// ------------------------
 	// CONSTRUCTOR
 	// ------------------------
 
-	public UserProfile(String aEmail, String aName, String aUserName, String aPassword, int aAge, int aHeight,
-			boolean aBiologicalSex) {
+	public UserProfile(String aEmail, String aName, String aUserName, String aPassword, Date adOB, int aHeight,
+			Sex aBiologicalSex) {
 		email = aEmail;
 		name = aName;
 		userName = aUserName;
 		password = aPassword;
-		age = aAge;
+		dOB = adOB;
 		height = aHeight;
 		biologicalSex = aBiologicalSex;
 		weights = new ArrayList<Weight>();
 		metrics = new ArrayList<Metrics>();
-		goals = new ArrayList<Goal>();
+		footnotes = new ArrayList<Footnote>();
+		goal = new Goal();
 	}
 	
 	public UserProfile() {
-		goals = new ArrayList<Goal>();
+		goal = new Goal();
 		weights = new ArrayList<Weight>();
 		metrics = new ArrayList<Metrics>();
+		footnotes = new ArrayList<Footnote>();
 	}
 
 	// ------------------------
@@ -105,9 +118,9 @@ public class UserProfile {
 		return wasSet;
 	}
 
-	public boolean setAge(int aAge) {
+	public boolean setDOB(Date adOB) {
 		boolean wasSet = false;
-		age = aAge;
+		dOB = adOB;
 		wasSet = true;
 		return wasSet;
 	}
@@ -119,15 +132,18 @@ public class UserProfile {
 		return wasSet;
 	}
 
-	public boolean setBiologicalSex(boolean aBiologicalSex) {
+	public boolean setBiologicalSex(Sex aBiologicalSex) {
 		boolean wasSet = false;
 		biologicalSex = aBiologicalSex;
 		wasSet = true;
 		return wasSet;
 	}
 
-	public void setGoals(List<Goal> goals) {
-		this.goals = goals;
+	public boolean setGoal(Goal goal) {
+		boolean wasSet = false;
+		this.goal = goal;
+		wasSet = true;
+		return wasSet;
 	}
 
 	@Id
@@ -147,16 +163,43 @@ public class UserProfile {
 		return password;
 	}
 
-	public int getAge() {
-		return age;
+	public Date getDOB() {
+		return dOB;
 	}
 
 	public int getHeight() {
 		return height;
 	}
 
-	public boolean getBiologicalSex() {
+	@Enumerated
+	public Sex getBiologicalSex() {
 		return biologicalSex;
+	}
+
+	/* Code from template association_GetMany */
+	public Footnote getFootnote(int index) {
+		Footnote aFootnote = footnotes.get(index);
+		return aFootnote;
+	}
+
+	@OneToMany(cascade = { CascadeType.ALL })
+	public List<Footnote> getFootnotes() {
+		return footnotes;
+	}
+
+	public int numberOfFootnotes() {
+		int number = footnotes.size();
+		return number;
+	}
+
+	public boolean hasFootnotes() {
+		boolean has = footnotes.size() > 0;
+		return has;
+	}
+
+	public int indexOfFootnote(Footnote aFootnote) {
+		int index = footnotes.indexOf(aFootnote);
+		return index;
 	}
 
 	/* Code from template association_GetMany */
@@ -211,31 +254,11 @@ public class UserProfile {
 		return index;
 	}
 
-	/* Code from template association_GetMany */
-	//@OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
-	public Goal getGoal(int index) {
-		Goal aGoal = goals.get(index);
-		return aGoal;
-	}
-
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
-	public List<Goal> getGoals() {
-		return goals;
-	}
-
-	public int numberOfGoals() {
-		int number = goals.size();
-		return number;
-	}
-
-	public boolean hasGoals() {
-		boolean has = goals.size() > 0;
-		return has;
-	}
-
-	public int indexOfGoal(Goal aGoal) {
-		int index = goals.indexOf(aGoal);
-		return index;
+	
+  	/* Code from template association_GetOne */
+	@OneToOne(cascade={CascadeType.ALL})
+	public Goal getGoal() {
+		return this.goal;
 	}
 
 	/* Code from template association_MinimumNumberOfMethod */
@@ -263,6 +286,16 @@ public class UserProfile {
 			return false;
 		} else {
 			weights.remove(aWeight);
+			return true;
+		}
+	}
+
+	public boolean removeGoal(){
+		if (this.goal == null){
+			return false;
+		} 
+		else {
+			this.goal = null;
 			return true;
 		}
 	}
@@ -372,78 +405,23 @@ public class UserProfile {
 	}
 
 	/* Code from template association_AddManyToOne */
-	public Goal addGoal(int aBaseCalories, boolean aResult, Date aStartDate, float aWeight,
-			ActivityLevel aActivityLevel, MacroDistribution aMacroDistribution) {
-		return new Goal(aBaseCalories, aResult, aStartDate, aWeight, aActivityLevel, aMacroDistribution);
+	public Goal setGoal(int aBaseCalories, boolean aResult, Date aStartDate, Date aEndDate, float aWeightGoal,
+			ActivityLevel aActivityLevel, GoalType aGoalType, MacroDistribution aMacroDistribution) {
+		return new Goal(aBaseCalories, aResult, aStartDate, aEndDate, aWeightGoal, aActivityLevel, aGoalType, aMacroDistribution);
 	}
 
-	public boolean addGoal(Goal aGoal) {
-		if (goals.contains(aGoal)) {
-			return false;
-		} else {
-			goals.add(aGoal);
-			return true;
-		}
-	}
-
-	public boolean removeGoal(Goal aGoal) {
-		if (!goals.contains(aGoal)) {
-			return false;
-		} else {
-			goals.remove(aGoal);
-			return true;
-		}
-	}
-
-	/* Code from template association_AddIndexControlFunctions */
-	public boolean addGoalAt(Goal aGoal, int index) {
-		boolean wasAdded = false;
-		if (addGoal(aGoal)) {
-			if (index < 0) {
-				index = 0;
-			}
-			if (index > numberOfGoals()) {
-				index = numberOfGoals() - 1;
-			}
-			goals.remove(aGoal);
-			goals.add(index, aGoal);
-			wasAdded = true;
-		}
-		return wasAdded;
-	}
-
-	public boolean addOrMoveGoalAt(Goal aGoal, int index) {
-		boolean wasAdded = false;
-		if (goals.contains(aGoal)) {
-			if (index < 0) {
-				index = 0;
-			}
-			if (index > numberOfGoals()) {
-				index = numberOfGoals() - 1;
-			}
-			goals.remove(aGoal);
-			goals.add(index, aGoal);
-			wasAdded = true;
-		} else {
-			wasAdded = addGoalAt(aGoal, index);
-		}
-		return wasAdded;
-	}
 
 	public void delete() {
 		for (int i = metrics.size(); i > 0; i--) {
 			Metrics aMetric = metrics.get(i - 1);
 			aMetric.delete();
 		}
-		for (int i = goals.size(); i > 0; i--) {
-			Goal aGoal = goals.get(i - 1);
-			aGoal.delete();
-		}
+		goal.delete();
 	}
 
 	public String toString() {
 		return super.toString() + "[" + "email" + ":" + getEmail() + "," + "name" + ":" + getName() + "," + "userName"
-				+ ":" + getUserName() + "," + "password" + ":" + getPassword() + "," + "age" + ":" + getAge() + ","
+				+ ":" + getUserName() + "," + "password" + ":" + getPassword() + "," + "age" + ":" + getDOB() + ","
 				+ "height" + ":" + getHeight() + "," + "biologicalSex" + ":" + getBiologicalSex() + "]";
 	}
 }

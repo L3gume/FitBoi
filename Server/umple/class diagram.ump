@@ -4,9 +4,9 @@ class UserProfile
     name;
   userName;
   password;
-  Integer age;
+  Date DOB;
   Integer height;
-  Boolean biologicalSex;
+  Sex biologicalSex;
   0..1 -> 1..* Weight;
 }
 
@@ -29,18 +29,24 @@ class Meal
  * <- 0..1 Metrics;
 }
 
-enum MealType {BreakFast, Lunch, Dinner}
+enum MealType {Breakfast, Lunch, Snack, Dinner, Custom}
 
-enum ActivityLevel{1,2,3,4,5}
+enum ActivityLevel{High, Medium, Low}
+
+enum GoalType {Maintain, Gain, Lose}
+
+enum Sex {Male, Female}
 
 class Goal
 {
   Integer baseCalories;
   Boolean result;
   Date startDate;
-  float weight;
+  float weightGoal;
   ActivityLevel activityLevel;
-  * <- 0..1 UserProfile;
+  Date endDate;
+GoalType goalType;
+0..1 <- 0..1 UserProfile;
   0..1 -> 1 MacroDistribution;
 }
 
@@ -62,49 +68,69 @@ class FoodItem
 
 
 
+
+
+class Footnote
+{
+  Date date;
+  note;
+  * <- 0..1 UserProfile;
+}
+
 //$?[End_of_model]$?
 
 namespace -;
 
-
-class Meal
-{
-  position 412 378 160 57;
-  position.association Meal__Metrics 0,2 202,7;
-}
-
-class UserProfile
-{
-  position 101 74 175 158;
-  position.association UserProfile__Weight 0,158 108,0;
-}
-
-class Weight
-{
-  position 9 288 109 74;
-}
-
 class Metrics
 {
-  position 135 370 201 74;
   position.association Metrics__UserProfile 30,0 22,158;
+  position 87 385 201 74;
 }
 
 class Goal
 {
-  position 312 75 202 125;
-  position.association Goal__UserProfile 0,26 175,16;
-  position.association Goal__MacroDistribution 202,73 0,45;
-}
-
-class MacroDistribution
-{
-  position 627 73 126 90;
+  position.association Goal__UserProfile 0,18 170,64;
+    position.association Goal__MacroDistribution 202,35 0,45;
+position 310 31 202 158;
 }
 
 class FoodItem
 {
-  position 610 280 139 90;
-  position.association FoodItem__MacroDistribution 137,0 0,90;
-  position.association FoodItem__Meal 0,35 160,35;
+  position.association FoodItem__MacroDistribution 138,0 0,90;
+    position.association FoodItem__Meal 0,10 160,12;
+position 607 374 139 90;
+}
+
+class MacroDistribution
+{
+  position 624 46 126 90;
+}
+
+class Meal
+{
+  position 367 389 160 57;
+  position.association Meal__Metrics 0,8 202,31;
+}
+
+class Weight
+{
+  position 131 246 109 74;
+}
+
+class UserProfile
+{
+  position.association UserProfile__Weight 73,158 30,0;
+  position 50 30 170 158;
+}
+
+class Footnote
+{
+  position 338 254 109 57;
+  position.association Footnote__Weight 0,10 110,10;
+  position.association Footnote__UserProfile 0,10 170,118;
+}
+
+class UserProfile
+{
+  position 50 30 170 158;
 }

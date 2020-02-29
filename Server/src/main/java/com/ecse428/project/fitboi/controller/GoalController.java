@@ -1,7 +1,5 @@
 package com.ecse428.project.fitboi.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ecse428.project.fitboi.dto.*;
 import com.ecse428.project.fitboi.model.ActivityLevel;
 import com.ecse428.project.fitboi.model.Goal;
+import com.ecse428.project.fitboi.model.GoalType;
 import com.ecse428.project.fitboi.model.MacroDistribution;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.GoalService;
@@ -40,18 +39,16 @@ public class GoalController {
      * @param userEmail
      * @return
      */
-    @GetMapping("{userEmail}/goals")
-    public ResponseEntity<List<GoalDto>> getUserGoals(@PathVariable String userEmail)
+    @GetMapping("{userEmail}/goal")
+    public ResponseEntity<GoalDto> getUserGoal(@PathVariable String userEmail)
     {
-        List<GoalDto> goalDtos = new ArrayList<GoalDto>();
-        List<Goal> goals = goalService.getUserGoals(userEmail);
+        GoalDto goalDto = new GoalDto();
+        Goal goal = goalService.getUserGoal(userEmail);
 
-        for(Goal goal : goals)
-        {
-            goalDtos.add(convertToDto(goal));
-        }
+        goalDto = convertToDto(goal);
+        
 
-    	return new ResponseEntity<List<GoalDto>>(goalDtos, HttpStatus.OK);
+    	return new ResponseEntity<GoalDto>(goalDto, HttpStatus.OK);
     }
 
         /**
@@ -60,7 +57,7 @@ public class GoalController {
      * @param userEmail
      * @return
      */
-    @PostMapping("{userEmail}/goals")
+    @PostMapping("{userEmail}/goal")
     public ResponseEntity<?> createGoal(@PathVariable("userEmail") String userEmail, @RequestBody ObjectNode objectNode) {
     	if (objectNode == null) {
     		return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
@@ -72,10 +69,12 @@ public class GoalController {
         }
 
         ActivityLevel activityLevel;
+        GoalType goalType;
         
         float fats, carbs, proteins;
         try {
             activityLevel = ActivityLevel.valueOf(objectNode.get("activityLevel").asText());
+            goalType = GoalType.valueOf(objectNode.get("goalType").asText());
 
             fats = (float) objectNode.get("fats").asLong();
             carbs = (float) objectNode.get("carbs").asLong();
@@ -90,14 +89,14 @@ public class GoalController {
         int cal = objectNode.get("baseCalories").asInt();
         boolean result =  objectNode.get("result").asBoolean();
       
-        float weight = objectNode.get("weight").asLong();
+        float weightGoal = objectNode.get("weightGoal").asLong();
 
-        GoalDto goal = new GoalDto(cal, result, Date.valueOf(objectNode.get("startDate").asText()), weight, activityLevel, macroDistribution);
+        GoalDto goal = new GoalDto(cal, result, Date.valueOf(objectNode.get("startDate").asText()), Date.valueOf(objectNode.get("endDate").asText()), weightGoal, activityLevel, goalType, macroDistribution);
        
-        //TODO This method is not working
-    	if (!goalService.addGoaltoUser(convertToDomainObject(goal), user))
+
+    	if (!goalService.setUserGoal(convertToDomainObject(goal), user))
     	{
-    		return new ResponseEntity<String>("Goal already exists", HttpStatus.UNPROCESSABLE_ENTITY);
+    		return new ResponseEntity<String>("Unable to set goal", HttpStatus.UNPROCESSABLE_ENTITY);
     	}
 
     	return new ResponseEntity<GoalDto>(goal, HttpStatus.CREATED);
@@ -110,10 +109,10 @@ public class GoalController {
      * @param goalId
      * @return
      */
-    @DeleteMapping("{userEmail}/goals/{goalId}")
-    public ResponseEntity<?> deleteGoal(@PathVariable String userEmail, @PathVariable int goalId) {
+    @DeleteMapping("{userEmail}/goal")
+    public ResponseEntity<?> deleteGoal(@PathVariable String userEmail) {
     	
-    	Goal deletedGoal = goalService.deleteGoal(userEmail, goalId);
+    	Goal deletedGoal = goalService.deleteGoal(userEmail);
 
     	if (deletedGoal == null) {
     		return new ResponseEntity<String>("Goal does not exist", HttpStatus.NOT_FOUND);
@@ -130,8 +129,10 @@ public class GoalController {
             goal.getBaseCalories(),
             goal.getResult(),
             goal.getStartDate(),
-            goal.getWeight(),
+            goal.getEndDate(),
+            goal.getWeightGoal(),
             goal.getActivityLevel(),
+            goal.getGoalType(),
             goal.getMacroDistribution()   			
     			);
     }
@@ -142,8 +143,10 @@ public class GoalController {
             goalDto.getBaseCalories(),
             goalDto.getResult(),
             goalDto.getStartDate(),
-            goalDto.getWeight(),
+            goalDto.getEndDate(),
+            goalDto.getWeightGoal(),
             goalDto.getActivityLevel(),
+            goalDto.getGoalType(),
             goalDto.getMacroDistribution()
                 );
                 
