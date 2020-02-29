@@ -16,7 +16,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.springframework.http.MediaType;
 
 import com.ecse428.project.fitboi.dto.UserDto;
-import com.ecse428.project.fitboi.model.Sex;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.repository.*;
 
