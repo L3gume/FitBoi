@@ -22,7 +22,6 @@ import com.ecse428.project.repository.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.sql.Date;
 import java.util.logging.*;
 
 @SpringBootTest
