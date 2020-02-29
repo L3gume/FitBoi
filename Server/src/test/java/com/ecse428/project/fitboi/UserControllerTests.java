@@ -26,6 +26,7 @@ import java.util.logging.*;
 @SpringBootTest
 @AutoConfigureMockMvc
 class UserControllerTests {
+
 	private static final Logger LOGGER = Logger.getLogger( UserControllerTests.class.getName() );
 
 	@Autowired 
@@ -248,4 +249,5 @@ class UserControllerTests {
 
 		mockMvc.perform(get("/users/" + aEmail + "/" + aBadPassword)).andExpect(status().isNotFound());
 	 }
+
 }

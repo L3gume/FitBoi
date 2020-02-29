@@ -14,13 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 @SpringBootTest
 class DBFoodServiceTests {
     
-    @Autowired
-    private FoodService foodService;
+    // @Autowired
+    // private FoodService foodService;
 
-    @Test
-    public void testKnownFoodFetch()
-    {
-        List<DBFood> eggnog = foodService.getDBFoodFromName("EGGNOG");
-        assertTrue(eggnog.size() > 0);
-    }
+    // @Test
+    // public void testKnownFoodFetch()
+    // {
+    //     List<DBFood> eggnog = foodService.getDBFoodFromName("EGGNOG");
+    //     assertTrue(eggnog.size() > 0);
+    // }
 }
