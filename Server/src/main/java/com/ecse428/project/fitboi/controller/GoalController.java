@@ -62,6 +62,8 @@ public class GoalController {
     	if (objectNode == null) {
     		return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
         }
+
+        System.out.println("Goal: " + objectNode);
         
         UserProfile user = userService.getUser(userEmail);
         if (user == null) {
@@ -76,15 +78,16 @@ public class GoalController {
             activityLevel = ActivityLevel.valueOf(objectNode.get("activityLevel").asText());
             goalType = GoalType.valueOf(objectNode.get("goalType").asText());
 
-            fats = (float) objectNode.get("fats").asLong();
-            carbs = (float) objectNode.get("carbs").asLong();
-            proteins = (float) objectNode.get("proteins").asLong();
+            fats = (float) objectNode.get("fats").asDouble();
+            carbs = (float) objectNode.get("carbs").asDouble();
+            proteins = (float) objectNode.get("proteins").asDouble();
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>("Activity Level invalid ('Low', 'Medium', 'High')", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Invalid enum value", HttpStatus.NOT_FOUND);
         } catch(NullPointerException e) {
             return new ResponseEntity<>("The macro distribution is missing a field: ('fats', 'carbs', 'proteins')", HttpStatus.NOT_FOUND);
         }
         MacroDistribution macroDistribution  = new MacroDistribution(fats, carbs, proteins);
+        System.out.println("fats: " + macroDistribution.getFats() + "  carbs: " + macroDistribution.getCarbs() + "  protiens: " + macroDistribution.getProtein());
 
         int cal = objectNode.get("baseCalories").asInt();
         boolean result =  objectNode.get("result").asBoolean();
