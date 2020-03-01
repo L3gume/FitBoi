@@ -1,22 +1,16 @@
 package com.ecse428.project.fitboi.dto;
 
-import java.sql.Date;
-import java.util.List;
-
-import com.ecse428.project.fitboi.model.Meal;
-
-
 public class MetricsDto {
 
     private int id;
-    private Date date;
+    private String date;
     private int exerciseSpending;
 
     public MetricsDto(){
 
     }
 
-    public MetricsDto(int id, Date date, int exerciseSpending){
+    public MetricsDto(int id, String date, int exerciseSpending){
         this.id = id;
         this.date = date;
         this.exerciseSpending = exerciseSpending;
@@ -30,11 +24,11 @@ public class MetricsDto {
         this.id = id;
     }
 
-    public Date getDate (){
+    public String getDate (){
         return this.date;
     }
 
-    public void setDate(Date date){
+    public void setDate(String date){
         this.date = date;
     }
 

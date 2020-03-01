@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.ecse428.project.fitboi.model.Meal;
 import com.ecse428.project.fitboi.model.Metrics;
-import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.repository.MetricsRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

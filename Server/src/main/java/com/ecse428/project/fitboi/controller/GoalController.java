@@ -120,10 +120,6 @@ public class GoalController {
     	return new ResponseEntity<GoalDto>(convertToDto(deletedGoal), HttpStatus.OK);
     }
 
-
-
-   // TODO: Add PATCH call
-
     private GoalDto convertToDto(Goal goal) {
     	return new GoalDto(
             goal.getBaseCalories(),

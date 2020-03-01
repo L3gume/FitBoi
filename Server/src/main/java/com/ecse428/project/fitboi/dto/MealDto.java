@@ -1,10 +1,5 @@
 package com.ecse428.project.fitboi.dto;
 
-import java.util.List;
-
-import com.ecse428.project.fitboi.model.FoodItem;;
-
-
 public class MealDto {
 
     private int id;

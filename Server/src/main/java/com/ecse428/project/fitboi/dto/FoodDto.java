@@ -2,28 +2,35 @@ package com.ecse428.project.fitboi.dto;
 
 public class FoodDto
 {
+    private int id;
     private String name;
-    private float cal;
-    private float portionSize;
+    private double cal;
+    private double portionSize;
     private double protein;
     private double fat;
     private double carbs;
 
 
-    public FoodDto(String aName, float aCal, float aPortionSize, double aProtein, double aFat,
-        double aCarbs)
+    public FoodDto(int id, String name, double cal, double portionSize, double protein, double fat, double carbs)
     {
-        name = aName;
-        cal = aCal;
-        portionSize = aPortionSize;
-        protein = aProtein;
-        fat = aFat;
-        carbs = aCarbs;
+        this.id = id;
+        this.name = name;
+        this.cal = cal;
+        this.portionSize = portionSize;
+        this.protein = protein;
+        this.fat = fat;
+        this.carbs = carbs;
     }
 
     public FoodDto()
     {
 
+    }
+
+    public boolean setId(int id)
+    {
+        this.id = id;
+        return true;
     }
 
     public boolean setName(String aName)
@@ -62,17 +69,22 @@ public class FoodDto
         return true;
     }
 
+    public int getId()
+    {
+        return this.id;
+    }
+
     public String getName()
     {
         return this.name;
     }
 
-    public float getCal()
+    public double getCal()
     {
         return this.cal;
     }
 
-    public float getPortionSize()
+    public double getPortionSize()
     {
         return this.portionSize;
     }

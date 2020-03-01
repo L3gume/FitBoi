@@ -34,26 +34,31 @@ public class MetricsController {
 
     /**
      * POST
-     * /users/{user_id} -> Adds a metric to the user
+     * /users/{user_id}/metrics -> Adds a metric to the user
      * @param user_id
      * @return
      */
-    @PostMapping("{user_id}/metrics/")
+    @PostMapping("{user_id}/metrics")
     public ResponseEntity<?> addMetric(@PathVariable String user_id, @RequestBody ObjectNode objectNode)
     {
+        // Get the user from the DB
         UserProfile user = userService.getUser(user_id);
+        if (user == null) {
+            return new ResponseEntity<String>("The user does not exist", HttpStatus.NOT_ACCEPTABLE);
+        }
 
+        // Extract the information from the body
         Date date = Date.valueOf(objectNode.get("date").asText());
         int exercise = objectNode.get("exercise").asInt();
         
+        // Create the new metric and add it to the user
         Metrics metric = new Metrics(date, exercise);
-
         user.addMetric(metric);
         
-        metricsService.addNewMetrics(metric);
-
+        // Persist the user and the new metric
         userService.updateUser(user);
 
+        // Convert to DTO
         MetricsDto metricsDto = convertToDto(metric);
 
     	return new ResponseEntity<MetricsDto>(metricsDto, HttpStatus.OK);
@@ -61,15 +66,21 @@ public class MetricsController {
 
     /**
      * GET
-     * /users/{user_id}/metrics/ -> returns all the metrics for a user
+     * /users/{user_id}/metrics -> returns all the metrics for a user
      * @param user_id
      * @return
      */
-    @GetMapping("{user_id}/metrics/")
-    public ResponseEntity<List<MetricsDto>> getAllUserMetrics(@PathVariable String user_id)
+    @GetMapping("{user_id}/metrics")
+    public ResponseEntity<?> getAllUserMetrics(@PathVariable String user_id)
     {
-        UserProfile user = userService.getUser(user_id);
 
+        // Get the user from the DB
+        UserProfile user = userService.getUser(user_id);
+        if (user == null) {
+            return new ResponseEntity<String>("The user does not exist", HttpStatus.NOT_ACCEPTABLE);
+        }
+
+        // Get all the users metrics and convert to DTO
         List<MetricsDto> metricsDto = new ArrayList<MetricsDto>();
         for (Metrics metrics : user.getMetrics()) {
             metricsDto.add(convertToDto(metrics));
@@ -80,7 +91,7 @@ public class MetricsController {
 
     /**
      * GET
-     * /users/{user_id}/metrics/{metric_id} -> returns all the metrics for a user
+     * /users/{user_id}/metrics/{metric_id} -> returns all the metric with the given metric_id for the user
      * @param user_id
      * @param metric_id
      * @return
@@ -88,8 +99,8 @@ public class MetricsController {
     @GetMapping("{user_id}/metrics/{metric_id}")
     public ResponseEntity<?> getUserMetrics(@PathVariable String user_id, @PathVariable int metric_id)
     {
+        // Get the metric from the user
         Metrics metric = userService.getUserMetric(user_id, metric_id);
-
         if (metric == null) {
             return new ResponseEntity<String>("The user does not have a metric with the given metric_id", HttpStatus.NOT_ACCEPTABLE);
         }
@@ -104,14 +115,16 @@ public class MetricsController {
      * @param metrics_id
      * @return
      */
-    @DeleteMapping("{user_id}/metrics/{metricsId}")
-    public ResponseEntity<?> deleteMetrics(@PathVariable String user_id, @PathVariable int metric_id) {
-        
+    @DeleteMapping("{user_id}/metrics/{metric_id}")
+    public ResponseEntity<?> deleteMetrics(@PathVariable String user_id, @PathVariable int metric_id) 
+    {
+        // Get the metric from the user
         Metrics metric = userService.getUserMetric(user_id, metric_id);
         if (metric == null) {
             return new ResponseEntity<String>("The user does not have a metric with the given metric_id", HttpStatus.NOT_ACCEPTABLE);
         }
 
+        // Delete the metric from the DB
         metric = metricsService.deleteMetrics(metric_id);
 
         return new ResponseEntity<MetricsDto>(convertToDto(metric), HttpStatus.OK);
@@ -122,7 +135,7 @@ public class MetricsController {
     private MetricsDto convertToDto(Metrics metrics) {
     	return new MetricsDto(
             metrics.getId(),
-            metrics.getDate(),
+            metrics.getDate().toString(),
             metrics.getExerciseSpending()	
     		);
     }

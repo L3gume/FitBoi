@@ -1,5 +1,6 @@
 package com.ecse428.project.fitboi.service;
 
+import com.ecse428.project.fitboi.model.FoodItem;
 import com.ecse428.project.fitboi.model.Meal;
 import com.ecse428.project.repository.MealRepository;
 
@@ -47,11 +48,22 @@ public class MealService {
 	@Transactional
 	public Meal deleteMeal(int id) {
     	if (!mealRepository.existsById(id)) {
+			System.out.println("Meal does not exist");
     		return null;
-    	}
-    	Meal deletedMeal = mealRepository.findMealById(id);
-    	mealRepository.deleteById(id);
+		}
+		System.out.println("Meal does exist");
+    	Meal deletedMeal = mealRepository.deleteById(id);
 		return deletedMeal;
+	}
+
+
+	public FoodItem getFoodItem(Meal meal, int food_id) {
+		for (FoodItem food : meal.getFoodItems()) {
+			if (food.getId() == food_id) {
+				return food;
+			}
+		}
+		return null;
 	}
 
 
