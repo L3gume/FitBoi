@@ -37,6 +37,7 @@ android {
 
 
 dependencies {
+    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.2'
