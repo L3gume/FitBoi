@@ -7,7 +7,6 @@ import java.util.List;
 import com.ecse428.project.fitboi.dto.MetricsDto;
 import com.ecse428.project.fitboi.model.Metrics;
 import com.ecse428.project.fitboi.model.UserProfile;
-import com.ecse428.project.fitboi.service.MetricsService;
 import com.ecse428.project.fitboi.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +24,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 @RestController
 @RequestMapping("/users/")
 public class MetricsController {
-    	
-	@Autowired
-    private MetricsService metricsService;
 
     @Autowired
     private UserService userService;
