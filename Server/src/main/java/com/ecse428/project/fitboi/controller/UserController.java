@@ -216,7 +216,7 @@ public class UserController {
         
         Metrics metric = userService.getUserMetric(user_id, metric_id);
         Meal meal = metricsService.getUserMeal(metric, meal_id);
-        FoodItem  food = mealService.getFoodItem(meal, food_id);
+        FoodItem  food = mealService.deleteFood(meal, food_id);
         
         if (food == null) {
             return new ResponseEntity<String>("The food item does not exist in the given meal", HttpStatus.NOT_ACCEPTABLE);

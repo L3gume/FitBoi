@@ -125,7 +125,7 @@ public class MetricsController {
         }
 
         // Delete the metric from the DB
-        metric = metricsService.deleteMetrics(metric_id);
+        metric = userService.deleteMetrics(user_id,metric_id);
 
         return new ResponseEntity<MetricsDto>(convertToDto(metric), HttpStatus.OK);
 

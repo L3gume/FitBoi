@@ -119,4 +119,17 @@ public class UserService {
 		return null;
 	}
 
+	public Metrics deleteMetrics(String userEmail, int metric_id) {
+		UserProfile user = getUser(userEmail);
+		for(Metrics metric : user.getMetrics()) {
+			if(metric.getId() == metric_id) {
+				if (user.removeMetric(metric)) {
+					repository.save(user);
+					return metric;
+				}
+			}
+		}
+
+		return null;
+	}
 }

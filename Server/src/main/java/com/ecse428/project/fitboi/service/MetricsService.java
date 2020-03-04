@@ -78,4 +78,16 @@ public class MetricsService {
 		return null;
 	}
 
+	public Meal deleteMeal(Metrics metric, int meal_id) {
+		for (Meal meal : metric.getMeals()) {
+			if (meal.getId() == meal_id) {
+				if (metric.removeMeal(meal)) {
+					metricsRepository.save(metric);
+					return meal;
+				}
+			}
+		}
+		return null;
+	}
+
 }

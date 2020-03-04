@@ -157,15 +157,9 @@ public class MealController {
         if (metric == null) {
             return new ResponseEntity<String>("The user has no metrics for the given metric_id", HttpStatus.NOT_ACCEPTABLE);
         }
-        
-        // Get the meal given the meal_id
-        Meal meal = metricsService.getUserMeal(metric, meal_id);
-        if (meal == null) {
-            return new ResponseEntity<String>("The user has no meals for the given meal_id", HttpStatus.NOT_ACCEPTABLE);
-        }
 
         // Delete the meal from the DB
-        Meal deletedMeal = mealService.deleteMeal(meal_id);
+        Meal deletedMeal = metricsService.deleteMeal(metric, meal_id);
 
     	return new ResponseEntity<MealDto>(convertToDto(deletedMeal), HttpStatus.OK);
     }

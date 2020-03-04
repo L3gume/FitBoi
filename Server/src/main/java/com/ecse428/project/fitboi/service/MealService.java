@@ -66,5 +66,18 @@ public class MealService {
 		return null;
 	}
 
+	public FoodItem deleteFood(Meal meal, int food_id) {
+		for (FoodItem food : meal.getFoodItems()) {
+			if (food.getId() == food_id) {
+				if (meal.removeFoodItem(food)) {
+					mealRepository.save(meal);
+					return food;
+				}
+			}
+		}
+
+		return null;
+	}
+
 
 }
