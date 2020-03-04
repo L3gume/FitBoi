@@ -30,7 +30,7 @@ his/her calorie breakdown over a certain period of time:
 
 The Data Structure used in this class (to communicate with the API)
 
-        List<double[]> dto_output = new ArrayList<>();
+        List<Integer> dto_output = new ArrayList<>();
 
 Have a bug when switching pages between today, week, and month, although the pages
 work on their own as expected. In this switch statement at the end,
