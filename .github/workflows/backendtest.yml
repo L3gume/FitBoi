@@ -29,6 +29,8 @@ jobs:
         chmod +x ./gradlew
     - name: build server
       run: ./gradlew build
+    - name: switch back dir
+      run: cd .. # this might help
     - name: Heroku Deploy
       uses: AkhileshNS/heroku-deploy@v3.0.0
       with:
