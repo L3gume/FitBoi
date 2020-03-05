@@ -122,17 +122,18 @@ public class MetricsAPI {
 
     @NonNull
     private static MetricDto jsonToMetricDto(JSONObject json) {
-
+        // TODO: fix
         String tmp = json.optString("tmp");
 
-        return new MetricDto(tmp);
+        return new MetricDto();
     }
 
     private static JSONObject metricDtoToJson(MetricDto metricDto) {
         JSONObject json = new JSONObject();
 
         try {
-            json.put("tmp", metricDto.getTmp());
+            // TODO:fix
+            //json.put("tmp", metricDto.getTmp());
         } catch (Exception e) {
             // TODO: something with exception
         }
