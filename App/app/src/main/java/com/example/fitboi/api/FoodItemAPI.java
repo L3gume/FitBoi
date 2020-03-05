@@ -3,9 +3,11 @@ package com.example.fitboi.api;
 import androidx.annotation.NonNull;
 
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
 import com.example.fitboi.dto.FoodItemDto;
 
@@ -135,8 +137,116 @@ public class FoodItemAPI {
         return null;
     }
 
-    // TODO: write
-    public static FoodItemDto addFoodItemToUser(String foodName, String userId, Consumer<FoodItemDto> fn) {
+    /**
+     * Add/log a food item to a user
+     * path:    /users/{userId}/foods/
+     * type:    POST
+     *
+     * Example of how to use asynchronously:
+     * FoodItemDto foundFoodItem;
+     * Consumer logFoodItem = new Consumer(<FoodItemDto> fn) {
+     *   @Override
+     *   public void accept(FoodItemDto foodItemDTO) {
+     *      foodItemDTO = foundFoodItem;
+     *   }
+     * };
+     *
+     * FoodAPI.addFoodItemToUser(foundFoodItem.id, "test@gmail.com", logFoodItem);
+     *
+     * Example of how to use synchronously:
+     * FoodItemDto foundFoodItem;
+     * FoodDto foodAdded = FoodItemAPI.addFoodItemToUser(foundFoodItem.id, "test@gmail.com", null);
+     *
+     * @param foodDto FoodItemDto: FoodDto to be added to user
+     * @param userId String: Unique id of user to which food item should be added
+     * @param fn to be called by response, if null wait for response and return it directly
+     **/
+    public static FoodItemDto addFoodItemToUser(FoodItemDto foodDto, String userId, Consumer<FoodItemDto> fn) {
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        Response.Listener<JSONObject> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = foodItemCallSuccessListener(fn);
+            errorListener = foodItemCallErrorListener(fn);
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                MyVolley.serverUrl+MyVolley.userPostfix+userId+MyVolley.foodItemPostfix,
+                foodItemToJson(foodDto),
+                successListener,
+                errorListener
+        );
+
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+        if (fn == null) {
+            try {
+                return jsonToFoodItemDto(future.get(10, TimeUnit.SECONDS));
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Delete a food item from a user
+     * path:    /users/{userId}/foods/{foodId}
+     * type:    DELETE
+     *
+     * Example of how to use asynchronously:
+     * FoodItemDto toBeDeletedFoodItem;
+     * Consumer deleteFoodItem = new Consumer(<FoodItemDto> fn) {
+     *   @Override
+     *   public void accept(FoodItemDto foodItemDTO) {
+     *      foodItemDTO = toBeDeletedFoodItem;
+     *   }
+     * };
+     *
+     * FoodAPI.deleteFoodItemFromUser(toBeDeletedFoodItem.id, "test@gmail.com", deleteFoodItem);
+     *
+     * Example of how to use synchronously:
+     * FoodItemDto toBeDeletedFoodItem;
+     * FoodDto foodAdded = FoodItemAPI.deleteFoodItemFromUser(toBeDeletedFoodItem.id, "test@gmail.com", null);
+     *
+     * @param foodId Integer: Unique id of food item to be added
+     * @param userId String: Unique id of user to which food item should be added
+     * @param fn to be called by response, if null wait for response and return it directly
+     **/
+    public static FoodItemDto deleteFoodItemFromUser(Integer foodId, String userId, Consumer<FoodItemDto> fn) {
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        Response.Listener<JSONObject> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = foodItemCallSuccessListener(fn);
+            errorListener = foodItemCallErrorListener(fn);
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.DELETE,
+                MyVolley.serverUrl+MyVolley.userPostfix+userId+MyVolley.foodItemPostfix+foodId,
+                null,
+                successListener,
+                errorListener
+        );
+
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+        if (fn == null) {
+            try {
+                return jsonToFoodItemDto(future.get(10, TimeUnit.SECONDS));
+            } catch (Exception e) {
+                return null;
+            }
+        }
         return null;
     }
 

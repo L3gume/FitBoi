@@ -23,33 +23,11 @@ public class UserAPIUnitTest {
     private static Consumer<UserDto> userAddFunction;
     private static Consumer<UserDto> userGetFunction;
     private static boolean isAdded;
+    private static boolean isLoggedIn;
+    private static boolean isEdited;
 
     @BeforeClass
     public static void Setup() {
-        userGetListFunction = new Consumer<List<UserDto>>() {
-            @Override
-            public void accept(List<UserDto> userDtos) {
-                userList.addAll(userDtos);
-            }
-        };
-
-        userGetFunction = new Consumer<UserDto>() {
-            @Override
-            public void accept(UserDto userDto) {
-                if(userDto.getEmail().equals(user)) {
-                    user = userDto;
-                }
-            }
-        };
-
-        userAddFunction = new Consumer<UserDto>() {
-            @Override
-            public void accept(UserDto userDto) {
-                if(userDto.getEmail().equals(userDto.getEmail())) {
-                    isAdded = true;
-                }
-            }
-        };
     }
 
     @Test
@@ -57,7 +35,8 @@ public class UserAPIUnitTest {
         user = new UserDto("test@gmail.com", "Test", "test123", "123", 21, 21, true);
         PowerMockito.mockStatic(UserAPI.class);
         PowerMockito.doNothing().when(UserAPI.class);
-        UserAPI.addUser(user, userAddFunction);
+        UserDto userDto = UserAPI.addUser(user, null);
+        isAdded = (userDto != null);
     }
 
     @Test
@@ -66,14 +45,24 @@ public class UserAPIUnitTest {
         String password = "password";
         PowerMockito.mockStatic(UserAPI.class);
         PowerMockito.doNothing().when(UserAPI.class);
-        UserAPI.getUserByLogin(username, password, userGetFunction);
+        UserDto userDto = UserAPI.getUserByLogin(username, password, null);
+        isLoggedIn = (userDto.getEmail().equals(user));
     }
 
     @Test
     public void getAllUsers() {
         PowerMockito.mockStatic(UserAPI.class);
         PowerMockito.doNothing().when(UserAPI.class);
-        UserAPI.getUsers(userGetListFunction);
+        userList = UserAPI.getUsers(null);
+    }
+
+    @Test
+    public void editUser() {
+        PowerMockito.mockStatic(UserAPI.class);
+        PowerMockito.doNothing().when(UserAPI.class);
+        user.setHeight(22);
+        UserDto newUser = UserAPI.updateUser("test@gmail.com", user, null);
+        isEdited = (newUser.getHeight() == 22);
     }
 }
 

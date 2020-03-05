@@ -99,25 +99,29 @@ public class GoalAPI {
      * if (goal.goalId = deletedGoal.goalId) {
      *     String message = "Goal Deleted";
      * }
+     * @param userEmail: email of user for which the goal should be deleted
      * @param goalId of goal to be deleted
      * @param fn to be called by response, if null wait for response and return it directly
      */
-    public static GoalDto deleteUserGoal(String goalId, Consumer<GoalDto> fn) {
+    public static GoalDto deleteUserGoal(String userEmail, Integer goalId, Consumer<GoalDto> fn) {
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
+        Response.ErrorListener errorListener;
 
         if (fn == null) {
             successListener = future;
+            errorListener = future;
         } else {
             successListener = goalCallSuccessListener(fn);
+            errorListener = goalCallErrorListener(fn);
         }
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.DELETE,
-                (MyVolley.serverUrl+MyVolley.userPostfix+MyVolley.goalPostfix+goalId+'/'),
+                (MyVolley.serverUrl+MyVolley.userPostfix+userEmail+MyVolley.goalPostfix+goalId+'/'),
                 null,
                 successListener,
-                null);
+                errorListener);
 
         request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
         MyVolley.getRequestQueue().add(request);
@@ -148,6 +152,7 @@ public class GoalAPI {
      * Example of how to use synchronously:
      * GoalDto goal = GoalAPI.getUserGoals(userEmail, null);
      *
+     * @param userEmail: email of user to get the goals of
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static List<GoalDto> getUserGoals(String userEmail, Consumer<List<GoalDto>> fn) {
@@ -187,6 +192,65 @@ public class GoalAPI {
         }
         return null;
 
+    }
+
+    /**
+     * Update a given user's goal
+     * path:    /users/{userEmail}/goals/{goalId}
+     * type:    PUT
+     *
+     * Example of how to use asynchronously:
+     * GoalDto goalToUpdate;
+     * Consumer updateGoal = new Consumer<GoalDto>() {
+     *   @Override
+     *   public void accept(GoalDto updatedGoal) {
+     *     if (updatedGoal == goalToUpdate) {
+     *         String message = "Succesfully updated goal!");
+     *     }
+     *   }
+     * };
+     * GoalAPI.updateUserGoal(userEmail, goalToUpdate.id, goalToUpdate, updateGoal);
+     *
+     * Example of how to use synchronously:
+     * GoalDto goalToUpdate;
+     * GoalDto goal = GoalAPI.updateUserGoal(userEmail, goalToUpdate.id, goalToUpdate, null);
+     *
+     * @param userEmail : email of user to update goal of
+     * @param goalId : id of goal to update
+     * @param newGoalDto : new information of goal
+     * @param fn to be called by response, if null wait for response and return it directly
+     */
+    public static GoalDto updateUserGoal(String userEmail, Integer goalId, GoalDto newGoalDto, Consumer<GoalDto> fn) {
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        Response.Listener<JSONObject> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = goalCallSuccessListener(fn);
+            errorListener = goalCallErrorListener(fn);
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.PUT,
+                (MyVolley.serverUrl+MyVolley.userPostfix+userEmail+MyVolley.goalPostfix+goalId+'/'),
+                goalDtoToJson(newGoalDto),
+                successListener,
+                errorListener);
+
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+
+        if (fn == null) {
+            try {
+                return jsonToGoalDto(future.get(10, TimeUnit.SECONDS));
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
     }
 
     /********** PRIVATE METHODS **********/

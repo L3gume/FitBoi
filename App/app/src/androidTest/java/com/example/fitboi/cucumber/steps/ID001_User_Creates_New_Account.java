@@ -26,6 +26,7 @@ public class ID001_User_Creates_New_Account {
     private UserDto user;
     private UserDto createdUser;
     private String email;
+    private String password;
     private ArrayList<UserDto> users;
 
     private static boolean isCreated;
@@ -115,7 +116,6 @@ public class ID001_User_Creates_New_Account {
         // Write code here that turns the phrase above into concrete actions
   //      throw new io.cucumber.java.PendingException();
         createdUser = UserAPI.addUser(user, null);
-
     }
 
     @Then("a new User profile is created")
