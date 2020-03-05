@@ -1,4 +1,4 @@
-package com.ecse428.project.fitboi.dto;
+package com.example.fitboi.dto;
 
 public class DBFoodDto
 {

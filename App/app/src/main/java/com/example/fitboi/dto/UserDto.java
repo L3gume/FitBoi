@@ -1,6 +1,6 @@
 package com.example.fitboi.dto;
-
 import java.util.Objects;
+
 
 public class UserDto {
 
@@ -8,109 +8,29 @@ public class UserDto {
     private String name;
     private String userName;
     private String password;
-    private int age;
-    private boolean sex;
+    private String dob;
     private int height;
+    private String biologicalSex;
 
     public UserDto() {
-
     }
 
-    public UserDto(String email, String name, String userName, String password, int age, int height, boolean sex) {
+    public UserDto(String email, String name, String userName, String password, String dob, String biologicalSex, int height) {
         this.email = email;
-        this.setName(name);
-        this.setUserName(userName);
-        this.setPassword(password);
-        this.age = age;
-        this.sex = sex;
+        this.name = name;
+        this.userName = userName;
+        this.password = password;
+        this.dob = dob;
         this.height = height;
+        this.biologicalSex = biologicalSex;
     }
 
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public int getAge() {
-        return this.age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public boolean isSex() {
-        return this.sex;
-    }
-
-    public boolean getSex() {
-        return this.sex;
-    }
-
-    public void setSex(boolean sex) {
-        this.sex = sex;
-    }
-
-    public int getHeight() {
-        return this.height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public String getPassword() {return password;}
-
-    public  void setPassword(String password) {this.password = password;}
-
-    public UserDto email(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public UserDto age(int age) {
-        this.age = age;
-        return this;
-    }
-
-    public UserDto sex(boolean sex) {
-        this.sex = sex;
-        return this;
-    }
-
-
-    public UserDto height(int height) {
-        this.height = height;
-        return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof UserDto)) {
-            return false;
-        }
-        UserDto userDto = (UserDto) o;
-        return Objects.equals(email, userDto.email) && age == userDto.age && sex == userDto.sex && height == userDto.height;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(email, age, sex, height);
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-                " email='" + getEmail() + "'" +
-                ", age='" + getAge() + "'" +
-                ", sex='" + isSex() + "'" +
-                ", height='" + getHeight() + "'" +
-                "}";
     }
 
     public String getName() {
@@ -127,5 +47,68 @@ public class UserDto {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public String getBiologicalSex() {
+        return biologicalSex;
+    }
+
+    public void setBiologicalSex(String biologicalSex) {
+        this.biologicalSex = biologicalSex;
+    }
+
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        if (!super.equals(object)) return false;
+        UserDto userDto = (UserDto) object;
+        return height == userDto.height &&
+                email.equals(userDto.email) &&
+                name.equals(userDto.name) &&
+                userName.equals(userDto.userName) &&
+                password.equals(userDto.password) &&
+                dob.equals(userDto.dob) &&
+                biologicalSex.equals(userDto.biologicalSex);
+    }
+
+    public int hashCode() {
+        return java.util.Objects.hash(super.hashCode(), email, name, userName, password, dob, height, biologicalSex);
+    }
+
+    @java.lang.Override
+    public java.lang.String toString() {
+        return "UserDto{" +
+                "email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", dob='" + dob + '\'' +
+                ", height=" + height +
+                ", biologicalSex='" + biologicalSex + '\'' +
+                '}';
     }
 }

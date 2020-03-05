@@ -15,11 +15,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.springframework.http.MediaType;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.logging.*;
 
 import com.ecse428.project.repository.*;
 import com.ecse428.project.fitboi.model.*;
 import com.ecse428.project.fitboi.TestHelpMethods.*;
+import com.ecse428.project.fitboi.dto.UserDto;
 
 
 @SpringBootTest
@@ -52,38 +54,36 @@ class GoalControllerTests {
 
     @Test
     public void testPostGoalControllerSuccess() throws Exception{
-		String aEmail = "testUser1@mail.mcgill.ca";
+        String aEmail = "testUser1@mail.mcgill.ca";
 		String aName = "testboi";
 		String aUserName = "testBoi";
 		String aPassword = "password";
-		int aAge = 15;
+		String aDOB = "2010-11-11";
 		int aHeight = 193;
-		boolean aBiologicalSex = true;
-		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
-
-
+		String aBiologicalSex = "Female";
+		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
+      
         int baseCalories = 100;
         boolean result = false;
         String startDate =  "2020-05-09";
-        float weight = 68;
+        String endDate =  "2020-07-09";
+        float weightGoal = 68;
         ActivityLevel activityLevel = ActivityLevel.Medium;
+        GoalType goalType = GoalType.Gain;
         float fatsForMacroDistribution = 0.3f;
         float carbsForMacroDistribution = 0.4f; 
         float proteinForMacroDistribution = 0.3f;
-
-        SerializableGoal serializableGoal = new SerializableGoal(baseCalories, result, startDate, weight, activityLevel, fatsForMacroDistribution, carbsForMacroDistribution, proteinForMacroDistribution);
-
-
-		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
+      
+        SerializableGoal serializableGoal = new SerializableGoal(baseCalories, result, startDate, endDate, weightGoal, activityLevel, goalType, fatsForMacroDistribution, carbsForMacroDistribution, proteinForMacroDistribution);
+        LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
         	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
             .andExpect(status().isCreated());
             
         LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(serializableGoal));
-		mockMvc.perform(post("/users/"+ aEmail + "/goals").contentType(MediaType.APPLICATION_JSON)
+		mockMvc.perform(post("/users/"+ aEmail + "/goal").contentType(MediaType.APPLICATION_JSON)
         	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(serializableGoal)))
             .andExpect(status().isCreated());
-            
         return;
     }
 
@@ -94,23 +94,25 @@ class GoalControllerTests {
 		String aName = "testboi";
 		String aUserName = "testBoi";
 		String aPassword = "password";
-		int aAge = 15;
+		String aDOB = "2010-11-11";
 		int aHeight = 193;
-		boolean aBiologicalSex = true;
-		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+		String aBiologicalSex = "Female";
+		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
 
 
         int baseCalories = 100;
         boolean result = false;
         String startDate =  "2020-05-09";
-        float weight = 68;
+        String endDate =  "2020-07-09";
+        float weightGoal = 68;
         ActivityLevel activityLevel = ActivityLevel.Medium;
+        GoalType goalType = GoalType.Gain;
         float fatsForMacroDistribution = 0.3f;
         float carbsForMacroDistribution = 0.4f; 
         float proteinForMacroDistribution = 0.3f;
 
-        SerializableGoal serializableGoal = new SerializableGoal(baseCalories, result, startDate, weight, activityLevel, fatsForMacroDistribution, carbsForMacroDistribution, proteinForMacroDistribution);
-
+        SerializableGoal serializableGoal = new SerializableGoal(baseCalories, result, startDate, endDate, weightGoal, activityLevel, goalType, fatsForMacroDistribution, carbsForMacroDistribution, proteinForMacroDistribution);
+        
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
@@ -118,57 +120,58 @@ class GoalControllerTests {
             .andExpect(status().isCreated());
             
         LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(serializableGoal));
-		mockMvc.perform(post("/users/"+ aEmail + "/goals").contentType(MediaType.APPLICATION_JSON)
+		mockMvc.perform(post("/users/"+ aEmail + "/goal").contentType(MediaType.APPLICATION_JSON)
         	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(serializableGoal)))
             .andExpect(status().isCreated());
-       
-        mockMvc.perform(get("/users/"+aEmail+"/goals")).andExpect(status().isOk());
-
+        mockMvc.perform(get("/users/"+aEmail+"/goal")).andExpect(status().isOk());
+      
         return;
-    }
+     }
     
+
     @Test
     public void testDeleteGoalControllerSuccess() throws Exception{
+      
         String aEmail = "testUser1@mail.mcgill.ca";
-		String aName = "testboi";
-		String aUserName = "testBoi";
+	    String aName = "testboi";
+	    String aUserName = "testBoi";
 		String aPassword = "password";
-		int aAge = 15;
+		String aDOB = "2010-11-11";
 		int aHeight = 193;
-		boolean aBiologicalSex = true;
-		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+		String aBiologicalSex = "Female";
+		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
 
 
         int baseCalories = 100;
         boolean result = false;
         String startDate =  "2020-05-09";
-        float weight = 68;
+        String endDate =  "2020-07-09";
+        float weightGoal = 68;
         ActivityLevel activityLevel = ActivityLevel.Medium;
+        GoalType goalType = GoalType.Gain;
         float fatsForMacroDistribution = 0.3f;
         float carbsForMacroDistribution = 0.4f; 
         float proteinForMacroDistribution = 0.3f;
 
-        SerializableGoal serializableGoal = new SerializableGoal(baseCalories, result, startDate, weight, activityLevel, fatsForMacroDistribution, carbsForMacroDistribution, proteinForMacroDistribution);
+        SerializableGoal serializableGoal = new SerializableGoal(baseCalories, result, startDate, endDate, weightGoal, activityLevel, goalType, fatsForMacroDistribution, carbsForMacroDistribution, proteinForMacroDistribution);
+        
 
-
-		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
+        LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
         	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
             .andExpect(status().isCreated());
 
         LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(serializableGoal));
-		mockMvc.perform(post("/users/"+ aEmail + "/goals").contentType(MediaType.APPLICATION_JSON)
+		mockMvc.perform(post("/users/"+ aEmail + "/goal").contentType(MediaType.APPLICATION_JSON)
         	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(serializableGoal)))
             .andExpect(status().isCreated());
 
 
-      
-        testUser = userRepository.findUserByEmail(aEmail);
-        int goalId = testUser.getGoal(0).getId();
 
-        mockMvc.perform(delete("/users/"+aEmail+"/goals/" + Integer.toString(goalId))).andExpect(status().isOk());
+        mockMvc.perform(delete("/users/"+aEmail+"/goal")).andExpect(status().isOk());
+        
         return;
-    }
+     }
 
     @Test
     public void testPostGoalControllerNull() throws Exception {
@@ -176,24 +179,24 @@ class GoalControllerTests {
 		String aName = "testboi";
 		String aUserName = "testBoi";
 		String aPassword = "password";
-		int aAge = 15;
+		String aDOB = "2010-11-11";
 		int aHeight = 193;
-		boolean aBiologicalSex = true;
-		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
-
+		String aBiologicalSex = "Female";
+		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
+      
         SerializableGoal serializableGoal = null;
-
+      
         LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
         	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
             .andExpect(status().isCreated());
             
         LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(serializableGoal));
-		mockMvc.perform(post("/users/"+ aEmail + "/goals").contentType(MediaType.APPLICATION_JSON)
+		mockMvc.perform(post("/users/"+ aEmail + "/goal").contentType(MediaType.APPLICATION_JSON)
         	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(serializableGoal)))
             .andExpect(status().isBadRequest());
-            
+      
         return;
-    }
+     }
 
 }

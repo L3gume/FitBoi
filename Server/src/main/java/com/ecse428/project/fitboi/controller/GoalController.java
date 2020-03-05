@@ -1,7 +1,5 @@
 package com.ecse428.project.fitboi.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ecse428.project.fitboi.dto.*;
 import com.ecse428.project.fitboi.model.ActivityLevel;
 import com.ecse428.project.fitboi.model.Goal;
+import com.ecse428.project.fitboi.model.GoalType;
 import com.ecse428.project.fitboi.model.MacroDistribution;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.GoalService;
@@ -40,18 +39,16 @@ public class GoalController {
      * @param userEmail
      * @return
      */
-    @GetMapping("{userEmail}/goals")
-    public ResponseEntity<List<GoalDto>> getUserGoals(@PathVariable String userEmail)
+    @GetMapping("{userEmail}/goal")
+    public ResponseEntity<GoalDto> getUserGoal(@PathVariable String userEmail)
     {
-        List<GoalDto> goalDtos = new ArrayList<GoalDto>();
-        List<Goal> goals = goalService.getUserGoals(userEmail);
+        GoalDto goalDto = new GoalDto();
+        Goal goal = goalService.getUserGoal(userEmail);
 
-        for(Goal goal : goals)
-        {
-            goalDtos.add(convertToDto(goal));
-        }
+        goalDto = convertToDto(goal);
+        
 
-    	return new ResponseEntity<List<GoalDto>>(goalDtos, HttpStatus.OK);
+    	return new ResponseEntity<GoalDto>(goalDto, HttpStatus.OK);
     }
 
         /**
@@ -60,11 +57,13 @@ public class GoalController {
      * @param userEmail
      * @return
      */
-    @PostMapping("{userEmail}/goals")
+    @PostMapping("{userEmail}/goal")
     public ResponseEntity<?> createGoal(@PathVariable("userEmail") String userEmail, @RequestBody ObjectNode objectNode) {
     	if (objectNode == null) {
     		return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
         }
+
+        System.out.println("Goal: " + objectNode);
         
         UserProfile user = userService.getUser(userEmail);
         if (user == null) {
@@ -72,48 +71,51 @@ public class GoalController {
         }
 
         ActivityLevel activityLevel;
+        GoalType goalType;
         
         float fats, carbs, proteins;
         try {
             activityLevel = ActivityLevel.valueOf(objectNode.get("activityLevel").asText());
+            goalType = GoalType.valueOf(objectNode.get("goalType").asText());
 
-            fats = (float) objectNode.get("fats").asLong();
-            carbs = (float) objectNode.get("carbs").asLong();
-            proteins = (float) objectNode.get("proteins").asLong();
+            fats = (float) objectNode.get("fats").asDouble();
+            carbs = (float) objectNode.get("carbs").asDouble();
+            proteins = (float) objectNode.get("proteins").asDouble();
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>("Activity Level invalid ('Low', 'Medium', 'High')", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Invalid enum value", HttpStatus.NOT_FOUND);
         } catch(NullPointerException e) {
             return new ResponseEntity<>("The macro distribution is missing a field: ('fats', 'carbs', 'proteins')", HttpStatus.NOT_FOUND);
         }
         MacroDistribution macroDistribution  = new MacroDistribution(fats, carbs, proteins);
+        System.out.println("fats: " + macroDistribution.getFats() + "  carbs: " + macroDistribution.getCarbs() + "  protiens: " + macroDistribution.getProtein());
 
         int cal = objectNode.get("baseCalories").asInt();
         boolean result =  objectNode.get("result").asBoolean();
       
-        float weight = objectNode.get("weight").asLong();
+        float weightGoal = objectNode.get("weightGoal").asLong();
 
-        GoalDto goal = new GoalDto(cal, result, Date.valueOf(objectNode.get("startDate").asText()), weight, activityLevel, macroDistribution);
-       
-        //TODO This method is not working
-    	if (!goalService.addGoaltoUser(convertToDomainObject(goal), user))
+        Goal goal = new Goal(cal, result, Date.valueOf(objectNode.get("startDate").asText()),
+                Date.valueOf(objectNode.get("endDate").asText()), weightGoal, activityLevel,
+                goalType, macroDistribution);
+
+    	if (!goalService.setUserGoal(goal, user))
     	{
-    		return new ResponseEntity<String>("Goal already exists", HttpStatus.UNPROCESSABLE_ENTITY);
+    		return new ResponseEntity<>("Unable to set goal", HttpStatus.UNPROCESSABLE_ENTITY);
     	}
 
-    	return new ResponseEntity<GoalDto>(goal, HttpStatus.CREATED);
+    	return new ResponseEntity<>(convertToDto(goal), HttpStatus.CREATED);
     }
 
         /**
      * DELETE
      * /users/{user_id}/goals/{goalId} -> deletes a goal from the DB
      * @param userEmail 
-     * @param goalId
      * @return
      */
-    @DeleteMapping("{userEmail}/goals/{goalId}")
-    public ResponseEntity<?> deleteGoal(@PathVariable String userEmail, @PathVariable int goalId) {
+    @DeleteMapping("{userEmail}/goal")
+    public ResponseEntity<?> deleteGoal(@PathVariable String userEmail) {
     	
-    	Goal deletedGoal = goalService.deleteGoal(userEmail, goalId);
+    	Goal deletedGoal = goalService.deleteGoal(userEmail);
 
     	if (deletedGoal == null) {
     		return new ResponseEntity<String>("Goal does not exist", HttpStatus.NOT_FOUND);
@@ -121,18 +123,20 @@ public class GoalController {
     	return new ResponseEntity<GoalDto>(convertToDto(deletedGoal), HttpStatus.OK);
     }
 
-
-
-   // TODO: Add PATCH call
-
     private GoalDto convertToDto(Goal goal) {
+        MacroDistribution dist = goal.getMacroDistribution();
     	return new GoalDto(
-            goal.getBaseCalories(),
-            goal.getResult(),
-            goal.getStartDate(),
-            goal.getWeight(),
-            goal.getActivityLevel(),
-            goal.getMacroDistribution()   			
+    	        goal.getId(),
+                goal.getBaseCalories(),
+                goal.getResult(),
+                goal.getStartDate(),
+                goal.getEndDate(),
+                goal.getWeightGoal(),
+                goal.getActivityLevel().name(),
+                goal.getGoalType().name(),
+                dist.getFats(),
+                dist.getCarbs(),
+                dist.getProtein()
     			);
     }
 
@@ -140,11 +144,13 @@ public class GoalController {
 		
 		Goal goal = new Goal(
             goalDto.getBaseCalories(),
-            goalDto.getResult(),
+            goalDto.isResult(),
             goalDto.getStartDate(),
-            goalDto.getWeight(),
-            goalDto.getActivityLevel(),
-            goalDto.getMacroDistribution()
+            goalDto.getEndDate(),
+            goalDto.getWeightGoal(),
+            ActivityLevel.valueOf(goalDto.getActivityLevel()),
+            GoalType.valueOf(goalDto.getGoalType()),
+            new MacroDistribution(goalDto.getFats(), goalDto.getCarbs(), goalDto.getProtein())
                 );
                 
 		return goal;

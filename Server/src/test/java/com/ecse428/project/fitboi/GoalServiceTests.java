@@ -9,7 +9,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import com.ecse428.project.fitboi.model.ActivityLevel;
 import com.ecse428.project.fitboi.model.Goal;
+import com.ecse428.project.fitboi.model.GoalType;
 import com.ecse428.project.fitboi.model.MacroDistribution;
+import com.ecse428.project.fitboi.model.Sex;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.GoalService;
 import com.ecse428.project.fitboi.service.UserService;
@@ -38,80 +40,63 @@ class GoalServiceTests {
   private UserService userService;
 
   @Test
-  public void testAddGoalToUserSuccess(){
+  public void testSetUserGoalSuccess(){
     UserProfile testUser = createUser();
     Goal testGoal = createGoal();
-    when(goalRepository.existsById(testGoal.getId())).thenReturn(false);
     when(goalRepository.save(any())).thenReturn(testGoal);
     when(userService.updateUser(any())).thenReturn(true);
-    assertTrue(goalService.addGoaltoUser(testGoal, testUser));
+    assertTrue(goalService.setUserGoal(testGoal, testUser));
   }
+
   @Test
-  public void testAddGoalToUserFail(){
+  public void testSetUserGoalFail(){
     UserProfile testUser = createUser();
     Goal testGoal = createGoal();
     when(goalRepository.existsById(testGoal.getId())).thenReturn(false);
     when(goalRepository.save(any())).thenReturn(testGoal);
     when(userService.updateUser(any())).thenReturn(true);
-    assertTrue(goalService.addGoaltoUser(testGoal, testUser));
+    assertTrue(goalService.setUserGoal(testGoal, testUser));
   }
 
   @Test
   public void testGetUserGoalsSuccess(){
     UserProfile testUser = createUser();
     Goal testGoal = createGoal();
-    testUser.addGoal(testGoal);
+    testUser.setGoal(testGoal);
     when(userService.getUser(testUser.getEmail())).thenReturn(testUser);
-    assertTrue(!goalService.getUserGoals(testUser.getEmail()).isEmpty());
-  }
-
-  @Test
-  public void testGetUserGoalsInRangeSuccess(){
-    UserProfile testUser = createUser();
-    Goal testGoal = createGoal();
-    testUser.addGoal(testGoal);
-    when(userService.getUser(anyString())).thenReturn(testUser);
-    assertTrue(!goalService.getUserGoalsInRange(testUser.getEmail(), testGoal.getStartDate(), testGoal.getStartDate()).isEmpty());
+    assertTrue(goalService.getUserGoal(testUser.getEmail()) != null);
   }
 
   @Test
   public void testDeleteUserGoal(){
     UserProfile testUser = createUser();
     Goal testGoal = createGoal();
-    testUser.addGoal(testGoal);
+    testUser.setGoal(testGoal);
     when(goalRepository.existsById(anyInt())).thenReturn(true);
     when(userRepository.findUserByEmail(anyString())).thenReturn(testUser);
     when(goalRepository.findGoalById(anyInt())).thenReturn(testGoal);
-    assertTrue(goalService.deleteGoal(testUser.getEmail(), 50) != null);
+    assertTrue(goalService.deleteGoal(testUser.getEmail()) != null);
   }
 
-  @Test
-  public void testGetUserGoalsInRangeFail(){
-    UserProfile testUser = createUser();
-    Goal testGoal = createGoal();
-    testUser.addGoal(testGoal);
-    when(userService.getUser(anyString())).thenReturn(testUser);
-    Date startDate = Date.valueOf("2020-01-15");
-    assertTrue(goalService.getUserGoalsInRange(testUser.getEmail(), startDate, startDate).isEmpty());
-  }
   private UserProfile createUser(){
 		String aEmail = "testUser1@mail.mcgill.ca";
 		String aName = "testboi";
 		String aUserName = "testBoi";
 		String aPassword = "password";
-		int aAge = 15;
+		Date aDOB = Date.valueOf("2010-11-11");
 		int aHeight = 193;
-		boolean aBiologicalSex = true;
-		return new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
-	}
+		Sex aBiologicalSex = Sex.Male;
+    return new UserProfile(aEmail, aName, aUserName, aPassword, aDOB, aHeight, aBiologicalSex);
+  }
 
   private Goal createGoal(){
     int calories = 2500;
     boolean result = false;
     Date startDate = Date.valueOf("2020-02-15");
-    float weight = 75;
-    return new Goal(calories, result, startDate, weight, ActivityLevel.Medium, new MacroDistribution(100, 150, 200));
+    Date endDate = Date.valueOf("2020-04-15");
+    float weightGoal = 75;
+    return new Goal(calories, result, startDate, endDate, weightGoal, ActivityLevel.Medium, GoalType.Gain, new MacroDistribution(100, 150, 200));
+    
   }
-
 
 }

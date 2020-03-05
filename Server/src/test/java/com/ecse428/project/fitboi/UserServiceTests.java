@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import com.ecse428.project.fitboi.model.Sex;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.UserService;
 import com.ecse428.project.repository.*;
@@ -15,6 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
+import java.sql.Date;
 import java.util.ArrayList;
 
 @ExtendWith(SpringExtension.class)
@@ -128,10 +130,10 @@ class UserServiceTests {
 		String aName = "testboi";
 		String aUserName = "testBoi";
 		String aPassword = "password";
-		int aAge = 15;
+		Date aDOB = Date.valueOf("2010-11-11");
 		int aHeight = 193;
-		boolean aBiologicalSex = true;
-		return new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+		Sex aBiologicalSex = Sex.Male;
+		return new UserProfile(aEmail, aName, aUserName, aPassword, aDOB, aHeight, aBiologicalSex);
 	}
 
 }

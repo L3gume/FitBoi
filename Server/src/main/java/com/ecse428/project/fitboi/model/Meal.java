@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 
 /*PLEASE DO NOT EDIT THIS CODE*/
@@ -61,6 +60,11 @@ public class Meal
     mealType = aMealType;
     wasSet = true;
     return wasSet;
+  }
+
+  public int getId()
+  {
+    return id;
   }
 
   @Enumerated

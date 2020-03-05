@@ -1,16 +1,13 @@
 package com.ecse428.project.fitboi.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import com.ecse428.project.fitboi.model.Goal;
+import com.ecse428.project.fitboi.model.Metrics;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.repository.UserRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Provides an API to manipulate user information in the database.
@@ -106,27 +103,33 @@ public class UserService {
 		return deletedUser;
 	}
 
-	public List<Goal> getUserGoals(String userEmail)
+	public Goal getUserGoal(String userEmail)
 	{
 		UserProfile user = getUser(userEmail);
-		return user.getGoals();
+		return user.getGoal();
 	}
 
-	public List<Goal> getUserGoalsInRange(String userEmail, Date start,
-		Date end)
-	{
-		List<Goal> goals = getUserGoals(userEmail);
-		List<Goal> valid_goals = new ArrayList<Goal>();
+	public Metrics getUserMetric(String userEmail, int metric_id) {
+		UserProfile user = getUser(userEmail);
+		for(Metrics metrics : user.getMetrics()) {
+			if(metrics.getId() == metric_id) {
+				return metrics;
+			}
+		}
+		return null;
+	}
 
-		for(Goal goal : goals)
-		{
-			if((goal.getStartDate().after(start) && goal.getStartDate().before(end)) ||
-				goal.getStartDate().equals(start) || goal.getStartDate().equals(end))
-			{
-				valid_goals.add(goal);
+	public Metrics deleteMetrics(String userEmail, int metric_id) {
+		UserProfile user = getUser(userEmail);
+		for(Metrics metric : user.getMetrics()) {
+			if(metric.getId() == metric_id) {
+				if (user.removeMetric(metric)) {
+					repository.save(user);
+					return metric;
+				}
 			}
 		}
 
-		return valid_goals;
+		return null;
 	}
 }

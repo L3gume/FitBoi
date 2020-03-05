@@ -15,15 +15,18 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import org.springframework.http.MediaType;
 
+import com.ecse428.project.fitboi.dto.UserDto;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.repository.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.logging.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 class UserControllerTests {
+
 	private static final Logger LOGGER = Logger.getLogger( UserControllerTests.class.getName() );
 
 	@Autowired 
@@ -50,10 +53,10 @@ class UserControllerTests {
 		String aName = "testboi";
 		String aUserName = "testBoi";
 		String aPassword = "password";
-		int aAge = 15;
+		String aDOB = "2010-11-11";
 		int aHeight = 193;
-		boolean aBiologicalSex = true;
-		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+		String aBiologicalSex = "Female";
+		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
@@ -67,10 +70,10 @@ class UserControllerTests {
 		String aName = "testboi";
 		String aUserName = "testBoi";
 		String aPassword = "password";
-		int aAge = 15;
+		String aDOB = "2010-11-11";
 		int aHeight = 193;
-		boolean aBiologicalSex = true;
-		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+		String aBiologicalSex = "Female";
+		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
@@ -87,10 +90,10 @@ class UserControllerTests {
 		String aName = "testboi";
 		String aUserName = "testBoi";
 		String aPassword = "password";
-		int aAge = -1;
+		String aDOB = "2010-11-11";
 		int aHeight = -1;
-		boolean aBiologicalSex = true;
-		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+		String aBiologicalSex = "Female";
+		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
@@ -115,10 +118,10 @@ class UserControllerTests {
 		String aName = "testboi";
 		String aUserName = "testBoi";
 		String aPassword = "password";
-		int aAge = 15;
+		String aDOB = "2010-11-11";
 		int aHeight = 193;
-		boolean aBiologicalSex = true;
-		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+		String aBiologicalSex = "Male";
+		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
@@ -137,10 +140,10 @@ class UserControllerTests {
 		String aName = "testboi";
 		String aUserName = "testBoi";
 		String aPassword = "password";
-		int aAge = 15;
+		String aDOB = "2010-11-11";
 		int aHeight = 193;
-		boolean aBiologicalSex = true;
-		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+		String aBiologicalSex = "Male";
+		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
@@ -156,10 +159,10 @@ class UserControllerTests {
 		String aName = "testboi";
 		String aUserName = "testBoi";
 		String aPassword = "password";
-		int aAge = 15;
+		String aDOB = "2010-11-11";
 		int aHeight = 193;
-		boolean aBiologicalSex = true;
-		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+		String aBiologicalSex = "Male";
+		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
@@ -175,10 +178,10 @@ class UserControllerTests {
 		String aName = "testboi";
 		String aUserName = "testBoi";
 		String aPassword = "password";
-		int aAge = 15;
+		String aDOB = "2010-11-11";
 		int aHeight = 193;
-		boolean aBiologicalSex = true;
-		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+		String aBiologicalSex = "Male";
+		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
@@ -194,10 +197,10 @@ class UserControllerTests {
 		String aName = "testboi";
 		String aUserName = "testBoi";
 		String aPassword = "password";
-		int aAge = 15;
+		String aDOB = "2010-11-11";
 		int aHeight = 193;
-		boolean aBiologicalSex = true;
-		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+		String aBiologicalSex = "Male";
+		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
@@ -214,10 +217,10 @@ class UserControllerTests {
 		String aName = "testboi";
 		String aUserName = "testBoi";
 		String aPassword = "password";
-		int aAge = 15;
+		String aDOB = "2010-11-11";
 		int aHeight = 193;
-		boolean aBiologicalSex = true;
-		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+		String aBiologicalSex = "Male";
+		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
@@ -234,10 +237,10 @@ class UserControllerTests {
 		String aUserName = "testBoi";
 		String aPassword = "password";
 		String aBadPassword = "password1";
-		int aAge = 15;
+		String aDOB = "2010-11-11";
 		int aHeight = 193;
-		boolean aBiologicalSex = true;
-		UserProfile testUser = new UserProfile(aEmail, aName, aUserName, aPassword, aAge, aHeight, aBiologicalSex);
+		String aBiologicalSex = "Male";
+		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
@@ -245,5 +248,6 @@ class UserControllerTests {
 				.andExpect(status().isCreated());
 
 		mockMvc.perform(get("/users/" + aEmail + "/" + aBadPassword)).andExpect(status().isNotFound());
-	}
+	 }
+
 }

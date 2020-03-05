@@ -299,11 +299,11 @@ public class UserAPI {
         String name = json.optString("name");
         String username = json.optString("username");
         String password = json.optString("password");
-        int age = json.optInt("age");
-        boolean sex = json.optBoolean("sex");
+        String birthDate = json.optString("dob");
+        String sex = json.optString("sex");
         int height = json.optInt("height");
 
-        return new UserDto(email, name, username, password, age, height, sex);
+        return new UserDto(email, name, username, password, birthDate, sex, height);
     }
 
     private static JSONObject userDtoToJson(UserDto user) {
@@ -314,8 +314,8 @@ public class UserAPI {
             json.put("name", user.getName());
             json.put("username", user.getUserName());
             json.put("password", user.getPassword());
-            json.put("age", user.getAge());
-            json.put("sex", user.getSex());
+            json.put("dob", user.getDob());
+            json.put("sex", user.getBiologicalSex());
             json.put("height", user.getHeight());
             json.put("password", user.getPassword());
         } catch (Exception e) {

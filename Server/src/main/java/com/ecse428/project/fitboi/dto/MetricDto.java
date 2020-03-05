@@ -1,4 +1,4 @@
-package com.example.fitboi.dto;
+
 public class MetricDto {
 
     private int id;

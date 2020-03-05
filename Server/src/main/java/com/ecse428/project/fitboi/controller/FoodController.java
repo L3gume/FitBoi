@@ -24,13 +24,15 @@ public class FoodController {
     private FoodService foodService;
 
     /**
-     * GET
-     * /food/{foodName}/ -> returns a list of food in the food DB that have that exact name
+     * GET /food/{foodName}/ -> returns a list of food in the food DB that have that
+     * exact name
+     * 
      * @param foodName
+     * @param numElements
      * @return
      */
     @GetMapping("{foodName}/{numElements}")
-    public ResponseEntity<?> getUser(@PathVariable String foodName, @PathVariable int numElements) {
+    public ResponseEntity<?> getFoodItem(@PathVariable String foodName, @PathVariable int numElements) {
         List<DBFood> foodList = foodService.getDBFoodFromName(foodName);
         List<DBFood> smallList = foodList.stream().limit(numElements).collect(Collectors.toList());
         List<DBFoodDto> foodDtoList = new ArrayList<DBFoodDto>();
@@ -43,9 +45,8 @@ public class FoodController {
     }
 
 
-    public DBFoodDto converToDto(DBFood food)
-    {
-        return new DBFoodDto(food.getName(), food.getCal(), food.getProtein(), food.getFat(),
+    public DBFoodDto converToDto(DBFood food) {
+        return new DBFoodDto(food.getId(), food.getName(), food.getCal(), food.getProtein(), food.getFat(),
          food.getCarbs());
     }
 }

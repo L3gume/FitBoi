@@ -3,7 +3,7 @@ package com.example.fitboi.cucumber.steps;
 import com.example.fitboi.Fitboi;
 import com.example.fitboi.api.UserAPI;
 import com.example.fitboi.data.model.LoggedInUser;
-import com.example.fitboi.dto.UserDto;
+import com.example.fitboi.dto.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

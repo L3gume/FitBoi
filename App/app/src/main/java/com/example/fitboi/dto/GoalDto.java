@@ -1,62 +1,86 @@
 package com.example.fitboi.dto;
 
+import java.sql.Date;
+
+
 public class GoalDto {
 
+    private int id;
     private int baseCalories;
     private boolean result;
-    private String startDate;
-    private double weight;
-
+    private Date startDate;
+    private Date endDate;
+    private float weightGoal;
     private String activityLevel;
-    private int fats;
-    private int carbs;
-    private int proteins;
+    private String goalType;
+    private float fats;
+    private float carbs;
+    private float protein;
 
     public GoalDto(){
 
     }
 
-    public GoalDto(int baseCalories, boolean result, String startDate, double weight, String activityLevel, int fats, int carbs, int proteins){
+    public GoalDto(int id, int baseCalories, boolean result, Date startDate, Date endDate, float weightGoal, String activityLevel, String goalType, float fats, float carbs, float protein) {
+        this.id = id;
         this.baseCalories = baseCalories;
         this.result = result;
         this.startDate = startDate;
-        this.weight = weight;
+        this.endDate = endDate;
+        this.weightGoal = weightGoal;
         this.activityLevel = activityLevel;
+        this.goalType = goalType;
         this.fats = fats;
         this.carbs = carbs;
-        this.proteins = proteins;
+        this.protein = protein;
     }
 
-    public int getBaseCalories(){
-        return this.baseCalories;
+    public int getId() {
+        return id;
     }
 
-    public void setBaseCalories (int baseCalories){
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getBaseCalories() {
+        return baseCalories;
+    }
+
+    public void setBaseCalories(int baseCalories) {
         this.baseCalories = baseCalories;
     }
 
-    public boolean getResult (){
-        return this.result;
+    public boolean isResult() {
+        return result;
     }
 
-    public void setResult(boolean result){
+    public void setResult(boolean result) {
         this.result = result;
     }
 
-    public String getStartDate(){
-        return this.startDate;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStartDate(String startDate){
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public double getWeight(){
-        return this.weight;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setWeight(double weight){
-        this.weight = weight;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public float getWeightGoal() {
+        return weightGoal;
+    }
+
+    public void setWeightGoal(float weightGoal) {
+        this.weightGoal = weightGoal;
     }
 
     public String getActivityLevel() {
@@ -67,28 +91,74 @@ public class GoalDto {
         this.activityLevel = activityLevel;
     }
 
-    public int getFats() {
+    public String getGoalType() {
+        return goalType;
+    }
+
+    public void setGoalType(String goalType) {
+        this.goalType = goalType;
+    }
+
+    public float getFats() {
         return fats;
     }
 
-    public void setFats(int fats) {
+    public void setFats(float fats) {
         this.fats = fats;
     }
 
-    public int getCarbs() {
+    public float getCarbs() {
         return carbs;
     }
 
-    public void setCarbs(int carbs) {
+    public void setCarbs(float carbs) {
         this.carbs = carbs;
     }
 
-    public int getProteins() {
-        return proteins;
+    public float getProtein() {
+        return protein;
     }
 
-    public void setProteins(int proteins) {
-        this.proteins = proteins;
+    public void setProtein(float protein) {
+        this.protein = protein;
+    }
+
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        if (!super.equals(object)) return false;
+        GoalDto goalDto = (GoalDto) object;
+        return id == goalDto.id &&
+                baseCalories == goalDto.baseCalories &&
+                result == goalDto.result &&
+                java.lang.Float.compare(goalDto.weightGoal, weightGoal) == 0 &&
+                java.lang.Float.compare(goalDto.fats, fats) == 0 &&
+                java.lang.Float.compare(goalDto.carbs, carbs) == 0 &&
+                java.lang.Float.compare(goalDto.protein, protein) == 0 &&
+                startDate.equals(goalDto.startDate) &&
+                java.util.Objects.equals(endDate, goalDto.endDate) &&
+                activityLevel.equals(goalDto.activityLevel) &&
+                goalType.equals(goalDto.goalType);
+    }
+
+    public int hashCode() {
+        return java.util.Objects.hash(super.hashCode(), id, baseCalories, result, startDate, endDate, weightGoal, activityLevel, goalType, fats, carbs, protein);
+    }
+
+    @java.lang.Override
+    public java.lang.String toString() {
+        return "GoalDto{" +
+                "id=" + id +
+                ", baseCalories=" + baseCalories +
+                ", result=" + result +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", weightGoal=" + weightGoal +
+                ", activityLevel='" + activityLevel + '\'' +
+                ", goalType='" + goalType + '\'' +
+                ", fats=" + fats +
+                ", carbs=" + carbs +
+                ", protein=" + protein +
+                '}';
     }
 }
-

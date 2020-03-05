@@ -32,10 +32,14 @@ public class Goal
   private int baseCalories;
   private boolean result;
   private Date startDate;
-  private float weight;
+  private Date endDate;
+  private float weightGoal;
   
   @Enumerated(EnumType.STRING)
   private ActivityLevel activityLevel;
+
+  @Enumerated(EnumType.STRING)
+  private GoalType goalType;
 
   //Goal Associations
   @OneToOne(cascade={CascadeType.ALL})
@@ -45,13 +49,15 @@ public class Goal
   // CONSTRUCTOR
   //------------------------
 
-  public Goal(int aBaseCalories, boolean aResult, Date aStartDate, float aWeight, ActivityLevel aActivityLevel, MacroDistribution aMacroDistribution)
+  public Goal(int aBaseCalories, boolean aResult, Date aStartDate, Date aEndDate, float aWeightGoal, ActivityLevel aActivityLevel, GoalType aGoalType, MacroDistribution aMacroDistribution)
   {
     baseCalories = aBaseCalories;
     result = aResult;
     startDate = aStartDate;
-    weight = aWeight;
+    endDate = aEndDate;
+    weightGoal = aWeightGoal;
     activityLevel = aActivityLevel;
+    goalType = aGoalType;
     if (aMacroDistribution == null)
     {
       throw new RuntimeException("Unable to create Goal due to aMacroDistribution. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
@@ -59,13 +65,15 @@ public class Goal
     macroDistribution = aMacroDistribution;
   }
 
-  public Goal(int aBaseCalories, boolean aResult, Date aStartDate, float aWeight, ActivityLevel aActivityLevel, float aFatsForMacroDistribution, float aCarbsForMacroDistribution, float aProteinForMacroDistribution)
+  public Goal(int aBaseCalories, boolean aResult, Date aStartDate, Date aEndDate, float aWeightGoal, ActivityLevel aActivityLevel, GoalType aGoalType, float aFatsForMacroDistribution, float aCarbsForMacroDistribution, float aProteinForMacroDistribution)
   {
     baseCalories = aBaseCalories;
     result = aResult;
     startDate = aStartDate;
-    weight = aWeight;
+    endDate = aEndDate;
+    weightGoal = aWeightGoal;
     activityLevel = aActivityLevel;
+    goalType = aGoalType;
     macroDistribution = new MacroDistribution(aFatsForMacroDistribution, aCarbsForMacroDistribution, aProteinForMacroDistribution);
   }
 
@@ -107,10 +115,18 @@ public class Goal
     return wasSet;
   }
 
-  public boolean setWeight(float aWeight)
+  public boolean setEndDate(Date aEndDate)
   {
     boolean wasSet = false;
-    weight = aWeight;
+    endDate = aEndDate;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public boolean setWeightGoal(float aWeightGoal)
+  {
+    boolean wasSet = false;
+    weightGoal = aWeightGoal;
     wasSet = true;
     return wasSet;
   }
@@ -123,12 +139,12 @@ public class Goal
     return wasSet;
   }
 
-  public boolean setMacroDistribution(MacroDistribution aMacroDistribution){
+  public boolean setGoalType(GoalType aGoalType)
+  {
     boolean wasSet = false;
-    macroDistribution = aMacroDistribution;
+    goalType = aGoalType;
     wasSet = true;
     return wasSet;
-
   }
 
   public int getBaseCalories()
@@ -146,15 +162,26 @@ public class Goal
     return startDate;
   }
 
-  public float getWeight()
+  public Date getEndDate()
   {
-    return weight;
+    return endDate;
+  }
+
+  public float getWeightGoal()
+  {
+    return weightGoal;
   }
 
   @Enumerated
   public ActivityLevel getActivityLevel()
   {
     return activityLevel;
+  }
+
+  @Enumerated
+  public GoalType getGoalType()
+  {
+    return goalType;
   }
   /* Code from template attribute_IsBoolean */
   public boolean isResult()
@@ -167,8 +194,11 @@ public class Goal
   {
     return macroDistribution;
   }
-  /* Code from template association_SetOneToMany */
 
+  //@OneToOne(cascade = {CascadeType.ALL})
+  public void setMacroDistribution(MacroDistribution aMacroDistribution){
+    this.macroDistribution = aMacroDistribution;
+  }
   public void delete()
   {
     MacroDistribution existingMacroDistribution = macroDistribution;
@@ -181,9 +211,11 @@ public class Goal
     return super.toString() + "["+
             "baseCalories" + ":" + getBaseCalories()+ "," +
             "result" + ":" + getResult()+ "," +
-            "weight" + ":" + getWeight()+ "]" + System.getProperties().getProperty("line.separator") +
+            "weight" + ":" + getWeightGoal()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "startDate" + "=" + (getStartDate() != null ? !getStartDate().equals(this)  ? getStartDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
+            "  " + "endDate" + "=" + (getEndDate() != null ? !getEndDate().equals(this)  ? getEndDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
             "  " + "activityLevel" + "=" + (getActivityLevel() != null ? !getActivityLevel().equals(this)  ? getActivityLevel().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
+            "  " + "goalType" + "=" + (getGoalType() != null ? !getGoalType().equals(this)  ? getGoalType().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
             "  " + "macroDistribution = "+(getMacroDistribution()!=null?Integer.toHexString(System.identityHashCode(getMacroDistribution())):"null");
   }
 }

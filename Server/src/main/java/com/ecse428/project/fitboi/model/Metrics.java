@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 
 
@@ -70,6 +69,10 @@ public class Metrics
     exerciseSpending = aExerciseSpending;
     wasSet = true;
     return wasSet;
+  }
+
+  public int getId() {
+    return id;
   }
 
   public Date getDate()
