@@ -4,6 +4,10 @@ import com.example.fitboi.Fitboi;
 import com.example.fitboi.api.UserAPI;
 import com.example.fitboi.dto.UserDto;
 
+import java.lang.reflect.Array;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,7 +24,9 @@ public class ID001_User_Creates_New_Account {
 
     private Fitboi app;
     private UserDto user;
+    private UserDto createdUser;
     private String email;
+    private ArrayList<UserDto> users;
 
     private static boolean isCreated;
 
@@ -43,23 +49,24 @@ public class ID001_User_Creates_New_Account {
 
     @Before
     public void init() {
-        isCreated = false;
-        user = null;
         email = "boatyyy@mcboatface.com";
+        user = new UserDto();
+        user.setDob(new Date(1).toString());
+        user.setEmail(email);
+        user.setHeight(180);
+        user.setName("Boaty McBoatFace");
+        user.setPassword("boatboat");
+        user.setBiologicalSex("Female");
+        user.setUserName("boaty");
         app = mock(Fitboi.class);
         app.onCreate();
-        UserAPI.getUserByLoginInfo(new Consumer<UserDto>() {
-            @Override
-            public void accept(UserDto userDto) {
-                user = userDto;
-            }
-        }, email);
+        users = (ArrayList<UserDto>)UserAPI.getUsers(null);
     }
 
     @Given("the User is not currently a member of the the FitBoi application")
     public void the_User_is_not_currently_a_member_of_the_the_FitBoi_application() {
         // Write code here that turns the phrase above into concrete actions
-        assert user == null;
+        assert users.contains(user);
 
     }
 
@@ -76,12 +83,12 @@ public class ID001_User_Creates_New_Account {
         assert !isValidEmail(email);
 
         user = new UserDto();
-        user.setAge(18);
+        user.setDob(new Date(1).toString());
         user.setEmail(email);
         user.setHeight(180);
         user.setName("Boaty McBoatFace");
         user.setPassword("boatboat");
-        user.setSex(false);
+        user.setBiologicalSex("Female");
         user.setUserName("boaty");
     }
 
@@ -89,25 +96,17 @@ public class ID001_User_Creates_New_Account {
     public void the_individual_s_form_data_entered_are_valid() {
         // Write code here that turns the phrase above into concrete actions
  //       throw new io.cucumber.java.PendingException();
-        user = new UserDto();
-        user.setAge(18);
-        user.setEmail(email);
-        user.setHeight(180);
-        user.setName("Boaty McBoatFace");
-        user.setPassword("boatboat");
-        user.setSex(false);
-        user.setUserName("boaty");
     }
 
     @And("the entered form data is invalid")
     public void the_entered_form_data_is_invalid() {
         user = new UserDto();
-        user.setAge(-1);
+        user.setDob(new Date(-1).toString());
         user.setEmail(email);
         user.setHeight(180);
         user.setName("Boaty McBoatFace");
         user.setPassword(null);
-        user.setSex(false);
+        user.setBiologicalSex("Female");
         user.setUserName(null);
     }
 
@@ -115,26 +114,19 @@ public class ID001_User_Creates_New_Account {
     public void request_create_profile_made() {
         // Write code here that turns the phrase above into concrete actions
   //      throw new io.cucumber.java.PendingException();
-        UserAPI.addNewUser(user, new Consumer<UserDto>() {
-            @Override
-            public void accept(UserDto userDto) {
-                if (userDto != null)
-                    isCreated = user.getEmail().equals(userDto.getEmail());
-                else
-                    isCreated = false;
-            }
-        });
+        createdUser = UserAPI.addUser(user, null);
+
     }
 
     @Then("a new User profile is created")
     public void a_new_user_profile_is_created() {
         // Write code here that turns the phrase above into concrete actions
    //     throw new io.cucumber.java.PendingException();
-        assert isCreated;
+        assert createdUser != null;
     }
 
     @Then("a new User profile is not created")
     public void a_new_user_profile_is_not_created() {
-        assert !isCreated;
+        assert createdUser == null;
     }
 }
