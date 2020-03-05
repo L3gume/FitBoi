@@ -45,9 +45,8 @@ public class FoodController {
     }
 
 
-    public DBFoodDto converToDto(DBFood food)
-    {
-        return new DBFoodDto(food.getName(), food.getCal(), food.getProtein(), food.getFat(),
+    public DBFoodDto converToDto(DBFood food) {
+        return new DBFoodDto(food.getId(), food.getName(), food.getCal(), food.getProtein(), food.getFat(),
          food.getCarbs());
     }
 }

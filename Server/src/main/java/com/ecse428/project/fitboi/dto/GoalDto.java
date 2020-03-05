@@ -19,6 +19,7 @@ public class GoalDto {
     private float fats;
     private float carbs;
     private float protein;
+    private MacroDistribution macroDistribution;
 
     public GoalDto(){
 

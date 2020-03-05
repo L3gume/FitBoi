@@ -94,22 +94,22 @@ public class GoalController {
       
         float weightGoal = objectNode.get("weightGoal").asLong();
 
-        GoalDto goal = new GoalDto(cal, result, Date.valueOf(objectNode.get("startDate").asText()), Date.valueOf(objectNode.get("endDate").asText()), weightGoal, activityLevel, goalType, macroDistribution);
-       
+        Goal goal = new Goal(cal, result, Date.valueOf(objectNode.get("startDate").asText()),
+                Date.valueOf(objectNode.get("endDate").asText()), weightGoal, activityLevel,
+                goalType, macroDistribution);
 
-    	if (!goalService.setUserGoal(convertToDomainObject(goal), user))
+    	if (!goalService.setUserGoal(goal, user))
     	{
-    		return new ResponseEntity<String>("Unable to set goal", HttpStatus.UNPROCESSABLE_ENTITY);
+    		return new ResponseEntity<>("Unable to set goal", HttpStatus.UNPROCESSABLE_ENTITY);
     	}
 
-    	return new ResponseEntity<GoalDto>(goal, HttpStatus.CREATED);
+    	return new ResponseEntity<>(convertToDto(goal), HttpStatus.CREATED);
     }
 
         /**
      * DELETE
      * /users/{user_id}/goals/{goalId} -> deletes a goal from the DB
      * @param userEmail 
-     * @param goalId
      * @return
      */
     @DeleteMapping("{userEmail}/goal")
@@ -124,15 +124,19 @@ public class GoalController {
     }
 
     private GoalDto convertToDto(Goal goal) {
+        MacroDistribution dist = goal.getMacroDistribution();
     	return new GoalDto(
-            goal.getBaseCalories(),
-            goal.getResult(),
-            goal.getStartDate(),
-            goal.getEndDate(),
-            goal.getWeightGoal(),
-            goal.getActivityLevel(),
-            goal.getGoalType(),
-            goal.getMacroDistribution()   			
+    	        goal.getId(),
+                goal.getBaseCalories(),
+                goal.getResult(),
+                goal.getStartDate(),
+                goal.getEndDate(),
+                goal.getWeightGoal(),
+                goal.getActivityLevel().name(),
+                goal.getGoalType().name(),
+                dist.getFats(),
+                dist.getCarbs(),
+                dist.getProtein()
     			);
     }
 
@@ -140,13 +144,13 @@ public class GoalController {
 		
 		Goal goal = new Goal(
             goalDto.getBaseCalories(),
-            goalDto.getResult(),
+            goalDto.isResult(),
             goalDto.getStartDate(),
             goalDto.getEndDate(),
             goalDto.getWeightGoal(),
-            goalDto.getActivityLevel(),
-            goalDto.getGoalType(),
-            goalDto.getMacroDistribution()
+            ActivityLevel.valueOf(goalDto.getActivityLevel()),
+            GoalType.valueOf(goalDto.getGoalType()),
+            new MacroDistribution(goalDto.getFats(), goalDto.getCarbs(), goalDto.getProtein())
                 );
                 
 		return goal;

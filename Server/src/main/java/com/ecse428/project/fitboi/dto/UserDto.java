@@ -16,7 +16,7 @@ public class UserDto {
     public UserDto() {
     }
 
-    public UserDto(String email, String name, String userName, String password, String dob, int height, String biologicalSex) {
+    public UserDto(String email, String name, String userName, String password, String dob, String biologicalSex, int height) {
         this.email = email;
         this.name = name;
         this.userName = userName;

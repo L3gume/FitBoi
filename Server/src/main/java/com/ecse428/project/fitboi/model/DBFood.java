@@ -18,7 +18,7 @@ public class DBFood
     private double fat;
     private double carbs;
 
-
+    // id is auto-generated, no need to have it in the constructor
     public DBFood(String aName, long aCal, double aProtein, double aFat,
         double aCarbs)
     {
@@ -64,6 +64,11 @@ public class DBFood
         return true;
     }
 
+    public boolean setId(int iId) {
+        this.id = iId;
+        return true;
+    }
+
     public String getName()
     {
         return this.name;
@@ -89,4 +94,5 @@ public class DBFood
         return this.carbs;
     }
 
+    public int getId() { return this.id; }
 }
