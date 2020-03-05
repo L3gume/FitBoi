@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.fitboi.R;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.function.Consumer;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +34,7 @@ public class Signup_Step2 extends AppCompatActivity implements DatePickerDialog.
     private int birthYear;
     private int birthMonth;
     private int birthDay;
-    private boolean sex;
+    private String sex;
     public EditText getHeight() {
         return this.height;
     }
@@ -90,9 +91,9 @@ public class Signup_Step2 extends AppCompatActivity implements DatePickerDialog.
                 // find the radiobutton by returned id
                 radioSexButton = (RadioButton) findViewById(selectedId);
                 if (selectedId == R.id.rbMale)
-                    sex = true;
+                    sex = "Male";
                 else
-                    sex = false;
+                    sex = "Female";
                 radioSexButton.setBackgroundResource(R.drawable.border_green);
             }
         });
@@ -155,8 +156,8 @@ public class Signup_Step2 extends AppCompatActivity implements DatePickerDialog.
 
                     String username = firstName.charAt(0) + lastName;
                             UserDto userToAdd = new UserDto(email, firstName, username,
-                                    password, age,
-                                    Integer.parseInt(height.getText().toString()), sex);
+                                    password, new Date(birthYear, birthMonth, birthDay).toString(),
+                                    sex, Integer.parseInt(height.getText().toString()));
                 }
 
             }

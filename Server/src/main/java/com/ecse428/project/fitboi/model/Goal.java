@@ -147,14 +147,6 @@ public class Goal
     return wasSet;
   }
 
-  public boolean setMacroDistribution(MacroDistribution aMacroDistribution){
-    boolean wasSet = false;
-    macroDistribution = aMacroDistribution;
-    wasSet = true;
-    return wasSet;
-
-  }
-
   public int getBaseCalories()
   {
     return baseCalories;
@@ -202,8 +194,11 @@ public class Goal
   {
     return macroDistribution;
   }
-  /* Code from template association_SetOneToMany */
 
+  //@OneToOne(cascade = {CascadeType.ALL})
+  public void setMacroDistribution(MacroDistribution aMacroDistribution){
+    this.macroDistribution = aMacroDistribution;
+  }
   public void delete()
   {
     MacroDistribution existingMacroDistribution = macroDistribution;

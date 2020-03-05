@@ -235,8 +235,8 @@ public class UserController {
     			user.getUserName(),
     			user.getPassword(),
     			df.format(user.getDOB()),
-				user.getBiologicalSex().name(),
-				user.getHeight()
+                user.getBiologicalSex().name(),
+                user.getHeight()
     			);
     }
     
@@ -247,9 +247,9 @@ public class UserController {
 				userDto.getName(),
 				userDto.getUserName(),
 				userDto.getPassword(),
-				Date.valueOf(userDto.getDOB()),
+				Date.valueOf(userDto.getDob()),
                 userDto.getHeight(),
-                Sex.valueOf(userDto.getSex())
+                Sex.valueOf(userDto.getBiologicalSex())
 				);
 		return profile;
     }

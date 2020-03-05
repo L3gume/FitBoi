@@ -12,6 +12,7 @@ import com.example.fitboi.dto.GoalDto;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -236,30 +237,37 @@ public class GoalAPI {
 
     // JSON - DTO converters
     private static GoalDto jsonToGoalDto(JSONObject json) {
+        int id = json.optInt("id");
         int baseCalories = json.optInt("baseCalories");
         boolean result = json.optBoolean("result");
-        String startDate = json.optString("startDate");
-        double weight = json.optDouble("weight");
+        long startDate = json.optLong("startDate");
+        long endDate = json.optLong("endDate");
+        float weight = (float)json.optDouble("weight");
         String activityLevel = json.optString("activityLevel");
-        int fats = json.optInt("fats");
-        int carbs = json.optInt("carbs");
-        int proteins = json.optInt("proteins");
+        String goalType = json.optString("goalType");
+        float fats = (float)json.optDouble("fats");
+        float carbs = (float)json.optDouble("carbs");
+        float proteins = (float)json.optDouble("proteins");
 
-        return new GoalDto(baseCalories,result,startDate,weight,activityLevel,fats,carbs,proteins);
+        return new GoalDto(id, baseCalories, result, new Date(startDate), new Date(endDate), weight,
+                activityLevel, goalType, fats, carbs, proteins);
     }
 
     private static JSONObject goalDtoToJson(GoalDto goal) {
         JSONObject json = new JSONObject();
 
         try {
+            json.put("id", goal.getId());
             json.put("baseCalories", goal.getBaseCalories());
-            json.put("result", goal.getResult());
-            json.put("startDate", goal.getStartDate());
-            json.put("weight", goal.getWeight());
+            json.put("result", goal.isResult());
+            json.put("startDate", goal.getStartDate().getTime());
+            json.put("endDate", goal.getEndDate().getTime());
+            json.put("weight", goal.getWeightGoal());
             json.put("activityLevel", goal.getActivityLevel());
+            json.put("goalType", goal.getGoalType());
             json.put("fats", goal.getFats());
             json.put("carbs", goal.getCarbs());
-            json.put("proteins", goal.getProteins());
+            json.put("proteins", goal.getProtein());
         } catch (Exception e) {
             // TODO: something with exception
         }

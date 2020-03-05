@@ -9,6 +9,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -22,7 +23,9 @@ public class ID006_User_Sets_A_New_Goal {
 
     @Then("the User adds a goal to their profile")
     public void the_user_adds_a_goal_to_their_profile() {
-        GoalDto goalDto = new GoalDto(10, true, "12-12-2019", 12, "High", 20, 30, 40);
+        GoalDto goalDto = new GoalDto(1337, 10, true,
+                new Date(0), new Date(1), 12.f,
+                "High", "Lose", 20.f, 30.f, 40.f);
         GoalAPI.addUserGoal("boaty@mcboatface.ca", goalDto, null);
         assert true;
     }
