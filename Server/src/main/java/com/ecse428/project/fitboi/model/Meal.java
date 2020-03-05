@@ -62,6 +62,11 @@ public class Meal
     return wasSet;
   }
 
+  public int getId()
+  {
+    return id;
+  }
+
   @Enumerated
   public MealType getMealType()
   {

@@ -71,6 +71,10 @@ public class Metrics
     return wasSet;
   }
 
+  public int getId() {
+    return id;
+  }
+
   public Date getDate()
   {
     return date;

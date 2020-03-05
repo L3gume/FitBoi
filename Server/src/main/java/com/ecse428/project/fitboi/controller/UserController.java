@@ -19,9 +19,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecse428.project.fitboi.dto.*;
+import com.ecse428.project.fitboi.model.FoodItem;
+import com.ecse428.project.fitboi.model.MacroDistribution;
+import com.ecse428.project.fitboi.model.Meal;
+import com.ecse428.project.fitboi.model.Metrics;
 import com.ecse428.project.fitboi.model.Sex;
 import com.ecse428.project.fitboi.model.UserProfile;
+import com.ecse428.project.fitboi.service.MealService;
+import com.ecse428.project.fitboi.service.MetricsService;
 import com.ecse428.project.fitboi.service.UserService;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @RestController
 @RequestMapping("/users/")
@@ -29,6 +36,12 @@ public class UserController {
 	
 	@Autowired
     private UserService userService;
+
+    @Autowired
+    private MetricsService metricsService;
+
+    @Autowired
+    private MealService mealService;
 
     @GetMapping("{userEmail}/{password}")
     public ResponseEntity<?> loginUser(@PathVariable String userEmail, @PathVariable String password) {
@@ -134,7 +147,84 @@ public class UserController {
     	return new ResponseEntity<UserDto>(convertToDto(deletedUser), HttpStatus.OK);
     }
 
-   // TODO: Add PATCH call
+    /**
+     * POST
+     * /users/{user_id}/metrics/{metric_id}/meals/{meal_id}/food -> adds a food to a meal
+     * @param user_id
+     * @param metric_id
+     * @param meal_id
+     * @return
+     */
+    @PostMapping("{user_id}/metrics/{metric_id}/meal/{meal_id}/food")
+    public ResponseEntity<?> addFoodtoMeal(@PathVariable String user_id, @PathVariable int metric_id, @PathVariable int meal_id, @RequestBody ObjectNode food) 
+    {
+        
+        Metrics metric = userService.getUserMetric(user_id, metric_id);
+        Meal meal = metricsService.getUserMeal(metric, meal_id);
+
+        String name = food.get("name").asText();
+        int cal = food.get("cal").asInt();
+        float portionSize = food.get("portionSize").asLong();
+        float fats = food.get("fat").asLong();
+        float carbs = food.get("carbs").asLong();
+        float protein = food.get("protein").asLong();
+
+        FoodItem foodItem = new FoodItem(name, cal, portionSize, new MacroDistribution(fats, carbs, protein));
+
+        meal.addFoodItem(foodItem);
+        
+        mealService.updateMeal(meal);
+
+    	return new ResponseEntity<FoodDto>(convertToDto(foodItem), HttpStatus.OK);
+    }
+
+    /**
+     * GET
+     * /users/{user_id}/metrics/{metric_id}/meals/{meal_id}/food -> adds a food to a meal
+     * @param user_id
+     * @param metric_id
+     * @param meal_id
+     * @return
+     */
+    @GetMapping("{user_id}/metrics/{metric_id}/meal/{meal_id}/food")
+    public ResponseEntity<?> getFoodsFromMeal(@PathVariable String user_id, @PathVariable int metric_id, @PathVariable int meal_id) 
+    {
+        
+        Metrics metric = userService.getUserMetric(user_id, metric_id);
+        Meal meal = metricsService.getUserMeal(metric, meal_id);
+
+        List<FoodItem> foods = meal.getFoodItems();
+        
+        List<FoodDto> foodsDto = new ArrayList<FoodDto>();
+        for (FoodItem food : foods) {
+            foodsDto.add(convertToDto(food));
+        }
+    	return new ResponseEntity<List<FoodDto>>(foodsDto, HttpStatus.OK);
+    }
+
+    /**
+     * GET
+     * /users/{user_id}/metrics/{metric_id}/meals/{meal_id}/food -> adds a food to a meal
+     * @param user_id
+     * @param metric_id
+     * @param meal_id
+     * @return
+     */
+    @DeleteMapping("{user_id}/metrics/{metric_id}/meal/{meal_id}/food/{food_id}")
+    public ResponseEntity<?> deleteFoodFromMeal(@PathVariable String user_id, @PathVariable int metric_id, @PathVariable int meal_id, @PathVariable int food_id) 
+    {
+        
+        Metrics metric = userService.getUserMetric(user_id, metric_id);
+        Meal meal = metricsService.getUserMeal(metric, meal_id);
+        FoodItem  food = mealService.deleteFood(meal, food_id);
+        
+        if (food == null) {
+            return new ResponseEntity<String>("The food item does not exist in the given meal", HttpStatus.NOT_ACCEPTABLE);
+        }
+        
+    	return new ResponseEntity<FoodDto>(convertToDto(food), HttpStatus.OK);
+    }
+
     
     private UserDto convertToDto(UserProfile user) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -163,6 +253,18 @@ public class UserController {
 				);
 		return profile;
     }
+
+    private FoodDto convertToDto(FoodItem foodItem) {
+        return new FoodDto(
+            foodItem.getId(),
+            foodItem.getName(),
+            foodItem.getCalories(),
+            foodItem.getPortionSize(),
+            foodItem.getMacroDistribution().getFats(),
+            foodItem.getMacroDistribution().getCarbs(),
+            foodItem.getMacroDistribution().getProtein()
+        );
+    } 
 
     private boolean isValidUser(UserDto user){
         return user.getEmail().contains(("@")) && user.getHeight() > 0;

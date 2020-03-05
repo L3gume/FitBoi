@@ -1,3 +1,4 @@
+package com.ecse428.project.fitboi.dto;
 
 public class MealDto {
 
@@ -11,7 +12,7 @@ public class MealDto {
         this.id = id;
         this.mealType = mealType;
     }
-
+    
     public int getId() {
         return id;
     }
