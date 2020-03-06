@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -106,7 +107,32 @@ public class GoalController {
     	return new ResponseEntity<>(convertToDto(goal), HttpStatus.CREATED);
     }
 
-        /**
+    /**
+     * POST
+     * updates goal in db given 
+     * @param userEmail 
+     * @param goalDto
+     * @return
+     */
+
+    @PutMapping("{userEmail}/goal")
+    public ResponseEntity<?> updateGoal(@PathVariable("userEmail") String userEmail, @RequestBody GoalDto goalDto) {
+        if (goalDto == null) {
+            return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
+        }
+        
+        Goal goal = userService.getUserGoal(userEmail);
+        goal = cloneDto(goal, goalDto);
+
+        if (!goalService.updateGoal(userEmail, goal))
+        {
+            return new ResponseEntity<String>("Goal does not exist", HttpStatus.BAD_REQUEST);
+        }
+        
+        return new ResponseEntity<GoalDto>(goalDto, HttpStatus.OK);
+    }
+
+    /**
      * DELETE
      * /users/{user_id}/goals/{goalId} -> deletes a goal from the DB
      * @param userEmail 
@@ -138,6 +164,21 @@ public class GoalController {
                 dist.getCarbs(),
                 dist.getProtein()
     			);
+    }
+
+    // account for auto-gen issue
+    private Goal cloneDto(Goal goal, GoalDto goalDto){
+        goal.setBaseCalories(goalDto.getBaseCalories());
+        goal.setResult(goalDto.isResult());
+        goal.setStartDate(goalDto.getStartDate());
+        goal.setEndDate(goalDto.getEndDate());
+        goal.setWeightGoal(goalDto.getWeightGoal());
+        goal.setActivityLevel(ActivityLevel.valueOf(goalDto.getActivityLevel()));
+        goal.setGoalType(GoalType.valueOf(goalDto.getGoalType()));
+        goal.getMacroDistribution().setFats(goalDto.getFats());
+        goal.getMacroDistribution().setCarbs(goalDto.getCarbs());
+        goal.getMacroDistribution().setProtein(goalDto.getProtein());
+        return goal;
     }
 
     private Goal convertToDomainObject(GoalDto goalDto) {
