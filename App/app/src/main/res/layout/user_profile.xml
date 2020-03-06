@@ -90,11 +90,11 @@
                 android:layout_gravity="bottom|center"
                 android:background="@drawable/filled_rounded_button"
                 android:outlineSpotShadowColor="@color/textWhite"
+                android:contextClickable="true"
                 android:text="Edit Profile"
                 android:textAllCaps="false"
                 android:textColor="@color/colorOrangeRed"
                 android:textStyle="bold">
-
             </Button>
 
         </LinearLayout>
@@ -110,8 +110,8 @@
             android:id="@+id/profile_info_btn"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:paddingHorizontal="20dp"
-            android:background="@drawable/btn_select"
+            android:paddingHorizontal="15dp"
+            android:background="@drawable/large_btn_profile_navigation"
             android:drawableRight="@drawable/arrow_right_white"
             android:drawableLeft="@drawable/profile_info_icon"
             android:shadowColor="@color/textBlack"
@@ -127,8 +127,8 @@
             android:id="@+id/goals_btn"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:paddingHorizontal="20dp"
-            android:background="@drawable/btn_select"
+            android:paddingHorizontal="15dp"
+            android:background="@drawable/large_btn_profile_navigation"
             android:drawableRight="@drawable/arrow_right_white"
             android:drawableLeft="@drawable/goal_icon"
             android:shadowColor="@color/textBlack"
@@ -145,10 +145,10 @@
             android:id="@+id/user_settings_btn"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:paddingHorizontal="20dp"
-            android:background="@drawable/btn_select"
+            android:paddingHorizontal="10dp"
+            android:background="@drawable/large_btn_profile_navigation"
             android:drawableRight="@drawable/arrow_right_white"
-            android:drawableLeft="@drawable/goal_icon"
+            android:drawableLeft="@drawable/settings_icon"
             android:shadowColor="@color/textBlack"
             android:elevation="5dp"
             android:textAlignment="center"
