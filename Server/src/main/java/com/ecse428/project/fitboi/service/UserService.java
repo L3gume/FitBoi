@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.ecse428.project.fitboi.model.Goal;
 import com.ecse428.project.fitboi.model.UserProfile;
+import com.ecse428.project.fitboi.model.Metrics;
 import com.ecse428.project.repository.UserRepository;
 
 /**
@@ -128,5 +129,46 @@ public class UserService {
 		}
 
 		return valid_goals;
+	}
+
+	/**
+	 * Adds the given number to the users excersie count for 
+	 * the current day
+	 * 
+	 * @param userEmail
+	 * @param calorieCount
+	 * @return 
+	 */
+	@Transactional
+	public boolean addExceriseCount(String userEmail, int cal)
+	{
+		UserProfile user = getUser(userEmail);
+		if(user == null) return false;
+
+		Metrics curMetric = user.getMetric(0);
+		curMetric.setExerciseSpending(curMetric.getExerciseSpending() +
+			cal);
+
+		return true;
+	} 
+
+	/**
+	 * Sets the excerise calorie count for the current day to the given
+	 * calorie count
+	 *
+	 * @param userEmail
+	 * @param calorieCount
+	 * @return 
+	 */
+	@Transactional
+	public boolean setExerciseSpending(String userEmail, int cal)
+	{
+		UserProfile user = getUser(userEmail);
+		if(user == null) return false;
+
+		Metrics curMetric = user.getMetric(0);
+		curMetric.setExerciseSpending(cal);
+
+		return true;
 	}
 }
