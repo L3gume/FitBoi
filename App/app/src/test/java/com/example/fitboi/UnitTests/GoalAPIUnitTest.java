@@ -18,42 +18,36 @@ import java.util.function.Consumer;
 @PrepareForTest(GoalAPI.class)
 public class GoalAPIUnitTest {
     private static GoalDto goal;
-    private static List<GoalDto> goalList = new ArrayList<>();
-    private static Consumer<List<GoalDto>> goalGetListFunction;
-    private static Consumer<GoalDto> goalAddFunction;
-    private static Consumer<GoalDto> goalDeleteFunction;
     private static boolean isAdded;
     private static boolean isDeleted;
     private static boolean isUpdated;
 
     @BeforeClass
     public static void Setup() {
-        goal = new GoalDto(2000, false, "02-02-2020", 76.8, "high", 10, 20, 30);
+        goal = new GoalDto(1234,0,false,"2020-02-02", "2020-10-01", 76.8, "high", "lose", 10,20,30);
     }
 
     @Test
     public void addNewGoal() {
         PowerMockito.mockStatic(GoalAPI.class);
         PowerMockito.doNothing().when(GoalAPI.class);
-        GoalDto goalDto = GoalAPI.addUserGoal("test@gmail.com", goal, null);
-        isAdded = (goalDto.getStartDate().equals(goal.getStartDate()) && goalDto.getResult());
+        GoalDto goalDto = GoalAPI.createGoal("test@gmail.com", goal, null);
+        isAdded = (goalDto.getStartDate().equals(goal.getStartDate()) && goalDto.isResult());
     }
 
     @Test
     public void deleteGoal() {
-        String goalID = "12345";
         PowerMockito.mockStatic(GoalAPI.class);
         PowerMockito.doNothing().when(GoalAPI.class);
-        GoalDto goalDto = GoalAPI.deleteUserGoal(goalID, null);
+        GoalDto goalDto = GoalAPI.deleteGoal("test@gmail.com", null);
         isDeleted = (goalDto.getStartDate().equals(goal.getStartDate()));
     }
 
     @Test
-    public void getListOfUserGoals() {
-        String goalID = "12345";
+    public void getUserGoal() {
         PowerMockito.mockStatic(GoalAPI.class);
         PowerMockito.doNothing().when(GoalAPI.class);
-        goalList = GoalAPI.getUserGoals(goalID, null);
+        goal = GoalAPI.getUserGoal("test@gmail.com", null);
     }
 
     @Test
@@ -61,7 +55,7 @@ public class GoalAPIUnitTest {
         PowerMockito.mockStatic(GoalAPI.class);
         PowerMockito.doNothing().when(GoalAPI.class);
         goal.setCarbs(30);
-        GoalDto newGoal = GoalAPI.updateUserGoal("test@gmail.com", goal.getId(), goal, null);
+        GoalDto newGoal = GoalAPI.updateGoal("test@gmail.com", goal, null);
         isUpdated = (newGoal.getCarbs() == 30);
     }
 

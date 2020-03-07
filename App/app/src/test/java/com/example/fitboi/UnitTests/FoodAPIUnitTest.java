@@ -1,8 +1,8 @@
 package com.example.fitboi.UnitTests;
 
-import com.example.fitboi.api.FoodItemAPI;
+import com.example.fitboi.api.FoodAPI;
 import com.example.fitboi.api.UserAPI;
-import com.example.fitboi.dto.FoodItemDto;
+import com.example.fitboi.dto.FoodDto;
 import com.example.fitboi.dto.UserDto;
 
 import org.junit.BeforeClass;
@@ -22,14 +22,14 @@ import java.util.List;
 import java.util.function.Consumer;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(FoodItemAPI.class)
-public class FoodItemAPIUnitTest {
+@PrepareForTest(FoodAPI.class)
+public class FoodAPIUnitTest {
 
     private static UserDto user;
-    private static FoodItemDto foodItem;
-    private static List<FoodItemDto> foodItemList = new ArrayList<>();
-    private static Consumer<List<FoodItemDto>> foodItemListFunction;
-    private static Consumer<FoodItemDto> foodItemFunction;
+    private static FoodDto foodItem;
+    private static List<FoodDto> foodItemList = new ArrayList<>();
+    private static Consumer<List<FoodDto>> foodItemListFunction;
+    private static Consumer<FoodDto> foodItemFunction;
     private static String desiredFood;
     private static boolean isFound;
     private static boolean isLogged;
@@ -40,38 +40,38 @@ public class FoodItemAPIUnitTest {
 
         desiredFood = "Chicken";
 
-        user = new UserDto("test@gmail.com", "Test", "test123", "123", 21, 21, true);
+        user = new UserDto("test@gmail.com", "Test", "test123", "123", "1998-02-23" , "Male", 180);
         UserAPI.addUser(user, null);
     }
 
     @Test
     public void getAllOfTheItems() {
-        PowerMockito.mockStatic(FoodItemAPI.class);
-        PowerMockito.doNothing().when(FoodItemAPI.class);
-        foodItemList = FoodItemAPI.getFoodItems(null);
+        PowerMockito.mockStatic(FoodAPI.class);
+        PowerMockito.doNothing().when(FoodAPI.class);
+        foodItemList = FoodAPI.getFoodsByPrefix("", 10, null);
     }
 
     @Test
     public void getSpecificItem() {
-        PowerMockito.mockStatic(FoodItemAPI.class);
-        PowerMockito.doNothing().when(FoodItemAPI.class);
-        foodItem = FoodItemAPI.getFoodItemsByPrefix(desiredFood, null).get(0);
+        PowerMockito.mockStatic(FoodAPI.class);
+        PowerMockito.doNothing().when(FoodAPI.class);
+        foodItem = FoodAPI.getFoodsByPrefix(desiredFood, 1,null).get(0);
         isFound = (foodItem != null);
     }
 
     @Test
     public void logFoodItem() {
-        PowerMockito.mockStatic(FoodItemAPI.class);
-        PowerMockito.doNothing().when(FoodItemAPI.class);
-        FoodItemDto foodDto = FoodItemAPI.addFoodItemToUser(foodItem, user.getEmail(), null);
+        PowerMockito.mockStatic(FoodAPI.class);
+        PowerMockito.doNothing().when(FoodAPI.class);
+        FoodDto foodDto = FoodAPI.addFoodToMeal(foodItem, user.getEmail(), 1,1,null);
         isLogged = (foodDto != null);
     }
 
     @Test
     public void deleteLoggedFoodItem() {
-        PowerMockito.mockStatic(FoodItemAPI.class);
-        PowerMockito.doNothing().when(FoodItemAPI.class);
-        FoodItemDto foodDto = FoodItemAPI.deleteFoodItemFromUser(foodItem.getId(), user.getEmail(), null);
+        PowerMockito.mockStatic(FoodAPI.class);
+        PowerMockito.doNothing().when(FoodAPI.class);
+        FoodDto foodDto = FoodAPI.deleteFoodFromMeal(user.getEmail(), 1,1,foodItem.getId(), null);
         isUnlogged = (foodDto != null);
     }
 }

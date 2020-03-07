@@ -23,31 +23,27 @@ public class GoalAPI {
 
     /**
      * Add new goal to given user
-     * path:    /users/{userEmail}/goals/
+     * path:    /users/{userEmail}/goal
      * type:    POST
      *
      * Example of how to use asynchronously:
      * Consumer addGoalConfirmation = new Consumer<GoalDto>() {
      *   @Override
      *   public void accept(GoalDto goal) {
-     *     if (goal.goalId == goalDto.goalId) {
-     *         Message.setText("Goal Added!");
-     *     }
+     *     // do something
      *   }
      * };
-     * GoalAPI.addNewGoal(goalDto, addGoalConfirmation);
+     * GoalAPI.createGoal(goalDto, addGoalConfirmation);
      *
      * Example of how to use synchronously:
      * GoalDto newGoal = GoalDto();
-     * GoalDto addedGoal = GoalAPI.addNewGoal("test@gmail.com", newGoal, null);
-     * if (addedGoal == newGoal) {
-     *     String message = "Adding new goal worked!";
-     * }
+     * GoalDto addedGoal = GoalAPI.createGoal("test@gmail.com", newGoal, null);
+     *
      * @param userEmail of user to which to add the goal
      * @param goalToAdd GoalDto of goal to add
      * @param fn to be called by response, if null wait for response and return it directly
      */
-    public static GoalDto addUserGoal(String userEmail, GoalDto goalToAdd, Consumer<GoalDto> fn) {
+    public static GoalDto createGoal(String userEmail, GoalDto goalToAdd, Consumer<GoalDto> fn) {
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -61,7 +57,9 @@ public class GoalAPI {
         }
 
         JsonObjectRequest request = new JsonObjectRequest(
-                MyVolley.serverUrl+MyVolley.userPostfix+userEmail+MyVolley.goalPostfix,
+                MyVolley.serverUrl
+                        +MyVolley.userPostfix+userEmail
+                        +MyVolley.goalPostfix,
                 goalDtoToJson(goalToAdd),
                 successListener,
                 errorListener
@@ -80,30 +78,25 @@ public class GoalAPI {
 
     /**
      * Delete a goal from a given user
-     * path:    /users/{userEmail}/goals
+     * path:    /users/{userEmail}/goal
      * type:    DELETE
      *
      * Example of how to use asynchronously:
      * Consumer deleteGoalConfirmation = new Consumer<GoalDto>() {
      *   @Override
      *   public void accept(GoalDto user) {
-     *     if (goal.goalId == goalDto.goalId) {
-     *         String message = "Goal Deleted!";
-     *     }
+     *     // do something
      *   }
      * };
-     * GoalAPI.addNewGoal(goal.goalId, deleteGoalConfirmation);
+     * GoalAPI.deleteGoal("test@gmail.com", deleteGoalConfirmation);
      *
      * Example of how to use synchronously:
-     * GoalDto deletedGoal = GoalAPI.deleteGoal(goal.goalId, null);
-     * if (goal.goalId = deletedGoal.goalId) {
-     *     String message = "Goal Deleted";
-     * }
+     * GoalDto deletedGoal = GoalAPI.deleteGoal("test@gmail.com", null);
+     *
      * @param userEmail: email of user for which the goal should be deleted
-     * @param goalId of goal to be deleted
      * @param fn to be called by response, if null wait for response and return it directly
      */
-    public static GoalDto deleteUserGoal(String userEmail, Integer goalId, Consumer<GoalDto> fn) {
+    public static GoalDto deleteGoal(String userEmail, Consumer<GoalDto> fn) {
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -118,7 +111,9 @@ public class GoalAPI {
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.DELETE,
-                (MyVolley.serverUrl+MyVolley.userPostfix+userEmail+MyVolley.goalPostfix+goalId+'/'),
+                MyVolley.serverUrl+
+                        MyVolley.userPostfix+userEmail
+                        +MyVolley.goalPostfix,
                 null,
                 successListener,
                 errorListener);
@@ -137,39 +132,44 @@ public class GoalAPI {
     }
 
     /**
-     * Get a list of all goal of a given user
-     * path:    /users/{userEmail}/goals
+     * Get a goal of given user
+     * path:    /users/{userEmail}/goal
      * type:    GET
+     *
      * Example of how to use asynchronously:
-     * Consumer addAllGoalsToList = new Consumer<List<GoalDto>>() {
+     * Consumer addAllGoalsToList = new Consumer<GoalDto>() {
      *   @Override
-     *   public void accept(List<GoalDto> goals) {
-     *     ListObject.add(goals);
+     *   public void accept(GoalDto goal) {
+     *     // do something
      *   }
      * };
-     * GoalAPI.getUserGoals(userEmail, addAllGoalsToList);
+     * GoalAPI.getUserGoal(userEmail, addAllGoalsToList);
      *
      * Example of how to use synchronously:
-     * GoalDto goal = GoalAPI.getUserGoals(userEmail, null);
+     * GoalDto goal = GoalAPI.getUserGoal(userEmail, null);
      *
      * @param userEmail: email of user to get the goals of
      * @param fn to be called by response, if null wait for response and return it directly
      */
-    public static List<GoalDto> getUserGoals(String userEmail, Consumer<List<GoalDto>> fn) {
-        RequestFuture<JSONArray> future = RequestFuture.newFuture();
-        Response.Listener<JSONArray> successListener;
+    public static GoalDto getUserGoal(String userEmail, Consumer<GoalDto> fn) {
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
 
         if (fn == null) {
             successListener = future;
             errorListener = future;
         } else {
-            successListener = goalListCallSuccessListener(fn);
-            errorListener = goalListCallErrorListener(fn);
+            successListener = goalCallSuccessListener(fn);
+            errorListener = goalCallErrorListener(fn);
         }
 
-        JsonArrayRequest request = new JsonArrayRequest(
-                (MyVolley.serverUrl+MyVolley.userPostfix+userEmail+MyVolley.goalPostfix),
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                MyVolley.serverUrl
+                        +MyVolley.userPostfix+userEmail
+                        +MyVolley.goalPostfix,
+                null,
                 successListener,
                 errorListener
         );
@@ -179,13 +179,7 @@ public class GoalAPI {
 
         if (fn == null) {
             try {
-                List<GoalDto> goals = null;
-                JSONArray result = future.get(10, TimeUnit.SECONDS);
-                for (int i=0; i<result.length(); i++) {
-                    goals.add(jsonToGoalDto(result.optJSONObject(i)));
-                }
-
-                return goals;
+                return jsonToGoalDto(future.get(10, TimeUnit.SECONDS));
             } catch (Exception e) {
                 return null;
             }
@@ -196,7 +190,7 @@ public class GoalAPI {
 
     /**
      * Update a given user's goal
-     * path:    /users/{userEmail}/goals/{goalId}
+     * path:    /users/{userEmail}/goal
      * type:    PUT
      *
      * Example of how to use asynchronously:
@@ -204,23 +198,20 @@ public class GoalAPI {
      * Consumer updateGoal = new Consumer<GoalDto>() {
      *   @Override
      *   public void accept(GoalDto updatedGoal) {
-     *     if (updatedGoal == goalToUpdate) {
-     *         String message = "Succesfully updated goal!");
-     *     }
+     *     // do something
      *   }
      * };
-     * GoalAPI.updateUserGoal(userEmail, goalToUpdate.id, goalToUpdate, updateGoal);
+     * GoalAPI.updateGoal(userEmail, goalToUpdate, updateGoal);
      *
      * Example of how to use synchronously:
      * GoalDto goalToUpdate;
-     * GoalDto goal = GoalAPI.updateUserGoal(userEmail, goalToUpdate.id, goalToUpdate, null);
+     * GoalDto goal = GoalAPI.updateGoal(userEmail, goalToUpdate, null);
      *
      * @param userEmail : email of user to update goal of
-     * @param goalId : id of goal to update
      * @param newGoalDto : new information of goal
      * @param fn to be called by response, if null wait for response and return it directly
      */
-    public static GoalDto updateUserGoal(String userEmail, Integer goalId, GoalDto newGoalDto, Consumer<GoalDto> fn) {
+    public static GoalDto updateGoal(String userEmail, GoalDto newGoalDto, Consumer<GoalDto> fn) {
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -235,7 +226,9 @@ public class GoalAPI {
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.PUT,
-                (MyVolley.serverUrl+MyVolley.userPostfix+userEmail+MyVolley.goalPostfix+goalId+'/'),
+                MyVolley.serverUrl
+                        +MyVolley.userPostfix+userEmail
+                        +MyVolley.goalPostfix,
                 goalDtoToJson(newGoalDto),
                 successListener,
                 errorListener);
@@ -304,16 +297,16 @@ public class GoalAPI {
         int id = json.optInt("id");
         int baseCalories = json.optInt("baseCalories");
         boolean result = json.optBoolean("result");
-        long startDate = json.optLong("startDate");
-        long endDate = json.optLong("endDate");
-        float weight = (float)json.optDouble("weight");
+        String startDate = json.optString("startDate");
+        String endDate = json.optString("endDate");
+        double weight = json.optDouble("weight");
         String activityLevel = json.optString("activityLevel");
         String goalType = json.optString("goalType");
-        float fats = (float)json.optDouble("fats");
-        float carbs = (float)json.optDouble("carbs");
-        float proteins = (float)json.optDouble("proteins");
+        double fats = json.optDouble("fats");
+        double carbs = json.optDouble("carbs");
+        double proteins = json.optDouble("proteins");
 
-        return new GoalDto(id, baseCalories, result, new Date(startDate), new Date(endDate), weight,
+        return new GoalDto(id, baseCalories, result, startDate, endDate, weight,
                 activityLevel, goalType, fats, carbs, proteins);
     }
 
@@ -321,11 +314,11 @@ public class GoalAPI {
         JSONObject json = new JSONObject();
 
         try {
-            json.put("id", goal.getId());
+            // json.put("id", goal.getId()); id is autogenerated
             json.put("baseCalories", goal.getBaseCalories());
             json.put("result", goal.isResult());
-            json.put("startDate", goal.getStartDate().getTime());
-            json.put("endDate", goal.getEndDate().getTime());
+            json.put("startDate", goal.getStartDate());
+            json.put("endDate", goal.getEndDate());
             json.put("weight", goal.getWeightGoal());
             json.put("activityLevel", goal.getActivityLevel());
             json.put("goalType", goal.getGoalType());
