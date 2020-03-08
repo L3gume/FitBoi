@@ -26,7 +26,7 @@ public class ID006_User_Sets_A_New_Goal {
         GoalDto goalDto = new GoalDto(1337, 10, true,
                 new Date(0), new Date(1), 12.f,
                 "High", "Lose", 20.f, 30.f, 40.f);
-        GoalAPI.addUserGoal("boaty@mcboatface.ca", goalDto, null);
+        GoalAPI.createGoal("boaty@mcboatface.ca", goalDto, null);
         assert true;
     }
 
@@ -47,8 +47,8 @@ public class ID006_User_Sets_A_New_Goal {
 
     @And("there is a goal currently in progress")
     public void there_is_a_goal_currently_in_progress() {
-        List<GoalDto> goals = GoalAPI.getUserGoals("boaty@mcboatface.ca",null);
-        assert (!goals.isEmpty());
+        GoalDto goal = GoalAPI.getUserGoal("boaty@mcboatface.ca",null);
+        assert goal != null;
     }
 
     @And("the User has entered a custom goal")

@@ -5,16 +5,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.fitboi.R;
-import com.example.fitboi.api.FoodItemAPI;
-import com.example.fitboi.dto.FoodItemDto;
+import com.example.fitboi.api.FoodAPI;
+import com.example.fitboi.dto.FoodDto;
 
-import java.util.AbstractQueue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -30,7 +27,7 @@ public class AddMealActivity extends AppCompatActivity {
     private static final String LOG_TAG = AddMealActivity.class.getSimpleName();
 
     private RecyclerView.Adapter mealAdapter;
-    private ArrayList<FoodItemDto> mealEntries;
+    private ArrayList<FoodDto> mealEntries;
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
@@ -80,16 +77,16 @@ public class AddMealActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
 
                 Log.d(LOG_TAG,query + " searched");
-                Consumer foodConsumer = new Consumer<List<FoodItemDto>>() {
+                Consumer foodConsumer = new Consumer<List<FoodDto>>() {
                     @Override
-                    public void accept(List<FoodItemDto> foods) {
-                        for (FoodItemDto food: foods) {
+                    public void accept(List<FoodDto> foods) {
+                        for (FoodDto food: foods) {
                             mealEntries.add(food);
                             Log.d(LOG_TAG, food.getName() + "added");
                         }
                     }
                 };
-                FoodItemAPI.getFoodItemsByPrefix(query,foodConsumer);
+                FoodAPI.getFoodsByPrefix(query,10,foodConsumer);
 
                 progressBar.setVisibility(View.INVISIBLE);
                 uiSetup();

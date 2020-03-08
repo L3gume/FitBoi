@@ -1,3 +1,4 @@
+package com.ecse428.project.fitboi.dto;
 
 public class FootnoteDto {
 

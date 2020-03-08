@@ -32,7 +32,7 @@ public class UserAPIUnitTest {
 
     @Test
     public void addNewUser() {
-        user = new UserDto("test@gmail.com", "Test", "test123", "123", 21, 21, true);
+        user = new UserDto("test@gmail.com", "Test", "test123", "123", "1998-02-23", "Male", 180);
         PowerMockito.mockStatic(UserAPI.class);
         PowerMockito.doNothing().when(UserAPI.class);
         UserDto userDto = UserAPI.addUser(user, null);
@@ -61,7 +61,7 @@ public class UserAPIUnitTest {
         PowerMockito.mockStatic(UserAPI.class);
         PowerMockito.doNothing().when(UserAPI.class);
         user.setHeight(22);
-        UserDto newUser = UserAPI.updateUser("test@gmail.com", user, null);
+        UserDto newUser = UserAPI.updateUser(user, null);
         isEdited = (newUser.getHeight() == 22);
     }
 }
