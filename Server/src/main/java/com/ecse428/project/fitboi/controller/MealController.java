@@ -150,7 +150,7 @@ public class MealController {
      * @return
      */
     @DeleteMapping("{user_id}/metrics/{metric_id}/meal/{meal_id}")
-    public ResponseEntity<?> deleteGoal(@PathVariable String user_id, @PathVariable int metric_id, @PathVariable int meal_id) {
+    public ResponseEntity<?> deleteMeal(@PathVariable String user_id, @PathVariable int metric_id, @PathVariable int meal_id) {
     	
     	// Make sure the metric is for the user
         Metrics metric = userService.getUserMetric(user_id, metric_id);

@@ -50,7 +50,7 @@ class MealControllerTests {
 
 	@Test
 	public void testGetAllMeals() throws Exception{
-		mockMvc.perform(post("/users/meals").contentType(MediaType.APPLICATION_JSON)
+		mockMvc.perform(get("/users/meals").contentType(MediaType.APPLICATION_JSON)
         	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString("")))
             .andExpect(status().isOk());
 	}

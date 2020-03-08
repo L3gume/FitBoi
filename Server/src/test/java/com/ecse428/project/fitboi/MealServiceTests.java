@@ -84,12 +84,12 @@ class MealServiceTests {
 	}
     
     @Test
-	public void testUpdaeMealFailure(){
+	public void testUpdateMealFailure(){
         Meal tMeal = new Meal(MealType.Breakfast);
 		when(mockRepository.existsById(anyInt())).thenReturn(false);
 		when(mockRepository.save(any())).thenReturn(tMeal);
 		boolean addStatus = mealService.updateMeal(tMeal);
 		assertTrue(!addStatus);
-    }
+	}
 
 }

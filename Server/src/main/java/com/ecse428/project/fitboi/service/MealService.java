@@ -52,7 +52,8 @@ public class MealService {
     		return null;
 		}
 		System.out.println("Meal does exist");
-    	Meal deletedMeal = mealRepository.deleteById(id);
+		Meal deletedMeal = mealRepository.deleteMealById(id);
+		System.out.println(deletedMeal.getId());
 		return deletedMeal;
 	}
 
