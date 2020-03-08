@@ -16,11 +16,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.springframework.http.MediaType;
 
 import com.ecse428.project.fitboi.dto.UserDto;
+import com.ecse428.project.fitboi.model.ActivityLevel;
+import com.ecse428.project.fitboi.model.FoodItem;
+import com.ecse428.project.fitboi.model.Goal;
+import com.ecse428.project.fitboi.model.GoalType;
+import com.ecse428.project.fitboi.model.MacroDistribution;
+import com.ecse428.project.fitboi.model.Meal;
+import com.ecse428.project.fitboi.model.MealType;
+import com.ecse428.project.fitboi.model.Metrics;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.repository.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.sql.Date;
 import java.util.logging.*;
 
 @SpringBootTest
@@ -249,5 +258,77 @@ class UserControllerTests {
 
 		mockMvc.perform(get("/users/" + aEmail + "/" + aBadPassword)).andExpect(status().isNotFound());
 	 }
+
+
+
+	@Test
+	public void testAddFoodToMeal() throws Exception{
+		String aEmail = "testUser1@mail.mcgill.ca";
+		String aName = "testboi";
+		String aUserName = "testBoi";
+		String aPassword = "password";
+		String aDOB = "2010-11-11";
+		int aHeight = 193;
+		String aBiologicalSex = "Female";
+		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
+
+
+		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
+		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
+		.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
+		.andExpect(status().isCreated());
+		
+		Metrics m = new Metrics(new Date(0), 3);
+		Meal meal = new Meal(MealType.Breakfast);
+
+		mockMvc.perform(post("/users/" + aEmail + "/metrics")
+		.contentType(MediaType.APPLICATION_JSON)
+		.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(m)))
+		.andExpect(status().isOk());
+	
+		Goal g = new Goal(2000, false, new Date(0), new Date(0), 150.0f, ActivityLevel.Medium, GoalType.Maintain, 150.0f, 200.0f, 150.0f);
+		FoodItem food = new FoodItem("food", 250, 15.0f, 10.0f, 10.0f, 10.0f, g);
+
+		mockMvc.perform(post("/users/" + aEmail + "/metrics/" + m.getId() + "/meal/" + meal.getId() + "/food")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(food)))
+			.andExpect(status().isCreated());
+	}
+
+	@Test
+	public void tesGetFoodFromMeal() throws Exception{
+		String aEmail = "testUser1@mail.mcgill.ca";
+		String aName = "testboi";
+		String aUserName = "testBoi";
+		String aPassword = "password";
+		String aDOB = "2010-11-11";
+		int aHeight = 193;
+		String aBiologicalSex = "Female";
+		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
+
+		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
+		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
+		.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
+		.andExpect(status().isCreated());
+		
+		Metrics m = new Metrics(new Date(0), 3);
+		Meal meal = new Meal(MealType.Breakfast);
+
+		mockMvc.perform(post("/users/" + aEmail + "/metrics")
+		.contentType(MediaType.APPLICATION_JSON)
+		.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(m)))
+		.andExpect(status().isOk());
+	
+		Goal g = new Goal(2000, false, new Date(0), new Date(0), 150.0f, ActivityLevel.Medium, GoalType.Maintain, 150.0f, 200.0f, 150.0f);
+		FoodItem food = new FoodItem("food", 250, 15.0f, 10.0f, 10.0f, 10.0f, g);
+		mockMvc.perform(post("/users/" + aEmail + "/metrics/" + m.getId() + "/meal/" + meal.getId() + "/food")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(food)))
+			.andExpect(status().isCreated());
+		mockMvc.perform(get("/users/" + aEmail + "/metrics/" + m.getId() + "/meal/" + meal.getId() + "/food")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(food)))
+			.andExpect(status().isCreated());
+	}
 
 }
