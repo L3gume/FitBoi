@@ -421,7 +421,7 @@ public class UserProfile {
 
 	public String toString() {
 		return super.toString() + "[" + "email" + ":" + getEmail() + "," + "name" + ":" + getName() + "," + "userName"
-				+ ":" + getUserName() + "," + "password" + ":" + getPassword() + "," + "age" + ":" + getDOB() + ","
+				+ ":" + getUserName() + "," + "password" + ":" + getPassword() + "," + "dob" + ":" + getDOB() + ","
 				+ "height" + ":" + getHeight() + "," + "biologicalSex" + ":" + getBiologicalSex() + "]";
 	}
 }
