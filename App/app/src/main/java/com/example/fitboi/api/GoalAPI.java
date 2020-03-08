@@ -44,6 +44,8 @@ public class GoalAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static GoalDto createGoal(String userEmail, GoalDto goalToAdd, Consumer<GoalDto> fn) {
+        if (userEmail == null || goalToAdd == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -97,6 +99,8 @@ public class GoalAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static GoalDto deleteGoal(String userEmail, Consumer<GoalDto> fn) {
+        if (userEmail == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -152,6 +156,8 @@ public class GoalAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static GoalDto getUserGoal(String userEmail, Consumer<GoalDto> fn) {
+        if (userEmail == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -212,6 +218,8 @@ public class GoalAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static GoalDto updateGoal(String userEmail, GoalDto newGoalDto, Consumer<GoalDto> fn) {
+        if (userEmail == null || newGoalDto == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;

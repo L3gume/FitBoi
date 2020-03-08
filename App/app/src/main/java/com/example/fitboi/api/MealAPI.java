@@ -97,6 +97,8 @@ public class MealAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      **/
     public static List<MealDto> getUserMeals(String userId, Integer metricId, Consumer<List<MealDto>> fn) {
+        if (userId == null || metricId == null) return null;
+
         RequestFuture<JSONArray> future = RequestFuture.newFuture();
         Response.Listener<JSONArray> successListener;
         Response.ErrorListener errorListener;
@@ -160,6 +162,8 @@ public class MealAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static MealDto getMeal(String userId, Integer metricId, Integer mealId, Consumer<MealDto> fn) {
+        if (userId == null || metricId == null || mealId == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -223,6 +227,8 @@ public class MealAPI {
      * @return meal created
      */
     public static MealDto createMeal(String userId, Integer metricId, MealDto mealDto, Consumer<MealDto> fn) {
+        if (userId == null || metricId == null || mealDto == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -283,6 +289,8 @@ public class MealAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static MealDto deleteMeal(String userId, Integer metricId, Integer mealId, Consumer<MealDto> fn) {
+        if (userId == null || metricId == null || mealId == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;

@@ -47,6 +47,8 @@ public class MetricsAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static MetricDto addMetric(String userId, MetricDto metricToAdd, Consumer<MetricDto> fn) {
+        if (userId == null || metricToAdd == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -102,6 +104,8 @@ public class MetricsAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      **/
     public static List<MetricDto> getAllUserMetrics(String userId, Consumer<List<MetricDto>> fn) {
+        if (userId == null) return null;
+
         RequestFuture<JSONArray> future = RequestFuture.newFuture();
         Response.Listener<JSONArray> successListener;
         Response.ErrorListener errorListener;
@@ -162,6 +166,8 @@ public class MetricsAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static MetricDto getUserMetric(String userId, Integer metricId, Consumer<MetricDto> fn) {
+        if (userId == null || metricId == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -220,6 +226,8 @@ public class MetricsAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static MetricDto deleteMetric(String userId, Integer metricId, Consumer<MetricDto> fn) {
+        if (userId == null || metricId == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
