@@ -16,6 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.springframework.http.MediaType;
 
 import com.ecse428.project.fitboi.dto.UserDto;
+import com.ecse428.project.fitboi.dto.MetricsDto;
 import com.ecse428.project.fitboi.model.Metrics;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.repository.*;
@@ -60,16 +61,14 @@ class MetricsControllerTests {
 		int aHeight = 193;
 		String aBiologicalSex = "Female";
 		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
-        ObjectNode requestBody = mapper.createObjectNode();
-        requestBody.put("date" , 0);
-        requestBody.put("exercise", 3);
+		MetricsDto testMetrics = new MetricsDto(0, "2020-11-10", 100);
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
         	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
             .andExpect(status().isCreated());
         mockMvc.perform(post("/users/" + aEmail + "/metrics").contentType(MediaType.APPLICATION_JSON)
-        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(requestBody)))
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testMetrics)))
         	.andExpect(status().isOk());
 	}
 
@@ -83,9 +82,6 @@ class MetricsControllerTests {
 		int aHeight = 193;
 		String aBiologicalSex = "Female";
 		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
-        ObjectNode requestBody = mapper.createObjectNode();
-        requestBody.put("date" , 0);
-        requestBody.put("exercise", 3);
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
@@ -106,22 +102,44 @@ class MetricsControllerTests {
 		int aHeight = 193;
 		String aBiologicalSex = "Female";
 		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
-        ObjectNode requestBody = mapper.createObjectNode();
-        requestBody.put("date" , 0);
-        requestBody.put("exercise", 3);
+		MetricsDto testMetrics = new MetricsDto(0, "2020-11-10", 100);
+
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
         	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
 			.andExpect(status().isCreated());
-		Metrics m = new Metrics(new Date(0), 3);
 
 		mockMvc.perform(post("/users/" + aEmail + "/metrics").contentType(MediaType.APPLICATION_JSON)
-        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(requestBody)))
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testMetrics)))
         	.andExpect(status().isOk());
 		
-        mockMvc.perform(get("/users/" + aEmail + "/metrics/" + m.getId()).contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(get("/users/" + aEmail + "/metrics/" + testMetrics.getId()).contentType(MediaType.APPLICATION_JSON)
         	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString("")))
         	.andExpect(status().isOk());
+	}
+
+	@Test
+	public void testDeleteMetrics() throws Exception{
+		String aEmail = "testUser1@mail.mcgill.ca";
+		String aName = "testboi";
+		String aUserName = "testBoi";
+		String aPassword = "password";
+		String aDOB = "2010-11-11";
+		int aHeight = 193;
+		String aBiologicalSex = "Female";
+		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
+		MetricsDto testMetrics = new MetricsDto(0, "2020-11-10", 100);
+
+		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
+		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
+            .andExpect(status().isCreated());
+        mockMvc.perform(post("/users/" + aEmail + "/metrics").contentType(MediaType.APPLICATION_JSON)
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testMetrics)))
+			.andExpect(status().isOk());
+			
+		mockMvc.perform(delete("/users/" + aEmail + "/metrics/" + testMetrics.getId())).andExpect(status().isOk());
+
 	}
 }

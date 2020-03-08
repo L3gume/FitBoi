@@ -296,7 +296,7 @@ class UserControllerTests {
 	}
 
 	@Test
-	public void tesGetFoodFromMeal() throws Exception{
+	public void testGetFoodFromMeal() throws Exception{
 		String aEmail = "testUser1@mail.mcgill.ca";
 		String aName = "testboi";
 		String aUserName = "testBoi";

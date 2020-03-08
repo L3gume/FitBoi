@@ -13,6 +13,8 @@ import com.ecse428.project.fitboi.model.MealType;
 import com.ecse428.project.fitboi.model.Metrics;
 import com.ecse428.project.fitboi.model.Sex;
 import com.ecse428.project.fitboi.model.UserProfile;
+import com.ecse428.project.fitboi.model.FoodItem;
+
 import com.ecse428.project.fitboi.service.MealService;
 import com.ecse428.project.fitboi.service.MetricsService;
 import com.ecse428.project.fitboi.service.UserService;
@@ -91,5 +93,19 @@ class MealServiceTests {
 		boolean addStatus = mealService.updateMeal(tMeal);
 		assertTrue(!addStatus);
 	}
+
+	@Test
+    public void testDeleteFood(){
+		FoodItem tFoodItem = new FoodItem();
+		Meal tMeal = new Meal();
+		tMeal.addFoodItem(tFoodItem);
+
+		when(mockRepository.existsById(anyInt())).thenReturn(false);
+		when(mockRepository.save(any())).thenReturn(tMeal);
+
+		FoodItem deleted = mealService.deleteFood(tMeal, tFoodItem.getId());
+		assertTrue(deleted.getId() == tFoodItem.getId());
+
+    }
 
 }

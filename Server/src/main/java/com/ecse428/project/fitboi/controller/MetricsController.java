@@ -35,7 +35,7 @@ public class MetricsController {
      * @return
      */
     @PostMapping("{user_id}/metrics")
-    public ResponseEntity<?> addMetric(@PathVariable String user_id, @RequestBody ObjectNode objectNode)
+    public ResponseEntity<?> addMetric(@PathVariable String user_id, @RequestBody MetricsDto objectNode)
     {
         // Get the user from the DB
         UserProfile user = userService.getUser(user_id);
@@ -44,20 +44,20 @@ public class MetricsController {
         }
 
         // Extract the information from the body
-        Date date = Date.valueOf(objectNode.get("date").asText());
-        int exercise = objectNode.get("exercise").asInt();
+    //    Date date = Date.valueOf(objectNode.get("date").asText());
+    //    int exercise = objectNode.get("exercise").asInt();
         
         // Create the new metric and add it to the user
-        Metrics metric = new Metrics(date, exercise);
-        user.addMetric(metric);
+   //     Metrics metric = new Metrics(date, exercise);
+        user.addMetric(convertToDomainObject(objectNode));
         
         // Persist the user and the new metric
         userService.updateUser(user);
 
         // Convert to DTO
-        MetricsDto metricsDto = convertToDto(metric);
+  //      MetricsDto metricsDto = convertToDto(metric);
 
-    	return new ResponseEntity<MetricsDto>(metricsDto, HttpStatus.OK);
+    	return new ResponseEntity<MetricsDto>(objectNode, HttpStatus.OK);
     }
 
     /**
@@ -134,5 +134,13 @@ public class MetricsController {
             metrics.getDate().toString(),
             metrics.getExerciseSpending()	
     		);
+    }
+
+    private Metrics convertToDomainObject(MetricsDto metricsDto) {
+		Metrics metrics = new Metrics(
+                Date.valueOf(metricsDto.getDate()),
+                metricsDto.getExerciseSpending()
+				);
+		return metrics;
     }
 }
