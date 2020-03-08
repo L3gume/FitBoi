@@ -25,7 +25,7 @@ public class Signup_Step3 extends AppCompatActivity implements DatePickerDialog.
     private Button calendar;
 
     private ImageButton[] btn_gain_lose_weight = new ImageButton[2];
-    private ImageButton btn_unfocus_gain_lose_weight;
+    private static ImageButton btn_unfocus_gain_lose_weight;
     private int[] btn_id_gain_lose_weight = {R.id.btn_GainWeight, R.id.btn_LoseWeight};
 
     private Button[] btn_maintain = new Button[2];
@@ -42,7 +42,7 @@ public class Signup_Step3 extends AppCompatActivity implements DatePickerDialog.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_three);
 
-       calendar = (Button) findViewById(R.id.show_dialog);
+        calendar = (Button) findViewById(R.id.show_dialog);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         seekbarTV = (TextView) findViewById(R.id.textViewSB);
 
@@ -157,13 +157,13 @@ public class Signup_Step3 extends AppCompatActivity implements DatePickerDialog.
 
         btn_unfocus.setBackgroundResource(R.drawable.border_white);
         btn_focus.setBackgroundResource(R.drawable.border_green);
-        this.btn_unfocus_maintain = btn_focus;
+        btn_unfocus_maintain = btn_focus;
     }
 
-    private void setFocus2(ImageButton btn_unfocus, ImageButton btn_focus){
+    public static void setFocus2(ImageButton btn_unfocus, ImageButton btn_focus){
 
         btn_unfocus.setBackgroundResource(R.drawable.border_white);
         btn_focus.setBackgroundResource(R.drawable.border_green);
-        this.btn_unfocus_gain_lose_weight = btn_focus;
+        btn_unfocus_gain_lose_weight = btn_focus;
     }
 }

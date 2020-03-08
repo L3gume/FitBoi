@@ -19,12 +19,6 @@ public class MainPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        uiSetup();
-    }
-
-    private void uiSetup() {
-        getSupportActionBar().setTitle("Home");
-
         final CardView createMeal = findViewById(R.id.main_meals_card);
         createMeal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +34,7 @@ public class MainPageActivity extends AppCompatActivity {
                 launchUserProfileActivity();
             }
         }));
+
     }
 
     private void launchCreateMealActivity() {

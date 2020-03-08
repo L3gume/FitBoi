@@ -5,9 +5,11 @@ import com.example.fitboi.api.UserAPI;
 import com.example.fitboi.dto.UserDto;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +27,8 @@ import com.example.fitboi.ui.profile.UserProfileActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+
+import java.io.Serializable;
 
 public class EditProfileInfo extends AppCompatActivity{
 
@@ -55,7 +59,8 @@ public class EditProfileInfo extends AppCompatActivity{
     private int[] btn_id = {R.id.btn_LowAF_edit_profile, R.id.btn_MidAF_edit_profile, R.id.btn_HighAF_edit_profile};
 
     Uri imageURI;
-    Drawable setImage = profileImageButton.getBackground();
+    Drawable setImage;
+
 
 
     //*
@@ -71,10 +76,18 @@ public class EditProfileInfo extends AppCompatActivity{
 
         getSupportActionBar().setTitle("Edit Profile");
 
+        final LayoutInflater factory = getLayoutInflater();
+
+        final View mainProfile = factory.inflate(R.layout.user_profile, null);
+
+        profileImage = (ImageView) mainProfile.findViewById(R.id.profile_pic);
+
         saveButton = (Button) findViewById(R.id.save_btn_profile_info);
         profileImageButton = (ImageButton) findViewById(R.id.profile_pic_editable);
         updateProfilePicButton = (Button) findViewById(R.id.upload_new_pp_button);
         save_profile_changer_er = (TextView) findViewById(R.id.edit_profile_error);
+
+        setImage = profileImageButton.getBackground();
 
         height = (EditText) findViewById(R.id.profile_height_edit);
         weight = (EditText) findViewById(R.id.profile_weight_edit);
@@ -100,32 +113,21 @@ public class EditProfileInfo extends AppCompatActivity{
             }
         });
 
-//        profileImageButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View view) {
-//
-//                // Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
-//                // ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//                // bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-//                // byte[] b = baos.toByteArray();
-//                Intent profileActivity = new Intent(getParentActivityIntent());
-//                //profileActivity.putExtra("Current Image", );
-//                startActivity(profileActivity);
-//            }
-//
-//        });
+        profileImageButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                Intent profileActivity = new Intent(getParentActivityIntent());
+                profileActivity.putExtra("Current Image", (Serializable) setImage);
+            }
+
+        });
 
         updateProfilePicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Drawable currentImage  = profileImageButton.getDrawable();
-
-                //
-                //
-                // need to figure out passing image to Profile Activity
-                //
-                //
+                profileImage.setBackground(setImage);
 
             }
         });

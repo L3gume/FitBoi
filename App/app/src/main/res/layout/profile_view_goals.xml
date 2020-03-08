@@ -8,7 +8,6 @@
     tools:context=".ui.profile.ViewGoals">
 
     <TextView
-        android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -60,7 +59,7 @@
             android:layout_gravity="center">
 
             <ImageButton
-                android:id="@+id/btn_LoseWeight_current_goal"
+                android:id="@+id/btn_LoseWeight_updated_goal"
                 android:layout_width="59dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="110dp"
@@ -72,7 +71,7 @@
                 android:src="@drawable/lose_weight"/>
 
             <ImageButton
-                android:id="@+id/btn_GainWeight_current_goal"
+                android:id="@+id/btn_GainWeight_updated_goal"
                 android:layout_width="59dp"
                 android:layout_height="50dp"
                 android:layout_marginBottom="8dp"
@@ -97,7 +96,7 @@
             android:textAlignment="center"/>
 
         <SeekBar
-            android:id="@+id/seekBar_current_goal"
+            android:id="@+id/seekBar_updated_goal"
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="194dp"
             android:layout_height="20dp"
@@ -121,7 +120,7 @@
             android:textAlignment="center"/>
 
         <Button
-            android:id="@+id/date_picker_current_goal"
+            android:id="@+id/date_picker_updated_goal"
             android:layout_width="103dp"
             android:layout_height="29dp"
             android:layout_marginTop="20dp"
@@ -132,7 +131,7 @@
             android:text="@string/signup_date_yyyy_mm_dd"/>
 
         <ProgressBar
-            android:id="@+id/current_goal_page_progress_bar"
+            android:id="@+id/progress_bar_updated_goal"
             android:layout_width="250dp"
             android:layout_height="30dp"
             android:layout_gravity="bottom|center"
@@ -149,7 +148,7 @@
         android:layout_gravity="center">
 
         <Button
-            android:id="@+id/save_goal_button"
+            android:id="@+id/save_updated_goal_button"
             android:layout_width="120dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
@@ -189,4 +188,58 @@
         android:textStyle="bold"
         android:textColor="@color/textWhite"/>
 
+    <LinearLayout
+        android:id="@+id/popup_goal_edit"
+        android:orientation="vertical"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <TextView
+            android:id="@+id/save_confirmation_edit_foal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:text="Confirm new Goal"
+            android:textStyle="bold"
+            android:textColor="@color/colorOrangeRed"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+            android:id="@+id/btn_goal_confirm_save"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Confirm"
+            android:textStyle="bold"
+            android:textColor="@color/colorOrangeRed"
+            android:background="@drawable/filled_rounded_button"/>
+
+            <Button
+                android:id="@+id/btn_goal_cancel_save"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="15dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Cancel"
+                android:textStyle="bold"
+                android:textColor="@color/textWhite"
+                android:background="@drawable/transparent_rounded_button"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 </LinearLayout>
+
+
+
