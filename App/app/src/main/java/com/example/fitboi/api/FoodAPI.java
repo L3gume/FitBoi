@@ -14,6 +14,7 @@ import com.example.fitboi.dto.FoodDto;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -44,6 +45,8 @@ public class FoodAPI {
      * @param fn to be called by response, if null wait for response and return it directly
     **/
     public static List<FoodDto> getFoodsFromMeal(String userId, Integer metricId, Integer mealId, Consumer<List<FoodDto>> fn) {
+        if (userId == null || metricId == null || mealId == null) return null;
+
         RequestFuture<JSONArray> future = RequestFuture.newFuture();
         Response.Listener<JSONArray> successListener;
         Response.ErrorListener errorListener;
@@ -108,7 +111,9 @@ public class FoodAPI {
      * @param numReturn Integer: maximum number of foods to be returned
      * @param fn to be called by response, if null wait for response and return it directly
      **/
-    public static List<FoodDto> getFoodsByPrefix(String foodPrefix, int numReturn, Consumer<List<FoodDto>> fn) {
+    public static List<FoodDto> getFoodsByPrefix(String foodPrefix, Integer numReturn, Consumer<List<FoodDto>> fn) {
+        if (foodPrefix == null || numReturn == null) return null;
+
         RequestFuture<JSONArray> future = RequestFuture.newFuture();
         Response.Listener<JSONArray> successListener;
         Response.ErrorListener errorListener;
@@ -131,7 +136,7 @@ public class FoodAPI {
         MyVolley.getRequestQueue().add(request);
         if (fn == null) {
             try {
-                List<FoodDto> foods = null;
+                List<FoodDto> foods = new ArrayList<>();
                 JSONArray result = future.get(10, TimeUnit.SECONDS);
                 for (int i=0; i<result.length(); i++) {
                     foods.add(jsonToFoodDto(result.optJSONObject(i)));
@@ -171,7 +176,9 @@ public class FoodAPI {
      * @param mealId Integer: Unique id of meal to which food should be added
      * @param fn to be called by response, if null wait for response and return it directly
      **/
-    public static FoodDto addFoodToMeal(FoodDto foodDto, String userId, int metricId, int mealId, Consumer<FoodDto> fn) {
+    public static FoodDto addFoodToMeal(FoodDto foodDto, String userId, Integer metricId, Integer mealId, Consumer<FoodDto> fn) {
+        if (foodDto == null || userId == null || metricId == null || mealId == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -234,6 +241,8 @@ public class FoodAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      **/
     public static FoodDto deleteFoodFromMeal(String userId, Integer metricId, Integer mealId, Integer foodId, Consumer<FoodDto> fn) {
+        if (userId == null || metricId == null || mealId == null || foodId == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;

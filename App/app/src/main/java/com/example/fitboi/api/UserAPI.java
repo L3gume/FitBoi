@@ -12,6 +12,7 @@ import com.example.fitboi.dto.UserDto;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -44,6 +45,8 @@ public class UserAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static UserDto addUser(UserDto userToAdd, Consumer<UserDto> fn) {
+        if (userToAdd == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -118,7 +121,7 @@ public class UserAPI {
 
         if (fn == null) {
             try {
-                List<UserDto> users = null;
+                List<UserDto> users = new ArrayList<>();
                 JSONArray result = future.get(10, TimeUnit.SECONDS);
                 for (int i=0; i<result.length(); i++) {
                     users.add(jsonToUserDto(result.optJSONObject(i)));
@@ -154,6 +157,8 @@ public class UserAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static UserDto getUserByLogin(String email, String password, Consumer<UserDto> fn) {
+        if (email == null || password == null);
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -210,6 +215,8 @@ public class UserAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static UserDto getUser(String email, Consumer<UserDto> fn) {
+        if (email == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -268,6 +275,8 @@ public class UserAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static UserDto updateUser(UserDto newUserDto, Consumer<UserDto> fn) {
+        if (newUserDto == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -323,6 +332,8 @@ public class UserAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static UserDto deleteUser(String userId, Consumer<UserDto> fn) {
+        if (userId == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -355,7 +366,6 @@ public class UserAPI {
         }
         return null;
     }
-
 
 
     /********** PRIVATE METHODS **********/
@@ -410,7 +420,7 @@ public class UserAPI {
     private static UserDto jsonToUserDto(JSONObject json) {
         String email = json.optString("email");
         String name = json.optString("name");
-        String username = json.optString("username");
+        String username = json.optString("userName");
         String password = json.optString("password");
         String dob = json.optString("dob");
         int height = json.optInt("height");
@@ -425,7 +435,7 @@ public class UserAPI {
         try {
             json.put("email", user.getEmail());
             json.put("name", user.getName());
-            json.put("username", user.getUserName());
+            json.put("userName", user.getUserName());
             json.put("password", user.getPassword());
             json.put("dob", user.getDob());
             json.put("biologicalSex", user.getBiologicalSex());
