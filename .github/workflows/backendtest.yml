@@ -31,14 +31,14 @@ jobs:
       run: ./gradlew build
     - name: switch back dir
       run: cd .. # this might help
-    - name: Heroku Deploy
-      uses: AkhileshNS/heroku-deploy@v3.0.0
-      with:
-        # This will be used for authentication. You can find it in your heroku homepage account settings
-        heroku_api_key: 954c8833-4b96-41ac-b091-e2bd9f42dc18
-        # Email that you use with heroku
-        heroku_email: justin.tremblay@mail.mcgill.ca
-        # The appname to use for deploying/updating
-        heroku_app_name: fitboi-dev
-        # The branch that you would like to deploy to Heroku
-        branch: dev
+    #- name: Heroku Deploy
+    #  uses: AkhileshNS/heroku-deploy@v3.0.0
+    #  with:
+    #    # This will be used for authentication. You can find it in your heroku homepage account settings
+    #    heroku_api_key: 954c8833-4b96-41ac-b091-e2bd9f42dc18
+    #    # Email that you use with heroku
+    #    heroku_email: justin.tremblay@mail.mcgill.ca
+    #    # The appname to use for deploying/updating
+    #    heroku_app_name: fitboi-dev
+    #    # The branch that you would like to deploy to Heroku
+    #    branch: dev
