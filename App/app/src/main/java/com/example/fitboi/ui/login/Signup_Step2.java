@@ -182,9 +182,9 @@ public class Signup_Step2 extends AppCompatActivity implements DatePickerDialog.
         calendar_selected = true;
     }
 
-    private void setFocus(ImageButton btn_unfocus, ImageButton btn_focus){
+    public static void setFocus(ImageButton btn_unfocus, ImageButton btn_focus){
         btn_unfocus.setBackgroundResource(R.drawable.border_white);
         btn_focus.setBackgroundResource(R.drawable.border_green);
-        this.btn_unfocus = btn_focus;
+        // this.btn_unfocus = btn_focus;
     }
 }

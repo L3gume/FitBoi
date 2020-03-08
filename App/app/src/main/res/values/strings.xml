@@ -49,4 +49,7 @@
     <string name="signup_active_would_you_say_you_are">How active would you say you are?</string>
     <string name="addmeal_press_on_the_search_icon">Press on the search icon to look for a food</string>
     <string name="greeting_message_under_profile_pic">Hi, Michel</string>
+    <string name="edit_profile_page_title">Edit Profile</string>
+    <string name="actvity_factor_change_prompt">Current Activity Factor</string>
+    <string name="goal_completion_progress_bar_msg">Current Goal Completion</string>
 </resources>

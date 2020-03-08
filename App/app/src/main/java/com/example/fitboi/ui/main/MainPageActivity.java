@@ -7,6 +7,7 @@ import android.widget.ImageButton;
 
 import com.example.fitboi.R;
 import com.example.fitboi.ui.meal.AddMealActivity;
+import com.example.fitboi.ui.profile.UserProfileActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;

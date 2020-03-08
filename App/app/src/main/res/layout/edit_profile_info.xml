@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background_gradient"
+    tools:context=".ui.profile.EditProfileInfo">
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/edit_profile_page_title"
+        android:textColor="@color/textWhite"
+        android:textSize="45sp"
+        android:textStyle="italic|bold"
+        android:layout_gravity="center"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp">
+
+        <Button
+            android:id="@+id/upload_new_pp_button"
+            android:layout_width="130dp"
+            android:background="@drawable/filled_rounded_button"
+            android:contextClickable="true"
+            android:text="Upload Image"
+            android:layout_gravity="center|left"
+            android:layout_marginLeft="35dp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="200dp"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/profile_pic_editable"
+                android:layout_width="120dp"
+                android:layout_height="140dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:adjustViewBounds="true"
+                android:tooltipText="Edit Image"
+                android:scaleType="fitXY"
+                android:tint="@color/cardview_shadow_start_color"
+                android:src="@drawable/p3"
+                android:contextClickable="true"
+                android:layout_marginBottom="8dp"/>
+
+        </LinearLayout>
+
+    </GridLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp">
+
+    <TextView
+        android:text="@string/signup_hint_weight_in_kilograms"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/textWhite"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="13dp"/>
+
+    <EditText
+        android:id="@+id/profile_weight_edit"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/textWhite"
+        android:ems="10"
+        android:inputType="number"
+        android:paddingRight="30dp"
+        android:layout_gravity="right"/>
+
+    </GridLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:text="@string/signup_hint_height"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/textWhite"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="13dp"/>
+
+        <EditText
+            android:id="@+id/profile_height_edit"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/textWhite"
+            android:ems="10"
+            android:inputType="number"
+            android:paddingRight="30dp"
+            android:layout_gravity="right"/>
+
+    </GridLayout>
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="22dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="@string/actvity_factor_change_prompt"
+        android:textColor="@color/textWhite"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <RadioGroup
+        android:id="@+id/radioAF_edit_profile"
+        android:layout_width="227dp"
+        android:layout_height="71dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_LowAF_edit_profile"
+            android:layout_width="59dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_bg_transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/low_af"/>
+
+        <ImageButton
+            android:id="@+id/btn_MidAF_edit_profile"
+            android:layout_width="59dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_bg_transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/med_af"/>
+
+        <ImageButton
+            android:id="@+id/btn_HighAF_edit_profile"
+            android:layout_width="59dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_bg_transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/high_af"/>
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/edit_profile_error"
+        android:layout_width="270dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textColor="@color/textWhite"
+        android:textStyle="bold|italic"/>
+
+    <Button
+        android:id="@+id/save_btn_profile_info"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:background="@drawable/filled_rounded_button"
+        android:text="Save"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"/>
+
+</LinearLayout>
+

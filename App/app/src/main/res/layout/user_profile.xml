@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/main_background_gradient"
     android:orientation="vertical"
-    tools:context=".ui.main.UserProfileActivity">
+    tools:context=".ui.profile.UserProfileActivity">
 
     <GridLayout
         android:layout_width="match_parent"
@@ -21,6 +21,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/greeting_msg_profile_page"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_row="0"
@@ -28,76 +29,39 @@
                 android:layout_gravity="left|top"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="40dp"
-                android:text="@string/greeting_message_under_profile_pic"
                 android:textAlignment="center"
                 android:textColor="@color/textWhite"
                 android:textSize="13pt"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <ProgressBar
-                android:layout_width="140dp"
-                android:layout_height="20dp"
+                android:layout_width="160dp"
+                android:layout_height="30dp"
                 android:layout_gravity="bottom|center"
-                android:layout_marginTop="40dp"/>
+                android:layout_marginTop="20dp"/>
 
             <TextView
                 android:layout_width="128dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Profile Complete"
+                android:text="@string/goal_completion_progress_bar_msg"
                 android:textSize="5pt"
                 android:textColor="@color/textWhite"
                 android:layout_marginTop="10dp"
-                android:textStyle="italic"
+                android:textStyle="italic|bold"
                 android:textAlignment="center">
 
             </TextView>
 
         </LinearLayout>
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/profile_pic"
             android:layout_width="120dp"
-            android:layout_height="match_parent"
-            android:layout_row="0"
-            android:layout_column="2"
-            android:layout_gravity="right"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="20dp"
-            android:orientation="vertical">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_gravity="center|right"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="50dp"
-                app:cardElevation="0dp">
-
-                <ImageView
-                    android:id="@+id/profile_pic"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/p3" />
-
-            </androidx.cardview.widget.CardView>
-
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="25dp"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="bottom|center"
-                android:background="@drawable/filled_rounded_button"
-                android:outlineSpotShadowColor="@color/textWhite"
-                android:contextClickable="true"
-                android:text="Edit Profile"
-                android:textAllCaps="false"
-                android:textColor="@color/colorOrangeRed"
-                android:textStyle="bold">
-            </Button>
-
-        </LinearLayout>
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/p3" />
 
     </GridLayout>
 
@@ -116,15 +80,17 @@
             android:drawableLeft="@drawable/profile_info_icon"
             android:shadowColor="@color/textBlack"
             android:outlineSpotShadowColor="@color/textBlack"
+            android:contextClickable="true"
             android:elevation="30dp"
             android:textAllCaps="false"
-            android:text="Profile Information"
+            android:text="Edit Profile"
+            android:textAlignment="center"
             android:textSize="9pt"
             android:textStyle="bold"
             android:textColor="@color/textWhite"/>
 
         <Button
-            android:id="@+id/goals_btn"
+            android:id="@+id/view_goals_btn"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:paddingHorizontal="15dp"
@@ -134,6 +100,7 @@
             android:shadowColor="@color/textBlack"
             android:elevation="5dp"
             android:textAlignment="center"
+            android:contextClickable="true"
             android:text="View Goals"
             android:textAllCaps="false"
             android:outlineSpotShadowColor="@color/textBlack"
@@ -152,6 +119,7 @@
             android:shadowColor="@color/textBlack"
             android:elevation="5dp"
             android:textAlignment="center"
+            android:contextClickable="true"
             android:text="User Settings"
             android:textAllCaps="false"
             android:outlineSpotShadowColor="@color/textBlack"
