@@ -7,6 +7,8 @@ import android.widget.ImageButton;
 
 import com.example.fitboi.R;
 import com.example.fitboi.ui.meal.AddMealActivity;
+import com.example.fitboi.ui.myDay.MyDayActivity;
+import com.example.fitboi.ui.myDay.MyDayCardAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -42,7 +44,7 @@ public class MainPageActivity extends AppCompatActivity {
     }
 
     private void launchCreateMealActivity() {
-        Intent intent = new Intent(this, AddMealActivity.class);
+        Intent intent = new Intent(this, MyDayActivity.class);
         startActivity(intent);
     }
 
