@@ -45,7 +45,7 @@ public class MetricsController {
 
         // Extract the information from the body
         Date date = Date.valueOf(objectNode.get("date").asText());
-        int exercise = objectNode.get("exercise").asInt();
+        int exercise = objectNode.get("exerciseSpending").asInt();
         
         // Create the new metric and add it to the user
         Metrics metric = new Metrics(date, exercise);
