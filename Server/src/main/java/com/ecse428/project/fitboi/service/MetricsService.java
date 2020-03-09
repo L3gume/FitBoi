@@ -21,6 +21,11 @@ public class MetricsService {
 	UserService userService;
 
 	@Transactional
+	public Iterable<Metrics> getAllMetrics() {
+		return metricsRepository.findAll();
+	}
+	
+	@Transactional
 	public Metrics getCurrentUserMetrics(String userEmail) {
 		Iterable<Metrics> metrics_list = userService.getAllUserMetrics(userEmail);
 
