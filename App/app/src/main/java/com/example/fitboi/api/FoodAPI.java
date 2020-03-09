@@ -74,7 +74,7 @@ public class FoodAPI {
 
         if (fn == null) {
             try {
-                List<FoodDto> foods = null;
+                List<FoodDto> foods = new ArrayList<>();
                 JSONArray result = future.get(10, TimeUnit.SECONDS);
                 for (int i=0; i<result.length(); i++) {
                     foods.add(jsonToFoodDto(result.optJSONObject(i)));

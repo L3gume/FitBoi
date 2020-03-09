@@ -14,6 +14,7 @@ import com.example.fitboi.dto.MetricDto;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -130,7 +131,7 @@ public class MetricsAPI {
         MyVolley.getRequestQueue().add(request);
         if (fn == null) {
             try {
-                List<MetricDto> metrics = null;
+                List<MetricDto> metrics = new ArrayList<>();
                 JSONArray result = future.get(10, TimeUnit.SECONDS);
                 for (int i=0; i<result.length(); i++) {
                     metrics.add(jsonToMetricDto(result.optJSONObject(i)));
