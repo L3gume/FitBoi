@@ -1,5 +1,7 @@
 package com.ecse428.project.fitboi.service;
 
+import java.util.List;
+
 import com.ecse428.project.fitboi.model.Goal;
 import com.ecse428.project.fitboi.model.Metrics;
 import com.ecse428.project.fitboi.model.UserProfile;
@@ -117,6 +119,12 @@ public class UserService {
 			}
 		}
 		return null;
+	}
+
+	public List<Metrics> getAllUserMetrics(String userEmail) {
+		UserProfile user = getUser(userEmail);
+
+		return user == null ? null : user.getMetrics();
 	}
 
 	public Metrics deleteMetrics(String userEmail, int metric_id) {

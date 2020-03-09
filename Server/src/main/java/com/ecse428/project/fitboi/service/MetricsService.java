@@ -5,6 +5,7 @@ import java.util.List;
 import com.ecse428.project.fitboi.model.Meal;
 import com.ecse428.project.fitboi.model.Metrics;
 import com.ecse428.project.repository.MetricsRepository;
+import com.ecse428.project.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,55 @@ public class MetricsService {
 	@Autowired
 	MetricsRepository metricsRepository;
 
+	@Autowired
+	UserService userService;
+
 	@Transactional
 	public Iterable<Metrics> getAllMetrics() {
 		return metricsRepository.findAll();
 	}
+	
+	@Transactional
+	public Metrics getCurrentUserMetrics(String userEmail) {
+		Iterable<Metrics> metrics_list = userService.getAllUserMetrics(userEmail);
 
+		return metrics_list.iterator().hasNext() ? 
+			metrics_list.iterator().next() : null;
+	}
+
+	@Transactional
+	public int getCurrentExerciseCount(String userEmail)
+	{
+		Metrics cur_metrics = getCurrentUserMetrics(userEmail);
+		if(cur_metrics == null) return -1;
+
+		return cur_metrics.getExerciseSpending();
+	}
+
+	@Transactional 
+	public Metrics addExerciseCount(String userEmail, int cal)
+	{
+		Metrics cur_metrics = getCurrentUserMetrics(userEmail);
+		if(cur_metrics == null) return null;
+		
+		cur_metrics.setExerciseSpending(cal +
+			cur_metrics.getExerciseSpending());
+		metricsRepository.save(cur_metrics);
+
+		return cur_metrics;
+	}
+
+	@Transactional 
+	public Metrics setExerciseCount(String userEmail, int cal)
+	{
+		Metrics cur_metrics = getCurrentUserMetrics(userEmail);
+		if(cur_metrics == null) return null;
+		
+		cur_metrics.setExerciseSpending(cal);
+		metricsRepository.save(cur_metrics);
+
+		return cur_metrics;
+	}
 
 	@Transactional
 	public Metrics getMetrics(int id) {
