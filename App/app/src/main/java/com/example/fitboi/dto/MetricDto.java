@@ -1,14 +1,17 @@
 package com.example.fitboi.dto;
+
+import java.util.Objects;
+
 public class MetricDto {
 
     private int id;
     private String date;
-    private int exerciseSpending;
+    private Integer exerciseSpending;
 
     public MetricDto() {
     }
 
-    public MetricDto(int id, String date, int exerciseSpending) {
+    public MetricDto(int id, String date, Integer exerciseSpending) {
         this.id = id;
         this.date = date;
         this.exerciseSpending = exerciseSpending;
@@ -30,30 +33,31 @@ public class MetricDto {
         this.date = date;
     }
 
-    public int getExerciseSpending() {
+    public Integer getExerciseSpending() {
         return exerciseSpending;
     }
 
-    public void setExerciseSpending(int exerciseSpending) {
+    public void setExerciseSpending(Integer exerciseSpending) {
         this.exerciseSpending = exerciseSpending;
     }
 
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        if (!super.equals(object)) return false;
-        MetricDto metricDto = (MetricDto) object;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MetricDto metricDto = (MetricDto) o;
         return id == metricDto.id &&
-                exerciseSpending == metricDto.exerciseSpending &&
-                date.equals(metricDto.date);
+                date.equals(metricDto.date) &&
+                exerciseSpending.equals(metricDto.exerciseSpending);
     }
 
+    @Override
     public int hashCode() {
-        return java.util.Objects.hash(super.hashCode(), id, date, exerciseSpending);
+        return Objects.hash(id, date, exerciseSpending);
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
+    @Override
+    public String toString() {
         return "MetricDto{" +
                 "id=" + id +
                 ", date='" + date + '\'' +
