@@ -12,6 +12,7 @@ import com.example.fitboi.dto.MealDto;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -62,7 +63,7 @@ public class MealAPI {
 
         if (fn == null) {
             try {
-                List<MealDto> meals = null;
+                List<MealDto> meals = new ArrayList<>();
                 JSONArray result = future.get(10, TimeUnit.SECONDS);
                 for (int i=0; i<result.length(); i++) {
                     meals.add(jsonToMealDto(result.optJSONObject(i)));
@@ -125,7 +126,7 @@ public class MealAPI {
 
         if (fn == null) {
             try {
-                List<MealDto> meals = null;
+                List<MealDto> meals = new ArrayList<>();
                 JSONArray result = future.get(10, TimeUnit.SECONDS);
                 for (int i=0; i<result.length(); i++) {
                     meals.add(jsonToMealDto(result.optJSONObject(i)));
