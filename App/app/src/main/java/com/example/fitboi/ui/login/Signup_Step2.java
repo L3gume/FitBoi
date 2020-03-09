@@ -52,7 +52,7 @@ public class Signup_Step2 extends AppCompatActivity implements DatePickerDialog.
     private TextView signup_er;
 
     private ImageButton[] btn = new ImageButton[3];
-    private ImageButton btn_unfocus;
+    private static ImageButton btn_unfocus;
     private int[] btn_id = {R.id.btn_LowAF, R.id.btn_MidAF, R.id.btn_HighAF};
     private boolean calendar_selected = false;
     @Override
@@ -183,9 +183,9 @@ public class Signup_Step2 extends AppCompatActivity implements DatePickerDialog.
         calendar_selected = true;
     }
 
-    private void setFocus(ImageButton btn_unfocus, ImageButton btn_focus){
+    public static void setFocus(ImageButton btn_unfocus, ImageButton btn_focus){
         btn_unfocus.setBackgroundResource(R.drawable.border_white);
         btn_focus.setBackgroundResource(R.drawable.border_green);
-        this.btn_unfocus = btn_focus;
+        btn_unfocus = btn_focus;
     }
 }

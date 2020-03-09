@@ -3,7 +3,130 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/main_background_gradient"
-    tools:context=".ui.main.MainPageActivity">
+    android:orientation="vertical"
+    tools:context=".ui.profile.UserProfileActivity">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/ic_background_gradient_light"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/greeting_msg_profile_page"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_gravity="left|top"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp"
+                android:textAlignment="center"
+                android:textColor="@color/textWhite"
+                android:textSize="13pt"
+                android:textStyle="bold"/>
+
+            <ProgressBar
+                android:layout_width="160dp"
+                android:layout_height="30dp"
+                android:layout_gravity="bottom|center"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/goal_completion_progress_bar_msg"
+                android:textSize="5pt"
+                android:textColor="@color/textWhite"
+                android:layout_marginTop="10dp"
+                android:textStyle="italic|bold"
+                android:textAlignment="center">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/profile_pic"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/p3" />
+
+    </GridLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="526dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/profile_info_btn"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:paddingHorizontal="15dp"
+            android:background="@drawable/large_btn_profile_navigation"
+            android:drawableRight="@drawable/arrow_right_white"
+            android:drawableLeft="@drawable/profile_info_icon"
+            android:shadowColor="@color/textBlack"
+            android:outlineSpotShadowColor="@color/textBlack"
+            android:contextClickable="true"
+            android:elevation="30dp"
+            android:textAllCaps="false"
+            android:text="Edit Profile"
+            android:textAlignment="center"
+            android:textSize="9pt"
+            android:textStyle="bold"
+            android:textColor="@color/textWhite"/>
+
+        <Button
+            android:id="@+id/view_goals_btn"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:paddingHorizontal="15dp"
+            android:background="@drawable/large_btn_profile_navigation"
+            android:drawableRight="@drawable/arrow_right_white"
+            android:drawableLeft="@drawable/goal_icon"
+            android:shadowColor="@color/textBlack"
+            android:elevation="5dp"
+            android:textAlignment="center"
+            android:contextClickable="true"
+            android:text="View Goals"
+            android:textAllCaps="false"
+            android:outlineSpotShadowColor="@color/textBlack"
+            android:textSize="9pt"
+            android:textStyle="bold"
+            android:textColor="@color/textWhite"/>
+
+        <Button
+            android:id="@+id/user_settings_btn"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:paddingHorizontal="10dp"
+            android:background="@drawable/large_btn_profile_navigation"
+            android:drawableRight="@drawable/arrow_right_white"
+            android:drawableLeft="@drawable/settings_icon"
+            android:shadowColor="@color/textBlack"
+            android:elevation="5dp"
+            android:textAlignment="center"
+            android:contextClickable="true"
+            android:text="User Settings"
+            android:textAllCaps="false"
+            android:outlineSpotShadowColor="@color/textBlack"
+            android:textSize="9pt"
+            android:textStyle="bold"
+            android:textColor="@color/textWhite"/>
+
+    </LinearLayout>
 
 </LinearLayout>

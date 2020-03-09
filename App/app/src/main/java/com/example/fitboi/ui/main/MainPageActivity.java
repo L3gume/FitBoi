@@ -7,6 +7,7 @@ import android.widget.ImageButton;
 
 import com.example.fitboi.R;
 import com.example.fitboi.ui.meal.AddMealActivity;
+import com.example.fitboi.ui.profile.UserProfileActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -17,12 +18,6 @@ public class MainPageActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        uiSetup();
-    }
-
-    private void uiSetup() {
-        getSupportActionBar().setTitle("Home");
 
         final CardView createMeal = findViewById(R.id.main_meals_card);
         createMeal.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +34,7 @@ public class MainPageActivity extends AppCompatActivity {
                 launchUserProfileActivity();
             }
         }));
+
     }
 
     private void launchCreateMealActivity() {

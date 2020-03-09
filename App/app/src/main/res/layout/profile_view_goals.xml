@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background_gradient"
+    tools:context=".ui.profile.ViewGoals">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif"
+        android:text="My Goals"
+        android:textColor="@color/textWhite"
+        android:textSize="45sp"
+        android:textStyle="italic|bold"
+        android:layout_gravity="top"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/large_btn_profile_navigation">
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="My Current Goal"
+            android:textAlignment="center"
+            android:textColor="@color/textWhite"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:text="Are you looking to lose or gain weight?"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/textWhite"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textAlignment="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center">
+
+            <ImageButton
+                android:id="@+id/btn_LoseWeight_updated_goal"
+                android:layout_width="59dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="110dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/button_bg_transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/lose_weight"/>
+
+            <ImageButton
+                android:id="@+id/btn_GainWeight_updated_goal"
+                android:layout_width="59dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_bg_transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/gain_weight"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:text="Want to change your weight goal?"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/textWhite"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textAlignment="center"/>
+
+        <SeekBar
+            android:id="@+id/seekBar_updated_goal"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="194dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:max="20"
+            android:progress="1"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:text="Set new timeline for your goal?"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/textWhite"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/date_picker_updated_goal"
+            android:layout_width="103dp"
+            android:layout_height="29dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center"
+            android:background="@drawable/calendar_signup"
+            android:icon="@drawable/calendar_icon"
+            android:text="@string/signup_date_yyyy_mm_dd"/>
+
+        <ProgressBar
+            android:id="@+id/progress_bar_updated_goal"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom|center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/save_updated_goal_button"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:text="Save"
+            android:textStyle="bold"
+            android:textColor="@color/textWhite"
+            android:textSize="20sp"
+            android:layout_marginStart="60dp"
+            android:background="@drawable/transparent_rounded_button"/>
+
+        <Button
+            android:id="@+id/delete_goal_button"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="40dp"
+            android:background="@drawable/filled_rounded_button"
+            android:text="Delete"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/view_previous_goals"
+        android:layout_width="400dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/button_full_transparent"
+        android:text="View Previous Goals"
+        android:drawableRight="@drawable/arrow_right_white"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/textWhite"/>
+
+    <LinearLayout
+        android:id="@+id/popup_goal_edit"
+        android:orientation="vertical"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <TextView
+            android:id="@+id/save_confirmation_edit_foal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:text="Confirm new Goal"
+            android:textStyle="bold"
+            android:textColor="@color/colorOrangeRed"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+            android:id="@+id/btn_goal_confirm_save"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Confirm"
+            android:textStyle="bold"
+            android:textColor="@color/colorOrangeRed"
+            android:background="@drawable/filled_rounded_button"/>
+
+            <Button
+                android:id="@+id/btn_goal_cancel_save"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="15dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Cancel"
+                android:textStyle="bold"
+                android:textColor="@color/textWhite"
+                android:background="@drawable/transparent_rounded_button"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
