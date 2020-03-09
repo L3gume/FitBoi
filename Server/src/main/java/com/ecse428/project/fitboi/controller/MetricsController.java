@@ -9,6 +9,7 @@ import com.ecse428.project.fitboi.model.Metrics;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.MetricsService;
 import com.ecse428.project.fitboi.service.UserService;
+import com.ecse428.project.repository.MetricsRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -155,6 +157,42 @@ public class MetricsController {
         }
 
     	return new ResponseEntity<MetricsDto>(convertToDto(metric), HttpStatus.OK);
+    }
+
+    /**
+     * GET
+     * 
+     * /users/{user_email}/metrics/current
+     */
+    @GetMapping("{user_email}/metrics/current")
+    public ResponseEntity<?> getCurUserMetrics(@PathVariable String user_email)
+    {
+        Metrics metric = metricsService.getCurrentUserMetrics(user_email);
+        return new ResponseEntity<MetricsDto>(convertToDto(metric), HttpStatus.OK);
+    }
+
+    /**
+     * POST
+     * 
+     * users/metrics/{metric_id}
+    */
+    @PutMapping("metrics/{metric_id}")
+    public ResponseEntity<?> updateMetric(@PathVariable String metric_id, @RequestBody ObjectNode objectNode)
+    {
+        // Extract the information from the body
+        Date date = Date.valueOf(objectNode.get("date").asText());
+        int exercise = objectNode.get("exerciseSpending").asInt();
+        
+        // Create the new metric and add it to the user
+        Metrics metric = metricsService.getMetrics(Integer.parseInt(metric_id));
+        metric.setDate(date);
+        metric.setExerciseSpending(exercise);
+        metricsService.updateMetrics(metric);
+
+        // Convert to DTO
+        MetricsDto metricsDto = convertToDto(metric);
+
+    	return new ResponseEntity<MetricsDto>(metricsDto, HttpStatus.OK);
     }
 
     /**
