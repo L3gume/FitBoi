@@ -1,16 +1,10 @@
 package com.example.fitboi.cucumber.steps;
 
-import com.example.fitboi.Fitboi;
 import com.example.fitboi.api.UserAPI;
 import com.example.fitboi.dto.UserDto;
 import com.example.fitboi.api.GoalAPI;
 import com.example.fitboi.dto.GoalDto;
-
-
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.*;
 
 public class ID004_User_Edits_Current_Goal {
 
@@ -31,7 +25,6 @@ public class ID004_User_Edits_Current_Goal {
     	}else if(goal.getProtein() > 0 && goal.getProtein() < 1){
     		return false;
     	}
-
     	return true;
     }
 
@@ -53,7 +46,7 @@ public class ID004_User_Edits_Current_Goal {
                 "High", "Lose", 0.2, 0.4, 0.4);
 
         // persist goal
-        GoalAPI.createGoal("boaty@mcboatface.ca", goalDto, null);
+        GoalAPI.createGoal("boaty@mcboatface.ca", goal, null);
         assert true;
         
     }
@@ -64,7 +57,8 @@ public class ID004_User_Edits_Current_Goal {
     public void valid_target_goals_are_entered() {
     	
     	// get goal id
-    	goal_id = GoalAPI.getUserGoal("test@gmail.com",null).getId();
+        GoalDto g = GoalAPI.getUserGoal("test@gmail.com",null);
+    	int goal_id = g != null ? g.getId() : 0;
 
     	// update goal
     	updatedGoal = new GoalDto(goal_id, 10, true,
@@ -85,9 +79,10 @@ public class ID004_User_Edits_Current_Goal {
     public void the_goal_is_updated_and_persisted_to_the_database(){
     	
     	// get goal
-    	updatedGoal = GoalAPI.getUserGoal("test@gmail.com",null).getId();
+		GoalDto g = GoalAPI.getUserGoal("test@gmail.com",null);
+		int goal_id = g != null ? g.getId() : 0;
 
-    	// create copy of expected goal
+		// create copy of expected goal
     	actualUpdatedGoal = new GoalDto(goal_id, 10, true,
                 "2020-01-01", "2020-12-12", 12,
                 "High", "Lose", 0.4, 0.2, 0.4);
@@ -108,9 +103,10 @@ public class ID004_User_Edits_Current_Goal {
     public void invalid_target_goals_are_entered() {
 
     	// get goal id
-    	goal_id = GoalAPI.getUserGoal("test@gmail.com",null).getId();
+		GoalDto g = GoalAPI.getUserGoal("test@gmail.com",null);
+		int goal_id = g != null ? g.getId() : 0;
 
-    	// update goal
+		// update goal
     	updatedGoal = new GoalDto(goal_id, 10, true,
                 "2020-01-01", "2020-12-12", 12,
                 "High", "Lose", 69420, 0.2, 0.4);
@@ -125,13 +121,14 @@ public class ID004_User_Edits_Current_Goal {
 
     }
 
-    @Then("the goal is updated and persisted to the database")
+    @Then("the goal is not updated")
     public void the_goal_is_not_updated_and_persisted_to_the_database(){
 
     	// get goal
-    	updatedGoal = GoalAPI.getUserGoal("test@gmail.com",null).getId();
+		GoalDto g = GoalAPI.getUserGoal("test@gmail.com",null);
+		int goal_id = g != null ? g.getId() : 0;
 
-    	// create copy of unexpected goal
+		// create copy of unexpected goal
     	actualUpdatedGoal = new GoalDto(goal_id, 10, true,
                 "2020-01-01", "2020-12-12", 12,
                 "High", "Lose", 0.4, 0.2, 0.4);
