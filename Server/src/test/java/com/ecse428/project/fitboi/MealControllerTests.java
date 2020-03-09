@@ -17,6 +17,8 @@ import org.springframework.http.MediaType;
 
 import com.ecse428.project.fitboi.dto.UserDto;
 import com.ecse428.project.fitboi.dto.MetricsDto;
+import com.ecse428.project.fitboi.dto.MealDto;
+
 
 import com.ecse428.project.fitboi.model.Meal;
 import com.ecse428.project.fitboi.model.MealType;
@@ -157,26 +159,24 @@ class MealControllerTests {
 		int aHeight = 193;
 		String aBiologicalSex = "Female";
 		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
-		MetricsDto testMetrics = new MetricsDto(0, "2020-11-10", 100);
+		MetricsDto testMetricsDto = new MetricsDto(0, "2020-11-10", 100);
+		MealDto mealDto = new MealDto(0, "Breakfast");
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
         	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
             .andExpect(status().isCreated());
-        
-        Metrics m = new Metrics(new Date(0), 3);
-        Meal meal = new Meal(MealType.Breakfast);
-        m.addMeal(meal);
+		
 
-        mockMvc.perform(post("/users/" + aEmail + "/metrics").contentType(MediaType.APPLICATION_JSON)
-        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testMetrics)))
+        mockMvc.perform(post("/users/" + aEmail + "/metricsId").contentType(MediaType.APPLICATION_JSON)
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testMetricsDto)))
         	.andExpect(status().isOk());
         
-        mockMvc.perform(post("/users/" + aEmail + "/metrics/" + testMetrics.getId() + "/meal").contentType(MediaType.APPLICATION_JSON)
-        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(meal)))
+        mockMvc.perform(post("/users/" + aEmail + "/metrics/" + testMetricsDto.getId() + "/mealId").contentType(MediaType.APPLICATION_JSON)
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(mealDto)))
 			.andExpect(status().isCreated());
 			
-		mockMvc.perform(delete("/users/" + aEmail + "/metrics/" + testMetrics.getId() + "/meal/" + meal.getId())).andExpect(status().isOk());
+		mockMvc.perform(delete("/users/" + aEmail + "/metrics/" + testMetricsDto.getId() + "/meal/" + mealDto.getId())).andExpect(status().isOk());
 
 	}
 }

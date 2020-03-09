@@ -141,6 +141,33 @@ public class MealController {
     	return new ResponseEntity<MealDto>(mealDto, HttpStatus.CREATED);
     }
 
+
+        /**
+     * POST
+     * /meal/{user_id}/metrics/{metric_id}/meal/ -> create a new Meal for a Metric
+     * @param user_id
+     * @param metric_id
+     * @return
+     */
+    @PostMapping("{user_id}/metrics/{metric_id}/mealId")
+    public ResponseEntity<?> createMealId(@PathVariable String user_id, @PathVariable int metric_id, @RequestBody MealDto mealDto) {    
+
+        // Make sure the metric is for the user
+        Metrics metric = userService.getUserMetric(user_id, metric_id);
+        if (metric == null) {
+            return new ResponseEntity<String>("The user has no metric for the given metric_id", HttpStatus.NOT_ACCEPTABLE);
+        }
+
+        // Create the meal and add it to the metric
+        Meal meal = new Meal(MealType.valueOf(mealDto.getMealType()));
+        metric.addMeal(meal);
+
+        // Persist the metric
+        metricsService.updateMetrics(metric);
+       
+    	return new ResponseEntity<MealDto>(convertToDto(meal), HttpStatus.CREATED);
+    }
+
     /**
      * DELETE
      * /meal/{user_id}/metrics/{metric_id}/meal/{mealId}-> deletes a Meal from the users metrics
@@ -170,4 +197,5 @@ public class MealController {
             meal.getMealType().toString()
     		);
     }
+
 }

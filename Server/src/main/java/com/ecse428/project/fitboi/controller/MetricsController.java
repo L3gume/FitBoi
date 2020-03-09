@@ -35,7 +35,7 @@ public class MetricsController {
      * @return
      */
     @PostMapping("{user_id}/metrics")
-    public ResponseEntity<?> addMetric(@PathVariable String user_id, @RequestBody MetricsDto objectNode)
+    public ResponseEntity<?> addMetric(@PathVariable String user_id, @RequestBody ObjectNode objectNode)
     {
         // Get the user from the DB
         UserProfile user = userService.getUser(user_id);
@@ -44,20 +44,45 @@ public class MetricsController {
         }
 
         // Extract the information from the body
-    //    Date date = Date.valueOf(objectNode.get("date").asText());
-    //    int exercise = objectNode.get("exercise").asInt();
+        Date date = Date.valueOf(objectNode.get("date").asText());
+        int exercise = objectNode.get("exercise").asInt();
         
         // Create the new metric and add it to the user
-   //     Metrics metric = new Metrics(date, exercise);
-        user.addMetric(convertToDomainObject(objectNode));
+        Metrics metric = new Metrics(date, exercise);
+        user.addMetric(metric);
         
         // Persist the user and the new metric
         userService.updateUser(user);
 
         // Convert to DTO
-  //      MetricsDto metricsDto = convertToDto(metric);
+        MetricsDto metricsDto = convertToDto(metric);
 
-    	return new ResponseEntity<MetricsDto>(objectNode, HttpStatus.OK);
+    	return new ResponseEntity<MetricsDto>(metricsDto, HttpStatus.OK);
+    }
+
+        /**
+     * POST
+     * /users/{user_id}/metrics -> Adds a metric to the user
+     * @param user_id
+     * @return
+     */
+    @PostMapping("{user_id}/metricsId")
+    public ResponseEntity<?> addMetricId(@PathVariable String user_id, @RequestBody MetricsDto metricsDto)
+    {
+        // Get the user from the DB
+        UserProfile user = userService.getUser(user_id);
+        if (user == null) {
+            return new ResponseEntity<String>("The user does not exist", HttpStatus.NOT_ACCEPTABLE);
+        }
+
+        // Create the new metric and add it to the user
+        user.addMetric(convertToDomainObject(metricsDto));
+        
+        // Persist the user and the new metric
+        userService.updateUser(user);
+
+
+    	return new ResponseEntity<MetricsDto>(metricsDto, HttpStatus.OK);
     }
 
     /**
