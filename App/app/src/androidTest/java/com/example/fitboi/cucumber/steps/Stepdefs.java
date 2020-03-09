@@ -17,11 +17,11 @@ class StaticTestData {
     static UserDto user = null;
     static UserDto updatedUser = null;
     static UserDto actualUpdatedUser = null;
-    static MetricDto metric;
-    static MealDto meal;
+    static MetricDto metric = null;
+    static MealDto meal = null;
     static FoodDto food1 = new FoodDto(0,"Food1", 10,1,20,30,40);
     static FoodDto food2 = new FoodDto(1,"Food2", 50,2,60,70,80);
-    static boolean isConnectionGood;
+    static boolean isConnectionGood = true;
 }
 
 public class Stepdefs {
