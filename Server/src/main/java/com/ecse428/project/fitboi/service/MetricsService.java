@@ -21,6 +21,38 @@ public class MetricsService {
 		return metricsRepository.findAll();
 	}
 
+	@Transactional
+	public Metrics getCurrentMetrics() {
+		Iterable<Metrics> metrics_list = getAllMetrics();
+
+		return metrics_list.iterator().hasNext() ? 
+			metrics_list.iterator().next() : null;
+	}
+
+	@Transactional 
+	public boolean addExerciseCount(int cal)
+	{
+		Metrics cur_metrics = getCurrentMetrics();
+		if(cur_metrics == null) return false;
+		
+		cur_metrics.setExerciseSpending(cal +
+			cur_metrics.getExerciseSpending());
+		metricsRepository.save(cur_metrics);
+
+		return true;
+	}
+
+	@Transactional 
+	public boolean setExerciseCount(int cal)
+	{
+		Metrics cur_metrics = getCurrentMetrics();
+		if(cur_metrics == null) return false;
+		
+		cur_metrics.setExerciseSpending(cal);
+		metricsRepository.save(cur_metrics);
+
+		return true;
+	}
 
 	@Transactional
 	public Metrics getMetrics(int id) {
