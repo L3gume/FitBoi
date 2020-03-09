@@ -8,21 +8,21 @@ Scenario: User successfully changes one profile value (Normal flow)
 
 Given the User is logged into FitBoi
 And the User has modified one value in their profile
-When clicking the save changes button
+When the User saves the changes
 Then the profile changes are saved
 
 Scenario: User successfully changes many or all values (Alternate flow)
 
 Given the User is logged into FitBoi
 And the User has modified multiple values at once in their profile
-When clicking the save changes button
+When the User saves the changes
 Then the profile changes are saved
 
 Scenario: User enters invalid data (Error flow)
 
 Given the User is logged into FitBoi
 And the User has modified multiple values in their profile with invalid data
-When clicking the save changes button
+When the User saves the changes
 Then the profile changes are not saved
 
 Scenario: User exits the window without saving (Error flow)

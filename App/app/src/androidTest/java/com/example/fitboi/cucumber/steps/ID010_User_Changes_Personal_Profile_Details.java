@@ -12,6 +12,8 @@ public class ID010_User_Changes_Personal_Profile_Details {
 
     @Given("the User is logged into FitBoi")
     public void the_user_is_logged_into_Fitboi() {
+        updatedUser = null;
+        actualUpdatedUser = null;
         user = UserAPI.getUser("test@gmail.com",null);
         if (user == null) {
             user = new UserDto("test@gmail.com","Test", "test",
@@ -39,7 +41,7 @@ public class ID010_User_Changes_Personal_Profile_Details {
         updatedUser.setBiologicalSex("Attack Helicopter");
     }
 
-    @When("clicking the save changes button")
+    @When("the User saves the changes")
     public void clicking_the_save_changes_button() {
         actualUpdatedUser = UserAPI.updateUser(updatedUser, null);
     }
@@ -51,7 +53,7 @@ public class ID010_User_Changes_Personal_Profile_Details {
 
     @Then("the profile changes are saved")
     public void the_profile_changes_are_saved() {
-        assert actualUpdatedUser == updatedUser;
+        assert actualUpdatedUser.equals(updatedUser);
         // revert the change
         UserAPI.updateUser(user, null);
     }
