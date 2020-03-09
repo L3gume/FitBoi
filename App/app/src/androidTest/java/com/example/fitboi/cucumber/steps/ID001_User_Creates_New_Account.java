@@ -104,6 +104,9 @@ public class ID001_User_Creates_New_Account {
     @Then("a new User profile is created")
     public void a_new_user_profile_is_created() {
         assert user != null;
+        // cleanup
+        if (user != null)
+            UserAPI.deleteUser(user.getEmail(), null);
     }
 
     @Then("a new User profile is not created")

@@ -28,6 +28,13 @@ public class Stepdefs {
 
     @Given("the User is logged into FitBoi")
     public void the_user_is_logged_into_fitboi() {
+        // reset data
+        StaticTestData.metric = null;
+        StaticTestData.meal = null;
+        StaticTestData.food1 = new FoodDto(0,"Food1", 10,1,20,30,40);
+        StaticTestData.food2 = new FoodDto(1,"Food2", 50,2,60,70,80);
+        StaticTestData.isConnectionGood = true;
+
         StaticTestData.updatedUser = null;
         StaticTestData.actualUpdatedUser = null;
         StaticTestData.user = UserAPI.getUser("test@gmail.com",null);
