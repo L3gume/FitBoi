@@ -29,28 +29,28 @@ public class MetricsService {
 	}
 
 	@Transactional 
-	public boolean addExerciseCount(String userEmail, int cal)
+	public Metrics addExerciseCount(String userEmail, int cal)
 	{
 		Metrics cur_metrics = getCurrentUserMetrics(userEmail);
-		if(cur_metrics == null) return false;
+		if(cur_metrics == null) return null;
 		
 		cur_metrics.setExerciseSpending(cal +
 			cur_metrics.getExerciseSpending());
 		metricsRepository.save(cur_metrics);
 
-		return true;
+		return cur_metrics;
 	}
 
 	@Transactional 
-	public boolean setExerciseCount(String userEmail, int cal)
+	public Metrics setExerciseCount(String userEmail, int cal)
 	{
 		Metrics cur_metrics = getCurrentUserMetrics(userEmail);
-		if(cur_metrics == null) return false;
+		if(cur_metrics == null) return null;
 		
 		cur_metrics.setExerciseSpending(cal);
 		metricsRepository.save(cur_metrics);
 
-		return true;
+		return cur_metrics;
 	}
 
 	@Transactional
