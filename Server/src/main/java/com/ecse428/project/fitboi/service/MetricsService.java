@@ -33,6 +33,15 @@ public class MetricsService {
 			metrics_list.iterator().next() : null;
 	}
 
+	@Transactional
+	public int getCurrentExerciseCount(String userEmail)
+	{
+		Metrics cur_metrics = getCurrentUserMetrics(userEmail);
+		if(cur_metrics == null) return -1;
+
+		return cur_metrics.getExerciseSpending();
+	}
+
 	@Transactional 
 	public Metrics addExerciseCount(String userEmail, int cal)
 	{

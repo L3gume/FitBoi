@@ -67,6 +67,21 @@ public class MetricsController {
     }
 
     /**
+     * GET
+     * 
+     * /users/{user_email}/curExercise
+     * 
+     * @param user_email
+     * @return
+     */
+    @GetMapping("{user_email}/curExercise")
+    public ResponseEntity<?> getExerciseCount(@PathVariable String user_email)
+    {
+        int exerciseCount = metricsService.getCurrentExerciseCount(user_email);
+        return new ResponseEntity<Integer>(exerciseCount, HttpStatus.OK);
+    }
+
+    /**
      * POST
      * /users/{user_id}/metrics -> Adds a metric to the user
      * @param user_id
