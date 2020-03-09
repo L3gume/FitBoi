@@ -3,7 +3,9 @@ package com.ecse428.project.fitboi;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,6 +30,9 @@ import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.repository.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.sql.Date;
 import java.util.logging.*;
@@ -271,28 +276,64 @@ class UserControllerTests {
 		int aHeight = 193;
 		String aBiologicalSex = "Female";
 		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
-
+	   
+		ObjectNode requestBody = mapper.createObjectNode();
+        requestBody.put("date" , "2001-11-10");
+		requestBody.put("exercise", 3);
+		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+		String requestJson = ow.writeValueAsString(requestBody);
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
-		.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
-		.andExpect(status().isCreated());
-		
-		Metrics m = new Metrics(new Date(0), 3);
-		Meal meal = new Meal(MealType.Breakfast);
-
-		mockMvc.perform(post("/users/" + aEmail + "/metrics")
-		.contentType(MediaType.APPLICATION_JSON)
-		.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(m)))
-		.andExpect(status().isOk());
-	
-		Goal g = new Goal(2000, false, new Date(0), new Date(0), 150.0f, ActivityLevel.Medium, GoalType.Maintain, 150.0f, 200.0f, 150.0f);
-		FoodItem food = new FoodItem("food", 250, 15.0f, 10.0f, 10.0f, 10.0f, g);
-
-		mockMvc.perform(post("/users/" + aEmail + "/metrics/" + m.getId() + "/meal/" + meal.getId() + "/food")
-			.contentType(MediaType.APPLICATION_JSON)
-			.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(food)))
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
 			.andExpect(status().isCreated());
+
+		MvcResult result = mockMvc.perform(post("/users/" + aEmail + "/metrics").contentType(MediaType.APPLICATION_JSON)
+        	.content(requestJson))
+			.andExpect(status().isOk())
+			.andReturn();
+		
+		String s = result.getResponse().getContentAsString();
+		JSONObject jsonObj = new JSONObject(s);
+        String id = jsonObj.getString("id");
+        
+        requestBody = mapper.createObjectNode();
+        requestBody.put("mealType" , "Breakfast");
+
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		ow = mapper.writer().withDefaultPrettyPrinter();
+		requestJson = ow.writeValueAsString(requestBody);
+        
+        result = mockMvc.perform(post("/users/" + aEmail + "/metrics/" + id + "/meal").contentType(MediaType.APPLICATION_JSON)
+        .content(requestJson))
+        .andExpect(status().isCreated())
+        .andReturn();
+
+        s = result.getResponse().getContentAsString();
+		jsonObj = new JSONObject(s);
+        String mealId = jsonObj.getString("id");
+
+        mockMvc.perform(get("/users/" + aEmail + "/metrics/" + id + "/meal/" + mealId).contentType(MediaType.APPLICATION_JSON)
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString("")))
+        	.andExpect(status().isOk());
+	
+		requestBody = mapper.createObjectNode();
+		requestBody.put("name" , "food");
+		requestBody.put("cal" , "125");
+		requestBody.put("portionSize" , "125.5");
+		requestBody.put("fat" , "15.2");
+		requestBody.put("carbs" , "10.2");
+		requestBody.put("protein" , "12.5");
+
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		ow = mapper.writer().withDefaultPrettyPrinter();
+		requestJson = ow.writeValueAsString(requestBody);
+
+		mockMvc.perform(post("/users/" + aEmail + "/metrics/" + id + "/meal/" + mealId + "/food")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(requestJson))
+			.andExpect(status().isOk());
 	}
 
 	@Test
@@ -305,30 +346,68 @@ class UserControllerTests {
 		int aHeight = 193;
 		String aBiologicalSex = "Female";
 		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
+	   
+		ObjectNode requestBody = mapper.createObjectNode();
+        requestBody.put("date" , "2001-11-10");
+		requestBody.put("exercise", 3);
+		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+		String requestJson = ow.writeValueAsString(requestBody);
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
-		.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
-		.andExpect(status().isCreated());
-		
-		Metrics m = new Metrics(new Date(0), 3);
-		Meal meal = new Meal(MealType.Breakfast);
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser)))
+			.andExpect(status().isCreated());
 
-		mockMvc.perform(post("/users/" + aEmail + "/metrics")
-		.contentType(MediaType.APPLICATION_JSON)
-		.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(m)))
-		.andExpect(status().isOk());
+		MvcResult result = mockMvc.perform(post("/users/" + aEmail + "/metrics").contentType(MediaType.APPLICATION_JSON)
+        	.content(requestJson))
+			.andExpect(status().isOk())
+			.andReturn();
+		
+		String s = result.getResponse().getContentAsString();
+		JSONObject jsonObj = new JSONObject(s);
+        String id = jsonObj.getString("id");
+        
+        requestBody = mapper.createObjectNode();
+        requestBody.put("mealType" , "Breakfast");
+
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		ow = mapper.writer().withDefaultPrettyPrinter();
+		requestJson = ow.writeValueAsString(requestBody);
+        
+        result = mockMvc.perform(post("/users/" + aEmail + "/metrics/" + id + "/meal").contentType(MediaType.APPLICATION_JSON)
+        .content(requestJson))
+        .andExpect(status().isCreated())
+        .andReturn();
+
+        s = result.getResponse().getContentAsString();
+		jsonObj = new JSONObject(s);
+        String mealId = jsonObj.getString("id");
+
+        mockMvc.perform(get("/users/" + aEmail + "/metrics/" + id + "/meal/" + mealId).contentType(MediaType.APPLICATION_JSON)
+        	.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString("")))
+        	.andExpect(status().isOk());
 	
-		Goal g = new Goal(2000, false, new Date(0), new Date(0), 150.0f, ActivityLevel.Medium, GoalType.Maintain, 150.0f, 200.0f, 150.0f);
-		FoodItem food = new FoodItem("food", 250, 15.0f, 10.0f, 10.0f, 10.0f, g);
-		mockMvc.perform(post("/users/" + aEmail + "/metrics/" + m.getId() + "/meal/" + meal.getId() + "/food")
+		requestBody = mapper.createObjectNode();
+		requestBody.put("name" , "food");
+		requestBody.put("cal" , "125");
+		requestBody.put("portionSize" , "125.5");
+		requestBody.put("fat" , "15.2");
+		requestBody.put("carbs" , "10.2");
+		requestBody.put("protein" , "12.5");
+
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		ow = mapper.writer().withDefaultPrettyPrinter();
+		requestJson = ow.writeValueAsString(requestBody);
+
+		mockMvc.perform(post("/users/" + aEmail + "/metrics/" + id + "/meal/" + mealId + "/food")
 			.contentType(MediaType.APPLICATION_JSON)
-			.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(food)))
-			.andExpect(status().isCreated());
-		mockMvc.perform(get("/users/" + aEmail + "/metrics/" + m.getId() + "/meal/" + meal.getId() + "/food")
+			.content(requestJson))
+			.andExpect(status().isOk());
+		mockMvc.perform(get("/users/" + aEmail + "/metrics/" + id + "/meal/" + mealId + "/food")
 			.contentType(MediaType.APPLICATION_JSON)
-			.content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(food)))
-			.andExpect(status().isCreated());
+			.content(requestJson))
+			.andExpect(status().isOk());
 	}
 
 }

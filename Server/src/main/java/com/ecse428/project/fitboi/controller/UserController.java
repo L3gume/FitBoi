@@ -28,6 +28,7 @@ import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.MealService;
 import com.ecse428.project.fitboi.service.MetricsService;
 import com.ecse428.project.fitboi.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @RestController
@@ -95,9 +96,14 @@ public class UserController {
     	if (userDto == null || !isValidUser(userDto)) {
     		return new ResponseEntity<String>("Request body invalid", HttpStatus.NOT_ACCEPTABLE);
     	}
-    	
-        System.out.println("USER: " + userDto.toString());
-       
+    	ObjectMapper mapper = new ObjectMapper();
+        // System.out.println("USER: " + userDto.toString());
+        try{
+            System.out.println("USER: " + mapper.writeValueAsString(userDto));
+        }
+        catch(Exception e){
+
+        }
     	
     	if (!userService.addNewUser(convertToDomainObject(userDto)))
     	{
