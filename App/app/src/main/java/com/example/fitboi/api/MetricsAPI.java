@@ -38,11 +38,9 @@ public class MetricsAPI {
      * MetricAPI.addNewMetric(metricDto, addMetricConfirmation);
      *
      * Example of how to use synchronously:
-     * MetricDto newGoal = MetricDto();
-     * MetricDto addedGoal = MetricAPI.addNewGoal("test@gmail.com", newGoal, null);
-     * if (addedGoal == newGoal) {
-     *     String message = "Adding new goal worked!";
-     * }
+     * MetricDto newMetric = MetricDto();
+     * MetricDto addedMetric = MetricAPI.addNewGoal("test@gmail.com", newMetric, null);
+     *
      * @param userId of user to which to add the goal
      * @param metricToAdd GoalDto of goal to add
      * @param fn to be called by response, if null wait for response and return it directly
@@ -253,6 +251,120 @@ public class MetricsAPI {
         request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
         MyVolley.getRequestQueue().add(request);
 
+        if (fn == null) {
+            try {
+                return jsonToMetricDto(future.get(10, TimeUnit.SECONDS));
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Add calories to current metric's exercise counter
+     * path:    users/{user_email}/addExercise/{cal}
+     * type:    POST
+     *
+     * Example of how to use asynchronously:
+     * Consumer addExercise = new Consumer<MetricDto>() {
+     *   @Override
+     *   public void accept(MetricDto metric) {
+     *     // do something
+     *   }
+     * };
+     * MetricAPI.addExerciseCount("test@gmail.com", 10, addExercise);
+     *
+     * Example of how to use synchronously:
+     * MetricDto metric = MetricAPI.addExerciseCount("test@gmail.com", 10, null);
+     *
+     * @param userId of user to which to add the goal
+     * @param cal Amount of calories to be added to exercise counter
+     * @param fn to be called by response, if null wait for response and return it directly
+     */
+    public static MetricDto addExerciseCount(String userId, Integer cal, Consumer<MetricDto> fn) {
+        if (userId == null || cal == null) return null;
+
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        Response.Listener<JSONObject> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = metricCallSuccessListener(fn);
+            errorListener = metricCallErrorListener(fn);
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                MyVolley.serverUrl
+                        +MyVolley.userPostfix+userId
+                        +"addExercise/"+cal,
+                null,
+                successListener,
+                errorListener
+        );
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+        if (fn == null) {
+            try {
+                return jsonToMetricDto(future.get(10, TimeUnit.SECONDS));
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Set calories of current metric's exercise counter
+     * path:    users/{user_email}/addExercise/{cal}
+     * type:    POST
+     *
+     * Example of how to use asynchronously:
+     * Consumer setExercise = new Consumer<MetricDto>() {
+     *   @Override
+     *   public void accept(MetricDto metric) {
+     *     // do something
+     *   }
+     * };
+     * MetricAPI.setExerciseCount("test@gmail.com", 10, setExercise);
+     *
+     * Example of how to use synchronously:
+     * MetricDto metric = MetricAPI.setExerciseCount("test@gmail.com", 10, null);
+     *
+     * @param userId of user to which to add the goal
+     * @param cal Amount of calories to be set as exercise counter
+     * @param fn to be called by response, if null wait for response and return it directly
+     */
+    public static MetricDto setExerciseCount(String userId, Integer cal, Consumer<MetricDto> fn) {
+        if (userId == null || cal == null) return null;
+
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        Response.Listener<JSONObject> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = metricCallSuccessListener(fn);
+            errorListener = metricCallErrorListener(fn);
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                MyVolley.serverUrl
+                        +MyVolley.userPostfix+userId
+                        +"setExercise/"+cal,
+                null,
+                successListener,
+                errorListener
+        );
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
         if (fn == null) {
             try {
                 return jsonToMetricDto(future.get(10, TimeUnit.SECONDS));
