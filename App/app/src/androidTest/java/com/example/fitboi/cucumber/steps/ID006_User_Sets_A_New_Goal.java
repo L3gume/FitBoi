@@ -9,9 +9,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
-import java.sql.Date;
-import java.util.List;
-import java.util.function.Consumer;
 
 @RunWith(Cucumber.class)
 public class ID006_User_Sets_A_New_Goal {
@@ -24,9 +21,9 @@ public class ID006_User_Sets_A_New_Goal {
     @Then("the User adds a goal to their profile")
     public void the_user_adds_a_goal_to_their_profile() {
         GoalDto goalDto = new GoalDto(1337, 10, true,
-                new Date(0), new Date(1), 12.f,
-                "High", "Lose", 20.f, 30.f, 40.f);
-        GoalAPI.addUserGoal("boaty@mcboatface.ca", goalDto, null);
+                "2020-01-01", "2020-12-12", 12,
+                "High", "Lose", 20, 30, 40);
+        GoalAPI.createGoal("boaty@mcboatface.ca", goalDto, null);
         assert true;
     }
 
@@ -47,8 +44,8 @@ public class ID006_User_Sets_A_New_Goal {
 
     @And("there is a goal currently in progress")
     public void there_is_a_goal_currently_in_progress() {
-        List<GoalDto> goals = GoalAPI.getUserGoals("boaty@mcboatface.ca",null);
-        assert (!goals.isEmpty());
+        GoalDto goal = GoalAPI.getUserGoal("boaty@mcboatface.ca",null);
+        assert goal != null;
     }
 
     @And("the User has entered a custom goal")

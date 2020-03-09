@@ -1,17 +1,14 @@
 package com.example.fitboi.ui.meal;
 
-import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fitboi.R;
-import com.example.fitboi.dto.FoodItemDto;
+import com.example.fitboi.dto.FoodDto;
 
 import java.util.ArrayList;
 
@@ -23,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.MyViewHolder>{
     private static final String LOG_TAG = MealListAdapter.class.getSimpleName();
-    private final ArrayList<FoodItemDto> mfoods;
+    private final ArrayList<FoodDto> mfoods;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -55,7 +52,7 @@ public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.MyView
 
     }
 
-    public MealListAdapter(ArrayList<FoodItemDto> foods) {
+    public MealListAdapter(ArrayList<FoodDto> foods) {
         this.mfoods = foods;
         Log.d(LOG_TAG, String.valueOf(foods.size()));
     }
@@ -73,14 +70,14 @@ public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        FoodItemDto food = mfoods.get(position);
+        FoodDto food = mfoods.get(position);
 
         TextView foodNameView = (TextView) holder.foodNameView;
         TextView foodCalCountView = (TextView) holder.foodCalCountView;
         TextView foodPortionSizeView = (TextView) holder.foodPortionSizeView;
 
-        String foodCalCountText = String.valueOf(food.getCalories()) +  " Calories";
-        String foodPortionSizeText = String.valueOf(food.getCalories()) +  " portions";
+        String foodCalCountText = String.valueOf(food.getCal()) +  " Calories";
+        String foodPortionSizeText = String.valueOf(food.getCal()) +  " portions";
 
         foodNameView.setText(food.getName());
         foodCalCountView.setText(foodCalCountText);

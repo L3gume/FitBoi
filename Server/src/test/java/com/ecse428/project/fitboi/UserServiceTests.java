@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import com.ecse428.project.fitboi.model.Metrics;
 import com.ecse428.project.fitboi.model.Sex;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.UserService;
@@ -22,7 +23,6 @@ import java.util.ArrayList;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 class UserServiceTests {
-
 	@Autowired
 	private UserService userService;
 	@MockBean
@@ -125,6 +125,16 @@ class UserServiceTests {
 		assertTrue(deleted.getEmail().equals(testUser.getEmail()));
 	}
 
+	@Test
+	public void addMetricsSuccess(){
+		UserProfile testUser = createUser();
+		Metrics metric = new Metrics(new Date(0), 3);
+		testUser.addMetric(metric);
+		when(userService.getUser(anyString())).thenReturn(testUser);
+		Metrics result = userService.getUserMetric(testUser.getEmail(), metric.getId());
+		assertTrue(result.getDate().equals(metric.getDate()));
+	}
+
 	private UserProfile createUser(){
 		String aEmail = "testUser1@mail.mcgill.ca";
 		String aName = "testboi";
@@ -135,5 +145,4 @@ class UserServiceTests {
 		Sex aBiologicalSex = Sex.Male;
 		return new UserProfile(aEmail, aName, aUserName, aPassword, aDOB, aHeight, aBiologicalSex);
 	}
-
 }

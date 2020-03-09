@@ -1,6 +1,7 @@
 package com.ecse428.project.fitboi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.ecse428.project.fitboi.model.Goal;
@@ -26,18 +27,38 @@ public class GoalService {
 	@Autowired
 	UserService userService;
 
+	@Transactional
 	public boolean setUserGoal(Goal goal, UserProfile user) {
 		
 		user.setGoal(goal);
-		//goalRepository.save(goal);
 		userService.updateUser(user);
 		return true;
 	}
 	
+	@Transactional
 	public Goal getUserGoal(String userEmail)
 	{
 		UserProfile user = userService.getUser(userEmail);
 		return user.getGoal();
+	}
+
+
+	/**
+	 * Update a goal from the database with new goal
+	 * @param userEmail 
+	 * @param goal
+	 * @return boolean dependant on if goal exists or has been successfully updated
+	 */
+	@Transactional
+	public boolean updateGoal(String userEmail, Goal goal){
+		UserProfile user = userService.getUser(userEmail);
+		if(user.getGoal().getId() != goal.getId()){
+			return false;
+		}else{
+			user.setGoal(goal);
+			userService.updateUser(user);
+			return true;
+		}
 	}
 
 	/**

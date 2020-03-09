@@ -78,6 +78,20 @@ class GoalServiceTests {
     assertTrue(goalService.deleteGoal(testUser.getEmail()) != null);
   }
 
+  @Test 
+  public void testUpdateUserGoal(){
+    UserProfile testUser = createUser();
+    Goal testGoal = createGoal();
+    testUser.setGoal(testGoal);
+    testGoal.setBaseCalories(9000);
+    testUser.setGoal(testGoal);
+    when(goalRepository.existsById(anyInt())).thenReturn(true);
+    when(userRepository.findUserByEmail(anyString())).thenReturn(testUser);
+    when(goalRepository.findGoalById(anyInt())).thenReturn(testGoal);
+    assertTrue(goalService.deleteGoal(testUser.getEmail()) != null);
+
+  }
+
   private UserProfile createUser(){
 		String aEmail = "testUser1@mail.mcgill.ca";
 		String aName = "testboi";

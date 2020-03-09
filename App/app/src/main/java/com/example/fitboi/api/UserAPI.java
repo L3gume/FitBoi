@@ -12,6 +12,7 @@ import com.example.fitboi.dto.UserDto;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -44,6 +45,8 @@ public class UserAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static UserDto addUser(UserDto userToAdd, Consumer<UserDto> fn) {
+        if (userToAdd == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -118,7 +121,7 @@ public class UserAPI {
 
         if (fn == null) {
             try {
-                List<UserDto> users = null;
+                List<UserDto> users = new ArrayList<>();
                 JSONArray result = future.get(10, TimeUnit.SECONDS);
                 for (int i=0; i<result.length(); i++) {
                     users.add(jsonToUserDto(result.optJSONObject(i)));
@@ -154,6 +157,8 @@ public class UserAPI {
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static UserDto getUserByLogin(String email, String password, Consumer<UserDto> fn) {
+        if (email == null || password == null);
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -168,7 +173,67 @@ public class UserAPI {
 
 
         JsonObjectRequest request = new JsonObjectRequest(
-                MyVolley.serverUrl + MyVolley.userPostfix + email + "/" + password + "/",
+                Request.Method.GET,
+                MyVolley.serverUrl
+                        +MyVolley.userPostfix + email + "/" + password + "/",
+                null,
+                successListener,
+                errorListener
+        );
+
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+
+        if (fn == null) {
+            try {
+                return jsonToUserDto(future.get(10, TimeUnit.SECONDS));
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get user object from email
+     * path:    /users/{userEmail}
+     * type:    GET
+     *
+     * Example of how to use asynchronously:
+     * Consumer gotUser = new Consumer<UserDto>() {
+     *   @Override
+     *   public void accept(UserDto user) {
+     *      // do something
+     *   }
+     * };
+     * UserAPI.getUserByLoginInfo("test@gmail.com", gotUser);
+     *
+     * Example of how to use synchronously:
+     * UserDto user = UserAPI.getUserByLoginInfo("test@gmail.com", null);
+     *
+     * @param email String: email of user to be logged in
+     * @param fn to be called by response, if null wait for response and return it directly
+     */
+    public static UserDto getUser(String email, Consumer<UserDto> fn) {
+        if (email == null) return null;
+
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        Response.Listener<JSONObject> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = userCallSuccessListener(fn);
+            errorListener = userCallErrorListener(fn);
+        }
+
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                MyVolley.serverUrl
+                        +MyVolley.userPostfix+email,
                 null,
                 successListener,
                 errorListener
@@ -189,7 +254,7 @@ public class UserAPI {
 
     /**
      * Update user object
-     * path:    /users/{userEmail}/{userPassword}/
+     * path:    /users/
      * type:    GET
      *
      * Example of how to use asynchronously:
@@ -200,17 +265,18 @@ public class UserAPI {
      *       String message = "user settings modified";
      *   }
      * };
-     * UserAPI.updateUser("test@gmail.com", userWithChange, modifyUserSettings);
+     * UserAPI.updateUser(userWithChange, modifyUserSettings);
      *
      * Example of how to use synchronously:
      * UserDto userWithChange;
-     * UserDto user = UserAPI.updateUser("test@gmail.com", userWithChange, null);
+     * UserDto user = UserAPI.updateUser(userWithChange, null);
      *
-     * @param email String: email of user to be logged in
      * @param newUserDto new information with which to update user
      * @param fn to be called by response, if null wait for response and return it directly
      */
-    public static UserDto updateUser(String email, UserDto newUserDto, Consumer<UserDto> fn) {
+    public static UserDto updateUser(UserDto newUserDto, Consumer<UserDto> fn) {
+        if (newUserDto == null) return null;
+
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         Response.Listener<JSONObject> successListener;
         Response.ErrorListener errorListener;
@@ -244,6 +310,63 @@ public class UserAPI {
         }
         return null;
     }
+
+    /**
+     * Delete a user
+     * path:    /users/{user_id}
+     * type:    DELETE
+     *
+     * Example of how to use asynchronously:
+     * Consumer deleteUserConfirmation = new Consumer<UserDto>() {
+     *   @Override
+     *   public void accept(UserDto meal) {
+     *     // do something
+     *   }
+     * };
+     * MealAPI.deleteUser("test@gmail.com",deleteMealConfirmation);
+     *
+     * Example of how to use synchronously:
+     * UserAPI deletedUser = UserAPI.deleteUser("test@gmail.com",null);
+     *
+     * @param userId: email of user for which the meal should be deleted
+     * @param fn to be called by response, if null wait for response and return it directly
+     */
+    public static UserDto deleteUser(String userId, Consumer<UserDto> fn) {
+        if (userId == null) return null;
+
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        Response.Listener<JSONObject> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = userCallSuccessListener(fn);
+            errorListener = userCallErrorListener(fn);
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.DELETE,
+                MyVolley.serverUrl
+                        +MyVolley.userPostfix+userId,
+                null,
+                successListener,
+                errorListener);
+
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+
+        if (fn == null) {
+            try {
+                return jsonToUserDto(future.get(10, TimeUnit.SECONDS));
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
 
     /********** PRIVATE METHODS **********/
 
@@ -297,13 +420,13 @@ public class UserAPI {
     private static UserDto jsonToUserDto(JSONObject json) {
         String email = json.optString("email");
         String name = json.optString("name");
-        String username = json.optString("username");
+        String username = json.optString("userName");
         String password = json.optString("password");
-        String birthDate = json.optString("dob");
-        String sex = json.optString("sex");
+        String dob = json.optString("dob");
         int height = json.optInt("height");
+        String biologicalSex = json.optString("biologicalSex");
 
-        return new UserDto(email, name, username, password, birthDate, sex, height);
+        return new UserDto(email, name, username, password, dob, biologicalSex, height);
     }
 
     private static JSONObject userDtoToJson(UserDto user) {
@@ -312,12 +435,11 @@ public class UserAPI {
         try {
             json.put("email", user.getEmail());
             json.put("name", user.getName());
-            json.put("username", user.getUserName());
+            json.put("userName", user.getUserName());
             json.put("password", user.getPassword());
             json.put("dob", user.getDob());
-            json.put("sex", user.getBiologicalSex());
+            json.put("biologicalSex", user.getBiologicalSex());
             json.put("height", user.getHeight());
-            json.put("password", user.getPassword());
         } catch (Exception e) {
             // TODO: something with exception
         }

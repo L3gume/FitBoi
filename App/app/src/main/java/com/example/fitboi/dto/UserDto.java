@@ -9,13 +9,13 @@ public class UserDto {
     private String userName;
     private String password;
     private String dob;
-    private int height;
+    private Integer height;
     private String biologicalSex;
 
     public UserDto() {
     }
 
-    public UserDto(String email, String name, String userName, String password, String dob, String biologicalSex, int height) {
+    public UserDto(String email, String name, String userName, String password, String dob, String biologicalSex, Integer height) {
         this.email = email;
         this.name = name;
         this.userName = userName;
@@ -65,11 +65,11 @@ public class UserDto {
         this.dob = dob;
     }
 
-    public int getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(Integer height) {
         this.height = height;
     }
 
@@ -81,26 +81,27 @@ public class UserDto {
         this.biologicalSex = biologicalSex;
     }
 
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        if (!super.equals(object)) return false;
-        UserDto userDto = (UserDto) object;
-        return height == userDto.height &&
-                email.equals(userDto.email) &&
-                name.equals(userDto.name) &&
-                userName.equals(userDto.userName) &&
-                password.equals(userDto.password) &&
-                dob.equals(userDto.dob) &&
-                biologicalSex.equals(userDto.biologicalSex);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDto userDto = (UserDto) o;
+        return Objects.equals(email, userDto.email) &&
+                Objects.equals(name, userDto.name) &&
+                Objects.equals(userName, userDto.userName) &&
+                Objects.equals(password, userDto.password) &&
+                Objects.equals(dob, userDto.dob) &&
+                Objects.equals(height, userDto.height) &&
+                Objects.equals(biologicalSex, userDto.biologicalSex);
     }
 
+    @Override
     public int hashCode() {
-        return java.util.Objects.hash(super.hashCode(), email, name, userName, password, dob, height, biologicalSex);
+        return Objects.hash(email, name, userName, password, dob, height, biologicalSex);
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
+    @Override
+    public String toString() {
         return "UserDto{" +
                 "email='" + email + '\'' +
                 ", name='" + name + '\'' +
