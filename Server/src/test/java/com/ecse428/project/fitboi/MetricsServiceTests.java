@@ -99,4 +99,28 @@ class MetricsServiceTests {
         tMetrics.addMeal(tMeal);
         assertTrue(metricsService.getUserMeal(tMetrics, tMeal.getId()).equals(tMeal));
     }
+
+    @Test
+	public void testDeleteMeal(){
+        Metrics tMetrics = new Metrics(new Date(0), 3);
+        Meal tMeal = new Meal();
+        tMetrics.addMeal(tMeal);
+        when(mockRepository.existsById(anyInt())).thenReturn(false);
+		when(mockRepository.save(any())).thenReturn(tMetrics);
+		Meal deleted = metricsService.deleteMeal(tMetrics, tMeal.getId());
+		assertTrue(deleted.getId() == tMeal.getId());
+
+    }
+
+    @Test
+    public void testDeleteMetrics(){
+        Metrics tMetrics = new Metrics(new Date(0), 3);
+
+		when(mockRepository.existsById(tMetrics.getId())).thenReturn(true);
+		when(mockRepository.findMetricsById(tMetrics.getId())).thenReturn(tMetrics);
+
+		Metrics deleted = metricsService.deleteMetrics(tMetrics.getId());
+		assertTrue(deleted.getId() == tMetrics.getId());
+
+    }
 }

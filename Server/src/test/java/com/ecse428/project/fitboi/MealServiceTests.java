@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import com.ecse428.project.fitboi.model.Meal;
 import com.ecse428.project.fitboi.model.MealType;
+import com.ecse428.project.fitboi.model.FoodItem;
 import com.ecse428.project.fitboi.service.MealService;
 import com.ecse428.project.repository.*;
 
@@ -77,12 +78,25 @@ class MealServiceTests {
 	}
     
     @Test
-	public void testUpdaeMealFailure(){
+	public void testUpdateMealFailure(){
         Meal tMeal = new Meal(MealType.Breakfast);
 		when(mockRepository.existsById(anyInt())).thenReturn(false);
 		when(mockRepository.save(any())).thenReturn(tMeal);
 		boolean addStatus = mealService.updateMeal(tMeal);
 		assertTrue(!addStatus);
+	}
+	
+	@Test
+    public void testDeleteFood(){
+		FoodItem tFoodItem = new FoodItem();
+		Meal tMeal = new Meal();
+		tMeal.addFoodItem(tFoodItem);
+
+		when(mockRepository.existsById(anyInt())).thenReturn(false);
+		when(mockRepository.save(any())).thenReturn(tMeal);
+
+		FoodItem deleted = mealService.deleteFood(tMeal, tFoodItem.getId());
+		assertTrue(deleted.getId() == tFoodItem.getId());
     }
 
 }
