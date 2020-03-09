@@ -14,8 +14,7 @@ Then the food item is dissociated from the meal
 Scenario: User successfully deletes many or all food items in a meal (Alternate flow)
 
 Given the User is logged into FitBoi
-
-Given the User has more than one logged food items for the meal
+And the User has more than one logged food items for the meal
 When deleting multiple food items from the meal 
 Then the food items are dissociated from the meal
 
