@@ -1,9 +1,6 @@
 package com.ecse428.project.fitboi.dto;
 
 import java.sql.Date;
-import com.ecse428.project.fitboi.model.ActivityLevel;
-import com.ecse428.project.fitboi.model.GoalType;
-import com.ecse428.project.fitboi.model.MacroDistribution;;
 
 
 public class GoalDto {
@@ -19,7 +16,6 @@ public class GoalDto {
     private float fats;
     private float carbs;
     private float protein;
-    private MacroDistribution macroDistribution;
 
     public GoalDto(){
 

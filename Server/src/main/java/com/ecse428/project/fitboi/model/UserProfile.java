@@ -312,8 +312,8 @@ public class UserProfile {
 	}
 
 	/* Code from template association_AddMandatoryManyToOne */
-	public Metric addMetric(Date aDate, int aExerciseSpending) {
-		Metric aNewMetric = new Metric(aDate, aExerciseSpending);
+	public Metric addMetric(Date aDate, int aExerciseSpending, String aFootNote) {
+		Metric aNewMetric = new Metric(aDate, aExerciseSpending, aFootNote);
 		return aNewMetric;
 	}
 

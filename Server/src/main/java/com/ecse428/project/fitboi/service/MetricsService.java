@@ -5,7 +5,6 @@ import java.util.List;
 import com.ecse428.project.fitboi.model.Meal;
 import com.ecse428.project.fitboi.model.Metric;
 import com.ecse428.project.repository.MetricRepository;
-import com.ecse428.project.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

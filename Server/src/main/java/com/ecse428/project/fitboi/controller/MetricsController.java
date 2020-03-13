@@ -4,12 +4,11 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ecse428.project.fitboi.dto.MetricsDto;
+import com.ecse428.project.fitboi.dto.MetricDto;
 import com.ecse428.project.fitboi.model.Metric;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.MetricsService;
 import com.ecse428.project.fitboi.service.UserService;
-import com.ecse428.project.repository.MetricRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,10 +44,10 @@ public class MetricsController {
         @PathVariable int cal)
     {
         Metric curMetrics = metricsService.addExerciseCount(user_email, cal);
-        MetricsDto curMetricsDto = convertToDto(curMetrics);
+        MetricDto curMetricsDto = convertToDto(curMetrics);
         HttpStatus status = curMetrics == null ? HttpStatus.NOT_FOUND : HttpStatus.OK;
 
-        return new ResponseEntity<MetricsDto>(curMetricsDto, status);
+        return new ResponseEntity<MetricDto>(curMetricsDto, status);
     }
 
     /**
@@ -62,10 +61,10 @@ public class MetricsController {
         @PathVariable int cal)
     {
         Metric curMetrics = metricsService.setExerciseCount(user_email, cal);
-        MetricsDto curMetricsDto = convertToDto(curMetrics);
+        MetricDto curMetricsDto = convertToDto(curMetrics);
         HttpStatus status = curMetrics == null ? HttpStatus.NOT_FOUND : HttpStatus.OK;
 
-        return new ResponseEntity<MetricsDto>(curMetricsDto, status);
+        return new ResponseEntity<MetricDto>(curMetricsDto, status);
     }
 
     /**
@@ -101,18 +100,19 @@ public class MetricsController {
         // Extract the information from the body
         Date date = Date.valueOf(objectNode.get("date").asText());
         int exercise = objectNode.get("exerciseSpending").asInt();
+        String footNote = objectNode.get("footNote").asText();
         
         // Create the new metric and add it to the user
-        Metric metric = new Metric(date, exercise);
+        Metric metric = new Metric(date, exercise, footNote);
         user.addMetric(metric);
         
         // Persist the user and the new metric
         userService.updateUser(user);
 
         // Convert to DTO
-        MetricsDto metricsDto = convertToDto(metric);
+        MetricDto metricsDto = convertToDto(metric);
 
-    	return new ResponseEntity<MetricsDto>(metricsDto, HttpStatus.OK);
+    	return new ResponseEntity<MetricDto>(metricsDto, HttpStatus.OK);
     }
 
     /**
@@ -132,12 +132,12 @@ public class MetricsController {
         }
 
         // Get all the users metrics and convert to DTO
-        List<MetricsDto> metricsDto = new ArrayList<MetricsDto>();
+        List<MetricDto> metricsDto = new ArrayList<MetricDto>();
         for (Metric metrics : user.getMetrics()) {
             metricsDto.add(convertToDto(metrics));
         }
 
-    	return new ResponseEntity<List<MetricsDto>>(metricsDto, HttpStatus.OK);
+    	return new ResponseEntity<List<MetricDto>>(metricsDto, HttpStatus.OK);
     }
 
     /**
@@ -156,7 +156,7 @@ public class MetricsController {
             return new ResponseEntity<String>("The user does not have a metric with the given metric_id", HttpStatus.NOT_ACCEPTABLE);
         }
 
-    	return new ResponseEntity<MetricsDto>(convertToDto(metric), HttpStatus.OK);
+    	return new ResponseEntity<MetricDto>(convertToDto(metric), HttpStatus.OK);
     }
 
     /**
@@ -168,7 +168,7 @@ public class MetricsController {
     public ResponseEntity<?> getCurUserMetrics(@PathVariable String user_email)
     {
         Metric metric = metricsService.getCurrentUserMetrics(user_email);
-        return new ResponseEntity<MetricsDto>(convertToDto(metric), HttpStatus.OK);
+        return new ResponseEntity<MetricDto>(convertToDto(metric), HttpStatus.OK);
     }
 
     /**
@@ -190,9 +190,9 @@ public class MetricsController {
         metricsService.updateMetrics(metric);
 
         // Convert to DTO
-        MetricsDto metricsDto = convertToDto(metric);
+        MetricDto metricsDto = convertToDto(metric);
 
-    	return new ResponseEntity<MetricsDto>(metricsDto, HttpStatus.OK);
+    	return new ResponseEntity<MetricDto>(metricsDto, HttpStatus.OK);
     }
 
     /**
@@ -214,13 +214,13 @@ public class MetricsController {
         // Delete the metric from the DB
         metric = userService.deleteMetrics(user_id,metric_id);
 
-        return new ResponseEntity<MetricsDto>(convertToDto(metric), HttpStatus.OK);
+        return new ResponseEntity<MetricDto>(convertToDto(metric), HttpStatus.OK);
 
 
     }
 
-    private MetricsDto convertToDto(Metric metrics) {
-    	return new MetricsDto(
+    private MetricDto convertToDto(Metric metrics) {
+    	return new MetricDto(
             metrics.getId(),
             metrics.getDate().toString(),
             metrics.getExerciseSpending()	

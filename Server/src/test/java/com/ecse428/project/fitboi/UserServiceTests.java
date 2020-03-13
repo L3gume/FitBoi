@@ -128,7 +128,7 @@ class UserServiceTests {
 	@Test
 	public void addMetricsSuccess(){
 		UserProfile testUser = createUser();
-		Metric metric = new Metric(new Date(0), 3);
+		Metric metric = new Metric(new Date(0), 3, "Test note");
 		testUser.addMetric(metric);
 		when(userService.getUser(anyString())).thenReturn(testUser);
 		Metric result = userService.getUserMetric(testUser.getEmail(), metric.getId());
