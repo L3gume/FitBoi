@@ -8,7 +8,7 @@ import com.ecse428.project.fitboi.model.Meal;
 import com.ecse428.project.fitboi.model.MealType;
 import com.ecse428.project.fitboi.model.Metric;
 import com.ecse428.project.fitboi.service.MealService;
-import com.ecse428.project.fitboi.service.MetricsService;
+import com.ecse428.project.fitboi.service.MetricService;
 import com.ecse428.project.fitboi.service.UserService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -31,7 +31,7 @@ public class MealController {
     private MealService mealService;
 
     @Autowired
-    private MetricsService metricsService;
+    private MetricService metricService;
 
     @Autowired
     private UserService userService;
@@ -69,7 +69,7 @@ public class MealController {
         }
 
         // Find all the meals for the metric
-        List<Meal> meals = metricsService.getAllMeals(metric);
+        List<Meal> meals = metricService.getAllMeals(metric);
         if (meals == null) {
             return new ResponseEntity<String>("The user has no meals for the given metric_id", HttpStatus.NOT_ACCEPTABLE);
         }
@@ -101,7 +101,7 @@ public class MealController {
         }
         
         // Get the meal given the meal_id
-        Meal meal = metricsService.getUserMeal(metric, meal_id);
+        Meal meal = metricService.getUserMeal(metric, meal_id);
         if (meal == null) {
             return new ResponseEntity<String>("The user has no meals for the given meal_id", HttpStatus.NOT_ACCEPTABLE);
         }
@@ -133,7 +133,7 @@ public class MealController {
         metric.addMeal(meal);
 
         // Persist the metric
-        metricsService.updateMetrics(metric);
+        metricService.updateMetrics(metric);
 
         // Convert to DTO
         MealDto mealDto = convertToDto(meal);
@@ -159,7 +159,7 @@ public class MealController {
         }
 
         // Delete the meal from the DB
-        Meal deletedMeal = metricsService.deleteMeal(metric, meal_id);
+        Meal deletedMeal = metricService.deleteMeal(metric, meal_id);
 
     	return new ResponseEntity<MealDto>(convertToDto(deletedMeal), HttpStatus.OK);
     }

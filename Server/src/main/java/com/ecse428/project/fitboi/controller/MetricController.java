@@ -7,7 +7,7 @@ import java.util.List;
 import com.ecse428.project.fitboi.dto.MetricDto;
 import com.ecse428.project.fitboi.model.Metric;
 import com.ecse428.project.fitboi.model.UserProfile;
-import com.ecse428.project.fitboi.service.MetricsService;
+import com.ecse428.project.fitboi.service.MetricService;
 import com.ecse428.project.fitboi.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +25,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @RestController
 @RequestMapping("/users/")
-public class MetricsController {
+public class MetricController {
 
     @Autowired
     private UserService userService;
 
     @Autowired
-    private MetricsService metricsService;
+    private MetricService metricService;
 
         /**
      * POST
@@ -43,7 +43,7 @@ public class MetricsController {
     public ResponseEntity<?> addExerciseCount(@PathVariable String user_email,
         @PathVariable int cal)
     {
-        Metric curMetrics = metricsService.addExerciseCount(user_email, cal);
+        Metric curMetrics = metricService.addExerciseCount(user_email, cal);
         MetricDto curMetricsDto = convertToDto(curMetrics);
         HttpStatus status = curMetrics == null ? HttpStatus.NOT_FOUND : HttpStatus.OK;
 
@@ -60,7 +60,7 @@ public class MetricsController {
     public ResponseEntity<?> setExerciseCount(@PathVariable String user_email,
         @PathVariable int cal)
     {
-        Metric curMetrics = metricsService.setExerciseCount(user_email, cal);
+        Metric curMetrics = metricService.setExerciseCount(user_email, cal);
         MetricDto curMetricsDto = convertToDto(curMetrics);
         HttpStatus status = curMetrics == null ? HttpStatus.NOT_FOUND : HttpStatus.OK;
 
@@ -78,7 +78,7 @@ public class MetricsController {
     @GetMapping("{user_email}/curExercise")
     public ResponseEntity<?> getExerciseCount(@PathVariable String user_email)
     {
-        int exerciseCount = metricsService.getCurrentExerciseCount(user_email);
+        int exerciseCount = metricService.getCurrentExerciseCount(user_email);
         return new ResponseEntity<Integer>(exerciseCount, HttpStatus.OK);
     }
 
@@ -167,7 +167,7 @@ public class MetricsController {
     @GetMapping("{user_email}/metrics/current")
     public ResponseEntity<?> getCurUserMetrics(@PathVariable String user_email)
     {
-        Metric metric = metricsService.getCurrentUserMetrics(user_email);
+        Metric metric = metricService.getCurrentUserMetrics(user_email);
         return new ResponseEntity<MetricDto>(convertToDto(metric), HttpStatus.OK);
     }
 
@@ -184,10 +184,10 @@ public class MetricsController {
         int exercise = objectNode.get("exerciseSpending").asInt();
         
         // Create the new metric and add it to the user
-        Metric metric = metricsService.getMetrics(Integer.parseInt(metric_id));
+        Metric metric = metricService.getMetrics(Integer.parseInt(metric_id));
         metric.setDate(date);
         metric.setExerciseSpending(exercise);
-        metricsService.updateMetrics(metric);
+        metricService.updateMetrics(metric);
 
         // Convert to DTO
         MetricDto metricsDto = convertToDto(metric);
@@ -219,11 +219,12 @@ public class MetricsController {
 
     }
 
-    private MetricDto convertToDto(Metric metrics) {
+    private MetricDto convertToDto(Metric metric) {
     	return new MetricDto(
-            metrics.getId(),
-            metrics.getDate().toString(),
-            metrics.getExerciseSpending()	
+            metric.getId(),
+            metric.getDate().toString(),
+            metric.getExerciseSpending(),
+            metric.getFootNote()	
     		);
     }
 }

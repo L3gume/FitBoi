@@ -5,14 +5,16 @@ public class MetricDto {
     private int id;
     private String date;
     private int exerciseSpending;
+    private String footNote;
 
     public MetricDto() {
     }
 
-    public MetricDto(int id, String date, int exerciseSpending) {
+    public MetricDto(int id, String date, int exerciseSpending, String footNote) {
         this.id = id;
         this.date = date;
         this.exerciseSpending = exerciseSpending;
+        this.footNote = footNote;
     }
 
     public int getId() {
@@ -30,6 +32,21 @@ public class MetricDto {
     public void setDate(String date) {
         this.date = date;
     }
+
+    /**
+     * @return String return the footNote
+     */
+    public String getFootNote() {
+        return footNote;
+    }
+
+    /**
+     * @param footNote the footNote to set
+     */
+    public void setFootNote(String footNote) {
+        this.footNote = footNote;
+    }
+
 
     public int getExerciseSpending() {
         return exerciseSpending;
@@ -59,6 +76,9 @@ public class MetricDto {
                 "id=" + id +
                 ", date='" + date + '\'' +
                 ", exerciseSpending=" + exerciseSpending +
+                ", footNote=" + footNote +
                 '}';
     }
+
+  
 }
