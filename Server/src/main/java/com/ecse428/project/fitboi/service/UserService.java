@@ -3,7 +3,7 @@ package com.ecse428.project.fitboi.service;
 import java.util.List;
 
 import com.ecse428.project.fitboi.model.Goal;
-import com.ecse428.project.fitboi.model.Metrics;
+import com.ecse428.project.fitboi.model.Metric;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.repository.UserRepository;
 
@@ -111,9 +111,9 @@ public class UserService {
 		return user.getGoal();
 	}
 
-	public Metrics getUserMetric(String userEmail, int metric_id) {
+	public Metric getUserMetric(String userEmail, int metric_id) {
 		UserProfile user = getUser(userEmail);
-		for(Metrics metrics : user.getMetrics()) {
+		for(Metric metrics : user.getMetrics()) {
 			if(metrics.getId() == metric_id) {
 				return metrics;
 			}
@@ -121,15 +121,15 @@ public class UserService {
 		return null;
 	}
 
-	public List<Metrics> getAllUserMetrics(String userEmail) {
+	public List<Metric> getAllUserMetrics(String userEmail) {
 		UserProfile user = getUser(userEmail);
 
 		return user == null ? null : user.getMetrics();
 	}
 
-	public Metrics deleteMetrics(String userEmail, int metric_id) {
+	public Metric deleteMetrics(String userEmail, int metric_id) {
 		UserProfile user = getUser(userEmail);
-		for(Metrics metric : user.getMetrics()) {
+		for(Metric metric : user.getMetrics()) {
 			if(metric.getId() == metric_id) {
 				if (user.removeMetric(metric)) {
 					repository.save(user);

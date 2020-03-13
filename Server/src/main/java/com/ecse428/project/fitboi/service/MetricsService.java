@@ -3,8 +3,8 @@ package com.ecse428.project.fitboi.service;
 import java.util.List;
 
 import com.ecse428.project.fitboi.model.Meal;
-import com.ecse428.project.fitboi.model.Metrics;
-import com.ecse428.project.repository.MetricsRepository;
+import com.ecse428.project.fitboi.model.Metric;
+import com.ecse428.project.repository.MetricRepository;
 import com.ecse428.project.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,19 +15,19 @@ import org.springframework.transaction.annotation.Transactional;
 public class MetricsService {
     
 	@Autowired
-	MetricsRepository metricsRepository;
+	MetricRepository metricsRepository;
 
 	@Autowired
 	UserService userService;
 
 	@Transactional
-	public Iterable<Metrics> getAllMetrics() {
+	public Iterable<Metric> getAllMetrics() {
 		return metricsRepository.findAll();
 	}
 	
 	@Transactional
-	public Metrics getCurrentUserMetrics(String userEmail) {
-		Iterable<Metrics> metrics_list = userService.getAllUserMetrics(userEmail);
+	public Metric getCurrentUserMetrics(String userEmail) {
+		Iterable<Metric> metrics_list = userService.getAllUserMetrics(userEmail);
 
 		return metrics_list.iterator().hasNext() ? 
 			metrics_list.iterator().next() : null;
@@ -36,16 +36,16 @@ public class MetricsService {
 	@Transactional
 	public int getCurrentExerciseCount(String userEmail)
 	{
-		Metrics cur_metrics = getCurrentUserMetrics(userEmail);
+		Metric cur_metrics = getCurrentUserMetrics(userEmail);
 		if(cur_metrics == null) return -1;
 
 		return cur_metrics.getExerciseSpending();
 	}
 
 	@Transactional 
-	public Metrics addExerciseCount(String userEmail, int cal)
+	public Metric addExerciseCount(String userEmail, int cal)
 	{
-		Metrics cur_metrics = getCurrentUserMetrics(userEmail);
+		Metric cur_metrics = getCurrentUserMetrics(userEmail);
 		if(cur_metrics == null) return null;
 		
 		cur_metrics.setExerciseSpending(cal +
@@ -56,9 +56,9 @@ public class MetricsService {
 	}
 
 	@Transactional 
-	public Metrics setExerciseCount(String userEmail, int cal)
+	public Metric setExerciseCount(String userEmail, int cal)
 	{
-		Metrics cur_metrics = getCurrentUserMetrics(userEmail);
+		Metric cur_metrics = getCurrentUserMetrics(userEmail);
 		if(cur_metrics == null) return null;
 		
 		cur_metrics.setExerciseSpending(cal);
@@ -68,13 +68,13 @@ public class MetricsService {
 	}
 
 	@Transactional
-	public Metrics getMetrics(int id) {
+	public Metric getMetrics(int id) {
 		return metricsRepository.findMetricsById(id);
 	}
 
 
 	@Transactional
-	public boolean addNewMetrics(Metrics metrics) {
+	public boolean addNewMetrics(Metric metrics) {
 		if (metricsRepository.existsById(metrics.getId())) {
 			return false;
 		}
@@ -84,7 +84,7 @@ public class MetricsService {
 	}
 
 	@Transactional
-	public boolean updateMetrics(Metrics metrics) {
+	public boolean updateMetrics(Metric metrics) {
 		if (metricsRepository.existsById(metrics.getId())) {
 			metricsRepository.save(metrics);
 			return true;
@@ -93,17 +93,17 @@ public class MetricsService {
 	}
 
 	@Transactional
-	public Metrics deleteMetrics(int id) {
+	public Metric deleteMetrics(int id) {
     	if (!metricsRepository.existsById(id)) {
     		return null;
     	}
-    	Metrics deletedMetrics = metricsRepository.findMetricsById(id);
+    	Metric deletedMetrics = metricsRepository.findMetricsById(id);
     	metricsRepository.deleteById(id);
 		return deletedMetrics;
 	}
 
 	@Transactional
-	public List<Meal> getAllMeals(Metrics metric) {
+	public List<Meal> getAllMeals(Metric metric) {
 		if (metric == null) {
 			return null;
 		}
@@ -111,7 +111,7 @@ public class MetricsService {
 	}
 
 	@Transactional
-	public Meal getUserMeal(Metrics metric, int meal_id) {
+	public Meal getUserMeal(Metric metric, int meal_id) {
 		if (metric == null) {
 			return null;
 		}
@@ -123,7 +123,7 @@ public class MetricsService {
 		return null;
 	}
 
-	public Meal deleteMeal(Metrics metric, int meal_id) {
+	public Meal deleteMeal(Metric metric, int meal_id) {
 		for (Meal meal : metric.getMeals()) {
 			if (meal.getId() == meal_id) {
 				if (metric.removeMeal(meal)) {

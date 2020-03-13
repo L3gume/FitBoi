@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import com.ecse428.project.fitboi.model.Meal;
-import com.ecse428.project.fitboi.model.Metrics;
+import com.ecse428.project.fitboi.model.Metric;
 import com.ecse428.project.fitboi.service.MetricsService;
 import com.ecse428.project.repository.*;
 
@@ -27,11 +27,11 @@ class MetricsServiceTests {
 	private MetricsService metricsService;
     
     @MockBean
-	private MetricsRepository mockRepository;
+	private MetricRepository mockRepository;
     
     @Test
 	public void testAddMetricsSuccess(){
-		Metrics tMetrics = new Metrics(new Date(0), 3);
+		Metric tMetrics = new Metric(new Date(0), 3);
 		when(mockRepository.existsById(anyInt())).thenReturn(false);
 		when(mockRepository.save(any())).thenReturn(tMetrics);
 		boolean addStatus = metricsService.addNewMetrics(tMetrics);
@@ -40,7 +40,7 @@ class MetricsServiceTests {
     
     @Test
 	public void testAddMetricsFailure(){
-		Metrics tMetrics = new Metrics(new Date(0), 3);
+		Metric tMetrics = new Metric(new Date(0), 3);
 		when(mockRepository.existsById(anyInt())).thenReturn(true);
 		when(mockRepository.save(any())).thenReturn(tMetrics);
 		boolean addStatus = metricsService.addNewMetrics(tMetrics);
@@ -49,12 +49,12 @@ class MetricsServiceTests {
     
     @Test
 	public void testGetAllMetrics(){
-        Metrics tMetrics = new Metrics(new Date(0), 3);
-        List<Metrics> metrics = new ArrayList<>();
+        Metric tMetrics = new Metric(new Date(0), 3);
+        List<Metric> metrics = new ArrayList<>();
         metrics.add(tMetrics);
 		when(mockRepository.findAll()).thenReturn(metrics);
-        List<Metrics> results = new ArrayList<>();
-        for(Metrics m : metricsService.getAllMetrics()){
+        List<Metric> results = new ArrayList<>();
+        for(Metric m : metricsService.getAllMetrics()){
             results.add(m);
         }
 		assertTrue(!results.isEmpty());
@@ -62,14 +62,14 @@ class MetricsServiceTests {
     
     @Test
 	public void testGetMetrics(){
-        Metrics tMetrics = new Metrics(new Date(0), 3);
+        Metric tMetrics = new Metric(new Date(0), 3);
         when(mockRepository.findMetricsById(anyInt())).thenReturn(tMetrics);
 		assertTrue(tMetrics.getDate().equals(metricsService.getMetrics(tMetrics.getId()).getDate()));
     }
     
     @Test
 	public void testUpdateMetricsSuccess(){
-		Metrics tMetrics = new Metrics(new Date(0), 3);
+		Metric tMetrics = new Metric(new Date(0), 3);
 		when(mockRepository.existsById(anyInt())).thenReturn(true);
 		when(mockRepository.save(any())).thenReturn(tMetrics);
 		boolean addStatus = metricsService.updateMetrics(tMetrics);
@@ -78,7 +78,7 @@ class MetricsServiceTests {
     
     @Test
 	public void testUpdaeMetricsFailure(){
-		Metrics tMetrics = new Metrics(new Date(0), 3);
+		Metric tMetrics = new Metric(new Date(0), 3);
 		when(mockRepository.existsById(anyInt())).thenReturn(false);
 		when(mockRepository.save(any())).thenReturn(tMetrics);
 		boolean addStatus = metricsService.updateMetrics(tMetrics);
@@ -87,14 +87,14 @@ class MetricsServiceTests {
 
     @Test
     public void testGetAllMeals(){
-        Metrics tMetrics = new Metrics(new Date(0), 3);
+        Metric tMetrics = new Metric(new Date(0), 3);
         tMetrics.addMeal(new Meal());
         assertTrue(!metricsService.getAllMeals(tMetrics).isEmpty());
     }
 
     @Test
     public void testGetuserMeal(){
-        Metrics tMetrics = new Metrics(new Date(0), 3);
+        Metric tMetrics = new Metric(new Date(0), 3);
         Meal tMeal = new Meal();
         tMetrics.addMeal(tMeal);
         assertTrue(metricsService.getUserMeal(tMetrics, tMeal.getId()).equals(tMeal));
@@ -102,7 +102,7 @@ class MetricsServiceTests {
 
     @Test
 	public void testDeleteMeal(){
-        Metrics tMetrics = new Metrics(new Date(0), 3);
+        Metric tMetrics = new Metric(new Date(0), 3);
         Meal tMeal = new Meal();
         tMetrics.addMeal(tMeal);
         when(mockRepository.existsById(anyInt())).thenReturn(false);
@@ -114,12 +114,12 @@ class MetricsServiceTests {
 
     @Test
     public void testDeleteMetrics(){
-        Metrics tMetrics = new Metrics(new Date(0), 3);
+        Metric tMetrics = new Metric(new Date(0), 3);
 
 		when(mockRepository.existsById(tMetrics.getId())).thenReturn(true);
 		when(mockRepository.findMetricsById(tMetrics.getId())).thenReturn(tMetrics);
 
-		Metrics deleted = metricsService.deleteMetrics(tMetrics.getId());
+		Metric deleted = metricsService.deleteMetrics(tMetrics.getId());
 		assertTrue(deleted.getId() == tMetrics.getId());
 
     }

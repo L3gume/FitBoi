@@ -41,13 +41,13 @@ public class UserProfile {
 
 	// UserProfile Associations
 	private List<Weight> weights;
-	private List<Metrics> metrics;
-	private List<Footnote> footnotes;
+	private List<Metric> metrics;
+	
 
 	@OneToOne(cascade={CascadeType.ALL})
 	private Goal goal;
 
-	public void setMetrics(List<Metrics> metrics) {
+	public void setMetrics(List<Metric> metrics) {
 		this.metrics = metrics;
 	}
 
@@ -55,9 +55,7 @@ public class UserProfile {
 		this.weights = weights;
 	}
 
-	public void setFootnotes(List<Footnote> footnotes){
-		this.footnotes = footnotes;
-	}
+
 
 
 	// ------------------------
@@ -74,16 +72,14 @@ public class UserProfile {
 		height = aHeight;
 		biologicalSex = aBiologicalSex;
 		weights = new ArrayList<Weight>();
-		metrics = new ArrayList<Metrics>();
-		footnotes = new ArrayList<Footnote>();
+		metrics = new ArrayList<Metric>();
 		goal = new Goal();
 	}
 	
 	public UserProfile() {
 		goal = new Goal();
 		weights = new ArrayList<Weight>();
-		metrics = new ArrayList<Metrics>();
-		footnotes = new ArrayList<Footnote>();
+		metrics = new ArrayList<Metric>();
 	}
 
 	// ------------------------
@@ -176,31 +172,6 @@ public class UserProfile {
 		return biologicalSex;
 	}
 
-	/* Code from template association_GetMany */
-	public Footnote getFootnote(int index) {
-		Footnote aFootnote = footnotes.get(index);
-		return aFootnote;
-	}
-
-	@OneToMany(cascade = { CascadeType.ALL })
-	public List<Footnote> getFootnotes() {
-		return footnotes;
-	}
-
-	public int numberOfFootnotes() {
-		int number = footnotes.size();
-		return number;
-	}
-
-	public boolean hasFootnotes() {
-		boolean has = footnotes.size() > 0;
-		return has;
-	}
-
-	public int indexOfFootnote(Footnote aFootnote) {
-		int index = footnotes.indexOf(aFootnote);
-		return index;
-	}
 
 	/* Code from template association_GetMany */
 	public Weight getWeight(int index) {
@@ -229,13 +200,13 @@ public class UserProfile {
 	}
 
 	/* Code from template association_GetMany */
-	public Metrics getMetric(int index) {
-		Metrics aMetric = metrics.get(index);
+	public Metric getMetric(int index) {
+		Metric aMetric = metrics.get(index);
 		return aMetric;
 	}
 
 	@OneToMany(cascade = { CascadeType.ALL })
-	public List<Metrics> getMetrics() {
+	public List<Metric> getMetrics() {
 		return metrics;
 	}
 
@@ -249,7 +220,7 @@ public class UserProfile {
 		return has;
 	}
 
-	public int indexOfMetric(Metrics aMetric) {
+	public int indexOfMetric(Metric aMetric) {
 		int index = metrics.indexOf(aMetric);
 		return index;
 	}
@@ -341,12 +312,12 @@ public class UserProfile {
 	}
 
 	/* Code from template association_AddMandatoryManyToOne */
-	public Metrics addMetric(Date aDate, int aExerciseSpending) {
-		Metrics aNewMetric = new Metrics(aDate, aExerciseSpending);
+	public Metric addMetric(Date aDate, int aExerciseSpending) {
+		Metric aNewMetric = new Metric(aDate, aExerciseSpending);
 		return aNewMetric;
 	}
 
-	public boolean addMetric(Metrics aMetric) {
+	public boolean addMetric(Metric aMetric) {
 		if (metrics.contains(aMetric)) {
 			return false;
 		} else {
@@ -355,7 +326,7 @@ public class UserProfile {
 		}
 	}
 
-	public boolean removeMetric(Metrics aMetric) {
+	public boolean removeMetric(Metric aMetric) {
 		if (!metrics.contains(aMetric)) {
 			return false;
 		} else {
@@ -365,7 +336,7 @@ public class UserProfile {
 	}
 
 	/* Code from template association_AddIndexControlFunctions */
-	public boolean addMetricAt(Metrics aMetric, int index) {
+	public boolean addMetricAt(Metric aMetric, int index) {
 		boolean wasAdded = false;
 		if (addMetric(aMetric)) {
 			if (index < 0) {
@@ -381,7 +352,7 @@ public class UserProfile {
 		return wasAdded;
 	}
 
-	public boolean addOrMoveMetricAt(Metrics aMetric, int index) {
+	public boolean addOrMoveMetricAt(Metric aMetric, int index) {
 		boolean wasAdded = false;
 		if (metrics.contains(aMetric)) {
 			if (index < 0) {
@@ -413,7 +384,7 @@ public class UserProfile {
 
 	public void delete() {
 		for (int i = metrics.size(); i > 0; i--) {
-			Metrics aMetric = metrics.get(i - 1);
+			Metric aMetric = metrics.get(i - 1);
 			aMetric.delete();
 		}
 		goal.delete();

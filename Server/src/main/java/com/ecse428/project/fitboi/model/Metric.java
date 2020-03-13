@@ -18,7 +18,7 @@ import javax.persistence.CascadeType;
 // line 20 "model.ump"
 // line 80 "model.ump"
 @Entity
-public class Metrics
+public class Metric
 {
   //------------------------
   // MEMBER VARIABLES
@@ -39,14 +39,14 @@ public class Metrics
   // CONSTRUCTOR
   //------------------------
 
-  public Metrics(Date aDate, int aExerciseSpending)
+  public Metric(Date aDate, int aExerciseSpending)
   {
     date = aDate;
     exerciseSpending = aExerciseSpending;
     meals = new ArrayList<Meal>();
   }
   
-  public Metrics()
+  public Metric()
   {
     meals = new ArrayList<Meal>();
   }

@@ -6,7 +6,7 @@ import java.util.List;
 import com.ecse428.project.fitboi.dto.MealDto;
 import com.ecse428.project.fitboi.model.Meal;
 import com.ecse428.project.fitboi.model.MealType;
-import com.ecse428.project.fitboi.model.Metrics;
+import com.ecse428.project.fitboi.model.Metric;
 import com.ecse428.project.fitboi.service.MealService;
 import com.ecse428.project.fitboi.service.MetricsService;
 import com.ecse428.project.fitboi.service.UserService;
@@ -63,7 +63,7 @@ public class MealController {
     public ResponseEntity<?> getUserMeals(@PathVariable String user_id, @PathVariable int metric_id)
     {
         // Make sure the metric is for the user
-        Metrics metric = userService.getUserMetric(user_id, metric_id);
+        Metric metric = userService.getUserMetric(user_id, metric_id);
         if (metric == null) {
             return new ResponseEntity<String>("The user has no metrics for the given metric_id", HttpStatus.NOT_ACCEPTABLE);
         }
@@ -95,7 +95,7 @@ public class MealController {
     public ResponseEntity<?> getMeal(@PathVariable String user_id, @PathVariable int metric_id, @PathVariable int meal_id)
     {
         // Make sure the metric is for the user
-        Metrics metric = userService.getUserMetric(user_id, metric_id);
+        Metric metric = userService.getUserMetric(user_id, metric_id);
         if (metric == null) {
             return new ResponseEntity<String>("The user has no metrics for the given metric_id", HttpStatus.NOT_ACCEPTABLE);
         }
@@ -123,7 +123,7 @@ public class MealController {
     public ResponseEntity<?> createMeal(@PathVariable String user_id, @PathVariable int metric_id, @RequestBody ObjectNode objectNode) {    
 
         // Make sure the metric is for the user
-        Metrics metric = userService.getUserMetric(user_id, metric_id);
+        Metric metric = userService.getUserMetric(user_id, metric_id);
         if (metric == null) {
             return new ResponseEntity<String>("The user has no metric for the given metric_id", HttpStatus.NOT_ACCEPTABLE);
         }
@@ -153,7 +153,7 @@ public class MealController {
     public ResponseEntity<?> deleteGoal(@PathVariable String user_id, @PathVariable int metric_id, @PathVariable int meal_id) {
     	
     	// Make sure the metric is for the user
-        Metrics metric = userService.getUserMetric(user_id, metric_id);
+        Metric metric = userService.getUserMetric(user_id, metric_id);
         if (metric == null) {
             return new ResponseEntity<String>("The user has no metrics for the given metric_id", HttpStatus.NOT_ACCEPTABLE);
         }
