@@ -1,7 +1,7 @@
 package com.example.fitboi.cucumber.steps;
 
 import com.example.fitboi.api.FoodAPI;
-import com.example.fitboi.api.MetricsAPI;
+import com.example.fitboi.api.MetricAPI;
 import com.example.fitboi.dto.FoodDto;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class ID003_User_Logs_A_Food_Item {
 
     @Then("the User's calorie count is updated using the desired food item")
     public void the_users_calorie_count_is_updated_using_the_desired_food_item(){
-        int current_cal = MetricsAPI.getUserMetric(StaticTestData.user.getEmail(),StaticTestData.metric.getId(),null).getExerciseSpending();
+        int current_cal = MetricAPI.getUserMetric(StaticTestData.user.getEmail(),StaticTestData.metric.getId(),null).getExerciseSpending();
         assert (current_cal == food.getCal());
     }
 
