@@ -30,7 +30,7 @@ import java.util.logging.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class MetricsControllerTests {
+class MetricControllerTests {
 
 	private static final Logger LOGGER = Logger.getLogger( UserControllerTests.class.getName() );
 
@@ -66,6 +66,8 @@ class MetricsControllerTests {
         ObjectNode requestBody = mapper.createObjectNode();
         requestBody.put("date" , "2001-11-10");
 		requestBody.put("exerciseSpending", 3);
+		requestBody.put("footNote", "Testing Footnotes");
+
 		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
 		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
 		String requestJson = ow.writeValueAsString(requestBody);
@@ -93,7 +95,8 @@ class MetricsControllerTests {
 		UserDto testUser = new UserDto(aEmail, aName, aUserName, aPassword, aDOB, aBiologicalSex, aHeight);
         ObjectNode requestBody = mapper.createObjectNode();
         requestBody.put("date" , "2001-11-10");
-        requestBody.put("exerciseSpending", 3);
+		requestBody.put("exerciseSpending", 3);
+		requestBody.put("footNote", "Testing Footnotes");
 
 		LOGGER.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(testUser));
 		mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
@@ -117,6 +120,8 @@ class MetricsControllerTests {
 		ObjectNode requestBody = mapper.createObjectNode();
         requestBody.put("date" , "2001-11-10");
 		requestBody.put("exerciseSpending", 3);
+		requestBody.put("footNote", "Testing Footnotes");
+
 		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
 		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
 		String requestJson = ow.writeValueAsString(requestBody);
@@ -154,6 +159,8 @@ class MetricsControllerTests {
         ObjectNode requestBody = mapper.createObjectNode();
         requestBody.put("date" , "2001-11-10");
 		requestBody.put("exerciseSpending", 3);
+		requestBody.put("footNote", "Testing Footnotes");
+		
 		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
 		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
 		String requestJson = ow.writeValueAsString(requestBody);
