@@ -68,6 +68,22 @@ public class MetricController {
     }
 
     /**
+     * POST
+     * /users/{user_email}/setFootNote/{footNote} -> Sets footNote to users current metric
+     * @param user_id
+     * @return
+     */
+    @PostMapping("{user_email}/setFootNote/{footNote}")
+    public ResponseEntity<?> setFootNote(@PathVariable String user_email, @PathVariable String footNote)
+    {
+        Metric curMetrics = metricService.setFootNote(user_email, footNote);
+        MetricDto curMetricsDto = convertToDto(curMetrics);
+        HttpStatus status = curMetrics == null ? HttpStatus.NOT_FOUND : HttpStatus.OK;
+
+        return new ResponseEntity<MetricDto>(curMetricsDto, status);
+    }
+
+    /**
      * GET
      * 
      * /users/{user_email}/curExercise
@@ -80,6 +96,21 @@ public class MetricController {
     {
         int exerciseCount = metricService.getCurrentExerciseCount(user_email);
         return new ResponseEntity<Integer>(exerciseCount, HttpStatus.OK);
+    }
+
+    /**
+     * GET
+     * 
+     * /users/{user_email}/curFootNote
+     * 
+     * @param user_email
+     * @return
+     */
+    @GetMapping("{user_email}/curFootNote")
+    public ResponseEntity<?> getFootNote(@PathVariable String user_email)
+    {
+        String footNote = metricService.getCurrentFootNote(user_email);
+        return new ResponseEntity<String>(footNote, HttpStatus.OK);
     }
 
     /**
@@ -182,11 +213,13 @@ public class MetricController {
         // Extract the information from the body
         Date date = Date.valueOf(objectNode.get("date").asText());
         int exercise = objectNode.get("exerciseSpending").asInt();
+        String footNote = objectNode.get("footNote").asText();
         
         // Create the new metric and add it to the user
         Metric metric = metricService.getMetric(Integer.parseInt(metric_id));
         metric.setDate(date);
         metric.setExerciseSpending(exercise);
+        metric.setFootNote(footNote);
         metricService.updateMetric(metric);
 
         // Convert to DTO
