@@ -271,6 +271,8 @@ class UserControllerTests {
 		ObjectNode requestBody = mapper.createObjectNode();
         requestBody.put("date" , "2001-11-10");
 		requestBody.put("exerciseSpending", 3);
+		requestBody.put("footNote", "Testing Footnotes");
+		
 		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
 		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
 		String requestJson = ow.writeValueAsString(requestBody);
@@ -328,7 +330,7 @@ class UserControllerTests {
 	}
 
 	@Test
-	public void tesGetFoodFromMeal() throws Exception{
+	public void testGetFoodFromMeal() throws Exception{
 		String aEmail = "testUser1@mail.mcgill.ca";
 		String aName = "testboi";
 		String aUserName = "testBoi";
@@ -341,6 +343,8 @@ class UserControllerTests {
 		ObjectNode requestBody = mapper.createObjectNode();
         requestBody.put("date" , "2001-11-10");
 		requestBody.put("exerciseSpending", 3);
+		requestBody.put("footNote", "Testing Footnotes");
+
 		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
 		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
 		String requestJson = ow.writeValueAsString(requestBody);
