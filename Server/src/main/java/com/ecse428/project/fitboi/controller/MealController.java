@@ -133,7 +133,7 @@ public class MealController {
         metric.addMeal(meal);
 
         // Persist the metric
-        metricService.updateMetrics(metric);
+        metricService.updateMetric(metric);
 
         // Convert to DTO
         MealDto mealDto = convertToDto(meal);

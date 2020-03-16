@@ -184,10 +184,10 @@ public class MetricController {
         int exercise = objectNode.get("exerciseSpending").asInt();
         
         // Create the new metric and add it to the user
-        Metric metric = metricService.getMetrics(Integer.parseInt(metric_id));
+        Metric metric = metricService.getMetric(Integer.parseInt(metric_id));
         metric.setDate(date);
         metric.setExerciseSpending(exercise);
-        metricService.updateMetrics(metric);
+        metricService.updateMetric(metric);
 
         // Convert to DTO
         MetricDto metricsDto = convertToDto(metric);

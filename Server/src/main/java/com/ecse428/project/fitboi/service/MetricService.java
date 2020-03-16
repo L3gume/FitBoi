@@ -14,14 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class MetricService {
     
 	@Autowired
-	MetricRepository metricsRepository;
+	MetricRepository metricRepository;
 
 	@Autowired
 	UserService userService;
 
 	@Transactional
 	public Iterable<Metric> getAllMetrics() {
-		return metricsRepository.findAll();
+		return metricRepository.findAll();
 	}
 	
 	@Transactional
@@ -42,6 +42,15 @@ public class MetricService {
 	}
 
 	@Transactional 
+	public String getCurrentFootNote(String userEmail)
+	{
+		Metric cur_metrics = getCurrentUserMetrics(userEmail);
+		if(cur_metrics == null) return null;
+
+		return cur_metrics.getFootNote();
+	}
+
+	@Transactional 
 	public Metric addExerciseCount(String userEmail, int cal)
 	{
 		Metric cur_metrics = getCurrentUserMetrics(userEmail);
@@ -49,7 +58,7 @@ public class MetricService {
 		
 		cur_metrics.setExerciseSpending(cal +
 			cur_metrics.getExerciseSpending());
-		metricsRepository.save(cur_metrics);
+		metricRepository.save(cur_metrics);
 
 		return cur_metrics;
 	}
@@ -61,44 +70,56 @@ public class MetricService {
 		if(cur_metrics == null) return null;
 		
 		cur_metrics.setExerciseSpending(cal);
-		metricsRepository.save(cur_metrics);
+		metricRepository.save(cur_metrics);
+
+		return cur_metrics;
+	}
+
+	@Transactional 
+	public Metric setFootNote(String userEmail, String footNote)
+	{
+		Metric cur_metrics = getCurrentUserMetrics(userEmail);
+		if(cur_metrics == null) return null;
+		
+		cur_metrics.setFootNote(footNote);
+		metricRepository.save(cur_metrics);
 
 		return cur_metrics;
 	}
 
 	@Transactional
-	public Metric getMetrics(int id) {
-		return metricsRepository.findMetricsById(id);
+	public Metric getMetric(int id) {
+		return metricRepository.findMetricById(id);
 	}
 
 
 	@Transactional
-	public boolean addNewMetrics(Metric metrics) {
-		if (metricsRepository.existsById(metrics.getId())) {
+	public boolean addNewMetric(Metric metric) {
+		if (metricRepository.existsById(metric.getId())) {
 			return false;
 		}
 		
-		metricsRepository.save(metrics);
+		metricRepository.save(metric);
 		return true;
 	}
 
 	@Transactional
-	public boolean updateMetrics(Metric metrics) {
-		if (metricsRepository.existsById(metrics.getId())) {
-			metricsRepository.save(metrics);
+	public boolean updateMetric(Metric metric) {
+		if (metricRepository.existsById(metric.getId())) {
+			metricRepository.save(metric);
 			return true;
 		}
 		return false;
 	}
 
 	@Transactional
-	public Metric deleteMetrics(int id) {
-    	if (!metricsRepository.existsById(id)) {
+	public Metric deleteMetric(int id) {
+    	if (!metricRepository.existsById(id)) {
     		return null;
     	}
-    	Metric deletedMetrics = metricsRepository.findMetricsById(id);
-    	metricsRepository.deleteById(id);
-		return deletedMetrics;
+    	Metric deletedMetric = metricRepository.findMetricById(id);
+    	metricRepository.deleteById(id);
+		return deletedMetric;
 	}
 
 	@Transactional
@@ -126,7 +147,7 @@ public class MetricService {
 		for (Meal meal : metric.getMeals()) {
 			if (meal.getId() == meal_id) {
 				if (metric.removeMeal(meal)) {
-					metricsRepository.save(metric);
+					metricRepository.save(metric);
 					return meal;
 				}
 			}
