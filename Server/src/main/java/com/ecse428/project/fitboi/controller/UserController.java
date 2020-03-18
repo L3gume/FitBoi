@@ -22,11 +22,11 @@ import com.ecse428.project.fitboi.dto.*;
 import com.ecse428.project.fitboi.model.FoodItem;
 import com.ecse428.project.fitboi.model.MacroDistribution;
 import com.ecse428.project.fitboi.model.Meal;
-import com.ecse428.project.fitboi.model.Metrics;
+import com.ecse428.project.fitboi.model.Metric;
 import com.ecse428.project.fitboi.model.Sex;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.MealService;
-import com.ecse428.project.fitboi.service.MetricsService;
+import com.ecse428.project.fitboi.service.MetricService;
 import com.ecse428.project.fitboi.service.UserService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -38,7 +38,7 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private MetricsService metricsService;
+    private MetricService metricService;
 
     @Autowired
     private MealService mealService;
@@ -159,8 +159,8 @@ public class UserController {
     public ResponseEntity<?> addFoodtoMeal(@PathVariable String user_id, @PathVariable int metric_id, @PathVariable int meal_id, @RequestBody ObjectNode food) 
     {
         
-        Metrics metric = userService.getUserMetric(user_id, metric_id);
-        Meal meal = metricsService.getUserMeal(metric, meal_id);
+        Metric metric = userService.getUserMetric(user_id, metric_id);
+        Meal meal = metricService.getUserMeal(metric, meal_id);
 
         String name = food.get("name").asText();
         int cal = food.get("cal").asInt();
@@ -190,8 +190,8 @@ public class UserController {
     public ResponseEntity<?> getFoodsFromMeal(@PathVariable String user_id, @PathVariable int metric_id, @PathVariable int meal_id) 
     {
         
-        Metrics metric = userService.getUserMetric(user_id, metric_id);
-        Meal meal = metricsService.getUserMeal(metric, meal_id);
+        Metric metric = userService.getUserMetric(user_id, metric_id);
+        Meal meal = metricService.getUserMeal(metric, meal_id);
 
         List<FoodItem> foods = meal.getFoodItems();
         
@@ -214,8 +214,8 @@ public class UserController {
     public ResponseEntity<?> deleteFoodFromMeal(@PathVariable String user_id, @PathVariable int metric_id, @PathVariable int meal_id, @PathVariable int food_id) 
     {
         
-        Metrics metric = userService.getUserMetric(user_id, metric_id);
-        Meal meal = metricsService.getUserMeal(metric, meal_id);
+        Metric metric = userService.getUserMetric(user_id, metric_id);
+        Meal meal = metricService.getUserMeal(metric, meal_id);
         FoodItem  food = mealService.deleteFood(meal, food_id);
         
         if (food == null) {

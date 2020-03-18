@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import com.ecse428.project.fitboi.model.Metrics;
+import com.ecse428.project.fitboi.model.Metric;
 import com.ecse428.project.fitboi.model.Sex;
 import com.ecse428.project.fitboi.model.UserProfile;
 import com.ecse428.project.fitboi.service.UserService;
@@ -128,10 +128,10 @@ class UserServiceTests {
 	@Test
 	public void addMetricsSuccess(){
 		UserProfile testUser = createUser();
-		Metrics metric = new Metrics(new Date(0), 3);
+		Metric metric = new Metric(new Date(0), 3, "Test note");
 		testUser.addMetric(metric);
 		when(userService.getUser(anyString())).thenReturn(testUser);
-		Metrics result = userService.getUserMetric(testUser.getEmail(), metric.getId());
+		Metric result = userService.getUserMetric(testUser.getEmail(), metric.getId());
 		assertTrue(result.getDate().equals(metric.getDate()));
 	}
 

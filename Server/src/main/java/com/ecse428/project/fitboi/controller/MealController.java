@@ -6,9 +6,9 @@ import java.util.List;
 import com.ecse428.project.fitboi.dto.MealDto;
 import com.ecse428.project.fitboi.model.Meal;
 import com.ecse428.project.fitboi.model.MealType;
-import com.ecse428.project.fitboi.model.Metrics;
+import com.ecse428.project.fitboi.model.Metric;
 import com.ecse428.project.fitboi.service.MealService;
-import com.ecse428.project.fitboi.service.MetricsService;
+import com.ecse428.project.fitboi.service.MetricService;
 import com.ecse428.project.fitboi.service.UserService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -31,7 +31,7 @@ public class MealController {
     private MealService mealService;
 
     @Autowired
-    private MetricsService metricsService;
+    private MetricService metricService;
 
     @Autowired
     private UserService userService;
@@ -63,13 +63,13 @@ public class MealController {
     public ResponseEntity<?> getUserMeals(@PathVariable String user_id, @PathVariable int metric_id)
     {
         // Make sure the metric is for the user
-        Metrics metric = userService.getUserMetric(user_id, metric_id);
+        Metric metric = userService.getUserMetric(user_id, metric_id);
         if (metric == null) {
             return new ResponseEntity<String>("The user has no metrics for the given metric_id", HttpStatus.NOT_ACCEPTABLE);
         }
 
         // Find all the meals for the metric
-        List<Meal> meals = metricsService.getAllMeals(metric);
+        List<Meal> meals = metricService.getAllMeals(metric);
         if (meals == null) {
             return new ResponseEntity<String>("The user has no meals for the given metric_id", HttpStatus.NOT_ACCEPTABLE);
         }
@@ -95,13 +95,13 @@ public class MealController {
     public ResponseEntity<?> getMeal(@PathVariable String user_id, @PathVariable int metric_id, @PathVariable int meal_id)
     {
         // Make sure the metric is for the user
-        Metrics metric = userService.getUserMetric(user_id, metric_id);
+        Metric metric = userService.getUserMetric(user_id, metric_id);
         if (metric == null) {
             return new ResponseEntity<String>("The user has no metrics for the given metric_id", HttpStatus.NOT_ACCEPTABLE);
         }
         
         // Get the meal given the meal_id
-        Meal meal = metricsService.getUserMeal(metric, meal_id);
+        Meal meal = metricService.getUserMeal(metric, meal_id);
         if (meal == null) {
             return new ResponseEntity<String>("The user has no meals for the given meal_id", HttpStatus.NOT_ACCEPTABLE);
         }
@@ -123,7 +123,7 @@ public class MealController {
     public ResponseEntity<?> createMeal(@PathVariable String user_id, @PathVariable int metric_id, @RequestBody ObjectNode objectNode) {    
 
         // Make sure the metric is for the user
-        Metrics metric = userService.getUserMetric(user_id, metric_id);
+        Metric metric = userService.getUserMetric(user_id, metric_id);
         if (metric == null) {
             return new ResponseEntity<String>("The user has no metric for the given metric_id", HttpStatus.NOT_ACCEPTABLE);
         }
@@ -133,7 +133,7 @@ public class MealController {
         metric.addMeal(meal);
 
         // Persist the metric
-        metricsService.updateMetrics(metric);
+        metricService.updateMetric(metric);
 
         // Convert to DTO
         MealDto mealDto = convertToDto(meal);
@@ -153,13 +153,13 @@ public class MealController {
     public ResponseEntity<?> deleteGoal(@PathVariable String user_id, @PathVariable int metric_id, @PathVariable int meal_id) {
     	
     	// Make sure the metric is for the user
-        Metrics metric = userService.getUserMetric(user_id, metric_id);
+        Metric metric = userService.getUserMetric(user_id, metric_id);
         if (metric == null) {
             return new ResponseEntity<String>("The user has no metrics for the given metric_id", HttpStatus.NOT_ACCEPTABLE);
         }
 
         // Delete the meal from the DB
-        Meal deletedMeal = metricsService.deleteMeal(metric, meal_id);
+        Meal deletedMeal = metricService.deleteMeal(metric, meal_id);
 
     	return new ResponseEntity<MealDto>(convertToDto(deletedMeal), HttpStatus.OK);
     }

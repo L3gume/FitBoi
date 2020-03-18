@@ -18,7 +18,7 @@ import javax.persistence.CascadeType;
 // line 20 "model.ump"
 // line 80 "model.ump"
 @Entity
-public class Metrics
+public class Metric
 {
   //------------------------
   // MEMBER VARIABLES
@@ -30,6 +30,7 @@ public class Metrics
   //Metrics Attributes
   private Date date;
   private int exerciseSpending;
+  private String footNote;
 
   //Metrics Associations
   @OneToMany(cascade={CascadeType.ALL})
@@ -39,14 +40,15 @@ public class Metrics
   // CONSTRUCTOR
   //------------------------
 
-  public Metrics(Date aDate, int aExerciseSpending)
+  public Metric(Date aDate, int aExerciseSpending, String aFootNote)
   {
     date = aDate;
     exerciseSpending = aExerciseSpending;
+    footNote = aFootNote;
     meals = new ArrayList<Meal>();
   }
   
-  public Metrics()
+  public Metric()
   {
     meals = new ArrayList<Meal>();
   }
@@ -71,6 +73,14 @@ public class Metrics
     return wasSet;
   }
 
+  public boolean setFootNote(String aFootNote)
+  {
+    boolean wasSet = false;
+    footNote = aFootNote;
+    wasSet = true;
+    return wasSet;
+  }
+
   public int getId() {
     return id;
   }
@@ -84,6 +94,13 @@ public class Metrics
   {
     return exerciseSpending;
   }
+
+  public String getFootNote()
+  {
+    return footNote;
+  }
+
+
   /* Code from template association_GetMany */
   public Meal getMeal(int index)
   {
@@ -189,6 +206,7 @@ public class Metrics
   {
     return super.toString() + "["+
             "exerciseSpending" + ":" + getExerciseSpending()+ "]" + System.getProperties().getProperty("line.separator") +
+            "footNote" + ":" + getFootNote()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "date" + "=" +
             (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") +
             System.getProperties().getProperty("line.separator");
