@@ -7,14 +7,16 @@ public class MetricDto {
     private int id;
     private String date;
     private Integer exerciseSpending;
+    private String footNote;
 
     public MetricDto() {
     }
 
-    public MetricDto(int id, String date, Integer exerciseSpending) {
+    public MetricDto(int id, String date, Integer exerciseSpending, String footNote) {
         this.id = id;
         this.date = date;
         this.exerciseSpending = exerciseSpending;
+        this.footNote = footNote;
     }
 
     public int getId() {
@@ -41,19 +43,28 @@ public class MetricDto {
         this.exerciseSpending = exerciseSpending;
     }
 
+    public String getFootNote() {
+        return footNote;
+    }
+
+    public void setFootNote(String footNote) {
+        this.footNote = footNote;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MetricDto metricDto = (MetricDto) o;
         return id == metricDto.id &&
-                date.equals(metricDto.date) &&
-                exerciseSpending.equals(metricDto.exerciseSpending);
+                Objects.equals(date, metricDto.date) &&
+                Objects.equals(exerciseSpending, metricDto.exerciseSpending) &&
+                Objects.equals(footNote, metricDto.footNote);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, date, exerciseSpending);
+        return Objects.hash(id, date, exerciseSpending, footNote);
     }
 
     @Override
@@ -62,6 +73,7 @@ public class MetricDto {
                 "id=" + id +
                 ", date='" + date + '\'' +
                 ", exerciseSpending=" + exerciseSpending +
+                ", footNote='" + footNote + '\'' +
                 '}';
     }
 }

@@ -151,6 +151,65 @@ public class FoodAPI {
     }
 
     /**
+     * Add custom food to DB
+     * path:    /food/
+     * type:    POST
+     *
+     * Example of how to use asynchronously:
+     *
+     * Consumer foodAdded = new Consumer(<FoodDto> fn) {
+     *   @Override
+     *   public void accept(FoodDto foodThatWasAdded) {
+     *      // do something
+     *   }
+     * };
+     * FoodDto newFood = FoodDto();
+     * FoodAPI.addCustomFood(newFood,addFoundFoodToList);
+     *
+     * Example of how to use synchronously:
+     * FoodDto newFood = FoodDto();
+     * FoodDto foodAdded = FoodAPI.addCustomFood(newFood, null);
+     *
+     * @param customFood FoodDto of food data to be added as entry in DB
+     * @param fn to be called by response, if null wait for response and return it directly
+     **/
+    public static FoodDto addCustomFood(FoodDto customFood, Consumer<FoodDto> fn) {
+        if (customFood == null) return null;
+
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        Response.Listener<JSONObject> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = foodCallSuccessListener(fn);
+            errorListener = foodCallErrorListener(fn);
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                MyVolley.serverUrl
+                        +MyVolley.foodPostfix,
+                foodDtoToJson(customFood),
+                successListener,
+                errorListener
+        );
+
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+        if (fn == null) {
+            try {
+                return jsonToFoodDto(future.get(10, TimeUnit.SECONDS));
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Add/log a food item to a user
      * path:    /users/{user_id}/metrics/{metric_id}/meals/{meal_id}/food
      * type:    POST

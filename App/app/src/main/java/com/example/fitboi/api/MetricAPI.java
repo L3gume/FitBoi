@@ -9,6 +9,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
+import com.android.volley.toolbox.StringRequest;
 import com.example.fitboi.dto.GoalDto;
 import com.example.fitboi.dto.MetricDto;
 
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-public class MetricsAPI {
+public class MetricAPI {
 
     /**
      * Add new metric to given user
@@ -322,10 +323,26 @@ public class MetricsAPI {
     }
 
     /**
-     * Update a given metric by metric_id
-     * path:    /users/metrics/{metric_id}
+     * Update a metric from a given user
+     * path:    /users/{user_id}/metrics/{metrics_id}
      * type:    PUT
-
+     *
+     * Example of how to use asynchronously:
+     * MetricDto existingMetric;
+     * existingMetric.setExerciseSpending(10);
+     * Consumer updateMetricConfirmation = new Consumer<MetricDto>() {
+     *   @Override
+     *   public void accept(MetricDto metric) {
+     *     // do something
+     *   }
+     * };
+     * MetricAPI.updateMetric(existingMetric.getId(),existingMetric,updateMetricConfirmation);
+     *
+     * Example of how to use synchronously:
+     * MetricDto updatedMetric = MetricAPI.updateMetric(existingMetric.getId(),existingMetric,null);
+     *
+     * @param metricId: unique id of metric to be deleted
+     * @param metricDto: metricDto data to update metric with
      * @param fn to be called by response, if null wait for response and return it directly
      */
     public static MetricDto updateMetric(Integer metricId, MetricDto metricDto, Consumer<MetricDto> fn) {
@@ -479,6 +496,121 @@ public class MetricsAPI {
         return null;
     }
 
+    /**
+     * Set footnote of current metric
+     * path:    /users/{user_id}/setFootNote/{footNote}
+     * type:    POST
+     *
+     * Example of how to use asynchronously:
+     * Consumer setFootNoteConfirmation = new Consumer<MetricDto>() {
+     *   @Override
+     *   public void accept(MetricDto currentMetric) {
+     *     // do something
+     *   }
+     * };
+     * MetricAPI.setCurrentFootNote(userId, "This is a footnote",setFootNoteConfirmation);
+     *
+     * Example of how to use synchronously:
+     * MetricDto currentMetric = MetricAPI.setCurrentFootNote(userId, "This is a footnote", null);
+     *
+     * @param userId of user to which to add the goal
+     * @param footNote String of footnote to set
+     * @param fn to be called by response, if null wait for response and return it directly
+     */
+    public static MetricDto setCurrentFootNote(String userId, String footNote, Consumer<MetricDto> fn) {
+        if (userId == null || footNote == null) return null;
+
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        Response.Listener<JSONObject> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = metricCallSuccessListener(fn);
+            errorListener = metricCallErrorListener(fn);
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                MyVolley.serverUrl
+                        +MyVolley.userPostfix+userId
+                        +"/setFootNote/"+footNote,
+                null,
+                successListener,
+                errorListener
+        );
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+        if (fn == null) {
+            try {
+                return jsonToMetricDto(future.get(10, TimeUnit.SECONDS));
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get the current footnote of given user
+     * path:    /users/{user_id}/curFootNote
+     * type:    GET
+     *
+     * Example of how to use asynchronously:
+     * Consumer getCurrentFootNoteConfirmation = new Consumer<String>() {
+     *   @Override
+     *   public void accept(String footnote) {
+     *     // do something
+     *   }
+     * };
+     * MetricAPI.getUserCurrentFootNote(userEmail, getCurrentFootNoteConfirmation);
+     *
+     * Example of how to use synchronously:
+     * String footnote = MetricAPI.getUserCurrentFootNote(userEmail, null);
+     *
+     * @param userId: email of user to get the goals of
+     * @param fn to be called by response, if null wait for response and return it directly
+     */
+    public static String getUserCurrentFootNote(String userId, Consumer<String> fn) {
+        if (userId == null) return null;
+
+        RequestFuture<String> future = RequestFuture.newFuture();
+        Response.Listener<String> successListener;
+        Response.ErrorListener errorListener;
+
+        if (fn == null) {
+            successListener = future;
+            errorListener = future;
+        } else {
+            successListener = MyVolley.stringCallSuccessListener(fn);
+            errorListener = MyVolley.stringCallErrorListener(fn);
+        }
+
+        StringRequest request = new StringRequest(
+                Request.Method.GET,
+                MyVolley.serverUrl
+                +MyVolley.userPostfix+userId
+                +"curFootNote",
+                successListener,
+                errorListener
+        );
+
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 0));
+        MyVolley.getRequestQueue().add(request);
+
+        if (fn == null) {
+            try {
+                return (future.get(10, TimeUnit.SECONDS));
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+
+    }
+
     // Success Listeners
 
     private static Response.Listener<JSONArray> metricListCallSuccessListener(final Consumer<List<MetricDto>> fn) {
@@ -529,8 +661,9 @@ public class MetricsAPI {
         int id = json.optInt("id");
         String date = json.optString("date");
         Integer exerciseSpending = json.optInt("exerciseSpending");
+        String footNote = json.optString("footNote");
 
-        return new MetricDto(id, date, exerciseSpending);
+        return new MetricDto(id, date, exerciseSpending,footNote);
     }
 
     private static JSONObject metricDtoToJson(MetricDto metricDto) {
@@ -540,6 +673,7 @@ public class MetricsAPI {
             // json.put("id", metricDto.getId()); id is autogenerated
             json.put("date", metricDto.getDate());
             json.put("exerciseSpending", metricDto.getExerciseSpending());
+            json.put("footNote", metricDto.getFootNote());
         } catch (Exception e) {
             // TODO: something with exception
         }
